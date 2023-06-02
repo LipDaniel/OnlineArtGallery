@@ -121,7 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BEIndexController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\FEHomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -5785,7 +5785,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_UserHeader.cshtml" />
     <Content Include="Views\Shared\_UserFooter.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
@@ -5794,6 +5793,7 @@
     <Content Include="Views\Shared\AdminModals\_Index.cshtml" />
     <Content Include="Views\Shared\UserModals\_Index.cshtml" />
     <Content Include="Views\BEIndex\Index.cshtml" />
+    <Content Include="Views\FEHome\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
