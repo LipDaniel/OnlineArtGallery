@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <title>Admin</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" id="css-main" href="~/Content/adminassets/css/oneui.min.css">
+
+    @RenderSection("css", required: false)
+
+</head>
+<body>
+    <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+
+        @Html.Partial("~/Views/Shared/_AdminSidebar.cshtml")
+        @Html.Partial("~/Views/Shared/_AdminHeader.cshtml")
+
+        <main id="main-container">
+            @RenderSection("main", required: true)
+        </main>
+
+    </div>
+
+    @Html.Partial("~/Views/Shared/AdminModals/_Index.cshtml")
+
+    @RenderSection("modals", required: false)
+
+    <script src="~/Content/adminassets/js/lib/jquery.min.js"></script>
+    <script src="~/Content/adminassets/js/oneui.app.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

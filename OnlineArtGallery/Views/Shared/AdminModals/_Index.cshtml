@@ -1,0 +1,100 @@
+﻿<style>
+    .password-group {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+    }
+
+    .eye-icon {
+        position: absolute;
+        bottom: 12px;
+        right: 10px;
+    }
+</style>
+
+<!-- POPUP ĐỔI MẬT KHẨU -->
+<div class="modal fade" id="changepwd-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popin" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-popin" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded block-transparent mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">ĐỔI MẬT KHẨU</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-fw fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <form id="changePasswordForm">
+                    <div class="block-content fs-sm pb-3">
+                        <div class="password-group mb-1">
+                            <label class="form-label" for="one-profile-edit-password">Mật khẩu hiện tại</label>
+                            <input type="password" class="form-control" id="currentpwd">
+                            <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
+                        </div>
+                        <small id="currentpwd_alert" class="text-danger mb-2"></small>
+                        <div class="password-group mb-1">
+                            <label class="form-label" for="one-profile-edit-password-new">Mật khẩu mới <small>( Tối thiểu 8 ký tự )</small></label>
+                            <input type="password" class="form-control" id="newpwd">
+                            <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
+                        </div>
+                        <small id="newpwd_alert" class="text-danger mb-2"></small>
+                        <div class="password-group mb-1">
+                            <label class="form-label" for="one-profile-edit-password-new-confirm">Nhập lại mật khẩu mới</label>
+                            <input type="password" class="form-control" id="confirmpwd">
+                            <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
+                        </div>
+                        <small id="confirmpwd_alert" class="text-danger mb-2"></small>
+                        <div class="mt-2">
+                            <button type="submit" class="btn btn-alt-primary">Lưu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- POPUP XÁC NHẬN LOGOUT -->
+<div class="modal fade" id="logout-modal" tabindex="-1" aria-labelledby="modal-block-popin" aria-modal="true" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-popin" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded block-transparent mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">XÁC NHẬN</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-fw fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <form action="/authLogout" method="GET">
+                    <div class="block-content fs-sm">
+                        <h6>Bạn muốn đăng xuất ?</h6>
+                    </div>
+                    <div class="block-content block-content-full text-end border-top">
+                        <a class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Không</a>
+                        <button type="submit" class="btn btn-sm btn-danger">Xác nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- POPUP ĐỔI MẬT KHẨU THÀNH CÔNG -->
+<div class="modal fade" id="success-modal" tabindex="-1" aria-labelledby="modal-block-popin" aria-modal="true" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-popin modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded block-transparent mb-0">
+                <div class="block-content fs-sm p-5 text-center">
+                    <i class="far fa-circle-check text-success mb-3" style=" font-size: 100px"></i>
+                    <h5>Đổi mật khẩu thành công</h5>
+                    <div class="form-submit mt-4">
+                        <button class="btn btn-alt-primary" data-bs-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
