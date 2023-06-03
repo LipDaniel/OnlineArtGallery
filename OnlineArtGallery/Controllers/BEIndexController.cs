@@ -17,7 +17,45 @@ namespace OnlineArtGallery.Controllers
         {
             return View();
         }
- 
-
+        public ActionResult ArtistList()
+        {
+            return View();
+        }
+        public ActionResult ArtSellRequest()
+        {
+            return View();
+        }
+        public ActionResult ArtList()
+        {
+            return View();
+        }
+        public ActionResult News()
+        {
+            return View();
+        }
+        public ActionResult NewsControl()
+        {
+            return View();
+        }
+        public ActionResult NewsEdit()
+        {
+            return View();
+        }
+        public ActionResult GalleryList()
+        {
+            return View();
+        }
+        public ActionResult GalleryRequest()
+        {
+            return View();
+        }
+        public ActionResult Infor()
+        {
+            return View();
+        }
+        public ActionResult About()
+        {
+            return View();
+        }
     }
 }

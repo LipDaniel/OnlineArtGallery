@@ -5795,6 +5795,16 @@
     <Content Include="Views\BEIndex\Index.cshtml" />
     <Content Include="Views\FEHome\Index.cshtml" />
     <Content Include="Views\BEIndex\Artist.cshtml" />
+    <Content Include="Views\BEIndex\ArtistList.cshtml" />
+    <Content Include="Views\BEIndex\ArtSellRequest.cshtml" />
+    <Content Include="Views\BEIndex\ArtList.cshtml" />
+    <Content Include="Views\BEIndex\News.cshtml" />
+    <Content Include="Views\BEIndex\NewsControl.cshtml" />
+    <Content Include="Views\BEIndex\GalleryList.cshtml" />
+    <Content Include="Views\BEIndex\GalleryRequest.cshtml" />
+    <Content Include="Views\BEIndex\Infor.cshtml" />
+    <Content Include="Views\BEIndex\About.cshtml" />
+    <Content Include="Views\BEIndex\NewsEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
