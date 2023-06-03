@@ -5794,7 +5794,6 @@
     <Content Include="Views\Shared\UserModals\_Index.cshtml" />
     <Content Include="Views\BEIndex\Index.cshtml" />
     <Content Include="Views\FEHome\Index.cshtml" />
-    <Content Include="Views\BEIndex\Artist.cshtml" />
     <Content Include="Views\BEIndex\ArtistList.cshtml" />
     <Content Include="Views\BEIndex\ArtWorkList.cshtml" />
     <Content Include="Views\BEIndex\CategoryList.cshtml" />
