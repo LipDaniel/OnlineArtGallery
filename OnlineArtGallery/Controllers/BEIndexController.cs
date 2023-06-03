@@ -13,7 +13,7 @@ namespace OnlineArtGallery.Controllers
         {
             return View();
         }
-        public ActionResult Artist()
+        public ActionResult UserList()
         {
             return View();
         }
@@ -21,23 +21,11 @@ namespace OnlineArtGallery.Controllers
         {
             return View();
         }
-        public ActionResult ArtSellRequest()
+        public ActionResult ArtworkRequest()
         {
             return View();
         }
-        public ActionResult ArtList()
-        {
-            return View();
-        }
-        public ActionResult News()
-        {
-            return View();
-        }
-        public ActionResult NewsControl()
-        {
-            return View();
-        }
-        public ActionResult NewsEdit()
+        public ActionResult ArtworkList()
         {
             return View();
         }
@@ -45,7 +33,19 @@ namespace OnlineArtGallery.Controllers
         {
             return View();
         }
-        public ActionResult GalleryRequest()
+        public ActionResult CategoryList()
+        {
+            return View();
+        }
+        public ActionResult Favourite()
+        {
+            return View();
+        }
+        public ActionResult Rating()
+        {
+            return View();
+        }
+        public ActionResult OtherList()
         {
             return View();
         }

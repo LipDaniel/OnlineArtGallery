@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ArtistList";
+    ViewBag.Title = "ArtSellRequest";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -9,13 +9,13 @@
     <div class="container-fluid mt-3">
         <div class="block block-rounded">
             <div class="block-header block-header-default">
-                <strong>ARTIST</strong>
+                <strong>ART</strong>
             </div>
             <div class="block-content pb-3">
                 <ul class="nav nav-tabs nav-fill nav-tabs-alt  " role="tablist">
                     <li class="nav-item">
                         <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#published-posts-tab" role="tab" aria-selected="true">
-                            DANH SÁCH ARTIST
+                            DANH SÁCH TRANH YÊU CẦU ĐĂNG BÁN : 
                         </button>
                     </li>
                 </ul>
@@ -23,12 +23,11 @@
                     <div class="tab-pane active" id="published-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
                         <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                             <thead>
-                            <th>Artist name</th>
-                            <th>Số lượng tranh</th>
-                            <th>Tranh đang bán</th>
-                            <th>Tranh đã bán</th>
-                            <th>Tranh đã mua</th>
-                            <th>Email</th>
+                            <th>Ngày gửi yêu cầu<</th>
+                            <th>Artist</th>
+                            <th>Tên Tranh</th>
+                            <th>Gía Bán</th>
+                            <th>Tag</th>
                             </thead>
                             <tbody>
                                 <tr>

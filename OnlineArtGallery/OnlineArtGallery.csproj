@@ -5796,15 +5796,16 @@
     <Content Include="Views\FEHome\Index.cshtml" />
     <Content Include="Views\BEIndex\Artist.cshtml" />
     <Content Include="Views\BEIndex\ArtistList.cshtml" />
-    <Content Include="Views\BEIndex\ArtSellRequest.cshtml" />
-    <Content Include="Views\BEIndex\ArtList.cshtml" />
-    <Content Include="Views\BEIndex\News.cshtml" />
-    <Content Include="Views\BEIndex\NewsControl.cshtml" />
+    <Content Include="Views\BEIndex\ArtWorkList.cshtml" />
+    <Content Include="Views\BEIndex\CategoryList.cshtml" />
     <Content Include="Views\BEIndex\GalleryList.cshtml" />
-    <Content Include="Views\BEIndex\GalleryRequest.cshtml" />
     <Content Include="Views\BEIndex\Infor.cshtml" />
     <Content Include="Views\BEIndex\About.cshtml" />
-    <Content Include="Views\BEIndex\NewsEdit.cshtml" />
+    <Content Include="Views\BEIndex\UserList.cshtml" />
+    <Content Include="Views\BEIndex\Favourite.cshtml" />
+    <Content Include="Views\BEIndex\Rating.cshtml" />
+    <Content Include="Views\BEIndex\ArtworkRequest.cshtml" />
+    <Content Include="Views\BEIndex\OtherList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
