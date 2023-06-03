@@ -53,5 +53,10 @@ namespace OnlineArtGallery.Models.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rating> Ratings { get; set; }
         public virtual Category Category { get; set; }
+
+        internal object Include(Func<object, object> value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
