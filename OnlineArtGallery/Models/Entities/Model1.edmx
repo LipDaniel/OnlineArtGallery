@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GalleryArtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="GalleryArtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Artist">
           <Key>
             <PropertyRef Name="artist_id" />
@@ -23,7 +23,7 @@
           <Property Name="artwork_name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="artwork_image" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="artwork_description" Type="nvarchar" MaxLength="500" />
-          <Property Name="artwork_price" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="artwork_price" Type="varchar" MaxLength="100" />
           <Property Name="artwork_dimensions" Type="nvarchar" MaxLength="50" />
           <Property Name="artwork_is_sold" Type="bit" />
           <Property Name="artwork_date" Type="nvarchar" MaxLength="50" />
@@ -164,6 +164,7 @@
           <Property Name="user_address" Type="nvarchar" MaxLength="1" />
           <Property Name="user_phone" Type="nvarchar" MaxLength="50" />
           <Property Name="user_is_active" Type="bit" />
+          <Property Name="user_level" Type="tinyint" />
         </EntityType>
         <Association Name="FK__Artwork__artist___267ABA7A">
           <End Role="Artist" Type="Self.Artist" Multiplicity="0..1" />
@@ -487,7 +488,8 @@
             <End Role="Rating" EntitySet="Rating" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GalleryArtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -510,11 +512,13 @@
           <Property Name="artwork_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="artwork_image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="artwork_description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="artwork_price" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="artwork_price" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="artwork_dimensions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="artwork_is_sold" Type="Boolean" />
           <Property Name="artwork_date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="category_id" Type="Int32" />
           <NavigationProperty Name="Artist" Relationship="Self.FK__Artwork__artist___267ABA7A" FromRole="Artwork" ToRole="Artist" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Artwork__categor__5812160E" FromRole="Artwork" ToRole="Category" />
           <NavigationProperty Name="Artwork_Gallery" Relationship="Self.FK__Artwork_G__artwo__5441852A" FromRole="Artwork" ToRole="Artwork_Gallery" />
           <NavigationProperty Name="Artwork_Tag" Relationship="Self.FK__Artwork_T__artwo__2E1BDC42" FromRole="Artwork" ToRole="Artwork_Tag" />
           <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__artwork_id__3D5E1FD2" FromRole="Artwork" ToRole="Cart" />
@@ -522,8 +526,6 @@
           <NavigationProperty Name="Histories" Relationship="Self.FK__History__artwork__44FF419A" FromRole="Artwork" ToRole="History" />
           <NavigationProperty Name="Order_Item" Relationship="Self.FK__Order_Ite__artwo__398D8EEE" FromRole="Artwork" ToRole="Order_Item" />
           <NavigationProperty Name="Ratings" Relationship="Self.FK__Rating__artwork___4D94879B" FromRole="Artwork" ToRole="Rating" />
-          <Property Name="category_id" Type="Int32" />
-          <NavigationProperty Name="Category" Relationship="GalleryArtModel.FK__Artwork__categor__5812160E" FromRole="Artwork" ToRole="Category" />
         </EntityType>
         <EntityType Name="Artwork_Gallery">
           <Key>
@@ -562,7 +564,7 @@
           <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="category_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="category_image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Artworks" Relationship="GalleryArtModel.FK__Artwork__categor__5812160E" FromRole="Category" ToRole="Artwork" />
+          <NavigationProperty Name="Artworks" Relationship="Self.FK__Artwork__categor__5812160E" FromRole="Category" ToRole="Artwork" />
         </EntityType>
         <EntityType Name="Exhibition">
           <Key>
@@ -681,6 +683,7 @@
           <Property Name="user_address" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="user_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="user_is_active" Type="Boolean" />
+          <Property Name="user_level" Type="Byte" />
           <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__user_id__3C69FB99" FromRole="Users" ToRole="Cart" />
           <NavigationProperty Name="Favourites" Relationship="Self.FK__Favourite__user___403A8C7D" FromRole="Users" ToRole="Favourite" />
           <NavigationProperty Name="Histories" Relationship="Self.FK__History__user_id__440B1D61" FromRole="Users" ToRole="History" />
@@ -698,6 +701,18 @@
             </Principal>
             <Dependent Role="Artwork">
               <PropertyRef Name="artist_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Artwork__categor__5812160E">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Artwork" Type="Self.Artwork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="Artwork">
+              <PropertyRef Name="category_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -926,6 +941,10 @@
             <End Role="Artist" EntitySet="Artists" />
             <End Role="Artwork" EntitySet="Artworks" />
           </AssociationSet>
+          <AssociationSet Name="FK__Artwork__categor__5812160E" Association="Self.FK__Artwork__categor__5812160E">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Artwork" EntitySet="Artworks" />
+          </AssociationSet>
           <AssociationSet Name="FK__Artwork_G__artwo__5441852A" Association="Self.FK__Artwork_G__artwo__5441852A">
             <End Role="Artwork" EntitySet="Artworks" />
             <End Role="Artwork_Gallery" EntitySet="Artwork_Gallery" />
@@ -994,23 +1013,7 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Rating" EntitySet="Ratings" />
           </AssociationSet>
-          <AssociationSet Name="FK__Artwork__categor__5812160E" Association="GalleryArtModel.FK__Artwork__categor__5812160E">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Artwork" EntitySet="Artworks" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK__Artwork__categor__5812160E">
-          <End Type="GalleryArtModel.Category" Role="Category" Multiplicity="0..1" />
-          <End Type="GalleryArtModel.Artwork" Role="Artwork" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="category_id" />
-            </Principal>
-            <Dependent Role="Artwork">
-              <PropertyRef Name="category_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1030,7 +1033,6 @@
           <EntitySetMapping Name="Artworks">
             <EntityTypeMapping TypeName="GalleryArtModel.Artwork">
               <MappingFragment StoreEntitySet="Artwork">
-                <ScalarProperty Name="category_id" ColumnName="category_id" />
                 <ScalarProperty Name="artwork_id" ColumnName="artwork_id" />
                 <ScalarProperty Name="artist_id" ColumnName="artist_id" />
                 <ScalarProperty Name="artwork_name" ColumnName="artwork_name" />
@@ -1040,6 +1042,7 @@
                 <ScalarProperty Name="artwork_dimensions" ColumnName="artwork_dimensions" />
                 <ScalarProperty Name="artwork_is_sold" ColumnName="artwork_is_sold" />
                 <ScalarProperty Name="artwork_date" ColumnName="artwork_date" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1190,6 +1193,7 @@
                 <ScalarProperty Name="user_address" ColumnName="user_address" />
                 <ScalarProperty Name="user_phone" ColumnName="user_phone" />
                 <ScalarProperty Name="user_is_active" ColumnName="user_is_active" />
+                <ScalarProperty Name="user_level" ColumnName="user_level" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -8,9 +8,16 @@ namespace OnlineArtGallery.Controllers
 {
     public class FEHomeController : Controller
     {
-        // GET: FEHome
-        public ActionResult Index()
-        {
+       
+        public ActionResult Index(){
+            return View();
+        }
+
+        public ActionResult About(){
+            return View();
+        }
+
+        public ActionResult Contact() { 
             return View();
         }
     }

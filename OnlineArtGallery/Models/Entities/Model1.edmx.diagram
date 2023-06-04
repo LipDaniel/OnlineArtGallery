@@ -4,24 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="92b2020a47004da3ae9c10b4f0266030" Name="Diagram1">
+      <Diagram DiagramId="52ecc608d3204195b2c4b76fe549feb9" Name="Diagram1">
         <EntityTypeShape EntityType="GalleryArtModel.Artist" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Artwork" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Artwork" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Artwork_Gallery" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Artwork_Tag" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Cart" Width="1.5" PointX="5.25" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Category" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Exhibition" Width="1.5" PointX="7.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Category" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Exhibition" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Favourite" Width="1.5" PointX="8.25" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Gallery" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Gallery" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.History" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Notification" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Order_Item" Width="1.5" PointX="8.25" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Order" Width="1.5" PointX="6" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Rating" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Tag" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.User" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.User" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
         <AssociationConnector Association="GalleryArtModel.FK__Artwork__artist___267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryArtModel.FK__Artwork__categor__5812160E" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Artwork_G__artwo__5441852A" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Artwork_T__artwo__2E1BDC42" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Cart__artwork_id__3D5E1FD2" ManuallyRouted="false" />
@@ -39,7 +40,6 @@
         <AssociationConnector Association="GalleryArtModel.FK__Order_Ite__order__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Orders__user_id__34C8D9D1" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Rating__user_id__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryArtModel.FK__Artwork__categor__5812160E" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

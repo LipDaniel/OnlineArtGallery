@@ -38,6 +38,7 @@ namespace OnlineArtGallery.Models.Entities
         public Nullable<int> category_id { get; set; }
     
         public virtual Artist Artist { get; set; }
+        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Artwork_Gallery> Artwork_Gallery { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -52,11 +53,5 @@ namespace OnlineArtGallery.Models.Entities
         public virtual ICollection<Order_Item> Order_Item { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rating> Ratings { get; set; }
-        public virtual Category Category { get; set; }
-
-        internal object Include(Func<object, object> value)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

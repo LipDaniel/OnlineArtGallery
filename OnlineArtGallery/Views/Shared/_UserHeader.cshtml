@@ -12,7 +12,15 @@
                 <li>
                     <a href="#">Links</a>
                     <ul class="dropdown-links">
-                        <li><a href="#signin-modal" data-toggle="modal">Sign in / Sign up</a></li>
+                        @if (Session["UserId"] == null)
+                        {
+                            <li><a href="#signin-modal" data-toggle="modal">Sign in / Sign up</a></li>
+
+                        }
+                        else
+                        {
+                            <li><a href="" >Welcome back, @Session["UserFName"]   </a>   | <a href="/FEAuth/Logout">   Logout</a></li>
+                        }
                     </ul>
                 </li>
             </ul><!-- End .top-menu -->
@@ -49,15 +57,18 @@
 
             
             <div class="header-dropdown-link">
-                
+       
                 @* ACCOUNT *@
                 <div class="account">
-                    <a href="dashboard.html" title="My account">
-                        <div class="icon">
-                            <i class="icon-user"></i>
-                        </div>
-                        <p>Account</p>
-                    </a>
+                    @if (Session["UserId"] != null) { 
+                    
+                        <a href="/FEAuth/UserProfile" title="My account">
+                            <div class="icon">
+                                <i class="icon-user"></i>
+                            </div>
+                            <p>Account</p>
+                        </a>
+                    }
                 </div><!-- End .compare-dropdown -->
 
                 @* WISHLIST *@
@@ -284,7 +295,7 @@
                                         <li><a href="blog-grid-sidebar.html">Grid sidebar</a></li>
                                     </ul>
                                 </li>
-                               
+
                             </ul>
                         </li>
 
@@ -293,8 +304,14 @@
 
                             <ul>
                                 <li><a href="elements-products.html">Products</a></li>
-                                
+
                             </ul>
+                        </li>
+                        <li>
+                            <a href="/FEHome/About">About us</a>
+                        </li>
+                        <li>
+                            <a href="/FEHome/Contact">Contact us</a>
                         </li>
                     </ul><!-- End .menu -->
                 </nav><!-- End .main-nav -->

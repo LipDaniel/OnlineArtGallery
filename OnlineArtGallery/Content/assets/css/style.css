@@ -12647,7 +12647,8 @@ button:focus {
     .sidebar-product .widget-title {
         font-size: 2.4rem;
         letter-spacing: -.025em;
-        margin-bottom: 2.4rem
+        margin-bottom: 2.4rem;
+        margin-left: 1rem
     }
 
     .sidebar-product .products {

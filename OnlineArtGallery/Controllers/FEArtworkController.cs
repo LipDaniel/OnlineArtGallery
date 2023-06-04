@@ -23,7 +23,7 @@ namespace OnlineArtGallery.Controllers
             {
                 return RedirectToAction("Index","FEHome");
             }
-            var artworkList = db.Artworks.Take(5).ToList();
+            var artworkList = db.Artworks.Take(4).ToList();
             ViewBag.Artwork = artwork;
             ViewBag.Artist = artist;
             ViewBag.Category = category;  
