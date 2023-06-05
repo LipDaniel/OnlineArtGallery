@@ -15303,7 +15303,7 @@ button:focus {
     margin: 0;
     margin-right: 2.8rem;
     flex-shrink: 0;
-    max-width: 60px
+    max-width: 250px
 }
 
 .product-col .product-title {

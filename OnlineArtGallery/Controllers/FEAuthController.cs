@@ -24,7 +24,11 @@ namespace OnlineArtGallery.Controllers
             }
 
             var auth = db.Users.Where(a => a.user_email == user.user_email && a.user_password == user.user_password).FirstOrDefault();
-            if(auth.user_is_active == true)
+
+            if(auth == null)
+                return Redirect(Request.UrlReferrer.ToString());
+
+            if (auth.user_is_active == true)
             {
                 Session["UserId"] = auth.user_id;
                 Session["UserEmail"] = auth.user_email;
@@ -124,5 +128,7 @@ namespace OnlineArtGallery.Controllers
             db.SaveChanges();
             return Redirect(Request.UrlReferrer.ToString());
         }
+
+        
     }
 }

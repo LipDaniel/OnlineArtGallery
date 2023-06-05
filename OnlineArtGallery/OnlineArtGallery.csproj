@@ -134,6 +134,8 @@
     <Compile Include="Controllers\FEArtworkController.cs" />
     <Compile Include="Controllers\FEAuthController.cs" />
     <Compile Include="Controllers\FEHomeController.cs" />
+    <Compile Include="Controllers\FEOrderController.cs" />
+    <Compile Include="Controllers\FEWishlistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -5912,6 +5914,9 @@
     <Content Include="Views\FEHome\Contact.cshtml" />
     <Content Include="Views\FEHome\About.cshtml" />
     <Content Include="Views\FEArtwork\ArtworkList.cshtml" />
+    <Content Include="Views\FEWishlist\Index.cshtml" />
+    <Content Include="Views\FEOrder\Cart.cshtml" />
+    <Content Include="Views\FEOrder\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

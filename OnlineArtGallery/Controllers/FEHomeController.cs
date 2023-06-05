@@ -20,5 +20,7 @@ namespace OnlineArtGallery.Controllers
         public ActionResult Contact() { 
             return View();
         }
+
+   
     }
 }

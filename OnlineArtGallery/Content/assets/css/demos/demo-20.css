@@ -156,10 +156,9 @@
 
 .product {
     height: 100%;
-    padding: 3rem 2rem 1rem;
     border-radius: .4rem;
     background-color: #fff;
-    border: .1rem solid #ebebeb
+  
 }
 
 .product-media {
