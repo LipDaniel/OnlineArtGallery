@@ -30,5 +30,16 @@ namespace OnlineArtGallery.Controllers
             ViewBag.ArtworkList = artworkList;
             return View();
         }
+
+        public ActionResult ArtworkList()
+        {
+            var artwork = db.Artworks.Include(a => a.Artist).Include(a => a.Category).ToList();
+            var category = db.Categories.ToList();
+            var tag = db.Tags.ToList();
+            ViewBag.Category = category;
+            ViewBag.Artwork = artwork;
+            ViewBag.Tag = tag;
+            return View();
+        }
     }
 }
