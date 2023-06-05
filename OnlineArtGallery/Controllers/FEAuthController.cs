@@ -11,22 +11,14 @@ namespace OnlineArtGallery.Controllers
     public class FEAuthController : Controller
     {
         private GalleryArtEntities db = new GalleryArtEntities();
-        public ActionResult SignIn(User user)
+        public string SignIn(User user)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(user);
-            }
-            
-            if(user.user_email == null && user.user_password == null)
-            {
-                return View(user);
-            }
-
-            var auth = db.Users.Where(a => a.user_email == user.user_email && a.user_password == user.user_password).FirstOrDefault();
+            var auth = db.Users.FirstOrDefault(a => a.user_email.Equals(user.user_email) && a.user_password.Equals(user.user_password));
 
             if(auth == null)
-                return Redirect(Request.UrlReferrer.ToString());
+            {
+                return "Wrong username or password";
+            }
 
             if (auth.user_is_active == true)
             {
@@ -37,31 +29,40 @@ namespace OnlineArtGallery.Controllers
                 Session["UserImage"] = auth.user_image;
                 if(auth.user_level == 2)
                 {
-                    return Redirect(Request.UrlReferrer.ToString());
+                    return "User";
 
                 } else
                 {
-                    return RedirectToAction("Index", "BEIndex");
+                    return "Admin";
                 }
             }
-            return Redirect(Request.UrlReferrer.ToString());
+            return "Account is blocked !!!";
         }
 
-        public ActionResult SignUp(User user)
+        [HttpPost]
+        public string SignUp(User user)
         {
+            bool check = db.Users.Any(e => e.user_email.Equals(user.user_email));
+            if (check)
+            {
+                return "Email is already exists";
+            }
             var auth = new User();
+            auth.user_lname = user.user_lname;
+            auth.user_fname = user.user_fname;
             auth.user_email = user.user_email;
             auth.user_password = user.user_password;
+            auth.user_is_active = true;
             auth.user_level = 2;
             db.Users.Add(auth);
             db.SaveChanges();
-            return Redirect(Request.UrlReferrer.ToString());
+            return "Successfully";
         }
 
         public ActionResult Logout()
         {
             Session.Clear();
-            return Redirect(Request.UrlReferrer.ToString());
+            return RedirectToAction("Index", "FEHome");
         }
 
         public ActionResult UserProfile()
