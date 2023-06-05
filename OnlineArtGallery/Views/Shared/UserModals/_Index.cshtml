@@ -20,7 +20,7 @@
                         <div class="tab-content" id="tab-content-5">
                             <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab">
                                 <form action="/FEAuth/SignIn" method="post">
-                                   
+
                                     <div class="form-group">
                                         <label for="singin-email">Email address *</label>
                                         <input type="text" class="form-control" id="singin-email" name="user_email" required>
@@ -127,3 +127,16 @@
         </div><!-- End .modal-content -->
     </div><!-- End .modal-dialog -->
 </div>
+
+<!-- TOAST -->
+<div class="position-fixed p-3" style="z-index: 9999; bottom: 0; right: 0;">
+    <div class="toast align-items-center text-white bg-primary border-0" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
