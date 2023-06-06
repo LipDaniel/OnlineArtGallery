@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArtController.cs" />
     <Compile Include="Controllers\ArtworksController.cs" />
     <Compile Include="Controllers\BEIndexController.cs" />
     <Compile Include="Controllers\FEArtworkController.cs" />
@@ -5922,6 +5923,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\assets\images\user\" />
+    <Folder Include="Content\Up\" />
     <Folder Include="Views\Artists\" />
     <Folder Include="Views\Artworks\" />
   </ItemGroup>

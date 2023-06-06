@@ -1,33 +1,74 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ArtistList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+
 @section main
 {
+    @model OnlineArtGallery.Models.Entities.Artist
+
+        <button type="button" class="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Create New Artist</button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Artist</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" asp-action="Create">
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Name Artist:</label>
+                                <input type="text" asp-for="artist_name" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Country Artist:</label>
+                                <input type="text" asp-for="artist_country" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label">Bio:</label>
+                                <textarea class="form-control" asp-for="artist_bio" id="message-text"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="btnSave" type="button"  class="btn btn-primary">Send message</button>
+                            </div>
+                        </form>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    @*//////*@
+
     <div class="container-fluid mt-3">
         <div class="block block-rounded">
             <div class="block-content tab-content ps-0 pe-0">
                 <div class="tab-pane active" id="published-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
-                    <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
-                        <thead>
-                        <th>Artist name</th>
-                        <th>Artwork Number</th>
-                        <th>Artworks sold</th>
-                        <th>Artworks for sale </th>
+
+                    <table class="table">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Artist name</th>
+                                <th>Artwork Number</th>
+                                <th>Artworks sold</th>
+                                <th>Artworks for sale </th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>12</td>
-                                <td>12</td>
-                                <td>12</td>
-                                <td>12</td>
-                            </tr>
+                            @*@foreach (var artist in ViewBag.Artist)
+                            {
+                                <tr>
+                                    <td>@artist.artist_name</td>
+                                    <td>@artist.artist_country</td>
+                                    <td>@artist.artist_bio</td>
+                                    <td>edit</td>
+                                </tr>
+                            }*@
                         </tbody>
                     </table>
                 </div>
-            </div>
             </div>
         </div>
     </div>
