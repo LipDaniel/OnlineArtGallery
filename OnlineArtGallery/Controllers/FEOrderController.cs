@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Lifetime;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace OnlineArtGallery.Controllers
 {
@@ -22,19 +24,25 @@ namespace OnlineArtGallery.Controllers
             return View();
         }
 
-        public ActionResult Create(int id)
+        public string Create(int id)
         {
             if (Session["UserId"] == null)
-                return RedirectToAction("Index", "FEHome");
+                return "Please login first ! ";
 
-            var cart = new Cart()
+            bool check = db.Favourites.Any(a => a.artwork_id == id);
+            if (!check)
             {
-                user_id = int.Parse(Session["UserId"].ToString()),
-                artwork_id = id
-            };
-            db.Carts.Add(cart);
-            db.SaveChanges();
-            return Redirect(Request.UrlReferrer.ToString());
+                var cart = new Cart()
+                {
+                    user_id = int.Parse(Session["UserId"].ToString()),
+                    artwork_id = id
+                };
+
+                db.Carts.Add(cart);
+                db.SaveChanges();
+                return "Added !";
+            }
+            return "Already added !";
         }
         public ActionResult Delete(int id)
         {

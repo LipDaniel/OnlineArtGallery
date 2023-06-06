@@ -1,4 +1,8 @@
-﻿
+﻿@using OnlineArtGallery.Models.Entities;
+@{ 
+    GalleryArtEntities db = new GalleryArtEntities();
+
+}
 
 <div class="header-top">
     <div class="container">
@@ -19,7 +23,7 @@
                         }
                         else
                         {
-                            <li><a href="" >Welcome back, @Session["UserFName"]   </a>   | <a href="/FEAuth/Logout">   Logout</a></li>
+                            <li><a href="">Welcome back, @Session["UserFName"]   </a>   | <a href="/FEAuth/Logout">   Logout</a></li>
                         }
                     </ul>
                 </li>
@@ -36,7 +40,7 @@
                 <span class="sr-only">Toggle mobile menu</span>
                 <i class="icon-bars"></i>
             </button>
-            
+
             @* LOGO *@
             <a href="/" class="logo">
                 <img src="~/Content/assets/images/demos/demo-20/logo.png" alt="Molla Logo" width="105" height="25">
@@ -55,13 +59,14 @@
                 </form>
             </div><!-- End .header-search -->
 
-            
+
             <div class="header-dropdown-link">
-       
+
                 @* ACCOUNT *@
                 <div class="account">
-                    @if (Session["UserId"] != null) { 
-                    
+                    @if (Session["UserId"] != null)
+                    {
+
                         <a href="/FEAuth/UserProfile" title="My account">
                             <div class="icon">
                                 <i class="icon-user"></i>
@@ -70,69 +75,72 @@
                         </a>
                     }
                 </div><!-- End .compare-dropdown -->
-
                 @* WISHLIST *@
                 <div class="wishlist">
                     <a href="/FEWishlist/Index" title="Wishlist">
                         <div class="icon">
                             <i class="icon-heart-o"></i>
-                            <span class="wishlist-count badge">3</span>
+                            @if (Session["UserId"] != null)
+                            {
+                                var id = int.Parse(Session["UserId"].ToString());
+                                var wishlistCount = db.Favourites.Where(a => a.user_id == id).ToList().Count();
+                                <span class="wishlist-count badge">@wishlistCount</span>
+                            }
+
                         </div>
                         <p>Wishlist</p>
                     </a>
                 </div><!-- End .compare-dropdown -->
-
                 @* CART *@
                 <div class="dropdown cart-dropdown">
                     <a href="/FEOrder/Cart" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                         <div class="icon">
                             <i class="icon-shopping-cart"></i>
-                            <span class="cart-count">2</span>
+                            @if (Session["UserId"] != null)
+                            {
+                                var id = int.Parse(Session["UserId"].ToString());
+                                var cartList = db.Carts.Where(a => a.user_id == id).ToList();
+                                var cartCount = db.Carts.Where(a => a.user_id == id).ToList().Count();
+                                <span class="cart-count">@cartCount</span>
+                            }
+                           
                         </div>
                         <p>Cart</p>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="dropdown-cart-products">
+                        @if (Session["UserId"] != null)
+                        {
+                            var id = int.Parse(Session["UserId"].ToString());
+                            var cartList = db.Carts.Where(a => a.user_id == id).ToList();
+
+                            foreach (var cart in cartList)
+                            {
                             <div class="product">
                                 <div class="product-cart-details">
                                     <h4 class="product-title">
-                                        <a href="product.html">Beige knitted elastic runner shoes</a>
+                                        <a href="/FEArtwork/ArtworkDetail/@cart.Artwork.artwork_id">@cart.Artwork.artwork_name </a>
                                     </h4>
 
                                     <span class="cart-product-info">
                                         <span class="cart-product-qty">1</span>
-                                        x $84.00
+                                        x $ @cart.Artwork.artwork_price
                                     </span>
                                 </div><!-- End .product-cart-details -->
 
                                 <figure class="product-image-container">
                                     <a href="product.html" class="product-image">
-                                        <img src="~/Content/assets/images/products/cart/product-1.jpg" alt="product">
+                                        <img src="~/Content/assets/images/artwork/@cart.Artwork.artwork_image" alt="product">
                                     </a>
                                 </figure>
-                                <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                <a href="/FEOrder/Delete/@cart.cart_id" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
                             </div><!-- End .product -->
 
-                            <div class="product">
-                                <div class="product-cart-details">
-                                    <h4 class="product-title">
-                                        <a href="product.html">Blue utility pinafore denim dress</a>
-                                    </h4>
+                            }
 
-                                    <span class="cart-product-info">
-                                        <span class="cart-product-qty">1</span>
-                                        x $76.00
-                                    </span>
-                                </div><!-- End .product-cart-details -->
+                        }
 
-                                <figure class="product-image-container">
-                                    <a href="product.html" class="product-image">
-                                        <img src="~/Content/assets/images/products/cart/product-2.jpg" alt="product">
-                                    </a>
-                                </figure>
-                                <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                            </div><!-- End .product -->
                         </div><!-- End .cart-product -->
 
                         <div class="dropdown-cart-total">
@@ -142,8 +150,8 @@
                         </div><!-- End .dropdown-cart-total -->
 
                         <div class="dropdown-cart-action">
-                            <a href="cart.html" class="btn btn-primary">View Cart</a>
-                            <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
+                            <a href="/FEOrder/Cart" class="btn btn-primary">View Cart</a>
+                            <a href="/FEOrder/Checkout" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
                         </div><!-- End .dropdown-cart-total -->
                     </div><!-- End .dropdown-menu -->
                 </div><!-- End .cart-dropdown -->

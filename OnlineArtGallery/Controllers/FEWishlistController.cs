@@ -21,19 +21,25 @@ namespace OnlineArtGallery.Controllers
             ViewBag.Wishlist = wishlist;
             return View();
         }
-        public ActionResult Create(int id)
+        public string Create(int id)
         {
             if (Session["UserId"] == null)
-                return RedirectToAction("Index", "FEHome");
+                return "Please login first";
 
-            var wishlist = new Favourite()
+            bool check = db.Favourites.Any(a => a.artwork_id == id);
+            if (!check)
             {
-                user_id = int.Parse(Session["UserId"].ToString()),
-                artwork_id = id
-            };
-            db.Favourites.Add(wishlist);
-            db.SaveChanges();
-            return Redirect(Request.UrlReferrer.ToString());
+                var wishlist = new Favourite()
+                {
+                    user_id = int.Parse(Session["UserId"].ToString()),
+                    artwork_id = id
+                };
+                db.Favourites.Add(wishlist);
+                db.SaveChanges();
+                return "Added"; 
+
+            }
+            return "Already added !";
         }
         public ActionResult Delete(int id)
         {

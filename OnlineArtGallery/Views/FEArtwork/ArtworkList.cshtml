@@ -87,66 +87,68 @@
                         </div><!-- End .toolbox -->
 
                         <div class="products mb-3">
-                        @foreach(var art in ViewBag.Artwork)
-                        {
+                            @foreach (var art in ViewBag.Artwork)
+                            {
 
-                            <div class="product product-list">
-                                <div class="row">
-                                    <div class="col-6 col-lg-4">
-                                        <figure class="product-media">
-                                            <span class="product-label label-new">New</span>
-                                            <a href="/FEArtwork/ArtworkDetail/@art.artwork_id">
-                                                @if (art.artwork_image == null)
-                                                {
-                                                    <img style="height:190px" src="~/Content/assets/images/no-image.png"/>
-                                                } else {
-                                                    <img style="height:190px" src="~/content/assets/images/artwork/@art.artwork_image"  alt="Product image" class="product-image">
+                                <div class="product product-list">
+                                    <div class="row">
+                                        <div class="col-6 col-lg-4">
+                                            <figure class="product-media">
+                                                <span class="product-label label-new">New</span>
+                                                <a href="/FEArtwork/ArtworkDetail/@art.artwork_id">
+                                                    @if (art.artwork_image == null)
+                                                    {
+                                                        <img style="height:190px" src="~/Content/assets/images/no-image.png" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img style="height:190px" src="~/content/assets/images/artwork/@art.artwork_image" alt="Product image" class="product-image">
 
-                                                }
-                                            </a>
-                                        </figure><!-- End .product-media -->
-                                    </div><!-- End .col-sm-6 col-lg-3 -->
+                                                    }
+                                                </a>
+                                            </figure><!-- End .product-media -->
+                                        </div><!-- End .col-sm-6 col-lg-3 -->
 
-                                    <div class="col-6 col-lg-3 order-lg-last">
-                                        <div class="product-list-action">
-                                            <div class="product-price">
-                                              $ @art.artwork_price
-                                            </div><!-- End .product-price -->
-                                            <div class="ratings-container">
-                                                <div class="ratings">
-                                                    <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
-                                                </div><!-- End .ratings -->
-                                                <span class="ratings-text">( 2 Reviews )</span>
-                                            </div><!-- End .rating-container -->
+                                        <div class="col-6 col-lg-3 order-lg-last">
+                                            <div class="product-list-action">
+                                                <div class="product-price">
+                                                    $ @art.artwork_price
+                                                </div><!-- End .product-price -->
+                                                <div class="ratings-container">
+                                                    <div class="ratings">
+                                                        <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                                                    </div><!-- End .ratings -->
+                                                    <span class="ratings-text">( 2 Reviews )</span>
+                                                </div><!-- End .rating-container -->
 
-                                            <a href="/FEWishlist/Create/@art.artwork_id" class="btn-product btn-cart mb-1"><span>add to wishlist</span></a>
-                                            <a href="/FEOrder/Create/@art.artwork_id" class="btn-product btn-cart "><span>add to cart</span></a>
-                                        </div><!-- End .product-list-action -->
-                                    </div><!-- End .col-sm-6 col-lg-3 -->
+                                                <a  data-wishlist-id="@art.artwork_id" href="" class="btn-product btn-cart mb-1 wishlist"><span>add to wishlist</span></a>
+                                                <a data-cart-id="@art.artwork_id" href="/FEOrder/Create/@art.artwork_id" class="btn-product btn-cart cart"><span>add to cart</span></a>
+                                            </div><!-- End .product-list-action -->
+                                        </div><!-- End .col-sm-6 col-lg-3 -->
 
-                                    <div class="col-lg-5">
-                                        <div class="product-body product-action-inner">
-                                            <div class="product-cat">
-                                                <a href="#">@art.Category.category_name</a>
-                                            </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="product.html">@art.artwork_name</a></h3><!-- End .product-title -->
+                                        <div class="col-lg-5">
+                                            <div class="product-body product-action-inner">
+                                                <div class="product-cat">
+                                                    <a href="#">@art.Category.category_name</a>
+                                                </div><!-- End .product-cat -->
+                                                <h3 class="product-title"><a href="product.html">@art.artwork_name</a></h3><!-- End .product-title -->
 
 
-                                            <p> <b style="font-weight:500">Artist:</b> <a href="/"> @art.Artist.artist_name</a> -  <b style="font-weight:500">Date:</b> @art.artwork_date</p>
-                                            <div>
-                                                <p  style="line-height:18px; font-size:13.5px">@art.artwork_description</p>
-                                            </div><!-- End .product-content -->
-                                            <p></p>
+                                                <p> <b style="font-weight:500">Artist:</b> <a href="/"> @art.Artist.artist_name</a> -  <b style="font-weight:500">Date:</b> @art.artwork_date</p>
+                                                <div>
+                                                    <p style="line-height:18px; font-size:13.5px">@art.artwork_description</p>
+                                                </div><!-- End .product-content -->
+                                                <p></p>
 
-                                        </div><!-- End .product-body -->
-                                    </div><!-- End .col-lg-6 -->
-                                </div><!-- End .row -->
-                            </div><!-- End .product -->
-                        }
+                                            </div><!-- End .product-body -->
+                                        </div><!-- End .col-lg-6 -->
+                                    </div><!-- End .row -->
+                                </div><!-- End .product -->
+                            }
 
-                            
 
-                           
+
+
                         </div><!-- End .products -->
 
                         <nav aria-label="Page navigation">
@@ -321,4 +323,37 @@
             </div><!-- End .container -->
         </div><!-- End .page-content -->
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(".wishlist").click(function (e) {
+            e.preventDefault();
+            var id = $(this).data("wishlist-id");
+
+            $.ajax({
+                url: "/FEWishlist/Create",
+                method: "Post",
+                data: {
+                    id : id
+                }
+            }).done(function (res) {
+                $('.toast-body').text(res);
+                $('#toast').toast('show');
+            });
+        });
+        $(".cart").click(function (e) {
+            e.preventDefault();
+            var id = $(this).data("cart-id");
+
+            $.ajax({
+                url: "/FEOrder/Create",
+                method: "Post",
+                data: {
+                    id: id
+                }
+            }).done(function (res) {
+                $('.toast-body').text(res);
+                $('#toast').toast('show');
+            });
+        });
+    </script>
 }
