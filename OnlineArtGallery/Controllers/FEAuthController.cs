@@ -58,6 +58,78 @@ namespace OnlineArtGallery.Controllers
             db.SaveChanges();
             return "Successfully";
         }
+        [HttpPost]
+        public string LoginFB(User user)
+        {
+            bool check = db.Users.Any(e => e.facebook_id.Equals(user.facebook_id));
+            if (check == true)
+            {
+                var data = db.Users.FirstOrDefault(e => e.facebook_id.Equals(user.facebook_id));
+
+                Session["UserId"] = data.user_id;
+                Session["UserFName"] = data.user_fname;
+                Session["UserLevel"] = data.user_level;
+                Session["UserImage"] = data.user_image;
+                return "Successfully";
+
+            }
+            else
+            {
+                var auth = new User();
+                auth.user_fname = user.user_fname;
+                auth.facebook_id = user.facebook_id;
+                auth.user_password = "123456";
+                auth.user_is_active = true;
+                auth.user_level = 2;
+                db.Users.Add(auth);
+                db.SaveChanges();
+
+                var data = db.Users.FirstOrDefault(e => e.facebook_id.Equals(user.facebook_id));
+
+                Session["UserId"] = data.user_id;
+                Session["UserFName"] = data.user_fname;
+                Session["UserLevel"] = data.user_level;
+                Session["UserImage"] = data.user_image;
+                return "Successfully";
+            }
+        }
+
+        [HttpPost]
+        public string LoginGG(User user)
+        {
+            bool check = db.Users.Any(e => e.google_id.Equals(user.google_id));
+            if (check == true)
+            {
+                var data = db.Users.FirstOrDefault(e => e.google_id.Equals(user.google_id));
+
+                Session["UserId"] = data.user_id;
+                Session["UserFName"] = data.user_fname;
+                Session["UserLevel"] = data.user_level;
+                Session["UserImage"] = data.user_image;
+                return "Successfully";
+
+            }
+            else
+            {
+                var auth = new User();
+                auth.user_fname = user.user_fname;
+                auth.user_email = "";
+                auth.google_id = user.google_id;
+                auth.user_password = "123456";
+                auth.user_is_active = true;
+                auth.user_level = 2;
+                db.Users.Add(auth);
+                db.SaveChanges();
+
+                var data = db.Users.FirstOrDefault(e => e.facebook_id.Equals(user.facebook_id));
+
+                Session["UserId"] = data.user_id;
+                Session["UserFName"] = data.user_fname;
+                Session["UserLevel"] = data.user_level;
+                Session["UserImage"] = data.user_image;
+                return "Successfully";
+            }
+        }
 
         public ActionResult Logout()
         {
