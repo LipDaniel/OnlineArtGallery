@@ -17,21 +17,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="~/Views/BEIndex/ArtistList.cshtml">
+                    <form method="post" action="@Url.Action("NewGallery","BEGallery")">
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Name:</label>
-                            <input type="text" name="artist_name" class="form-control" id="recipient-name">
+                            <input type="text" name="gallery_name" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Image:</label>
-                            <input type="text" name="artist_country" class="form-control" id="recipient-name">
+                            <input type="file" name="gallery_image" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Description:</label>
-                            <textarea class="form-control" name="artist_bio" id="message-text"></textarea>
+                            <textarea class="form-control" name="gallery_description"></textarea>
                         </div>
                         <div class="modal-footer">
-                            <input type="button" value="Submit" class="btn btn-primary">Send message</>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -50,20 +50,23 @@
                     <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                         <thead>
                             <tr>
-                                <th>Requested Date<</th>
-                                <th>Artist</th>
-                                <th>Artwork title</th>
-                                <th>Sell price</th>
-                                <th>Tag</th>
+                                <th>Gallery name<</th>
+                                <th>image</th>
+                                <th>Gallery Description</th>
+                                <th>Edit</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>12</td>
-                                <td>12</td>
-                                <td>12</td>
-                                <td>12</td>
-                            </tr>
+                            @foreach (var gallery in ViewBag.GalleryList)
+                            {
+                                <tr>
+                                    <td>@gallery.gallery_name</td>
+                                    <td>@gallery.gallery_image</td>
+                                    <td>@gallery.gallery_description</td>
+                                    <td>edit</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

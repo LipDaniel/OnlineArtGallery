@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineArtGallery.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace OnlineArtGallery.Controllers
 {
     public class BEIndexController : Controller
     {
+        private GalleryArtEntities db = new GalleryArtEntities();
+
         // GET: BEIndex
         public ActionResult Index()
         {
@@ -19,6 +22,7 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult ArtistList()
         {
+            ViewBag.Artists = db.Artists.ToList();
             return View();
         }
         public ActionResult ArtworkRequest()
@@ -27,10 +31,13 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult ArtworkList()
         {
+           
             return View();
         }
         public ActionResult GalleryList()
         {
+            ViewBag.GalleryList = db.Galleries.ToList();
+
             return View();
         }
         public ActionResult CategoryList()

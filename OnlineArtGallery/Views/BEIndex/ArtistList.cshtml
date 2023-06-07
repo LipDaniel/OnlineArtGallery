@@ -8,38 +8,38 @@
 {
     @model OnlineArtGallery.Models.Entities.Artist
 
-        <button type="button" class="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Create New Artist</button>
+    <button type="button" class="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Create New Artist</button>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New Artist</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post" asp-action="Create">
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Name Artist:</label>
-                                <input type="text" asp-for="artist_name" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Country Artist:</label>
-                                <input type="text" asp-for="artist_country" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Bio:</label>
-                                <textarea class="form-control" asp-for="artist_bio" id="message-text"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button id="btnSave" type="button"  class="btn btn-primary">Send message</button>
-                            </div>
-                        </form>
-                    </div>
-                   
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Artist</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
+                    <form method="post" action="@Url.Action("NewArt","BEArt")">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Name Artist:</label>
+                            <input type="text" name="artist_name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Country Artist:</label>
+                            <input type="text" name="artist_country" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Bio:</label>
+                            <textarea class="form-control" name="artist_bio"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btnSave" type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
+    </div>
     @*//////*@
 
     <div class="container-fluid mt-3">
@@ -50,22 +50,57 @@
                     <table class="table">
                         <thead class="table-dark">
                             <tr>
-                                <th>Artist name</th>
-                                <th>Artwork Number</th>
-                                <th>Artworks sold</th>
-                                <th>Artworks for sale </th>
+                                <th> Name</th>
+                                <th> Country</th>
+                                <th>Artist Bio</th>
+                                <th>Edit </th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var artist in ViewBag.Artist)
+                            @foreach (var artist in ViewBag.Artists)
                             {
                                 <tr>
                                     <td>@artist.artist_name</td>
                                     <td>@artist.artist_country</td>
                                     <td>@artist.artist_bio</td>
-                                    <td>edit</td>
+                                    <td>
+                                        <a> </a>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal+@artist.artist_id" data-bs-whatever="">Edit</button>
+                                        <div class="modal fade" id="exampleModal+@artist.artist_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">New Artist</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="post" action="@Url.Action("NewEdit","BEArt")">
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Name Artist:</label>
+                                                                <input type="text" value="@artist.artist_name" name="artist_name" class="form-control">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Country Artist:</label>
+                                                                <input type="text" value="@artist.artist_country" name="artist_country" class="form-control">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Bio:</label>
+                                                                <textarea class="form-control" name="artist_bio">@artist.artist_bio</textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button id="btnSave" type="submit" class="btn btn-primary">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
                                 </tr>
-                            }*@
+                            }
                         </tbody>
                     </table>
                 </div>
