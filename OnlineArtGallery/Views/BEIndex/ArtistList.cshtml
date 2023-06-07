@@ -8,7 +8,7 @@
 {
     @model OnlineArtGallery.Models.Entities.Artist
 
-    <button type="button" class="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Create New Artist</button>
+    <button type="button" class="btn btn-primary w-25 m-3" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Create New Artist</button>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -18,7 +18,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="@Url.Action("NewArt","BEArt")">
+                    <form method="post" action="@Url.Action("NewArt","BEArt")" enctype="multipart/form-data" >
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Name Artist:</label>
                             <input type="text" name="artist_name" class="form-control">
@@ -26,6 +26,10 @@
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Country Artist:</label>
                             <input type="text" name="artist_country" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Country Artist:</label>
+                            <input type="file" name="artist_image" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Bio:</label>
@@ -53,6 +57,8 @@
                                 <th> Name</th>
                                 <th> Country</th>
                                 <th>Artist Bio</th>
+                                <th>Images</th>
+                                <th>Create</th>
                                 <th>Edit </th>
                                 <th>Status</th>
                             </tr>
@@ -65,9 +71,15 @@
                                     <td>@artist.artist_country</td>
                                     <td>@artist.artist_bio</td>
                                     <td>
-                                        <a> </a>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal+@artist.artist_id" data-bs-whatever="">Edit</button>
-                                        <div class="modal fade" id="exampleModal+@artist.artist_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <img width="50px" src="~/Content/Assets/Images/artistimg/@artist.artist_image " alt="Alternate Text" />
+                                    </td>
+                                    <td>@artist.artist_created_date</td>
+                                    <td>
+                                        @{ 
+                                            var ar = "exampleModal" + @artist.artist_id;
+                                        }
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@ar" data-bs-whatever="@artist.artist_id">Edit</button>
+                                        <div class="modal fade" id="@ar" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -75,7 +87,8 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form method="post" action="@Url.Action("NewEdit","BEArt")">
+                                                        <form method="post" action="@Url.Action("NewEdit","BEArt")" enctype="multipart/form-data">
+                                                            <input type="text" value="@artist.artist_id" name="artist_id" class="form-control" hidden>
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Name Artist:</label>
                                                                 <input type="text" value="@artist.artist_name" name="artist_name" class="form-control">
@@ -83,6 +96,15 @@
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Country Artist:</label>
                                                                 <input type="text" value="@artist.artist_country" name="artist_country" class="form-control">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Image Artist:</label>
+                                                                <img width="150px" src="~/Content/assets/images/artistimg/@artist.artist_image" alt="Alternate Text" />
+                                                                <input type="file" name="artist_image" value="" />
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Created date:</label>
+                                                                <input type="text" value="@artist.artist_created_date" name="artist_created_date" class="form-control" disabled>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="message-text" class="col-form-label">Bio:</label>

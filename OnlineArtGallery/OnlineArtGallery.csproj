@@ -5297,6 +5297,7 @@
     <Content Include="Content\assets\images\demos\demo-9\slider\slide-3-480w.jpg" />
     <Content Include="Content\assets\images\demos\demo-9\slider\slide-3.jpg" />
     <Content Include="Content\assets\images\elements.png" />
+    <Content Include="Content\assets\images\artistimg\noimage.png" />
     <Content Include="Content\assets\images\icons\apple-touch-icon.png" />
     <Content Include="Content\assets\images\icons\browserconfig.xml" />
     <Content Include="Content\assets\images\icons\favicon-16x16.png" />
@@ -5578,6 +5579,7 @@
     <Content Include="Content\assets\js\superfish.min.js" />
     <Content Include="Content\assets\js\wNumb.js" />
     <Content Include="Content\assets\main.js" />
+    <Content Include="Content\assets\images\galleryimg\noimage.png" />
     <Content Include="Content\assets\vendor\line-awesome\line-awesome\line-awesome\css\line-awesome.min.css" />
     <Content Include="Content\assets\vendor\line-awesome\line-awesome\line-awesome\fonts\line-awesomeeb4f.svg" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -5924,7 +5926,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\assets\images\user\" />
-    <Folder Include="Content\Up\" />
     <Folder Include="Views\Artists\" />
     <Folder Include="Views\BEGallery\" />
     <Folder Include="Views\FEArtist\" />
