@@ -80,7 +80,7 @@ namespace OnlineArtGallery.Controllers
             return View();
         }
 
-        public ActionResult UserEdit(User user, string password, HttpPostedFileBase user_image)
+        public ActionResult UserEdit(User user, HttpPostedFileBase user_image)
         {
             var auth = db.Users.Find(Session["UserId"]);
             if (auth == null)
@@ -92,19 +92,7 @@ namespace OnlineArtGallery.Controllers
             auth.user_lname = user.user_lname;
             auth.user_phone = user.user_phone;
 
-            if(user.user_password != null)
-            {
-                if(password == auth.user_password)
-                {
-                    auth.user_password = user.user_password;
-                    TempData["SuccessMessage"] = "Change password successfully.";
-                }
-                else
-                {
-                    TempData["FailedMessage"] = "Wrong password !!!!!!";
-                    return Redirect(Request.UrlReferrer.ToString());
-                }
-            }
+            
             if(user_image != null && user_image.ContentLength > 0)
             {
                 if (auth.user_image != null)
@@ -130,6 +118,18 @@ namespace OnlineArtGallery.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
-        
+        public string EditPassword(string new_password , string current_password, string reset_password)
+        {
+            var auth = db.Users.Find(Session["UserId"]);
+
+            if (current_password == null)
+                return "Enter your password first !";
+
+            if (new_password != reset_password)
+                return "Your password doesen't match !";
+
+            auth.user_password = new_password;
+            return "Change password successfully !";
+        }
     }
 }

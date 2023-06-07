@@ -34,12 +34,15 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
                                 </li>
-                              
+
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-password-link" data-toggle="tab" href="#tab-password" role="tab" aria-controls="tab-password" aria-selected="false">Reset password</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/FEAuth/Logout">Sign Out</a>
@@ -50,8 +53,10 @@
                         <div class="col-md-8 col-lg-9">
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
+
                                     @if (TempData["SuccessMessage"] != null)
                                     {
+
                                         <span class="product-label label-new p-3">@TempData["SuccessMessage"]</span>
                                     }
                                     @if (TempData["FailedMessage"] != null)
@@ -107,7 +112,7 @@
                                     </div><!-- End .row -->
                                 </div><!-- .End .tab-pane -->
 
-                                <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link" >
+                                <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
                                     <form action="/FEAuth/UserEdit" method="Post" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col-sm-6">
@@ -130,37 +135,44 @@
                                                 <input name="user_phone" type="text" class="form-control" required="" value="@ViewBag.User.user_phone">
                                             </div>
                                         </div>
-                                        <div class="row mb-2">
-                                            <div class="col-sm-6">
-                                                <label>Current Image</label>
-                                                @if (ViewBag.User.user_image != null)
-                                                {
-                                                    <img style="width:250px" src="~/Content/assets/images/user/@ViewBag.User.user_image" />
-                                                }
-                                                else
-                                                {
-                                                    <img src="~/Content/assets/images/no-image.png" />
-                                                }
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label>Upload Image</label>
-                                                <input type="file" class="form-control" name="user_image" />
-                                            </div>
+
+                                        <div>
+                                            <label>Current Image</label>
+                                            @if (ViewBag.User.user_image != null)
+                                            {
+                                                <img style="width:250px" src="~/Content/assets/images/user/@ViewBag.User.user_image" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/assets/images/no-image.png" />
+                                            }
                                         </div>
+                                        <div class="mt-2">
+                                            <label>Upload Image</label>
+                                            <input type="file" class="form-control" name="user_image" />
+                                        </div>
+
+
+                                    </form>
+                                </div><!-- .End .tab-pane -->
+
+                                <div class="tab-pane fade" id="tab-password" role="tabpanel" aria-labelledby="tab-password-link">
+                                    <form id="resetPassword">
+
                                         <label>Current password (leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control" name="password">
+                                        <input type="password" class="form-control" name="current_password" id="current_password" required>
 
                                         <label>New password (leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control" name="user_password">
+                                        <input type="password" class="form-control" name="new_password" id="new_password" required>
 
                                         <label>Confirm new password</label>
-                                        <input type="password" class="form-control mb-2">
+                                        <input type="password" class="form-control mb-2" name="reset_password" id="reset_password" required>
 
                                         <button type="submit" class="btn btn-outline-primary-2">
                                             <span>SAVE CHANGES</span>
                                             <i class="icon-long-arrow-right"></i>
                                         </button>
-</form>
+                                    </form>
                                 </div><!-- .End .tab-pane -->
                             </div>
                         </div><!-- End .col-lg-9 -->
@@ -169,6 +181,25 @@
             </div><!-- End .dashboard -->
         </div><!-- End .page-content -->
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $("#resetPassword").on('submit', function (e) {
+            e.preventDefault();
+            var form_data = $(this).serialize();
+            console.log(form_data);
+
+            $.ajax({
+                url: "/FEAuth/EditPassword",
+                method: "Post",
+                data:  form_data
+            }).done(function (res) {
+                $('.toast-body').text(res);
+                $('#toast').toast('show');
+                $('#current_password')
+            });
+        });
+        
+    </script>
 }
 
 
