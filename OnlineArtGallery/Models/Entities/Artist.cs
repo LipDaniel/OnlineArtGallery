@@ -24,6 +24,8 @@ namespace OnlineArtGallery.Models.Entities
         public string artist_name { get; set; }
         public string artist_country { get; set; }
         public string artist_bio { get; set; }
+        public Nullable<bool> artist_is_status { get; set; }
+        public string artist_created_date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Artwork> Artworks { get; set; }

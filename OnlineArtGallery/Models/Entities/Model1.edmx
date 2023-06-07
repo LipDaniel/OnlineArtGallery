@@ -13,6 +13,8 @@
           <Property Name="artist_name" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="artist_country" Type="nvarchar" MaxLength="50" />
           <Property Name="artist_bio" Type="nvarchar" MaxLength="500" />
+          <Property Name="artist_is_status" Type="bit" />
+          <Property Name="artist_created_date" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Artwork">
           <Key>
@@ -28,6 +30,8 @@
           <Property Name="artwork_is_sold" Type="bit" />
           <Property Name="artwork_date" Type="nvarchar" MaxLength="50" />
           <Property Name="category_id" Type="int" />
+          <Property Name="artwork_is_status" Type="bit" />
+          <Property Name="artist_created_date" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Artwork_Gallery">
           <Key>
@@ -60,6 +64,8 @@
           <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="category_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="category_image" Type="nvarchar" MaxLength="50" />
+          <Property Name="category_is_status" Type="bit" />
+          <Property Name="category_created_date" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Exhibition">
           <Key>
@@ -72,6 +78,7 @@
           <Property Name="exhibition_description" Type="nvarchar" MaxLength="255" />
           <Property Name="exhibition_start_date" Type="nvarchar" MaxLength="1" />
           <Property Name="exhibition_end_date" Type="nvarchar" MaxLength="1" />
+          <Property Name="exhibition_is_status" Type="bit" />
         </EntityType>
         <EntityType Name="Favourite">
           <Key>
@@ -90,6 +97,7 @@
           <Property Name="gallery_image" Type="nvarchar" MaxLength="255" />
           <Property Name="gallery_description" Type="nvarchar" MaxLength="255" />
           <Property Name="gellery_is_active" Type="bit" />
+          <Property Name="gallery_created_date" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="History">
           <Key>
@@ -131,6 +139,12 @@
           <Property Name="order_status" Type="tinyint" />
           <Property Name="order_delivery_option" Type="bit" />
           <Property Name="order_is_paid" Type="bit" />
+          <Property Name="order_created_date" Type="varchar" MaxLength="50" />
+          <Property Name="order_phone" Type="varchar" MaxLength="50" />
+          <Property Name="order_address" Type="varchar" MaxLength="255" />
+          <Property Name="order_email" Type="varchar" MaxLength="255" />
+          <Property Name="order_fname" Type="varchar" MaxLength="50" />
+          <Property Name="order_lname" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Rating">
           <Key>
@@ -143,6 +157,16 @@
           <Property Name="rating_comment" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="rating_level" Type="int" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Tag">
           <Key>
             <PropertyRef Name="tag_id" />
@@ -150,6 +174,8 @@
           <Property Name="tag_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tag_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="tag_image" Type="nvarchar" MaxLength="50" />
+          <Property Name="tag_is_status" Type="bit" />
+          <Property Name="tag_created_date" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -165,6 +191,7 @@
           <Property Name="user_phone" Type="nvarchar" MaxLength="50" />
           <Property Name="user_is_active" Type="bit" />
           <Property Name="user_level" Type="tinyint" />
+          <Property Name="facebook_id" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK__Artwork__artist___267ABA7A">
           <End Role="Artist" Type="Self.Artist" Multiplicity="0..1" />
@@ -409,6 +436,7 @@
           <EntitySet Name="Order_Item" EntityType="Self.Order_Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Artwork__artist___267ABA7A" Association="Self.FK__Artwork__artist___267ABA7A">
@@ -501,6 +529,8 @@
           <Property Name="artist_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="artist_country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="artist_bio" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="artist_is_status" Type="Boolean" />
+          <Property Name="artist_created_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Artworks" Relationship="Self.FK__Artwork__artist___267ABA7A" FromRole="Artist" ToRole="Artwork" />
         </EntityType>
         <EntityType Name="Artwork">
@@ -517,6 +547,8 @@
           <Property Name="artwork_is_sold" Type="Boolean" />
           <Property Name="artwork_date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="category_id" Type="Int32" />
+          <Property Name="artwork_is_status" Type="Boolean" />
+          <Property Name="artist_created_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Artist" Relationship="Self.FK__Artwork__artist___267ABA7A" FromRole="Artwork" ToRole="Artist" />
           <NavigationProperty Name="Category" Relationship="Self.FK__Artwork__categor__5812160E" FromRole="Artwork" ToRole="Category" />
           <NavigationProperty Name="Artwork_Gallery" Relationship="Self.FK__Artwork_G__artwo__5441852A" FromRole="Artwork" ToRole="Artwork_Gallery" />
@@ -564,6 +596,8 @@
           <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="category_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="category_image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="category_is_status" Type="Boolean" />
+          <Property Name="category_created_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Artworks" Relationship="Self.FK__Artwork__categor__5812160E" FromRole="Category" ToRole="Artwork" />
         </EntityType>
         <EntityType Name="Exhibition">
@@ -577,6 +611,7 @@
           <Property Name="exhibition_description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="exhibition_start_date" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="exhibition_end_date" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="exhibition_is_status" Type="Boolean" />
         </EntityType>
         <EntityType Name="Favourite">
           <Key>
@@ -597,6 +632,7 @@
           <Property Name="gallery_image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="gallery_description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="gellery_is_active" Type="Boolean" />
+          <Property Name="gallery_created_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Artwork_Gallery" Relationship="Self.FK__Artwork_G__galle__5535A963" FromRole="Gallery" ToRole="Artwork_Gallery" />
         </EntityType>
         <EntityType Name="History">
@@ -645,6 +681,12 @@
           <Property Name="order_status" Type="Byte" />
           <Property Name="order_delivery_option" Type="Boolean" />
           <Property Name="order_is_paid" Type="Boolean" />
+          <Property Name="order_created_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="order_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="order_address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="order_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="order_fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="order_lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Order_Item" Relationship="Self.FK__Order_Ite__order__38996AB5" FromRole="Orders" ToRole="Order_Item" />
           <NavigationProperty Name="User" Relationship="Self.FK__Orders__user_id__34C8D9D1" FromRole="Orders" ToRole="Users" />
         </EntityType>
@@ -661,6 +703,16 @@
           <NavigationProperty Name="Artwork" Relationship="Self.FK__Rating__artwork___4D94879B" FromRole="Rating" ToRole="Artwork" />
           <NavigationProperty Name="User" Relationship="Self.FK__Rating__user_id__4CA06362" FromRole="Rating" ToRole="Users" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="Tag">
           <Key>
             <PropertyRef Name="tag_id" />
@@ -668,6 +720,8 @@
           <Property Name="tag_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tag_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="tag_image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tag_is_status" Type="Boolean" />
+          <Property Name="tag_created_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Artwork_Tag" Relationship="Self.FK__Artwork_T__tag_i__2F10007B" FromRole="Tag" ToRole="Artwork_Tag" />
         </EntityType>
         <EntityType Name="User">
@@ -684,6 +738,7 @@
           <Property Name="user_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="user_is_active" Type="Boolean" />
           <Property Name="user_level" Type="Byte" />
+          <Property Name="facebook_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__user_id__3C69FB99" FromRole="Users" ToRole="Cart" />
           <NavigationProperty Name="Favourites" Relationship="Self.FK__Favourite__user___403A8C7D" FromRole="Users" ToRole="Favourite" />
           <NavigationProperty Name="Histories" Relationship="Self.FK__History__user_id__440B1D61" FromRole="Users" ToRole="History" />
@@ -935,6 +990,7 @@
           <EntitySet Name="Order_Item" EntityType="Self.Order_Item" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Ratings" EntityType="Self.Rating" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tags" EntityType="Self.Tag" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK__Artwork__artist___267ABA7A" Association="Self.FK__Artwork__artist___267ABA7A">
@@ -1027,6 +1083,8 @@
                 <ScalarProperty Name="artist_name" ColumnName="artist_name" />
                 <ScalarProperty Name="artist_country" ColumnName="artist_country" />
                 <ScalarProperty Name="artist_bio" ColumnName="artist_bio" />
+                <ScalarProperty Name="artist_is_status" ColumnName="artist_is_status" />
+                <ScalarProperty Name="artist_created_date" ColumnName="artist_created_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1043,6 +1101,8 @@
                 <ScalarProperty Name="artwork_is_sold" ColumnName="artwork_is_sold" />
                 <ScalarProperty Name="artwork_date" ColumnName="artwork_date" />
                 <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="artwork_is_status" ColumnName="artwork_is_status" />
+                <ScalarProperty Name="artist_created_date" ColumnName="artist_created_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1079,6 +1139,8 @@
                 <ScalarProperty Name="category_id" ColumnName="category_id" />
                 <ScalarProperty Name="category_name" ColumnName="category_name" />
                 <ScalarProperty Name="category_image" ColumnName="category_image" />
+                <ScalarProperty Name="category_is_status" ColumnName="category_is_status" />
+                <ScalarProperty Name="category_created_date" ColumnName="category_created_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1092,6 +1154,7 @@
                 <ScalarProperty Name="exhibition_description" ColumnName="exhibition_description" />
                 <ScalarProperty Name="exhibition_start_date" ColumnName="exhibition_start_date" />
                 <ScalarProperty Name="exhibition_end_date" ColumnName="exhibition_end_date" />
+                <ScalarProperty Name="exhibition_is_status" ColumnName="exhibition_is_status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1112,6 +1175,7 @@
                 <ScalarProperty Name="gallery_image" ColumnName="gallery_image" />
                 <ScalarProperty Name="gallery_description" ColumnName="gallery_description" />
                 <ScalarProperty Name="gellery_is_active" ColumnName="gellery_is_active" />
+                <ScalarProperty Name="gallery_created_date" ColumnName="gallery_created_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1157,6 +1221,12 @@
                 <ScalarProperty Name="order_status" ColumnName="order_status" />
                 <ScalarProperty Name="order_delivery_option" ColumnName="order_delivery_option" />
                 <ScalarProperty Name="order_is_paid" ColumnName="order_is_paid" />
+                <ScalarProperty Name="order_created_date" ColumnName="order_created_date" />
+                <ScalarProperty Name="order_phone" ColumnName="order_phone" />
+                <ScalarProperty Name="order_address" ColumnName="order_address" />
+                <ScalarProperty Name="order_email" ColumnName="order_email" />
+                <ScalarProperty Name="order_fname" ColumnName="order_fname" />
+                <ScalarProperty Name="order_lname" ColumnName="order_lname" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1172,12 +1242,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GalleryArtModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tags">
             <EntityTypeMapping TypeName="GalleryArtModel.Tag">
               <MappingFragment StoreEntitySet="Tag">
                 <ScalarProperty Name="tag_id" ColumnName="tag_id" />
                 <ScalarProperty Name="tag_name" ColumnName="tag_name" />
                 <ScalarProperty Name="tag_image" ColumnName="tag_image" />
+                <ScalarProperty Name="tag_is_status" ColumnName="tag_is_status" />
+                <ScalarProperty Name="tag_created_date" ColumnName="tag_created_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1194,6 +1277,7 @@
                 <ScalarProperty Name="user_phone" ColumnName="user_phone" />
                 <ScalarProperty Name="user_is_active" ColumnName="user_is_active" />
                 <ScalarProperty Name="user_level" ColumnName="user_level" />
+                <ScalarProperty Name="facebook_id" ColumnName="facebook_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

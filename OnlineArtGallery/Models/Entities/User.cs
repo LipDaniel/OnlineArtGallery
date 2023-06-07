@@ -36,6 +36,7 @@ namespace OnlineArtGallery.Models.Entities
         public string user_phone { get; set; }
         public Nullable<bool> user_is_active { get; set; }
         public Nullable<byte> user_level { get; set; }
+        public string facebook_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }

@@ -21,5 +21,6 @@ namespace OnlineArtGallery.Models.Entities
         public string exhibition_description { get; set; }
         public string exhibition_start_date { get; set; }
         public string exhibition_end_date { get; set; }
+        public Nullable<bool> exhibition_is_status { get; set; }
     }
 }

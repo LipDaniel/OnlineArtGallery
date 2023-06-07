@@ -23,6 +23,8 @@ namespace OnlineArtGallery.Models.Entities
         public int category_id { get; set; }
         public string category_name { get; set; }
         public string category_image { get; set; }
+        public Nullable<bool> category_is_status { get; set; }
+        public string category_created_date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Artwork> Artworks { get; set; }

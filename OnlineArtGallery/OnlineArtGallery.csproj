@@ -132,6 +132,7 @@
     <Compile Include="Controllers\ArtController.cs" />
     <Compile Include="Controllers\ArtworksController.cs" />
     <Compile Include="Controllers\BEIndexController.cs" />
+    <Compile Include="Controllers\FEArtistController.cs" />
     <Compile Include="Controllers\FEArtworkController.cs" />
     <Compile Include="Controllers\FEAuthController.cs" />
     <Compile Include="Controllers\FEHomeController.cs" />
@@ -5926,6 +5927,7 @@
     <Folder Include="Content\Up\" />
     <Folder Include="Views\Artists\" />
     <Folder Include="Views\Artworks\" />
+    <Folder Include="Views\FEArtist\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

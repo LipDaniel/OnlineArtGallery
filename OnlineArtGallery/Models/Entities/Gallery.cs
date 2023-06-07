@@ -25,6 +25,7 @@ namespace OnlineArtGallery.Models.Entities
         public string gallery_image { get; set; }
         public string gallery_description { get; set; }
         public Nullable<bool> gellery_is_active { get; set; }
+        public string gallery_created_date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Artwork_Gallery> Artwork_Gallery { get; set; }

@@ -27,6 +27,12 @@ namespace OnlineArtGallery.Models.Entities
         public Nullable<byte> order_status { get; set; }
         public Nullable<bool> order_delivery_option { get; set; }
         public Nullable<bool> order_is_paid { get; set; }
+        public string order_created_date { get; set; }
+        public string order_phone { get; set; }
+        public string order_address { get; set; }
+        public string order_email { get; set; }
+        public string order_fname { get; set; }
+        public string order_lname { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Item> Order_Item { get; set; }

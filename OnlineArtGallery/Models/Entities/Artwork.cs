@@ -36,6 +36,8 @@ namespace OnlineArtGallery.Models.Entities
         public Nullable<bool> artwork_is_sold { get; set; }
         public string artwork_date { get; set; }
         public Nullable<int> category_id { get; set; }
+        public Nullable<bool> artwork_is_status { get; set; }
+        public string artist_created_date { get; set; }
     
         public virtual Artist Artist { get; set; }
         public virtual Category Category { get; set; }
