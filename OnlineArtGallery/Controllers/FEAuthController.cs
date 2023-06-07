@@ -15,7 +15,7 @@ namespace OnlineArtGallery.Controllers
         {
             var auth = db.Users.FirstOrDefault(a => a.user_email.Equals(user.user_email) && a.user_password.Equals(user.user_password));
 
-            if (auth == null)
+            if(auth == null)
             {
                 return "Wrong username or password";
             }
@@ -27,12 +27,11 @@ namespace OnlineArtGallery.Controllers
                 Session["UserFName"] = auth.user_fname;
                 Session["UserLevel"] = auth.user_level;
                 Session["UserImage"] = auth.user_image;
-                if (auth.user_level == 2)
+                if(auth.user_level == 2)
                 {
                     return "User";
 
-                }
-                else
+                } else
                 {
                     return "Admin";
                 }
@@ -59,81 +58,7 @@ namespace OnlineArtGallery.Controllers
             db.SaveChanges();
             return "Successfully";
         }
-        [HttpPost]
-        public string LoginFB(User user)
-        {
-            bool check = db.Users.Any(e => e.facebook_id.Equals(user.facebook_id));
-            if (check == true)
-            {
-                var data = db.Users.FirstOrDefault(e => e.facebook_id == user.facebook_id);
 
-                Session["UserId"] = data.user_id;
-                Session["UserFName"] = data.user_fname;
-                Session["UserLevel"] = data.user_level;
-                Session["UserImage"] = data.user_image;
-                return "Successfully";
-
-            }
-            else
-            {
-
-                var auth = new User();
-                auth.user_fname = user.user_fname;
-                auth.user_email = "";
-                auth.facebook_id = user.facebook_id;
-                auth.user_password = "123456";
-                auth.user_is_active = true;
-                auth.user_level = 2;
-                db.Users.Add(auth);
-                db.SaveChanges();
-
-                var data = db.Users.FirstOrDefault(e => e.facebook_id.Equals(user.facebook_id));
-
-                Session["UserId"] = data.user_id;
-                Session["UserFName"] = data.user_fname;
-                Session["UserLevel"] = data.user_level;
-                Session["UserImage"] = data.user_image;
-                return "Successfully";
-            }
-        }
-
-        [HttpPost]
-        public string LoginGG(User user)
-        {
-            bool check = db.Users.Any(e => e.google_id.Equals(user.google_id));
-            if (check == true)
-            {
-                var data = db.Users.FirstOrDefault(e => e.google_id.Equals(user.google_id));
-
-                Session["UserId"] = data.user_id;
-                Session["UserFName"] = data.user_fname;
-                Session["UserLevel"] = data.user_level;
-                Session["UserImage"] = data.user_image;
-                return "Successfully";
-
-            }
-            else
-            {
-
-                var auth = new User();
-                auth.user_fname = user.user_fname;
-                auth.user_email = "";
-                auth.google_id = user.google_id;
-                auth.user_password = "123456";
-                auth.user_is_active = true;
-                auth.user_level = 2;
-                db.Users.Add(auth);
-                db.SaveChanges();
-
-                var data = db.Users.FirstOrDefault(e => e.google_id.Equals(user.google_id));
-
-                Session["UserId"] = data.user_id;
-                Session["UserFName"] = data.user_fname;
-                Session["UserLevel"] = data.user_level;
-                Session["UserImage"] = data.user_image;
-                return "Successfully";
-            }
-        }
         public ActionResult Logout()
         {
             Session.Clear();
@@ -142,7 +67,7 @@ namespace OnlineArtGallery.Controllers
 
         public ActionResult UserProfile()
         {
-            if (Session["UserId"] == null)
+            if (Session["UserId"]  == null)
             {
                 return RedirectToAction("Index", "FEHome");
             }
@@ -155,32 +80,20 @@ namespace OnlineArtGallery.Controllers
             return View();
         }
 
-        public ActionResult UserEdit(User user, string password, HttpPostedFileBase user_image)
+        public ActionResult UserEdit(User user, HttpPostedFileBase user_image)
         {
             var auth = db.Users.Find(Session["UserId"]);
             if (auth == null)
             {
                 return RedirectToAction("Index", "FEHome");
             }
-
+            
             auth.user_fname = user.user_fname;
             auth.user_lname = user.user_lname;
             auth.user_phone = user.user_phone;
 
-            if (user.user_password != null)
-            {
-                if (password == auth.user_password)
-                {
-                    auth.user_password = user.user_password;
-                    TempData["SuccessMessage"] = "Change password successfully.";
-                }
-                else
-                {
-                    TempData["FailedMessage"] = "Wrong password !!!!!!";
-                    return Redirect(Request.UrlReferrer.ToString());
-                }
-            }
-            if (user_image != null && user_image.ContentLength > 0)
+            
+            if(user_image != null && user_image.ContentLength > 0)
             {
                 if (auth.user_image != null)
                 {
@@ -205,6 +118,18 @@ namespace OnlineArtGallery.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
+        public string EditPassword(string new_password , string current_password, string reset_password)
+        {
+            var auth = db.Users.Find(Session["UserId"]);
 
+            if (current_password == null)
+                return "Enter your password first !";
+
+            if (new_password != reset_password)
+                return "Your password doesen't match !";
+
+            auth.user_password = new_password;
+            return "Change password successfully !";
+        }
     }
 }
