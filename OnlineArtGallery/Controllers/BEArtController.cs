@@ -59,23 +59,58 @@ namespace OnlineArtGallery.Controllers
         }
 
 
+        //get edit 
+        public ActionResult Edit(int id)
+        {
+            var arr = db.Artists.Find(id);
+            
+            return RedirectToAction("ArtistList", "BEIndex", arr);
+
+           
+
+        }
 
 
-    //post edit 
 
-    [HttpPost]
-    public ActionResult NewEdit(int id, Artist artist)
+        //post edit 
+        [HttpPost]
+    public ActionResult NewEdit( Artist artist, HttpPostedFileBase artist_image)
     {
-        var arr = db.Artists.Find(id);
-        if (arr == null)
+        var art = db.Artists.Find(artist.artist_id);
+        if (art == null)
         {
             return RedirectToAction("ArtistList", "BEIndex");
         }
-        return RedirectToAction("ArtistList", "BEIndex");
+            art.artist_name = artist.artist_name;
+            art.artist_country = artist.artist_country;
+            art.artist_bio = artist.artist_bio;
+            if (artist_image != null)
+            {
+                if (art.artist_image != null)
+                {
+                    string artpath = Path.Combine(Server.MapPath("~/Content/Assets/Images/User/"), art.artist_image);
+                    if (System.IO.File.Exists(artpath))
+                    {
+                        // Delete the file
+                        System.IO.File.Delete(artpath);
 
-        arr.artist_name = artist.artist_name;
-        arr.artist_country = artist.artist_country;
-        arr.artist_country = artist.artist_bio;
+                        // Perform any other necessary actions
+                    }
+                }
+                var fileName = Path.GetFileName(artist_image.FileName);
+                string fileExtension = Path.GetExtension(artist_image.FileName);
+                string file = fileName + DateTime.Now.ToString("yyyyMMddHHmmss") + fileExtension;
+                var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/artistimg/"), file);
+
+
+
+                artist_image.SaveAs(path);
+                art.artist_image = file;
+            }
+            db.SaveChanges();
+            return RedirectToAction("ArtistList", "BEIndex");
+
+        
 
     }
 }
