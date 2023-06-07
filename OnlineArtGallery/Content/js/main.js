@@ -7,13 +7,13 @@
     }
 
     $("#SignUpForm").submit(function (e) {
-        
+
         e.preventDefault();
 
         var pwd = $("#register_password").val();
         var confirmpwd = $("#confirm_password").val();
 
-        if (pwd != confirmpwd) { 
+        if (pwd != confirmpwd) {
             $('.toast-body').text("Confirm password not match");
             $('#toast').removeClass('bg-primary');
             $('#toast').addClass("bg-danger");
@@ -59,7 +59,7 @@
         var email = $("#singin-email").val();
         var password = $("#singin-password").val();
 
-        
+
         $('#spinnerLogin').addClass('spinner-border spinner-border-sm');
         $('#btnLogin').prop('disabled', true)
 
@@ -85,4 +85,69 @@
             }
         });
     });
+
 })
+function fbLogin() {
+    FB.login(function (response) {
+        if (response.status == 'connected') {
+            FB.api('/me', function (response) {
+                const FacebookId = response.id
+                const NameCustomer = response.name
+
+                $.ajax({
+                    type: "POST",
+                    url: "/FEAuth/LoginFB",
+                    data: {
+                        facebook_id: FacebookId,
+                        user_fname: NameCustomer,
+                    },
+                    success: function (rs) {
+                        if (rs == "Successfully") {
+                            window.location.href = "/FEHome/Index"
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //do your own thing
+                        alert("Something wrong in server.")
+                    }
+                });
+            });
+        }
+    });
+};
+
+function fbLogout() {
+    FB.logout(function (response) {
+        console.log(response)
+        // user is now logged out
+    });
+}
+
+function decryptJwt(token) {
+    return JSON.parse(atob(token.split('.')[1]));
+}
+
+function googleLogin(response) {
+    const responsePayload = decryptJwt(response.credential);
+
+    const GoogleId = responsePayload.sub
+    const NameCustomer = responsePayload.name
+
+    $.ajax({
+        type: "POST",
+        url: "/FEAuth/LoginGG",
+        data: {
+            google_id: GoogleId,
+            user_fname: NameCustomer,
+        },
+        success: function (rs) {
+            if (rs == "Successfully") {
+                window.location.href = "/FEHome/Index"
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            //do your own thing
+            alert("Something wrong in server.")
+        }
+    });
+}
