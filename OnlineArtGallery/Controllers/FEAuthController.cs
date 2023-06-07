@@ -90,7 +90,7 @@ namespace OnlineArtGallery.Controllers
             
             auth.user_fname = user.user_fname;
             auth.user_lname = user.user_lname;
-            auth.user_phone = user.user_phone;
+            auth.user_phone = user.user_phone;  
 
             if(user.user_password != null)
             {

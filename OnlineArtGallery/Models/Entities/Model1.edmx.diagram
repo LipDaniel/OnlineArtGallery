@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0c9739e6674c48bebd808889baf28038" Name="Diagram1">
-        <EntityTypeShape EntityType="GalleryArtModel.Artist" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+      <Diagram DiagramId="02ca66188af341a2b6472073e51116dd" Name="Diagram1">
+        <EntityTypeShape EntityType="GalleryArtModel.Artist" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Artwork" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Artwork_Gallery" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Artwork_Tag" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="GalleryArtModel.Order_Item" Width="1.5" PointX="8.25" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Order" Width="1.5" PointX="6" PointY="17.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Rating" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.sysdiagram" Width="1.5" PointX="9.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Tag" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.User" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <AssociationConnector Association="GalleryArtModel.FK__Artwork__artist___267ABA7A" ManuallyRouted="false" />

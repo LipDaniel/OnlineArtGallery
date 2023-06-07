@@ -18,7 +18,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="@Url.Action("NewArt","BEArt")">
+                    <form method="post" action="@Url.Action("NewArt","BEArt")" enctype="multipart/form-data" >
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Name Artist:</label>
                             <input type="text" name="artist_name" class="form-control">
@@ -26,6 +26,10 @@
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Country Artist:</label>
                             <input type="text" name="artist_country" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Country Artist:</label>
+                            <input type="file" name="artist_image" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Bio:</label>
@@ -53,6 +57,8 @@
                                 <th> Name</th>
                                 <th> Country</th>
                                 <th>Artist Bio</th>
+                                <th>Images</th>
+                                <th>Create</th>
                                 <th>Edit </th>
                                 <th>Status</th>
                             </tr>
@@ -64,6 +70,10 @@
                                     <td>@artist.artist_name</td>
                                     <td>@artist.artist_country</td>
                                     <td>@artist.artist_bio</td>
+                                    <td>
+                                        <img width="50px" src="~/Content/Assets/Images/artistimg/@artist.artist_image " alt="Alternate Text" />
+                                    </td>
+                                    <td>@artist.artist_created_date</td>
                                     <td>
                                         <a> </a>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal+@artist.artist_id" data-bs-whatever="">Edit</button>
@@ -83,6 +93,10 @@
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Country Artist:</label>
                                                                 <input type="text" value="@artist.artist_country" name="artist_country" class="form-control">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Country Artist:</label>
+                                                                <input type="text" value="@artist.artist_created_date" name="artist_country" class="form-control">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="message-text" class="col-form-label">Bio:</label>
