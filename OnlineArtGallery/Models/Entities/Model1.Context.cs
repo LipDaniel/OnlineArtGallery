@@ -39,7 +39,6 @@ namespace OnlineArtGallery.Models.Entities
         public virtual DbSet<Order_Item> Order_Item { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }

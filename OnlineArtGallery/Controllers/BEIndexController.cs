@@ -30,7 +30,7 @@ namespace OnlineArtGallery.Controllers
             return View();
         }
         public ActionResult GalleryList()
-        {
+        {   
             return View();
         }
         public ActionResult CategoryList()
