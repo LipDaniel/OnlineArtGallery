@@ -22,6 +22,7 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult ArtistList()
         {
+
             ViewBag.Artists = db.Artists.ToList();
             return View();
         }

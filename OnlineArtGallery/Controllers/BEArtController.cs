@@ -51,6 +51,7 @@ namespace OnlineArtGallery.Controllers
                 artist_image.SaveAs(path);
                 artis.artist_image = file;
             }
+            
 
             db.Artists.Add(artis);
             db.SaveChanges();
@@ -86,9 +87,9 @@ namespace OnlineArtGallery.Controllers
             art.artist_bio = artist.artist_bio;
             if (artist_image != null)
             {
-                if (art.artist_image != null)
+                if (artist.artist_image != null)
                 {
-                    string artpath = Path.Combine(Server.MapPath("~/Content/Assets/Images/User/"), art.artist_image);
+                    string artpath = Path.Combine(Server.MapPath("~/Content/Assets/Images/User/"), artist.artist_image);
                     if (System.IO.File.Exists(artpath))
                     {
                         // Delete the file
