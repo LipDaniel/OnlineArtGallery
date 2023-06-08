@@ -64,5 +64,11 @@ namespace OnlineArtGallery.Controllers
         {
             return View();
         }
+        public ActionResult TagList()
+        {
+            ViewBag.Tag = db.Tags.ToList();
+
+            return View();
+        }
     }
 }

@@ -132,6 +132,7 @@
     <Compile Include="Controllers\BEArtController.cs" />
     <Compile Include="Controllers\BEGalleryController.cs" />
     <Compile Include="Controllers\BEIndexController.cs" />
+    <Compile Include="Controllers\BETagController.cs" />
     <Compile Include="Controllers\FEArtistController.cs" />
     <Compile Include="Controllers\FEArtworkController.cs" />
     <Compile Include="Controllers\FEAuthController.cs" />
@@ -5922,12 +5923,14 @@
     <Content Include="Views\FEWishlist\Index.cshtml" />
     <Content Include="Views\FEOrder\Cart.cshtml" />
     <Content Include="Views\FEOrder\Checkout.cshtml" />
+    <Content Include="Views\BEIndex\TagList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\assets\images\user\" />
     <Folder Include="Views\Artists\" />
     <Folder Include="Views\BEGallery\" />
+    <Folder Include="Views\BETag\" />
     <Folder Include="Views\FEArtist\" />
   </ItemGroup>
   <ItemGroup>

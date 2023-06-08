@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "ArtistList";
+    ViewBag.Title = "TagList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -7,7 +7,7 @@
 @section main
 {
 
-    @model OnlineArtGallery.Models.Entities.Artist
+    @model OnlineArtGallery.Models.Entities.Tag
 
     <div class="container-fluid mt-3">
         <div class="block block-rounded">
@@ -35,11 +35,13 @@
                     <div class="tab-pane active" id="published-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
                         <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                             <thead>
-                            <th>Artworks List</th>
-                            <th>TDate Created</th>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Gallery</th>
+                                <tr>
+                                    <th>Artworks List</th>
+                                    <th>TDate Created</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Gallery</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -55,11 +57,13 @@
                     <div class="tab-pane" id="pending-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-profile-tab">
                         <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                             <thead>
-                            <th>Artworks List</th>
-                            <th>TDate Created</th>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Gallery</th>
+                                <tr>
+                                    <th>Artworks List</th>
+                                    <th>TDate Created</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Gallery</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -76,33 +80,24 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-primary w-25 m-3" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Create New Artist</button>
+    <button type="button" class="btn btn-primary w-25 m-3" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Create New Tag</button>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New Artist</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">New Gallery</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="@Url.Action("NewArt","BEArt")" enctype="multipart/form-data">
+                    <form method="post" action="@Url.Action("NewTag","BETag")" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Name:</label>
-                            <input type="text" name="artist_name" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Country:</label>
-                            <input type="text" name="artist_country" class="form-control">
-                        </div> 
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Bio:</label>
-                            <textarea class="form-control" name="artist_bio"></textarea>
+                            <input type="text" name="tag_name" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Image:</label>
-                            <input type="file" name="artist_image" class="form-control">
+                            <input type="file" name="tag_image" class="form-control">
                         </div>
-
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
@@ -124,31 +119,29 @@
                         <thead class="table-dark">
                             <tr>
                                 <th> Name</th>
-                                <th> Country</th>
-                                <th>Artist Bio</th>
                                 <th>Images</th>
                                 <th>Create</th>
-                                <th>Edit </th>
                                 <th>Status</th>
+                                <th>Edit </th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var artist in ViewBag.Artists)
+                            @foreach (var tag in ViewBag.Tag)
                             {
                                 <tr>
-                                    <td>@artist.artist_name</td>
-                                    <td>@artist.artist_country</td>
-                                    <td>@artist.artist_bio</td>
+                                    <td>@tag.tag_name</td>
                                     <td>
-                                        <img width="50px" src="~/Content/assets/images/artistimg/@artist.artist_image" alt="Alternate Text" />
+                                        <img width="50px" src="~/Content/Assets/Images/artistimg/@tag.tag_image " alt="Alternate Text" />
                                     </td>
-                                    <td>@artist.artist_created_date</td>
+
+                                    <td>@tag.tag_created_date</td>
                                     <td>
                                         @{
-                                            var ar = "exampleModal" + @artist.artist_id;
+                                            var tager = "exampleModal" + tag.tag_id;
                                         }
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@ar" data-bs-whatever="@artist.artist_id">Edit</button>
-                                        <div class="modal fade" id="@ar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@tager" data-bs-whatever="@tag.tag_id">Edit</button>
+                                        <div class="modal fade" id="@tager" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -156,29 +149,20 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form method="post" action="@Url.Action("NewEdit","BEArt")" enctype="multipart/form-data">
-                                                            <input type="text" value="@artist.artist_id" name="artist_id" class="form-control" hidden>
+                                                        <form method="post" action="@Url.Action("NewEdit","BETag")" enctype="multipart/form-data">
+                                                            <input type="text" value="@tag.tag_id" name="tag_id" class="form-control" hidden>
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Name Artist:</label>
-                                                                <input type="text" value="@artist.artist_name" name="artist_name" class="form-control">
+                                                                <input type="text" value="@tag.tag_name" name="tag_name" class="form-control">
                                                             </div>
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Country Artist:</label>
-                                                                <input type="text" value="@artist.artist_country" name="artist_country" class="form-control">
-                                                            </div>
+
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Image Artist:</label>
-                                                                <img width="150px" src="~/Content/assets/images/artistimg/@artist.artist_image" alt="Alternate Text" />
-                                                                <input type="file" name="artist_image" value="" />
+                                                                <img width="150px" src="~/Content/assets/images/artistimg/@tag.tag_image" alt="Alternate Text" />
+                                                                <input type="file" name="tag_image" value="" />
                                                             </div>
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Created date:</label>
-                                                                <input type="text" value="@artist.artist_created_date" name="artist_created_date" class="form-control" disabled>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="message-text" class="col-form-label">Bio:</label>
-                                                                <textarea class="form-control" name="artist_bio">@artist.artist_bio</textarea>
-                                                            </div>
+
+
                                                             <div class="modal-footer">
                                                                 <button id="btnSave" type="submit" class="btn btn-primary">Submit</button>
                                                             </div>
