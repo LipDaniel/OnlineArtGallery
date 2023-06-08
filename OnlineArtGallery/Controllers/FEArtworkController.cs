@@ -41,5 +41,7 @@ namespace OnlineArtGallery.Controllers
             ViewBag.Tag = tag;
             return View();
         }
+
+
     }
 }

@@ -180,9 +180,12 @@
                     <div class="dropdown-menu">
                         <nav class="side-nav">
                             <ul class="menu-vertical sf-arrows">
-                                <li class="item-lead"><a href="#">Best Books of 2018</a></li>
-                                <li class="item-lead"><a href="#">New for 2019</a></li>
-                                <li><a href="#">Art & Photography</a></li>
+                                @{ 
+                                    var cateList = db.Categories.ToList();
+                                }
+                                @foreach (var cate in cateList) { 
+                                    <li class="item-lead"><a href="#">@cate.category_name</a></li>
+                                }
                             </ul>
                         </nav>
                     </div>

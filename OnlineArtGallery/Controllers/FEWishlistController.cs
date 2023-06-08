@@ -21,11 +21,12 @@ namespace OnlineArtGallery.Controllers
             ViewBag.Wishlist = wishlist;
             return View();
         }
-        public string Create(int id)
+        public ActionResult Create(int id)
         {
             if (Session["UserId"] == null)
-                return "Please login first";
+                return Json("Please login first");
 
+            var userId = int.Parse(Session["UserId"].ToString());
             bool check = db.Favourites.Any(a => a.artwork_id == id);
             if (!check)
             {
@@ -36,10 +37,21 @@ namespace OnlineArtGallery.Controllers
                 };
                 db.Favourites.Add(wishlist);
                 db.SaveChanges();
-                return "Added"; 
+                
+                var count = db.Favourites.Where(b => b.user_id == userId).Count();
+                var resultt = new
+                {
+                    noti = "Added !",
+                    count
+                };
+                return Json(resultt); 
 
             }
-            return "Already added !";
+            var result = new
+            {
+                noti = "Already added !",
+            };
+            return Json(result);
         }
         public ActionResult Delete(int id)
         {
