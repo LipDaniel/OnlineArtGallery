@@ -21,6 +21,7 @@
                     <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                         <thead>
                             <tr>
+                                <th>Number</th>
                                 <th>Name</th>
                                 <th>Img</th>
                                 <th>Description</th>
@@ -30,9 +31,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @{
+                                var s = 0;
+                            }
                             @foreach (var gallery in ViewBag.GalleryList)
                             {
+                                s += 1;
                                 <tr>
+                                    <td>@s</td>
                                     <td>@gallery.gallery_name</td>
                                     <td>
                                         <img width="50px" src="~/Content/Assets/Images/galleryimg/@gallery.gallery_image" alt="Alternate Text" />
@@ -81,7 +87,7 @@
                                     </td>
                                 </tr>
                             }
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>

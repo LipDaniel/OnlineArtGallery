@@ -17,41 +17,32 @@
                 </strong>
             </div>
             <div class="block-content pb-3">
-                <ul class="nav nav-tabs nav-fill nav-tabs-alt  " role="tablist">
-                    <li class="nav-item">
-                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#published-posts-tab" role="tab" aria-selected="true">
-                            APPROVED
-                            &nbsp<span class="badge bg-danger">0<!--Cập Nhật Số Lượng--></span>
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link" id="pendingTabs" data-bs-toggle="tab" data-bs-target="#pending-posts-tab" role="tab" aria-selected="false">
-                            NOT PPROVED YET
-                            &nbsp<span class="badge bg-danger">0<!--Cập Nhật Số Lượng--></span>
-                        </button>
-                    </li>
-
-                </ul>
 
                 <div class="block-content tab-content ps-0 pe-0">
                     <div class="tab-pane active" id="published-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
                         <table class="table table-sm table-responsive table table-striped  js-dataTable-responsive dataTable no-footer dtr-inline">
                             <thead>
-                               
-                                    <tr>
-                                        <th>Name </th>
-                                        <th>Country</th>
-                                        <th>Bio</th>
-                                        <th>Image</th>
-                                        <th>Create</th>
-                                        <th>Status</th>
-                                        <th>Edit</th>
-                                    </tr>
-                                </thead>
+
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Name </th>
+                                    <th>Country</th>
+                                    <th>Bio</th>
+                                    <th>Image</th>
+                                    <th>Create</th>
+                                    <th>Status</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
                             <tbody>
+                                @{
+                                    var s = 0;
+                                }
                                 @foreach (var artist in ViewBag.Artists)
                                 {
+                                    s += 1;
                                     <tr>
+                                        <td>@s</td>
                                         <td>@artist.artist_name</td>
                                         <td>@artist.artist_country</td>
                                         <td width="400px" height="90px">@artist.artist_bio</td>
@@ -109,37 +100,12 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane" id="pending-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-profile-tab">
-                        <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
-                            <thead>
-                                <tr>
-                                    <th>Name Artits</th>
-                                    <th>Country</th>
-                                    <th>Bio</th>
-                                    <th>Image</th>
-                                    <th>Create</th>
-                                    <th>Status</th>
-                                    <th>Edit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    @*form add artist*@ 
+    @*form add artist*@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -149,7 +115,7 @@
                 </div>
                 <div class="modal-body">
                     <form method="post" action="@Url.Action("NewArt","BEArt")" enctype="multipart/form-data">
-                       
+
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Name:</label>
                             <input type="text" name="artist_name" class="form-control">
@@ -179,7 +145,7 @@
 
     @*//////*@
 
-  
+
 }
 
 

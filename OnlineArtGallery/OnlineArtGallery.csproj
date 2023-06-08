@@ -139,6 +139,7 @@
     <Compile Include="Controllers\FEAuthController.cs" />
     <Compile Include="Controllers\FEHomeController.cs" />
     <Compile Include="Controllers\FEOrderController.cs" />
+    <Compile Include="Controllers\FEUserController.cs" />
     <Compile Include="Controllers\FEWishlistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
