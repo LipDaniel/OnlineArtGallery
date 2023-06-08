@@ -137,6 +137,7 @@
     <Compile Include="Controllers\FEAuthController.cs" />
     <Compile Include="Controllers\FEHomeController.cs" />
     <Compile Include="Controllers\FEOrderController.cs" />
+    <Compile Include="Controllers\FEUserController.cs" />
     <Compile Include="Controllers\FEWishlistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -5915,7 +5916,7 @@
     <Content Include="Views\BEIndex\ArtworkRequest.cshtml" />
     <Content Include="Views\BEIndex\OtherList.cshtml" />
     <Content Include="Views\FEArtwork\ArtworkDetail.cshtml" />
-    <Content Include="Views\FEAuth\UserProfile.cshtml" />
+    <Content Include="Views\FEUser\UserProfile.cshtml" />
     <Content Include="Views\FEHome\Contact.cshtml" />
     <Content Include="Views\FEHome\About.cshtml" />
     <Content Include="Views\FEArtwork\ArtworkList.cshtml" />
@@ -5929,6 +5930,7 @@
     <Folder Include="Views\Artists\" />
     <Folder Include="Views\BEGallery\" />
     <Folder Include="Views\FEArtist\" />
+    <Folder Include="Views\FEAuth\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
