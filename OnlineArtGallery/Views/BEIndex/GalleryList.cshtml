@@ -8,56 +8,25 @@
 {
     @model OnlineArtGallery.Models.Entities.Gallery
 
-    <button type="button" class="btn btn-primary w-25 m-3" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Create New Gallery</button>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New Gallery</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="@Url.Action("NewGallery","BEGallery")" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Name:</label>
-                            <input type="text" name="gallery_name" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Image:</label>
-                            <input type="file" name="gallery_image" class="form-control">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Description:</label>
-                            <textarea class="form-control" name="gallery_description"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    @*//////*@
     <div class="container-fluid mt-3">
         <div class="block block-rounded">
             <div class="block-header block-header-default">
-                <strong>FAVOURITE</strong>
+                <strong>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Create New Gallery</button>
+
+                </strong>
             </div>
             <div class="block-content pb-3">
                 <div class="block-content tab-content ps-0 pe-0">
                     <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
-                        <thead class="table-dark">
+                        <thead>
                             <tr>
-                                <th>Gallery name<</th>
-                                <th>image</th>
-                                <th>Gallery Description</th>
-                                <th>created</th>
-                                <th>Edit</th>
+                                <th>Name</th>
+                                <th>Img</th>
+                                <th>Description</th>
+                                <th>Create</th>
                                 <th>Status</th>
+                                <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,6 +39,7 @@
                                     </td>
                                     <td>@gallery.gallery_description</td>
                                     <td>@gallery.gallery_created_date</td>
+                                    <td>status</td>
                                     <td>
                                         @{
                                             var galle = "exampleModal" + @gallery.gallery_id;
@@ -109,15 +79,53 @@
                                         </div>
 
                                     </td>
-
                                 </tr>
                             }
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+
+    @*form add gallery*@
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Gallery</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="@Url.Action("NewGallery","BEGallery")" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Name:</label>
+                            <input type="text" name="gallery_name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Image:</label>
+                            <input type="file" name="gallery_image" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Description:</label>
+                            <textarea class="form-control" name="gallery_description"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @*//////*@
+  
 }
 
 @section css

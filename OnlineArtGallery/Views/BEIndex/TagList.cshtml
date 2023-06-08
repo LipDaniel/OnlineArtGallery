@@ -12,7 +12,10 @@
     <div class="container-fluid mt-3">
         <div class="block block-rounded">
             <div class="block-header block-header-default">
-                <strong>ARTWORK REQUEST</strong>
+                <strong>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Create New Tag</button>
+
+                </strong>
             </div>
             <div class="block-content pb-3">
                 <ul class="nav nav-tabs nav-fill nav-tabs-alt  " role="tablist">
@@ -36,21 +39,64 @@
                         <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                             <thead>
                                 <tr>
-                                    <th>Artworks List</th>
-                                    <th>TDate Created</th>
-                                    <th>Title</th>
-                                    <th>Category</th>
-                                    <th>Gallery</th>
+                                    <th>Name</th>
+                                    <th>Img</th>
+                                    <th>Create</th>
+                                    <th>Status</th>
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                </tr>
+                                @foreach (var tag in ViewBag.Tag)
+                                {
+                                    <tr>
+                                        <td>@tag.tag_name</td>
+                                        <td>
+                                            <img width="50px" src="~/Content/Assets/Images/tag/@tag.tag_image " alt="Alternate Text" />
+                                        </td>
+
+                                        <td>@tag.tag_created_date</td>
+                                        <td>Status</td>
+                                        <td>
+                                            @{
+                                                var tager = "exampleModal" + tag.tag_id;
+                                            }
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@tager" data-bs-whatever="@tag.tag_id">Edit</button>
+                                            <div class="modal fade" id="@tager" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">New Artist</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="post" action="@Url.Action("NewEdit","BETag")" enctype="multipart/form-data">
+                                                                <input type="text" value="@tag.tag_id" name="tag_id" class="form-control" hidden>
+                                                                <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">Name Artist:</label>
+                                                                    <input type="text" value="@tag.tag_name" name="tag_name" class="form-control">
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">Image Artist:</label>
+                                                                    <img width="150px" src="~/Content/assets/images/tag/@tag.tag_image" alt="Alternate Text" />
+                                                                    <input type="file" name="tag_image" value="" />
+                                                                </div>
+
+
+                                                                <div class="modal-footer">
+                                                                    <button id="btnSave" type="submit" class="btn btn-primary">Submit</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -80,7 +126,7 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-primary w-25 m-3" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Create New Tag</button>
+    @*form add Tag*@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -110,78 +156,7 @@
 
     @*//////*@
 
-    <div class="container-fluid mt-3">
-        <div class="block block-rounded">
-            <div class="block-content tab-content ps-0 pe-0">
-                <div class="tab-pane active" id="published-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
-
-                    <table class="table">
-                        <thead class="table-dark">
-                            <tr>
-                                <th> Name</th>
-                                <th>Images</th>
-                                <th>Create</th>
-                                <th>Status</th>
-                                <th>Edit </th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var tag in ViewBag.Tag)
-                            {
-                                <tr>
-                                    <td>@tag.tag_name</td>
-                                    <td>
-                                        <img width="50px" src="~/Content/Assets/Images/tag/@tag.tag_image " alt="Alternate Text" />
-                                    </td>
-
-                                    <td>@tag.tag_created_date</td>
-                                    <td>
-                                        @{
-                                            var tager = "exampleModal" + tag.tag_id;
-                                        }
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@tager" data-bs-whatever="@tag.tag_id">Edit</button>
-                                        <div class="modal fade" id="@tager" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">New Artist</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form method="post" action="@Url.Action("NewEdit","BETag")" enctype="multipart/form-data">
-                                                            <input type="text" value="@tag.tag_id" name="tag_id" class="form-control" hidden>
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Name Artist:</label>
-                                                                <input type="text" value="@tag.tag_name" name="tag_name" class="form-control">
-                                                            </div>
-
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Image Artist:</label>
-                                                                <img width="150px" src="~/Content/assets/images/tag/@tag.tag_image" alt="Alternate Text" />
-                                                                <input type="file" name="tag_image" value="" />
-                                                            </div>
-
-
-                                                            <div class="modal-footer">
-                                                                <button id="btnSave" type="submit" class="btn btn-primary">Submit</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 }
 
 

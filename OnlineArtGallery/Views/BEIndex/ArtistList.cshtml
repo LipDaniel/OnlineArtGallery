@@ -35,117 +35,31 @@
 
                 <div class="block-content tab-content ps-0 pe-0">
                     <div class="tab-pane active" id="published-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
-                        <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
+                        <table class="table table-sm table-responsive table table-striped  js-dataTable-responsive dataTable no-footer dtr-inline">
                             <thead>
-                            <th>Artworks List</th>
-                            <th>TDate Created</th>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Gallery</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="tab-pane" id="pending-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-profile-tab">
-                        <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
-                            <thead>
-                            <th>Artworks List</th>
-                            <th>TDate Created</th>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Gallery</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New Artist</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="@Url.Action("NewArt","BEArt")" enctype="multipart/form-data">
-                       
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Name:</label>
-                            <input type="text" name="artist_name" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Country:</label>
-                            <input type="text" name="artist_country" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Bio:</label>
-                            <textarea class="form-control" name="artist_bio"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Image:</label>
-                            <input type="file" name="artist_image" class="form-control">
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    @*//////*@
-
-    <div class="container-fluid mt-3">
-        <div class="block block-rounded">
-            <div class="block-content tab-content ps-0 pe-0">
-                <div class="tab-pane active" id="published-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
-
-                    <table class="table">
-                        <thead class="table-dark">
-                            <tr>
-                                <th> Name</th>
-                                <th> Country</th>
-                                <th>Artist Bio</th>
-                                <th>Images</th>
-                                <th>Create</th>
-                                <th>Edit </th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var artist in ViewBag.Artists)
-                            {
                                
+                                    <tr>
+                                        <th>Name </th>
+                                        <th>Country</th>
+                                        <th>Bio</th>
+                                        <th>Image</th>
+                                        <th>Create</th>
+                                        <th>Status</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                                @foreach (var artist in ViewBag.Artists)
+                                {
                                     <tr>
                                         <td>@artist.artist_name</td>
                                         <td>@artist.artist_country</td>
-                                        <td>@artist.artist_bio</td>
+                                        <td width="400px" height="90px">@artist.artist_bio</td>
                                         <td>
                                             <img width="50px" src="~/Content/assets/images/artistimg/@artist.artist_image" alt="Alternate Text" />
                                         </td>
                                         <td>@artist.artist_created_date</td>
+                                        <td></td>
                                         <td>
                                             @{
                                                 var ar = "exampleModal" + @artist.artist_id;
@@ -189,14 +103,83 @@
                                                 </div>
                                             </div>
                                         </td>
-                                     </tr>
-                    }
+                                    </tr>
+                                }
+
                             </tbody>
-                            </table>
-                        </div>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="pending-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-profile-tab">
+                        <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
+                            <thead>
+                                <tr>
+                                    <th>Name Artits</th>
+                                    <th>Country</th>
+                                    <th>Bio</th>
+                                    <th>Image</th>
+                                    <th>Create</th>
+                                    <th>Status</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>12</td>
+                                    <td>12</td>
+                                    <td>12</td>
+                                    <td>12</td>
+                                    <td>12</td>
+                                    <td>12</td>
+                                    <td>12</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    @*form add artist*@ 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Artist</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
+                    <form method="post" action="@Url.Action("NewArt","BEArt")" enctype="multipart/form-data">
+                       
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Name:</label>
+                            <input type="text" name="artist_name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Country:</label>
+                            <input type="text" name="artist_country" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Bio:</label>
+                            <textarea class="form-control" name="artist_bio"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Image:</label>
+                            <input type="file" name="artist_image" class="form-control">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    @*//////*@
+
+  
 }
 
 
