@@ -18,7 +18,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="@Url.Action("NewArt","BEArt")" enctype="multipart/form-data" >
+                    <form method="post" action="@Url.Action("NewArt","BEArt")" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Name Artist:</label>
                             <input type="text" name="artist_name" class="form-control">
@@ -75,11 +75,11 @@
                                     </td>
                                     <td>@artist.artist_created_date</td>
                                     <td>
-                                        @{ 
+                                        @{
                                             var ar = "exampleModal" + @artist.artist_id;
                                         }
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@ar" data-bs-whatever="@artist.artist_id">Edit</button>
-                                        <div class="modal fade" id="@ar" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="@ar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -136,23 +136,23 @@
 {
     <link rel="stylesheet" href="~/Content/adminassets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
-    <link rel="stylesheet" href="/Content/adminassets/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
 }
 
 @section scripts
 {
     <!-- Page JS Plugins -->
-    <script src="/Content/adminassets/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/Content/adminassets/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="/Content/adminassets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/Content/adminassets/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-    <script src="/Content/adminassets/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
-    <script src="/Content/adminassets/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
-    <script src="/Content/adminassets/plugins/datatables-buttons-jszip/jszip.min.js"></script>
-    <script src="/Content/adminassets/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
-    <script src="{/Content/adminassets/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
-    <script src="/Content/adminassets/plugins/datatables-buttons/buttons.print.min.js"></script>
-    <script src="/Content/adminassets/plugins/datatables-buttons/buttons.html5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.print.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
     <!-- Page JS Code -->
-    <script src="/Content/adminassets/pages/be_tables_datatables.min.js"></script>
+    <script src="/Content/adminassets/js/pages/be_tables_datatables.min.js"></script>
 }
