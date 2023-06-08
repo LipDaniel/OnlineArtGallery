@@ -1,0 +1,234 @@
+﻿@{
+    ViewBag.Title = "ExhibitionList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@section main
+{
+
+    @model OnlineArtGallery.Models.Entities.Exhibition
+
+    <div class="container-fluid mt-3">
+        <div class="block block-rounded">
+            <div class="block-header block-header-default">
+                <strong>ARTWORK REQUEST</strong>
+            </div>
+            <div class="block-content pb-3">
+                <ul class="nav nav-tabs nav-fill nav-tabs-alt  " role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#published-posts-tab" role="tab" aria-selected="true">
+                            APPROVED
+                            &nbsp<span class="badge bg-danger">0<!--Cập Nhật Số Lượng--></span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="pendingTabs" data-bs-toggle="tab" data-bs-target="#pending-posts-tab" role="tab" aria-selected="false">
+                            NOT PPROVED YET
+                            &nbsp<span class="badge bg-danger">0<!--Cập Nhật Số Lượng--></span>
+                        </button>
+                    </li>
+
+                </ul>
+
+                <div class="block-content tab-content ps-0 pe-0">
+                    <div class="tab-pane active" id="published-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
+                        <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
+                            <thead>
+                                <tr>
+                                    <th>Artworks List</th>
+                                    <th>TDate Created</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Gallery</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>12</td>
+                                    <td>12</td>
+                                    <td>12</td>
+                                    <td>12</td>
+                                    <td>12</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="pending-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-profile-tab">
+                        <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
+                            <thead>
+                                <tr>
+                                    <th>Artworks List</th>
+                                    <th>TDate Created</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Gallery</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>12</td>
+                                    <td>12</td>
+                                    <td>12</td>
+                                    <td>12</td>
+                                    <td>12</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary w-25 m-3" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">Create New Tag</button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Gallery</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="@Url.Action("NewExhibition","BEExhibitionList")" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Name:</label>
+                            <input type="text" name="exhibition_name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Img:</label>
+                            <input type="file" name="exhibition_image" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Location:</label>
+                            <input type="text" name="exhibition_location" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Description:</label>
+                            <input type="text" name="exhibition_description" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Start date:</label>
+                            <input type="date" name="exhibition_start_date" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">End date:</label>
+                            <input type="date" name="exhibition_end_date" class="form-control">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    @*//////*@
+
+    <div class="container-fluid mt-3">
+        <div class="block block-rounded">
+            <div class="block-content tab-content ps-0 pe-0">
+                <div class="tab-pane active" id="published-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
+
+                    <table class="table">
+                        <thead class="table-dark">
+                            <tr>
+                                <th> Name</th>
+                                <th>Images</th>
+                                <th>Description</th>
+                                <th>Location</th>
+                                <th>Start date </th>
+                                <th>End date</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var exhibi in ViewBag.Exhibition)
+                            {
+                                <tr>
+                                    <td>@exhibi.exhibition_name</td>
+                                    <td>
+                                        <img width="50px" src="~/Content/Assets/Images/exhibition/@exhibi.exhibition_image " alt="Alternate Text" />
+                                    </td>
+
+                                    <td>@exhibi.exhibition_description</td>
+                                    <td>@exhibi.exhibition_location</td>
+
+                                    <td>@exhibi.exhibition_start_date</td>
+                                    <td>@exhibi.exhibition_end_date</td>
+
+
+                                    <td>
+                                        @{
+                                            var ex = "exampleModal" + exhibi.exhibition_id;
+                                        }
+                                        @*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@ex" data-bs-whatever="@ex.exhibition_id">Edit</button>
+                                        <div class="modal fade" id="@ex" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">New Artist</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="post" action="@Url.Action("NewEdit","BETag")" enctype="multipart/form-data">
+                                                            <input type="text" value="@ex.exhibition_id" name="tag_id" class="form-control" hidden>
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Name Artist:</label>
+                                                                <input type="text" value="@ex.exhibition_name" name="tag_name" class="form-control">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Image Artist:</label>
+                                                                <img width="150px" src="~/Content/assets/images/exhibition/@ex.exhibition_image" alt="Alternate Text" />
+                                                                <input type="file" name="tag_image" value="" />
+                                                            </div>
+
+
+                                                            <div class="modal-footer">
+                                                                <button id="btnSave" type="submit" class="btn btn-primary">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>*@
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section css
+{
+    <link rel="stylesheet" href="~/Content/adminassets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
+    <link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
+}
+
+@section scripts
+{
+    <!-- Page JS Plugins -->
+    <script src="/Content/adminassets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.print.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
+    <!-- Page JS Code -->
+    <script src="/Content/adminassets/js/pages/be_tables_datatables.min.js"></script>
+}

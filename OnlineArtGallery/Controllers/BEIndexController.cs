@@ -71,5 +71,11 @@ namespace OnlineArtGallery.Controllers
 
             return View();
         }
+        public ActionResult ExhibitionList()
+        {
+            ViewBag.Exhibition = db.Exhibitions.ToList();
+
+            return View();
+        }
     }
 }
