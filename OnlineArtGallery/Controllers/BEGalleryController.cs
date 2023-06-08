@@ -56,9 +56,9 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult Edit(int id)
         {
-            var arr = db.Galleries.Find(id);
+            var galler = db.Galleries.Find(id);
 
-            return RedirectToAction("GalleryList", "BEIndex", arr);
+            return RedirectToAction("GalleryList", "BEIndex", galler);
 
 
 
@@ -75,9 +75,9 @@ namespace OnlineArtGallery.Controllers
             {
                 return RedirectToAction("GalleryList", "BEIndex");
             }
-            galle.gallery_name = galle.gallery_name;
-            galle.gallery_description = galle.gallery_description;
-            galle.gellery_is_active = galle.gellery_is_active;
+            galle.gallery_name = gallery.gallery_name;
+            galle.gallery_description = gallery.gallery_description;
+       
             if (gallery_image != null)
             {
                 if (galle.gallery_image != null)

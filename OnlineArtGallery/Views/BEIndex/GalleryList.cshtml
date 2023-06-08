@@ -79,28 +79,24 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">New Artist</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Edit Gallery</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <form method="post" action="@Url.Action("NewEdit", "BEGallery")" enctype="multipart/form-data">
                                                             <input type="text" value="@gallery.gallery_id" name="gallery_id" class="form-control" hidden>
                                                             <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Name Artist:</label>
+                                                                <label for="recipient-name" class="col-form-label">Name:</label>
                                                                 <input type="text" value="@gallery.gallery_name" name="gallery_name" class="form-control">
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Image Artist:</label>
+                                                                <label for="recipient-name" class="col-form-label">Image:</label>
                                                                 <img width="150px" src="~/Content/assets/images/galleryimg/@gallery.gallery_image" alt="Alternate Text" />
                                                                 <input type="file" name="gallery_image" value="" />
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Created date:</label>
-                                                                <input type="text" value="@gallery.gallery_created_date" class="form-control" disabled>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="message-text" class="col-form-label">Bio:</label>
-                                                                <textarea class="form-control" name="artist_bio">@gallery.gallery_description</textarea>
+                                                                <label for="message-text" class="col-form-label">Description:</label>
+                                                                <textarea class="form-control" name="gallery_description">@gallery.gallery_description</textarea>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button id="btnSave" type="submit" class="btn btn-primary">Submit</button>
