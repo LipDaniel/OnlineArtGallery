@@ -13,11 +13,12 @@ namespace OnlineArtGallery.Controllers
         private GalleryArtEntities db = new GalleryArtEntities();
 
 
+
         // GET: Art
         // GET: Art/Create
         public ActionResult Create()
         {
-            ViewBag.tag.id = new SelectList(db.Tags, "tag_id", "tag_name");
+            ViewBag.tag_id = new SelectList(db.Tags, "tag_id", "tag_name");
             ViewBag.category = new SelectList(db.Categories, "category_id", "category_name");
 
             return View();
@@ -38,15 +39,12 @@ namespace OnlineArtGallery.Controllers
                 var fileName = Path.GetFileName(tag_image.FileName);
                 string fileExtension = Path.GetExtension(tag_image.FileName);
                 string file = fileName + DateTime.Now.ToString("yyyyMMddHHmmss") + fileExtension;
-                var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/artistimg/"), file);
-
-
+                var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/tag/"), file);
 
                 tag_image.SaveAs(path);
-                tag.tag_image = file;
+                tager.tag_image = file;
             }
-
-            db.Tags.Add(tag);
+            db.Tags.Add(tager);
             db.SaveChanges();
             return RedirectToAction("TagList", "BEIndex");
 
@@ -56,7 +54,7 @@ namespace OnlineArtGallery.Controllers
         //get edit 
         public ActionResult Edit(int id)
         {
-            var arr = db.Artists.Find(id);
+            var arr = db.Tags.Find(id);
 
             return RedirectToAction("TagList", "BEIndex", arr);
 
@@ -76,10 +74,9 @@ namespace OnlineArtGallery.Controllers
                 return RedirectToAction("TagList", "BEIndex");
             }
             tager.tag_name = tag.tag_name;
-            tager.tag_created_date = tag.tag_created_date;
             if (tag_image != null)
             {
-                if (tager.tag_image != null)
+                if (tag.tag_image != null)
                 {
                     string artpath = Path.Combine(Server.MapPath("~/Content/Assets/Images/User/"), tag.tag_image);
                     if (System.IO.File.Exists(artpath))
@@ -93,7 +90,7 @@ namespace OnlineArtGallery.Controllers
                 var fileName = Path.GetFileName(tag_image.FileName);
                 string fileExtension = Path.GetExtension(tag_image.FileName);
                 string file = fileName + DateTime.Now.ToString("yyyyMMddHHmmss") + fileExtension;
-                var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/artistimg/"), file);
+                var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/tag/"), file);
 
 
 
