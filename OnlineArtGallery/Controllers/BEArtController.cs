@@ -50,11 +50,15 @@ namespace OnlineArtGallery.Controllers
 
                 artist_image.SaveAs(path);
                 artis.artist_image = file;
+
+                
             }
+            
             
 
             db.Artists.Add(artis);
             db.SaveChanges();
+
             return RedirectToAction("ArtistList", "BEIndex");
 
         }

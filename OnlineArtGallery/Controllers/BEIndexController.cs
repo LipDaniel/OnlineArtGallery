@@ -22,8 +22,7 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult ArtistList()
         {
-
-            ViewBag.Artists = db.Artists.ToList();
+            ViewBag.Artists = db.Artists.OrderByDescending(a=> a.artist_id).ToList();
             return View();
         }
         public ActionResult ArtworkRequest()
@@ -37,7 +36,7 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult GalleryList()
         {
-            ViewBag.GalleryList = db.Galleries.ToList();
+            ViewBag.GalleryList = db.Galleries.OrderByDescending(a=>a.gallery_id).ToList();
 
             return View();
         }
@@ -67,7 +66,7 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult TagList()
         {
-            ViewBag.Tag = db.Tags.ToList();
+            ViewBag.Tag = db.Tags.OrderByDescending(a=>a.tag_id).ToList();
 
             return View();
         }
