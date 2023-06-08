@@ -67,7 +67,7 @@
                     @if (Session["UserId"] != null)
                     {
 
-                        <a href="/FEAuth/UserProfile" title="My account">
+                        <a href="/FEUser/UserProfile" title="My account">
                             <div class="icon">
                                 <i class="icon-user"></i>
                             </div>
@@ -84,7 +84,11 @@
                             {
                                 var id = int.Parse(Session["UserId"].ToString());
                                 var wishlistCount = db.Favourites.Where(a => a.user_id == id).ToList().Count();
-                                <span class="wishlist-count badge">@wishlistCount</span>
+                                if(wishlistCount > 0)
+                                {
+                                    <span class="wishlist-count badge">@wishlistCount</span>
+
+                                }
                             }
 
                         </div>
@@ -101,7 +105,11 @@
                                 var id = int.Parse(Session["UserId"].ToString());
                                 var cartList = db.Carts.Where(a => a.user_id == id).ToList();
                                 var cartCount = db.Carts.Where(a => a.user_id == id).ToList().Count();
-                                <span class="cart-count">@cartCount</span>
+                                if(cartCount > 0)
+                                {
+                                    <span class="cart-count">@cartCount</span>
+
+                                }
                             }
                            
                         </div>
