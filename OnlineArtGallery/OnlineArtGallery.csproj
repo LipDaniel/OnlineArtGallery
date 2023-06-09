@@ -5939,6 +5939,7 @@
     <Content Include="Views\FEOrder\Checkout.cshtml" />
     <Content Include="Views\BEIndex\TagList.cshtml" />
     <Content Include="Views\BEIndex\ExhibitionList.cshtml" />
+    <Content Include="Views\FEUser\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
