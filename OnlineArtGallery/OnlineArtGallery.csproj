@@ -4416,6 +4416,13 @@
     <Content Include="Content\assets\images\category\grid\banner-3.jpg" />
     <Content Include="Content\assets\images\category\grid\banner-4.jpg" />
     <Content Include="Content\assets\images\contact-header-bg.jpg" />
+    <Content Include="Content\assets\images\contactus\contact-1.jpg" />
+    <Content Include="Content\assets\images\contactus\contact-2.jpg" />
+    <Content Include="Content\assets\images\contactus\contact-3.jpg" />
+    <Content Include="Content\assets\images\contactus\contact-4.jpg" />
+    <Content Include="Content\assets\images\contactus\contact-5.jpg" />
+    <Content Include="Content\assets\images\contactus\contact-header-1.jpg" />
+    <Content Include="Content\assets\images\contactus\contact-header.jpg" />
     <Content Include="Content\assets\images\demos-img\elements.png" />
     <Content Include="Content\assets\images\demos-img\header_splash.jpg" />
     <Content Include="Content\assets\images\demos-img\lazy.png" />
