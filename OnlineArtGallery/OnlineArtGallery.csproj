@@ -130,7 +130,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BEArtController.cs" />
-    <Compile Include="Controllers\BEExhibitionListController.cs" />
     <Compile Include="Controllers\BEGalleryController.cs" />
     <Compile Include="Controllers\BEIndexController.cs" />
     <Compile Include="Controllers\BETagController.cs" />
@@ -5944,6 +5943,7 @@
     <Content Include="Views\FEOrder\Checkout.cshtml" />
     <Content Include="Views\BEIndex\TagList.cshtml" />
     <Content Include="Views\BEIndex\ExhibitionList.cshtml" />
+    <Content Include="Views\FEUser\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -5951,7 +5951,6 @@
     <Folder Include="Content\assets\images\tag\" />
     <Folder Include="Content\assets\images\user\" />
     <Folder Include="Views\Artists\" />
-    <Folder Include="Views\BEExhibitionList\" />
     <Folder Include="Views\BEGallery\" />
     <Folder Include="Views\BETag\" />
     <Folder Include="Views\FEArtist\" />
