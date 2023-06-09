@@ -4183,12 +4183,13 @@
     <Content Include="Content\assets\fonts\icon51c1.svg" />
     <Content Include="Content\assets\fonts\molla0ab2.svg" />
     <Content Include="Content\assets\images\about-header-bg.jpg" />
+    <Content Include="Content\assets\images\about\about-header-2.jpg" />
+    <Content Include="Content\assets\images\about\about-header-3.jpg" />
+    <Content Include="Content\assets\images\about\about-header-4.jpeg" />
+    <Content Include="Content\assets\images\about\about-header-5.jpg" />
     <Content Include="Content\assets\images\about\about-header.jpg" />
     <Content Include="Content\assets\images\about\about-2\img-1.jpg" />
     <Content Include="Content\assets\images\about\about-2\signature.png" />
-    <Content Include="Content\assets\images\about\chandung1.jpg" />
-    <Content Include="Content\assets\images\about\chandung2.jpg" />
-    <Content Include="Content\assets\images\about\chandung3.jpg" />
     <Content Include="Content\assets\images\about\chandung4.jpg" />
     <Content Include="Content\assets\images\about\chandung5.jpg" />
     <Content Include="Content\assets\images\about\chandung6.jpg" />
@@ -4200,6 +4201,9 @@
     <Content Include="Content\assets\images\about\customer3.jpg" />
     <Content Include="Content\assets\images\about\img-1.jpg" />
     <Content Include="Content\assets\images\about\img-2.jpg" />
+    <Content Include="Content\assets\images\about\img-3.jpg" />
+    <Content Include="Content\assets\images\about\img-4.jpg" />
+    <Content Include="Content\assets\images\about\img-5.jpg" />
     <Content Include="Content\assets\images\artwork\191120105100-weeping-woman-1937.png" />
     <Content Include="Content\assets\images\artwork\50423484227_da139a77ea_b.png" />
     <Content Include="Content\assets\images\artwork\5042404896_4d77b0a414_b.jpg" />
