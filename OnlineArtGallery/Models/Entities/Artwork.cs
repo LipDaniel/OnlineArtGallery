@@ -19,9 +19,7 @@ namespace OnlineArtGallery.Models.Entities
         {
             this.Artwork_Gallery = new HashSet<Artwork_Gallery>();
             this.Artwork_Tag = new HashSet<Artwork_Tag>();
-            this.Carts = new HashSet<Cart>();
-            this.Favourites = new HashSet<Favourite>();
-            this.Histories = new HashSet<History>();
+            this.Auctions = new HashSet<Auction>();
             this.Order_Item = new HashSet<Order_Item>();
             this.Ratings = new HashSet<Rating>();
         }
@@ -38,6 +36,7 @@ namespace OnlineArtGallery.Models.Entities
         public Nullable<int> category_id { get; set; }
         public Nullable<bool> artwork_is_status { get; set; }
         public string artist_created_date { get; set; }
+        public Nullable<bool> artwork_is_auction { get; set; }
     
         public virtual Artist Artist { get; set; }
         public virtual Category Category { get; set; }
@@ -46,11 +45,7 @@ namespace OnlineArtGallery.Models.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Artwork_Tag> Artwork_Tag { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Carts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Favourite> Favourites { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<History> Histories { get; set; }
+        public virtual ICollection<Auction> Auctions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Item> Order_Item { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

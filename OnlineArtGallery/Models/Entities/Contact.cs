@@ -12,12 +12,13 @@ namespace OnlineArtGallery.Models.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Cart
+    public partial class Contact
     {
-        public int cart_id { get; set; }
-        public Nullable<int> user_id { get; set; }
-        public Nullable<int> artwork_id { get; set; }
-    
-        public virtual User User { get; set; }
+        public int contact_id { get; set; }
+        public string contact_name { get; set; }
+        public string contact_phone { get; set; }
+        public string contact_email { get; set; }
+        public string contact_subject { get; set; }
+        public string contact_message { get; set; }
     }
 }

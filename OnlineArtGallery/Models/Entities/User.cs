@@ -17,6 +17,7 @@ namespace OnlineArtGallery.Models.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            this.Auction_User = new HashSet<Auction_User>();
             this.Carts = new HashSet<Cart>();
             this.Favourites = new HashSet<Favourite>();
             this.Histories = new HashSet<History>();
@@ -39,6 +40,8 @@ namespace OnlineArtGallery.Models.Entities
         public string facebook_id { get; set; }
         public string google_id { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Auction_User> Auction_User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

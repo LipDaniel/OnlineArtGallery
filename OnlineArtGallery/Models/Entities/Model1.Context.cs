@@ -29,9 +29,13 @@ namespace OnlineArtGallery.Models.Entities
         public virtual DbSet<Artwork> Artworks { get; set; }
         public virtual DbSet<Artwork_Gallery> Artwork_Gallery { get; set; }
         public virtual DbSet<Artwork_Tag> Artwork_Tag { get; set; }
+        public virtual DbSet<Auction> Auctions { get; set; }
+        public virtual DbSet<Auction_User> Auction_User { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<Exhibition> Exhibitions { get; set; }
+        public virtual DbSet<Exhibition_Gallery> Exhibition_Gallery { get; set; }
         public virtual DbSet<Favourite> Favourites { get; set; }
         public virtual DbSet<Gallery> Galleries { get; set; }
         public virtual DbSet<History> Histories { get; set; }

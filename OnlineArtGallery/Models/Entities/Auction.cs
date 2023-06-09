@@ -12,25 +12,25 @@ namespace OnlineArtGallery.Models.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Gallery
+    public partial class Auction
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Gallery()
+        public Auction()
         {
-            this.Artwork_Gallery = new HashSet<Artwork_Gallery>();
-            this.Exhibition_Gallery = new HashSet<Exhibition_Gallery>();
+            this.Auction_User = new HashSet<Auction_User>();
         }
     
-        public int gallery_id { get; set; }
-        public string gallery_name { get; set; }
-        public string gallery_image { get; set; }
-        public string gallery_description { get; set; }
-        public Nullable<bool> gellery_is_active { get; set; }
-        public string gallery_created_date { get; set; }
+        public int auction_id { get; set; }
+        public Nullable<int> artwork_id { get; set; }
+        public string auction_reserve_price { get; set; }
+        public string auction_start_date { get; set; }
+        public string auction_end_date { get; set; }
+        public string auction_current_bid { get; set; }
+        public Nullable<int> user_id { get; set; }
+        public string auction_created_date { get; set; }
     
+        public virtual Artwork Artwork { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Artwork_Gallery> Artwork_Gallery { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Exhibition_Gallery> Exhibition_Gallery { get; set; }
+        public virtual ICollection<Auction_User> Auction_User { get; set; }
     }
 }

@@ -12,12 +12,15 @@ namespace OnlineArtGallery.Models.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Cart
+    public partial class Auction_User
     {
-        public int cart_id { get; set; }
+        public int auction_user_id { get; set; }
+        public Nullable<int> auction_id { get; set; }
         public Nullable<int> user_id { get; set; }
-        public Nullable<int> artwork_id { get; set; }
+        public string auction_amount { get; set; }
+        public string auction_user_created_date { get; set; }
     
+        public virtual Auction Auction { get; set; }
         public virtual User User { get; set; }
     }
 }

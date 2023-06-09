@@ -14,6 +14,12 @@ namespace OnlineArtGallery.Models.Entities
     
     public partial class Exhibition
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Exhibition()
+        {
+            this.Exhibition_Gallery = new HashSet<Exhibition_Gallery>();
+        }
+    
         public int exhibition_id { get; set; }
         public string exhibition_name { get; set; }
         public string exhibition_location { get; set; }
@@ -22,5 +28,8 @@ namespace OnlineArtGallery.Models.Entities
         public string exhibition_start_date { get; set; }
         public string exhibition_end_date { get; set; }
         public Nullable<bool> exhibition_is_status { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Exhibition_Gallery> Exhibition_Gallery { get; set; }
     }
 }

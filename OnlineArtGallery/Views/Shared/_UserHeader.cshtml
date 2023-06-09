@@ -121,7 +121,15 @@
                         @if (Session["UserId"] != null)
                         {
                             var id = int.Parse(Session["UserId"].ToString());
-                            var cartList = db.Carts.Where(a => a.user_id == id).ToList();
+                            var cartList = (from cart in db.Carts
+                                        join artwork in db.Artworks on cart.artwork_id equals artwork.artwork_id
+                                        where cart.user_id == id
+                                        select new
+                                        {
+                                            Cart = cart,
+                                            Artwork = artwork
+                                        }).ToList();
+                          
 
                             foreach (var cart in cartList)
                             {
@@ -142,7 +150,7 @@
                                         <img src="~/Content/assets/images/artwork/@cart.Artwork.artwork_image" alt="product">
                                     </a>
                                 </figure>
-                                <a href="/FEOrder/Delete/@cart.cart_id" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                <a href="/FEOrder/Delete/@cart.Cart.cart_id" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
                             </div><!-- End .product -->
 
                             }

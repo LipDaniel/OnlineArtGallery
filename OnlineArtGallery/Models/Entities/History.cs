@@ -18,7 +18,6 @@ namespace OnlineArtGallery.Models.Entities
         public Nullable<int> user_id { get; set; }
         public Nullable<int> artwork_id { get; set; }
     
-        public virtual Artwork Artwork { get; set; }
         public virtual User User { get; set; }
     }
 }

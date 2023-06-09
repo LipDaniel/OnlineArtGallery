@@ -4,37 +4,43 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="02ca66188af341a2b6472073e51116dd" Name="Diagram1" ZoomLevel="82">
-        <EntityTypeShape EntityType="GalleryArtModel.Artist" Width="1.5" PointX="12.875" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Artwork" Width="1.5" PointX="8.125" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Artwork_Gallery" Width="1.5" PointX="10.875" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Artwork_Tag" Width="1.5" PointX="11.5" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Cart" Width="1.5" PointX="5.75" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Category" Width="1.5" PointX="14.875" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Exhibition" Width="1.5" PointX="12.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Favourite" Width="1.5" PointX="5.875" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Gallery" Width="1.5" PointX="14.625" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.History" Width="1.5" PointX="5.125" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Notification" Width="1.5" PointX="0.5" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Order_Item" Width="1.5" PointX="8.25" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Order" Width="1.5" PointX="3.5" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Rating" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Tag" Width="1.5" PointX="13.625" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.User" Width="1.5" PointX="3.125" PointY="7" IsExpanded="true" />
+      <Diagram DiagramId="4902b1db061b4a40be675a399d15ea4d" Name="Diagram1">
+        <EntityTypeShape EntityType="GalleryArtModel.Artist" Width="1.5" PointX="1.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Artwork" Width="1.5" PointX="3.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Artwork_Gallery" Width="1.5" PointX="11" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Artwork_Tag" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Auction" Width="1.5" PointX="3.75" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Auction_User" Width="1.5" PointX="6" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Cart" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Category" Width="1.5" PointX="1.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Contact" Width="1.5" PointX="10.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Exhibition" Width="1.5" PointX="8.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Exhibition_Gallery" Width="1.5" PointX="11" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Favourite" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Gallery" Width="1.5" PointX="8.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.History" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Notification" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Order_Item" Width="1.5" PointX="5.25" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Order" Width="1.5" PointX="3" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Rating" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Tag" Width="1.5" PointX="3.75" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.User" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
         <AssociationConnector Association="GalleryArtModel.FK__Artwork__artist___267ABA7A" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Artwork__categor__5812160E" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Artwork_G__artwo__5441852A" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Artwork_T__artwo__2E1BDC42" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryArtModel.FK__Cart__artwork_id__3D5E1FD2" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryArtModel.FK__Favourite__artwo__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryArtModel.FK__History__artwork__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryArtModel.FK__Auction__artwork__656C112C" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Order_Ite__artwo__398D8EEE" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Rating__artwork___4D94879B" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Artwork_G__galle__5535A963" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Artwork_T__tag_i__2F10007B" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryArtModel.FK__Cart__user_id__3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryArtModel.FK__Favourite__user___403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryArtModel.FK__History__user_id__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryArtModel.FK__Auction_U__aucti__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryArtModel.FK__Auction_U__user___693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryArtModel.FK__Cart__user_id__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryArtModel.FK__Exhibitio__exhib__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryArtModel.FK__Exhibitio__galle__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryArtModel.FK__Favourite__user___6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="GalleryArtModel.FK__History__user_id__73BA3083" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Notificat__notif__47DBAE45" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Notificat__notif__48CFD27E" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Order_Ite__order__38996AB5" ManuallyRouted="false" />
