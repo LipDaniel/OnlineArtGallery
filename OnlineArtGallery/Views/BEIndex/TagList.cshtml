@@ -18,27 +18,14 @@
                 </strong>
             </div>
             <div class="block-content pb-3">
-                <ul class="nav nav-tabs nav-fill nav-tabs-alt  " role="tablist">
-                    <li class="nav-item">
-                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#published-posts-tab" role="tab" aria-selected="true">
-                            APPROVED
-                            &nbsp<span class="badge bg-danger">0<!--Cập Nhật Số Lượng--></span>
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link" id="pendingTabs" data-bs-toggle="tab" data-bs-target="#pending-posts-tab" role="tab" aria-selected="false">
-                            NOT PPROVED YET
-                            &nbsp<span class="badge bg-danger">0<!--Cập Nhật Số Lượng--></span>
-                        </button>
-                    </li>
-
-                </ul>
+                
 
                 <div class="block-content tab-content ps-0 pe-0">
                     <div class="tab-pane active" id="published-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
                         <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                             <thead>
                                 <tr>
+                                    <th>Number</th>
                                     <th>Name</th>
                                     <th>Img</th>
                                     <th>Create</th>
@@ -47,9 +34,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @{ 
+                                    var s = 0;
+                                }
                                 @foreach (var tag in ViewBag.Tag)
                                 {
+                                    s += 1;
                                     <tr>
+                                        <td>@s</td>
                                         <td>@tag.tag_name</td>
                                         <td>
                                             <img width="50px" src="~/Content/Assets/Images/tag/@tag.tag_image " alt="Alternate Text" />
@@ -100,28 +92,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane" id="pending-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-profile-tab">
-                        <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
-                            <thead>
-                                <tr>
-                                    <th>Artworks List</th>
-                                    <th>TDate Created</th>
-                                    <th>Title</th>
-                                    <th>Category</th>
-                                    <th>Gallery</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                    <td>12</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                  
                 </div>
             </div>
         </div>
