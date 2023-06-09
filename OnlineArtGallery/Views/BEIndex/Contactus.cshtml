@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section main
+{
+    @model OnlineArtGallery.Models.Entities.Contact
+
+    <div class="container-fluid mt-3">
+        <div class="block block-rounded">
+            <div class="block-header block-header-default">
+                <strong>
+                    Contact Us Message
+                </strong>
+            </div>
+            <div class="block-content pb-3">
+
+                <div class="block-content tab-content ps-0 pe-0">
+                    <div class="tab-pane active" id="published-posts-tab" role="tabpanel" aria-labelledby="btabs-alt-static-home-tab">
+                        <table class="table table-sm table-responsive table table-striped  js-dataTable-responsive dataTable no-footer dtr-inline">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Name </th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
+                                    <th>Create</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var s = 0;
+                                }
+                                @foreach (var contact in ViewBag.Contact)
+                                {
+                                    s += 1;
+                                    <tr>
+                                        <td>@s</td>
+                                        <td>@contact.contact_name</td>
+                                        <td>@contact.contact_phone</td>
+                                        <td width="400px" height="90px">@contact.contact_email</td>
+                                        <td width="400px" height="90px">@contact.contact_subject</td>
+                                        <td width="400px" height="90px">@contact.contact_message</td>
+                                        <td>cxcxcxc</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section css
+{
+    <link rel="stylesheet" href="~/Content/adminassets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
+    <link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
+}
+
+@section scripts
+{
+    <!-- Page JS Plugins -->
+    <script src="/Content/adminassets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.print.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
+    <!-- Page JS Code -->
+    <script src="/Content/adminassets/js/pages/be_tables_datatables.min.js"></script>
+}

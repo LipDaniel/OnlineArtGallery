@@ -23,6 +23,7 @@ namespace OnlineArtGallery.Controllers
         }
 
         public ActionResult Contact() { 
+            ViewBag.Contact = db.Contacts.OrderByDescending(a=>a.contact_id).ToList();
             return View();
         }
 

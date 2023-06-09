@@ -64,6 +64,11 @@ namespace OnlineArtGallery.Controllers
         {
             return View();
         }
+        public ActionResult Contactus()
+        {
+            ViewBag.Contact = db.Contacts.OrderByDescending(a => a.contact_id).ToList();
+            return View();
+        }
         public ActionResult TagList()
         {
             ViewBag.Tag = db.Tags.OrderByDescending(a=>a.tag_id).ToList();
