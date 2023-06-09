@@ -130,7 +130,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BEArtController.cs" />
-    <Compile Include="Controllers\BEExhibitionListController.cs" />
     <Compile Include="Controllers\BEGalleryController.cs" />
     <Compile Include="Controllers\BEIndexController.cs" />
     <Compile Include="Controllers\BETagController.cs" />
@@ -139,6 +138,7 @@
     <Compile Include="Controllers\FEAuthController.cs" />
     <Compile Include="Controllers\FEHomeController.cs" />
     <Compile Include="Controllers\FEOrderController.cs" />
+    <Compile Include="Controllers\FEUserController.cs" />
     <Compile Include="Controllers\FEWishlistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -5933,7 +5933,6 @@
     <Folder Include="Content\assets\images\tag\" />
     <Folder Include="Content\assets\images\user\" />
     <Folder Include="Views\Artists\" />
-    <Folder Include="Views\BEExhibitionList\" />
     <Folder Include="Views\BEGallery\" />
     <Folder Include="Views\BETag\" />
     <Folder Include="Views\FEArtist\" />
