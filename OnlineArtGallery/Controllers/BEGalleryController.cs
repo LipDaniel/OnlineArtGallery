@@ -1,11 +1,7 @@
 ﻿
 using OnlineArtGallery.Models.Entities;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity.Validation;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -77,7 +73,7 @@ namespace OnlineArtGallery.Controllers
             }
             galle.gallery_name = gallery.gallery_name;
             galle.gallery_description = gallery.gallery_description;
-       
+
             if (gallery_image != null)
             {
                 if (galle.gallery_image != null)

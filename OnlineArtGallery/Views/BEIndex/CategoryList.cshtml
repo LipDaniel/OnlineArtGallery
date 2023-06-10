@@ -27,23 +27,61 @@
                                 <th scope="col">Category Image</th>
                                 <th scope="col">Created Date</th>
                                 <th scope="col">Category Status</th>
+                                <th scope="col">Edit</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!--Get Data -> Input Table-->
                             @{
-                                var count = 1;
+                                var count = 0;
                             }
-                            @foreach (var obj in ViewBag.CategoryList)
+                            @foreach (var newcat in ViewBag.CategoryList)
                             {
+                                count += 1;
                                 <tr>
                                     <td>@count</td>
-                                    <td>@obj.category_name</td>
-                                    <td><img width="50" src="~/Content/Assets/Images/categoryList_img/"</td>
-                                    <td>@obj.category_created_date</td>
-                                    <td>obj.category_is_status</td>
+                                    <td>@newcat.category_name</td>
+                                    <td><img width="50" src="~/Content/Assets/Images/.categoryList_img/@newcat.category_image"</td>
+                                    <td>@newcat.category_created_date</td>
+                                    <td>newcat.category_is_status</td>
+                                    <td>
+
+                                        @{
+                                            var obj = "newCategory" + @newcat.category_id;
+                                        }
+                                        <!--Modal Bootstrap Form-->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="@obj" data-bs-whatever="@newcat.category_id">Edit</button>
+                                        <div class="modal fade" tabindex="-1" id="@obj" aria-labelledby="modal-block-popin" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="newCategory">Add New Category</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="post" action="@Url.Action("Edit", "BECategory")" enctype="multipart/form-data">
+                                                            <input type="text" value="@newcat.category_id" class="form-control" hidden>
+                                                            <div class="form-group">
+                                                                <label for="category-name" class="col-form-label">Categoy Name: </label>
+                                                                <input type="text" value="@newcat.category_name" class="form-control" id="inputCategory" aria-describedby="nameRule" placeholder="Enter Category Name.">
+                                                                <small id="nameRule" class="form-text text-muted">Category name rule</small>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="message-text" class="col-form-label">Category image: </label>
+                                                                <img width="150" src="~/Content/Assets/Images/categoryList_img/@newcat.category_image" alt="Alternate Text">
+                                                                <input type="file">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Add</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!--End Modal Bootstrap Form-->
+                                    </td>
                                 </tr>
-                                count++;
                             }
                         </tbody>
                     </table>
@@ -51,12 +89,8 @@
                 </div>
             </div>
         </div>
-    </div>
-}
-@section modals
-{
     <!--Modal Bootstrap Form-->
-    <div class="modal fade" tabindex="-1" id="newCategory" aria-labelledby="modal-block-popin" aria-hidden="true">
+    <div class="modal fade" tabindex="-1" id="newCategory" aria-invalid=""aria-labelledby="modal-block-popin" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -64,7 +98,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post">
+                    <form method="post" action="@Url.Action("NewCategory", "BECategory")">
+                        <input type="text" class="form-control" hidden>
                         <div class="form-group">
                             <label for="category-name" class="col-form-label">Categoy Name: </label>
                             <input type="text" class="form-control" id="inputCategory" aria-describedby="nameRule" placeholder="Enter Category Name.">
@@ -72,7 +107,7 @@
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Category image: </label>
-                            <img width="150" src="~/Content/Assets/Images/categoryList_img/" alt="Alternate Text">
+                            <img width="150" src="~/Content/Assets/Images/categoryList_img/ "alt="Alternate Text">
                             <input type="file">
                         </div>
                     </form>
@@ -83,7 +118,9 @@
                 </div>
             </div>
         </div>
-    </div><!--End Modal Bootstrap Form-->
+    </div>
+    <!--End Modal Bootstrap Form-->
+    </div>
 }
 
 @section css
