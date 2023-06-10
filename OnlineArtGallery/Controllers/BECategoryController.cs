@@ -1,7 +1,6 @@
 ﻿using OnlineArtGallery.Models.Entities;
 using System;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,14 +8,7 @@ namespace OnlineArtGallery.Controllers
 {
     public class BECategoryController : Controller
     {
-        //Connect Database 
         private GalleryArtEntities db = new GalleryArtEntities();
-
-
-        public ActionResult Index()
-        {
-            return View(db.Categories.ToList());
-        }
 
         // GET: BECategory/Create
         public ActionResult Create()
@@ -27,29 +19,24 @@ namespace OnlineArtGallery.Controllers
 
         // POST: Category/Create
         [HttpPost]
-        public ActionResult NewCategory(Category categorytable, HttpPostedFileBase category_image)
+        public ActionResult NewCategory(Category ncat, HttpPostedFileBase category_image)
         {
-            var categorytype = new Category();
-            categorytype.category_name = categorytable.category_name;
-            categorytype.category_created_date = DateTime.Now.ToString("yyyy/MM/dd");
-            categorytype.category_is_status = categorytype.category_created_date = true;
- = true;
+            var ncategory = new Category();
+            ncategory.category_name = ncat.category_name;
+            ncategory.category_created_date = DateTime.Now.ToString("dd/MM/yyyy");
             if (category_image != null)
             {
                 var fileName = Path.GetFileName(category_image.FileName);
                 string fileExtension = Path.GetExtension(category_image.FileName);
-                string file = fileName + DateTime.Now.ToString("yyyyMMddHHmmss") + fileExtension;
-                var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/categoryimg/"), file);
-
-
-
-                category_name.SaveAs(path);
-                categorytable.category_image = file;
+                string file = fileName + DateTime.Now.ToString("ddMMyyyyHHmmss") + fileExtension;
+                var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/categoryList_img/"), file);
+                category_image.SaveAs(path);
+                ncategory.category_image = file;
             }
 
-            db.Artists.Add(artis);
+            db.Categories.Add(ncategory);
             db.SaveChanges();
-            return RedirectToAction("ArtistList", "BEIndex");
+            return RedirectToAction("CategoryList", "BEIndex");
         }
     }
 
