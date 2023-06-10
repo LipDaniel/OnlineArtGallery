@@ -9,14 +9,10 @@ namespace OnlineArtGallery.Controllers
     public class BECategoryController : Controller
     {
         private GalleryArtEntities db = new GalleryArtEntities();
-
-        // GET: BECategory/Create
-        public ActionResult Create()
+        public ActionResult GetCat()
         {
-            ViewBag.category_id = new SelectList(db.Categories, "category_id", "category_name");
             return View();
         }
-
         // POST: Category/Create
         [HttpPost]
         public ActionResult NewCategory(Category ncat, HttpPostedFileBase category_image)

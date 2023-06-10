@@ -1,8 +1,5 @@
 ﻿using OnlineArtGallery.Models.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace OnlineArtGallery.Controllers
@@ -22,7 +19,7 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult ArtistList()
         {
-            ViewBag.Artists = db.Artists.OrderByDescending(a=> a.artist_id).ToList();
+            ViewBag.Artists = db.Artists.OrderByDescending(a => a.artist_id).ToList();
             return View();
         }
         public ActionResult ArtworkRequest()
@@ -31,7 +28,7 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult ArtworkList()
         {
-            ViewBag.Artists = db.Artists.OrderByDescending(a=> a.artist_id).ToList();
+            ViewBag.Artists = db.Artists.OrderByDescending(a => a.artist_id).ToList();
             ViewBag.Gallery = db.Galleries.OrderByDescending(a => a.gallery_id).ToList();
             ViewBag.Category = db.Categories.OrderByDescending(a => a.category_id).ToList();
             ViewBag.Artwork = db.Artworks.OrderByDescending(a => a.artwork_id).ToList();
@@ -39,12 +36,12 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult GalleryList()
         {
-            ViewBag.GalleryList = db.Galleries.OrderByDescending(a=>a.gallery_id).ToList();
-
+            ViewBag.GalleryList = db.Galleries.OrderByDescending(a => a.gallery_id).ToList();
             return View();
         }
-        public ActionResult CategoryList()
+        public ActionResult CategoryList(int? id)
         {
+            ViewBag.CategoryList = db.Categories.ToList();
             return View();
         }
         public ActionResult Favourite()
@@ -74,7 +71,7 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult TagList()
         {
-            ViewBag.Tag = db.Tags.OrderByDescending(a=>a.tag_id).ToList();
+            ViewBag.Tag = db.Tags.OrderByDescending(a => a.tag_id).ToList();
 
             return View();
         }

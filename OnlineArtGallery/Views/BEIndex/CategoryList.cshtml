@@ -1,18 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "ArtList";
+    ViewBag.Title = "CategoryList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 @section main
 {
+    @model OnlineArtGallery.Models.Entities.Category
+
     <div class="container-fluid mt-3">
         <div class="block block-rounded">
             <div class="block-header block-header-default">
-                <!--Header-->
-                <strong>CATEGORY LIST</strong>
-                <!--End Header-->
-            </div>            
+                <!--Header--><strong>CATEGORY LIST</strong><!--End Header-->
+            </div>
             <div class="block-content pb-3">
                 <div class="block-content tab-content ps-0 pe-0">
                     <!--Modal Bootstrap Form-->
@@ -27,16 +27,18 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form>
+                                    <form method="post">
                                         <div class="form-group">
                                             <label for="category-name" class="col-form-label">Categoy Name: </label>
                                             <input type="text" class="form-control" id="inputCategory" aria-describedby="nameRule" placeholder="Enter Category Name.">
                                             <small id="nameRule" class="form-text text-muted">Category name rule</small>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="category-description" class="col-form-label">Categoy Description: </label>
-                                            <textarea class="form-control" id="inputCategory" placeholder="Enter Category Description." maxlength="300"> </textarea>                                         
-                                        </div>
+                                        <!-- [Category description]
+                                <div class="form-group">
+                                    <label for="category-description" class="col-form-label">Categoy Description: </label>
+                                    <textarea class="form-control" id="inputCategory" placeholder="Enter Category Description." maxlength="300"> </textarea>
+                                </div>
+                                -->
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">Category image: </label>
                                             <input type="file">
@@ -59,25 +61,30 @@
                                 <th scope="col">Category ID</th>
                                 <th scope="col">Category Image</th>
                                 <th scope="col">Category Name</th>
-                                <th scope="col">Category Description</th>
                                 <th scope="col">Created Date</th>
-                            </tr>                       
+                            </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Category ID</td>
-                                <td>Category Image</td>
-                                <td>Category Name</td>
-                                <td>Category Description</td>
-                                <td>Created Date</td>
-                            </tr>
+                            @{
+                                var count = 0;
+                            }
+                            @foreach (var obj in ViewBag.CategoryList)
+                            {
+                                count = count + 1;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@obj.category_name</td>
+                                    <td><img width="50" src="~/Content/Assets/Images/categoryList_img/"</td>
+                                    <td>@obj.category_created_date</td>
+                                    <td>@obj.category_is_status</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <!--End Category Table List-->
-                </div>                 
-              </div>
-         </div>
+                </div>
+            </div>
+        </div>
     </div>
 }
 
