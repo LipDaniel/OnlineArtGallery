@@ -2,34 +2,68 @@
 @{
     ViewBag.Title = "ArtSellRequest";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+     
 }
 
 @section main
 {
     <div class="container-fluid mt-3">
+
         <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <strong>ARTWORKS LIST</strong>
+                <div class="block-options">
+                    <button class="btn btn-alt-success" data-bs-toggle="modal" data-bs-target="#createartwork_modal">
+                        ADD
+                    </button>
+                </div>
             </div>
             <div class="block-content pb-3">
                 <div class="block-content tab-content ps-0 pe-0">
                     <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                         <thead>
-                        <th>Ngày gửi yêu cầu<</th>
-                        <th>Artist</th>
-                        <th>Tên Tranh</th>
-                        <th>Gía Bán</th>
-                        <th>Tag</th>
+                            <th>#</th>
+                            <th>Artwork</th>
+                            <th>Price</th>
+                            <th>Artist</th>
+                            <th>Information</th>
+                            <th>Status</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>12</td>
-                                <td>12</td>
-                                <td>12</td>
-                                <td>12</td>
-                                <td>12</td>
-                                <td>12</td>
-                            </tr>
+                            @{ 
+                                var i = 1;
+                            }
+                            @foreach (var item in ViewBag.Artwork)
+                            {
+                                <tr class="align-middle">
+                                    <td>@i</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0 me-2">
+                                                <img src="~/Content/assets/images/artwork/@item.artwork_image" width="70" class="img-fluid" alt="Alternate Text" />
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <strong>@item.artwork_name</strong>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @item.artwork_price
+                                    </td>
+                                    <td>
+                                        @item.artist_id
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-primary">Dimmession: @item.artwork_dimensions</span> <br />
+                                        <span class="badge bg-secondary">Date: @item.artwork_date</span> <br />
+                                        <span class="badge bg-secondary">Category: @item.category_id</span> <br />
+                                    </td>
+                                    <td>
+                                        On Sale
+                                    </td>
+                                </tr>
+                                i++;
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -39,28 +73,39 @@
 }
 
 
+@section modals
+{
+    @Html.Partial("~/Views/Shared/AdminModals/_Artwork.cshtml")
+}
 
 @section css
 {
-<link rel="stylesheet" href="~/Content/adminassets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
-<link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
+    <link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" href="/Content/adminassets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="/Content/adminassets/js/plugins/flatpickr/flatpickr.min.css">
+
 }
 
 @section scripts
 {
-<!-- Page JS Plugins -->
-<script src="/Content/adminassets/js/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="/Content/adminassets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
-<script src="/Content/adminassets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="/Content/adminassets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-<script src="/Content/adminassets/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
-<script src="/Content/adminassets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
-<script src="/Content/adminassets/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
-<script src="/Content/adminassets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
-<script src="/Content/adminassets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
-<script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.print.min.js"></script>
-<script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
-<!-- Page JS Code -->
-<script src="/Content/adminassets/js/pages/be_tables_datatables.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/flatpickr/flatpickr.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <!-- Page JS Plugins -->
+    <script src="/Content/adminassets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.print.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
+    <!-- Page JS Code -->
+    <script src="/Content/adminassets/js/pages/be_tables_datatables.min.js"></script>
+    <script>One.helpersOnLoad(['js-flatpickr', 'jq-datepicker']);</script>
+
 }

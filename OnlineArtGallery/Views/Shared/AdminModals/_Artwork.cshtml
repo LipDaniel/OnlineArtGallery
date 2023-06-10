@@ -1,0 +1,89 @@
+﻿<div class="modal fade" id="createartwork_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popin" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-popin" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded block-transparent mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">CREATE ARTWORK</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-fw fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <form id="">
+                    <div class="block-content fs-sm pb-3">
+                        <div class="form-group mb-1">
+                            <label class="form-label">Artwork <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="artwork">
+                        </div>
+                        <div class="form-group mb-1 row">
+                            <div class="col-6">
+                                <label class="form-label">Artist <span class="text-danger">*</span></label>
+                                <select class="form-select form-control-alt bg-light">
+                                    @foreach (var item in ViewBag.Artists)
+                                    {
+                                        <option value="@item.artist_id">@item.artist_name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Category <span class="text-danger">*</span></label>
+                                <select class="form-select form-control-alt bg-light">
+                                    @foreach (var item in ViewBag.Category)
+                                    {
+                                        <option value="@item.category_id">@item.category_name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1 row">
+                            <div class="col-6">
+                                <label class="form-label">Price <span class="text-danger">*</span></label>
+                                <input type="number" onkeydown="" class="form-control" id="price">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Date <span class="text-danger">*</span></label>
+                                <input type="text" class="js-flatpickr form-control" placeholder="d-m-Y" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group mb-1 row">
+                            <div class="col-6">
+                                <label class="form-label">Width <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="email" class="form-control">
+                                    <span class="input-group-text">CM</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Height <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="email" class="form-control">
+                                    <span class="input-group-text">CM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1">
+                            <label class="form-label">Image <span class="text-danger">*</span></label>
+                            <input type="file" class="form-control">
+                        </div>
+                        <div class="form-group mb-1 row">
+                            <div class="col-9">
+                                <label class="form-label">Description <span class="text-danger">*</span></label>
+                                <textarea rows="8" class="form-control"></textarea>
+                            </div>
+                            <div class="col-3">
+                                <label class="form-label">Preview <span class="text-danger">*</span></label>
+                                <div class="bg-secondary" style="width: 100%; height: 200px">
+                                    <img class="img-fluid" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <button type="submit" class="btn btn-alt-primary">Lưu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

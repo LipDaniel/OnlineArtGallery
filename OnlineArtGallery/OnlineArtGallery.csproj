@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BEArtController.cs" />
+    <Compile Include="Controllers\BEArtworkController.cs" />
     <Compile Include="Controllers\BEContactController.cs" />
     <Compile Include="Controllers\BEGalleryController.cs" />
     <Compile Include="Controllers\BEIndexController.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Models\Entities\User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelView\ArtworkView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -5965,6 +5967,7 @@
     <Content Include="Views\BEIndex\ExhibitionList.cshtml" />
     <Content Include="Views\FEUser\UserProfile.cshtml" />
     <Content Include="Views\BEIndex\Contactus.cshtml" />
+    <Content Include="Views\Shared\AdminModals\_Artwork.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

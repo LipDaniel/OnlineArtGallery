@@ -31,7 +31,10 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult ArtworkList()
         {
-           
+            ViewBag.Artists = db.Artists.OrderByDescending(a=> a.artist_id).ToList();
+            ViewBag.Gallery = db.Galleries.OrderByDescending(a => a.gallery_id).ToList();
+            ViewBag.Category = db.Categories.OrderByDescending(a => a.category_id).ToList();
+            ViewBag.Artwork = db.Artworks.OrderByDescending(a => a.artwork_id).ToList();
             return View();
         }
         public ActionResult GalleryList()
