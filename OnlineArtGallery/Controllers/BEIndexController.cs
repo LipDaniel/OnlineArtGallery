@@ -39,9 +39,9 @@ namespace OnlineArtGallery.Controllers
             ViewBag.GalleryList = db.Galleries.OrderByDescending(a => a.gallery_id).ToList();
             return View();
         }
-        public ActionResult CategoryList(int? id)
+        public ActionResult CategoryList()
         {
-            ViewBag.CategoryList = db.Categories.ToList();
+            ViewBag.CategoryList = db.Categories.OrderByDescending(a => a.category_id).ToList();
             return View();
         }
         public ActionResult Favourite()
