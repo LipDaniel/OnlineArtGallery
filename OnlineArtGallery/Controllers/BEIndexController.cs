@@ -49,6 +49,10 @@ namespace OnlineArtGallery.Controllers
             }).ToList();
             return View();
         }
+        public ActionResult AuctionList()
+        {
+            return View();
+        }
         public ActionResult GalleryList()
         {
             ViewBag.GalleryList = db.Galleries.OrderByDescending(a => a.gallery_id).ToList();

@@ -6040,6 +6040,7 @@
     <Content Include="Views\FEUser\UserProfile.cshtml" />
     <Content Include="Views\BEIndex\Contactus.cshtml" />
     <Content Include="Views\Shared\AdminModals\_Artwork.cshtml" />
+    <Content Include="Views\BEIndex\AuctionList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
