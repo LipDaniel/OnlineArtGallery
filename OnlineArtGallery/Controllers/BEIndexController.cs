@@ -41,7 +41,7 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult CategoryList()
         {
-            ViewBag.CategoryList = db.Categories.OrderByDescending(a => a.category_id).ToList();
+            ViewBag.Category = db.Categories.OrderByDescending(a => a.category_id).ToList();
             return View();
         }
         public ActionResult Favourite()

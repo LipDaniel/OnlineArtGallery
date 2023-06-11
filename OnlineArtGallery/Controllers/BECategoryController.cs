@@ -19,30 +19,29 @@ namespace OnlineArtGallery.Controllers
 
         // POST: Category/Create
         [HttpPost]
-        public ActionResult NewCategory(Category newcat, HttpPostedFileBase category_image)
+        public ActionResult NewCategory(Category Category, HttpPostedFileBase category_image)
         {
-            var ncategory = new Category();
-            ncategory.category_name = newcat.category_name;
-            ncategory.category_created_date = DateTime.Now.ToString("dd/MM/yyyy");
-            ncategory.category_is_active = true;
-
+            var cate = new Category();
+            cate.category_name = Category.category_name;
+            cate.category_created_date = DateTime.Now.ToString("yyyy/MM/dd");
+            cate.category_is_status = true;
             if (category_image != null)
             {
                 var fileName = Path.GetFileName(category_image.FileName);
                 string fileExtension = Path.GetExtension(category_image.FileName);
-                string file = fileName + DateTime.Now.ToString("ddMMyyyyHHmmss") + fileExtension;
-                var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/categoryList_img/"), file);
+                string file = fileName + DateTime.Now.ToString("yyyyMMddHHmmss") + fileExtension;
+                var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/artistimg/"), file);
+
 
 
                 category_image.SaveAs(path);
-                ncategory.category_image = file;
+                cate.category_image = file;
             }
-
-            db.Categories.Add(ncategory);
+            db.Categories.Add(cate);
             db.SaveChanges();
 
-
             return RedirectToAction("CategoryList", "BEIndex");
+
         }
         public ActionResult Edit(int id)
         {
@@ -53,7 +52,7 @@ namespace OnlineArtGallery.Controllers
 
         //post edit 
         [HttpPost]
-        public ActionResult Edit(Category category, HttpPostedFileBase category_image)
+        public ActionResult EditCategory(Category category, HttpPostedFileBase category_image)
         {
             var nobj = db.Categories.Find(category.category_id);
             if (nobj == null)
@@ -78,10 +77,10 @@ namespace OnlineArtGallery.Controllers
                 var fileName = Path.GetFileName(category_image.FileName);
                 string fileExtension = Path.GetExtension(category_image.FileName);
                 string file = fileName + DateTime.Now.ToString("ddMMyyyyHHmmss") + fileExtension;
-                var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/categoryList_img/"), file);
+                var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/artistimg/"), file);
 
                 category_image.SaveAs(path);
-                category.category_image = file;
+                nobj.category_image = file;
             }
             db.SaveChanges();
             return RedirectToAction("CategoryList", "BEIndex");
