@@ -41,7 +41,7 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0 me-2">
-                                                <img src="~/Content/assets/images/artwork/@item.image" width="70" class="img-fluid" alt="Alternate Text" />
+                                                <img src="~/Content/assets/images/artwork/@item.image" width="70" class="img-fluid rounded-3" alt="Alternate Text" />
                                             </div>
                                             <div class="flex-grow-1">
                                                 <strong>@item.name</strong>
@@ -91,6 +91,31 @@
                                                     <button type="button" class="btn btn-sm btn-alt-danger" onclick="transferDeleteFeature('{{$item->id}}')" data-bs-toggle="modal" data-bs-target="#deletefeature-modal" title="Xóa">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="form-check form-switch mb-3">
+
+                                                    @if (item.status == 1)
+                                                    {
+                                                        <input class="form-check-input activateartwork" type="checkbox" checked data-id="@item.id">
+                                                    }
+                                                    else if (item.status == 2)
+                                                    {
+                                                        <input class="form-check-input activateartwork" type="checkbox" checked disabled data-id="@item.id">
+                                                    }
+                                                    else if (item.status == 3)
+                                                    {
+                                                        <input class="form-check-input activateartwork" type="checkbox" disabled data-id="@item.id">
+                                                    }
+                                                    else if (item.status == 4)
+                                                    {
+                                                        <input class="form-check-input activateartwork" type="checkbox" disabled data-id="@item.id">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input class="form-check-input activateartwork" type="checkbox" data-id="@item.id">
+                                                    }
                                                 </div>
                                             </div>
                                         </div>

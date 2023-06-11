@@ -78,10 +78,8 @@ $(document).ready(function ($) {
             processData: false,
             contentType: false,
         }).done(function (res) {
-            if (res == "Successfully") {
-                localStorage.setItem('toast', res);
-                window.location.reload();
-            };
+            localStorage.setItem('toast', res);
+            window.location.reload();
         })
     })
 
@@ -119,6 +117,23 @@ $(document).ready(function ($) {
             localStorage.setItem('toast', res);
             window.location.reload();
         })
+    })
 
+    $('.activateartwork').click(function (event) {
+
+        var id = $(this).data('id');
+        var status = $(this).is(':checked') ? 1 : 0
+
+        $.ajax({
+            method: "POST",
+            url: "/BEArtwork/Update",
+            data: {
+                artwork_id: id,
+                artwork_status: status
+            },
+        }).done(function (res) {
+            $('#toastbody').text(res)
+            $('#toast').toast('show');
+        })
     })
 })

@@ -4287,16 +4287,6 @@
     <Content Include="Content\assets\images\about\img-3.jpg" />
     <Content Include="Content\assets\images\about\img-4.jpg" />
     <Content Include="Content\assets\images\about\img-5.jpg" />
-    <Content Include="Content\assets\images\artwork\191120105100-weeping-woman-1937.png" />
-    <Content Include="Content\assets\images\artwork\50423484227_da139a77ea_b.png" />
-    <Content Include="Content\assets\images\artwork\5042404896_4d77b0a414_b.jpg" />
-    <Content Include="Content\assets\images\artwork\cq5dam.web.1280.1280.png" />
-    <Content Include="Content\assets\images\artwork\Frida-Kahlo-Self-Portrait-with-Thorn-Necklace-and-Hummingbird-via-flickr.png" />
-    <Content Include="Content\assets\images\artwork\old-guitarist-600x372.png" />
-    <Content Include="Content\assets\images\artwork\picasso.png" />
-    <Content Include="Content\assets\images\artwork\picasso_lead_1024x1024.png" />
-    <Content Include="Content\assets\images\artwork\The-Broken-Column-Frida-Kahlo-848x530.png" />
-    <Content Include="Content\assets\images\artwork\vz00fol17e1rdb7.png" />
     <Content Include="Content\assets\images\backgrounds\bg-1.jpg" />
     <Content Include="Content\assets\images\backgrounds\bg-2.jpg" />
     <Content Include="Content\assets\images\backgrounds\bg-4.jpg" />
@@ -6053,6 +6043,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\assets\images\artwork\" />
     <Folder Include="Content\assets\images\exhibition\" />
     <Folder Include="Content\assets\images\tag\" />
     <Folder Include="Content\assets\images\user\" />
