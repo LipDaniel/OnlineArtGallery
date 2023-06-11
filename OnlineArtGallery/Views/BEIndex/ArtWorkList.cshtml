@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "ArtSellRequest";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-     
+
 }
 
 @section main
@@ -22,15 +22,15 @@
                 <div class="block-content tab-content ps-0 pe-0">
                     <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                         <thead>
-                            <th>#</th>
-                            <th>Artwork</th>
-                            <th>Price</th>
-                            <th>Artist</th>
-                            <th>Information</th>
-                            <th>Status</th>
+                        <th>#</th>
+                        <th>Artwork</th>
+                        <th>Price</th>
+                        <th>Artist</th>
+                        <th>Information</th>
+                        <th>Status</th>
                         </thead>
                         <tbody>
-                            @{ 
+                            @{
                                 var i = 1;
                             }
                             @foreach (var item in ViewBag.Artwork)
@@ -106,6 +106,7 @@
     <script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
     <!-- Page JS Code -->
     <script src="/Content/adminassets/js/pages/be_tables_datatables.min.js"></script>
+    <script src="/Content/js/artwork.js"></script>
     <script>One.helpersOnLoad(['js-flatpickr', 'jq-datepicker']);</script>
 
 }

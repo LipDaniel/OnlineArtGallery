@@ -10,16 +10,16 @@
                         </button>
                     </div>
                 </div>
-                <form id="">
+                <form id="artworkform" enctype="multipart/form-data">
                     <div class="block-content fs-sm pb-3">
                         <div class="form-group mb-1">
                             <label class="form-label">Artwork <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="artwork">
+                            <input type="text" class="form-control" id="artwork_name">
                         </div>
                         <div class="form-group mb-1 row">
                             <div class="col-6">
                                 <label class="form-label">Artist <span class="text-danger">*</span></label>
-                                <select class="form-select form-control-alt bg-light">
+                                <select class="form-select form-control-alt bg-light" id="artist_id">
                                     @foreach (var item in ViewBag.Artists)
                                     {
                                         <option value="@item.artist_id">@item.artist_name</option>
@@ -28,7 +28,7 @@
                             </div>
                             <div class="col-6">
                                 <label class="form-label">Category <span class="text-danger">*</span></label>
-                                <select class="form-select form-control-alt bg-light">
+                                <select class="form-select form-control-alt bg-light" id="category_id">
                                     @foreach (var item in ViewBag.Category)
                                     {
                                         <option value="@item.category_id">@item.category_name</option>
@@ -39,44 +39,43 @@
                         <div class="form-group mb-1 row">
                             <div class="col-6">
                                 <label class="form-label">Price <span class="text-danger">*</span></label>
-                                <input type="number" onkeydown="" class="form-control" id="price">
+                                <input type="number" onkeydown="" class="form-control" id="artwork_price">
                             </div>
                             <div class="col-6">
                                 <label class="form-label">Date <span class="text-danger">*</span></label>
-                                <input type="text" class="js-flatpickr form-control" placeholder="d-m-Y" readonly="readonly">
+                                <input type="text" class="js-flatpickr form-control" placeholder="d-m-Y" readonly="readonly" id="artwork_date">
                             </div>
                         </div>
                         <div class="form-group mb-1 row">
                             <div class="col-6">
                                 <label class="form-label">Width <span class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <input type="email" class="form-control">
+                                    <input type="text" class="form-control" id="width">
                                     <span class="input-group-text">CM</span>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <label class="form-label">Height <span class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <input type="email" class="form-control">
+                                    <input type="text" class="form-control" id="height">
                                     <span class="input-group-text">CM</span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mb-1">
                             <label class="form-label">Image <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control">
+                            <input type="file" class="form-control" id="artwork_image">
                         </div>
                         <div class="form-group mb-1 row">
                             <div class="col-9">
                                 <label class="form-label">Description <span class="text-danger">*</span></label>
-                                <textarea rows="8" class="form-control"></textarea>
+                                <textarea rows="8" class="form-control" id="artwork_description"></textarea>
                             </div>
                             <div class="col-3">
                                 <label class="form-label">Preview <span class="text-danger">*</span></label>
-                                <div class="bg-secondary" style="width: 100%; height: 200px">
-                                    <img class="img-fluid" />
-                                </div>
+                                <img class="img-fluid bg-secondary" id="artwork_preview" style="width: 100%; height: 200px"/>
                             </div>
+                            <span class="text-danger" id="artworkalert"></span>
                         </div>
                         <div class="mt-2">
                             <button type="submit" class="btn btn-alt-primary">Lưu</button>
