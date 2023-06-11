@@ -22,12 +22,13 @@
                 <div class="block-content tab-content ps-0 pe-0">
                     <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                         <thead>
-                        <th>#</th>
-                        <th>Artwork</th>
-                        <th>Price</th>
-                        <th>Artist</th>
-                        <th>Information</th>
-                        <th>Status</th>
+                            <th>#</th>
+                            <th>Artwork</th>
+                            <th>Price</th>
+                            <th>Artist</th>
+                            <th>Information</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </thead>
                         <tbody>
                             @{
@@ -40,26 +41,59 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0 me-2">
-                                                <img src="~/Content/assets/images/artwork/@item.artwork_image" width="70" class="img-fluid" alt="Alternate Text" />
+                                                <img src="~/Content/assets/images/artwork/@item.image" width="70" class="img-fluid" alt="Alternate Text" />
                                             </div>
                                             <div class="flex-grow-1">
-                                                <strong>@item.artwork_name</strong>
+                                                <strong>@item.name</strong>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        @item.artwork_price
+                                        @item.price
                                     </td>
                                     <td>
-                                        @item.artist_id
+                                        @item.artist
                                     </td>
                                     <td>
-                                        <span class="badge bg-primary">Dimmession: @item.artwork_dimensions</span> <br />
-                                        <span class="badge bg-secondary">Date: @item.artwork_date</span> <br />
-                                        <span class="badge bg-secondary">Category: @item.category_id</span> <br />
+                                        <span class="badge bg-primary">Dimmession: @item.dimensions</span> <br />
+                                        <span class="badge bg-warning">Date: @item.date</span> <br />
+                                        <span class="badge bg-secondary">Category: @item.category</span> <br />
                                     </td>
                                     <td>
-                                        On Sale
+                                        @if (item.status == 1)
+                                        {
+                                            <h5 class="badge bg-success m-0">ON SALE</h5>
+                                        }
+                                        else if (item.status == 2)
+                                        {
+                                            <h5 class="badge bg-primary m-0">ON AUCTION</h5>
+                                        }
+                                        else if (item.status == 3)
+                                        {
+                                            <h5 class="badge bg-danger m-0">SOLD OUT</h5>
+                                        }
+                                        else if (item.status == 4)
+                                        {
+                                            <h5 class="badge bg-ino m-0">pending approval</h5>
+                                        }
+                                        else
+                                        {
+                                            <h5 class="badge bg-secondary m-0">INACTIVE</h5>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="d-flex" style="max-width: 160px">
+                                            <div class="flex-grow-1">
+                                                <div class="btn-group me-2 mb-2 w-100" role="group">
+                                                    <button type="button" class="btn btn-sm btn-alt-info" onclick="transferEditFeature('{{$item->id}}','{{$item->title}}','{{$item->description}}')" data-bs-toggle="modal" data-bs-target="#editfeature-modal" title="Sửa">
+                                                        <i class="fa fa-fw fa-pencil-alt"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-alt-danger" onclick="transferDeleteFeature('{{$item->id}}')" data-bs-toggle="modal" data-bs-target="#deletefeature-modal" title="Xóa">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 i++;

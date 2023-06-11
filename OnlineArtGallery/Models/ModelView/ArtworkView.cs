@@ -15,8 +15,9 @@ namespace OnlineArtGallery.Models.ModelView
         public string description { get; set; }
         public string price { get; set; }
         public string dimensions { get; set; }
-        public Nullable<bool> artwork_is_sold { get; set; }
-        public string artwork_date { get; set; }
+        public Nullable<int> status { get; set; }
+        public string date { get; set; }
         public Nullable<int> category_id { get; set; }
+        public string category { get; set; }
     }
 }
