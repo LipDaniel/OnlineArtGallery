@@ -17,6 +17,37 @@
     }
 }
 
+edit_artwork_image.onchange = evt => {
+    var filePath = edit_artwork_image.value;
+    // Allowing file type
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    $('#edit_artworkalert').text('')
+
+    if (!allowedExtensions.exec(filePath)) {
+        $('#edit_artworkalert').text("* File isn't in the correct format")
+        edit_artwork_preview.src = ""
+        edit_artwork_image.value = '';
+        return false;
+    }
+
+    const [file] = edit_artwork_image.files
+    if (file) {
+        edit_artwork_preview.src = URL.createObjectURL(file)
+    }
+}
+
+function transferEditArtwork(id, name, price, dimensions, date, category, artist, image, description) {
+    $('#edit_artwork_id').val(id)
+    $('#edit_artwork_name').val(name)
+    $('#edit_artist_id').val(artist)
+    $('#edit_category_id').val(category)
+    $('#edit_artwork_price').val(price)
+    $('#edit_artwork_date').val(date)
+    $('#edit_dimensions').val(dimensions)
+    $('#edit_artwork_description').val(description)
+    edit_artwork_preview.src = "/Content/assets/images/artwork/" + image;
+}
+
 $(document).ready(function ($) {
     $('#artworkform').submit(function (event) {
         event.preventDefault();
@@ -51,6 +82,42 @@ $(document).ready(function ($) {
                 localStorage.setItem('toast', res);
                 window.location.reload();
             };
+        })
+    })
+
+    $('#editartworkform').submit(function (event) {
+        event.preventDefault();
+
+        var artwork_id = $('#edit_artwork_id').val();
+        var artwork_name = $('#edit_artwork_name').val();
+        var artwork_price = $('#edit_artwork_price').val();
+        var artwork_dimensions = $('#edit_dimensions').val();
+        var artwork_description = $('#edit_artwork_description').val();
+        var category_id = $('#edit_category_id').val();
+        var artist_id = $('#edit_artist_id').val();
+        var artwork_date = $('#edit_artwork_date').val();
+        var artwork_image = $('#edit_artwork_image')[0].files[0];
+
+        var formData = new FormData()
+        formData.append("artwork_id", artwork_id)
+        formData.append("artwork_name", artwork_name)
+        formData.append("artwork_price", artwork_price)
+        formData.append("artwork_dimensions", artwork_dimensions)
+        formData.append("artwork_description", artwork_description)
+        formData.append("category_id", category_id)
+        formData.append("artist_id", artist_id)
+        formData.append("artwork_date", artwork_date)
+        formData.append("artwork_image", artwork_image)
+
+        $.ajax({
+            method: "POST",
+            url: "/BEArtwork/Edit",
+            data: formData,
+            processData: false,
+            contentType: false,
+        }).done(function (res) {
+            localStorage.setItem('toast', res);
+            window.location.reload();
         })
 
     })
