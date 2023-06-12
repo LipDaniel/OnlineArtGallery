@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
 
 namespace OnlineArtGallery.Controllers
 {
@@ -28,18 +29,15 @@ namespace OnlineArtGallery.Controllers
             cont.contact_email = contact.contact_email;
             cont.contact_subject = contact.contact_subject;
             cont.contact_message = contact.contact_message;
+            
 
             if (cont != null)
             {
                 TempData["msg"] = "Message successfully.";
 
             }
-            else
-            {
-                TempData["msg"] = "Message Fail.";
-                return RedirectToAction("Contact", "FEHome");
-
-            }
+            
+            
 
             //cont.artist_created_date = DateTime.Now.ToString("yyyy/MM/dd");
             //cont.artist_is_status = true;

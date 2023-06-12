@@ -75,7 +75,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="cname" class="sr-only">Name</label>
-                                    <input type="text" class="form-control" name="contact_name" placeholder="Name *" required="">
+                                    <input type="text" class="form-control" name="contact_name" runat="server" placeholder="Name *" required="">
                                 </div><!-- End .col-sm-6 -->
 
                                 <div class="col-sm-6">
@@ -87,7 +87,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="cphone" class="sr-only">Phone</label>
-                                    <input type="tel" class="form-control" name="contact_phone" id="cphone" placeholder="Phone">
+                                    <input type="number" class="form-control" name="contact_phone" runat="server" id="cphone" placeholder="Phone">
                                 </div><!-- End .col-sm-6 -->
 
                                 <div class="col-sm-6">
@@ -104,6 +104,7 @@
                                 <i class="icon-long-arrow-right"></i>
                             </button>
                         </form><!-- End .contact-form -->
+                        @TempData["msg"]
                     </div><!-- End .col-lg-6 -->
                 </div><!-- End .row -->
 

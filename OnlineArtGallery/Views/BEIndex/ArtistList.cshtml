@@ -77,7 +77,6 @@
                                                                     <img width="150px" src="~/Content/assets/images/artistimg/@artist.artist_image" alt="Alternate Text" />
                                                                     <input type="file" name="artist_image" value="" />
                                                                 </div>
-
                                                                 <div class="mb-3">
                                                                     <label for="message-text" class="col-form-label">Bio:</label>
                                                                     <textarea class="form-control" name="artist_bio">@artist.artist_bio</textarea>
@@ -94,7 +93,7 @@
                                         </td>
                                     </tr>
                                 }
-
+                                @TempData["msg"]
                             </tbody>
                         </table>
                     </div>
@@ -103,6 +102,7 @@
             </div>
         </div>
     </div>
+
     @*form add artist*@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

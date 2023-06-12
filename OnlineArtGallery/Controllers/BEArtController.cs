@@ -51,6 +51,17 @@ namespace OnlineArtGallery.Controllers
                 artist_image.SaveAs(path);
                 artis.artist_image = file;
             }
+            if (artis != null)
+            {
+                TempData["msg"] = "success";
+                return RedirectToAction("ArtistList", "BEIndex");
+            }
+            else
+            {
+                TempData["msg"] = "Fail";
+                return RedirectToAction("ArtistList", "BEIndex");
+            }
+           
             db.Artists.Add(artis);
             db.SaveChanges();
 
