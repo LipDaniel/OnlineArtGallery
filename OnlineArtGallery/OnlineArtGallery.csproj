@@ -6042,7 +6042,6 @@
     <Content Include="Views\BEIndex\Contactus.cshtml" />
     <Content Include="Views\Shared\AdminModals\_Artwork.cshtml" />
     <Content Include="Views\BEIndex\AuctionList.cshtml" />
-    <Content Include="Views\BEIndex\ProfileAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -6053,7 +6052,6 @@
     <Folder Include="Views\Artists\" />
     <Folder Include="Views\BEContact\" />
     <Folder Include="Views\BEGallery\" />
-    <Folder Include="Views\BEProfile\" />
     <Folder Include="Views\BETag\" />
     <Folder Include="Views\FEArtist\" />
   </ItemGroup>
