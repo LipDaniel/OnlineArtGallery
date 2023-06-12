@@ -294,7 +294,7 @@
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
-    <Content Include="Content\adminassets\css\app.css" />
+    <None Include="Content\adminassets\css\app.scss" />
     <Content Include="Content\adminassets\css\oneui.css" />
     <Content Include="Content\adminassets\css\oneui.min.css" />
     <Content Include="Content\adminassets\css\themes\amethyst.css" />
@@ -5688,6 +5688,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\js\artwork.js" />
+    <Content Include="Content\js\auction.js" />
+    <Content Include="Content\js\custom-select.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\mainadmin.js" />
     <Content Include="favicon.ico" />
@@ -6042,6 +6044,7 @@
     <Content Include="Views\BEIndex\Contactus.cshtml" />
     <Content Include="Views\Shared\AdminModals\_Artwork.cshtml" />
     <Content Include="Views\BEIndex\AuctionList.cshtml" />
+    <Content Include="Views\Shared\AdminModals\_Auction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

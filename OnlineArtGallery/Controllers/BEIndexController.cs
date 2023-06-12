@@ -51,6 +51,8 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult AuctionList()
         {
+            ViewBag.Artwork = db.Artworks.Where(a => a.artwork_status == 0).ToList();
+
             return View();
         }
         public ActionResult ProfileAdmin()
