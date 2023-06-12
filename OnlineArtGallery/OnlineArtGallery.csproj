@@ -135,6 +135,7 @@
     <Compile Include="Controllers\BEContactController.cs" />
     <Compile Include="Controllers\BEGalleryController.cs" />
     <Compile Include="Controllers\BEIndexController.cs" />
+    <Compile Include="Controllers\BEProfileController.cs" />
     <Compile Include="Controllers\BETagController.cs" />
     <Compile Include="Controllers\FEArtistController.cs" />
     <Compile Include="Controllers\FEArtworkController.cs" />
@@ -6041,6 +6042,7 @@
     <Content Include="Views\BEIndex\Contactus.cshtml" />
     <Content Include="Views\Shared\AdminModals\_Artwork.cshtml" />
     <Content Include="Views\BEIndex\AuctionList.cshtml" />
+    <Content Include="Views\BEIndex\ProfileAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -6051,6 +6053,7 @@
     <Folder Include="Views\Artists\" />
     <Folder Include="Views\BEContact\" />
     <Folder Include="Views\BEGallery\" />
+    <Folder Include="Views\BEProfile\" />
     <Folder Include="Views\BETag\" />
     <Folder Include="Views\FEArtist\" />
   </ItemGroup>

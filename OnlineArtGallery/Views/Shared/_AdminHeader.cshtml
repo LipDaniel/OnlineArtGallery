@@ -49,9 +49,13 @@
                         <p class="mb-0 text-muted fs-sm fw-medium">Admin</p>
                     </div>
                     <div class="p-2">
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="/admin/account">
-                            <span class="fs-sm fw-medium">Hồ sơ</span>
-                        </a>
+                        <!-- Button trigger modal -->
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-alt-success" data-bs-toggle="modal" data-bs-target="#profile-admin">
+                            Profile
+                        </button>
+                        <!-- Modal -->
+
                         <button class="dropdown-item d-flex align-items-center justify-content-between" data-bs-toggle="modal" data-bs-target="#changepwd-modal">
                             <span class="fs-sm fw-medium">Đổi mật khẩu</span>
                         </button>
@@ -66,9 +70,9 @@
             <div class="dropdown d-inline-block ms-2">
                 <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-fw fa-bell"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-                            <span class="visually-hidden">New alerts</span>
-                        </span>
+                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0 border-0 fs-sm" aria-labelledby="page-header-notifications-dropdown">
                     <div class="p-2 bg-body-light border-bottom text-center rounded-top">
@@ -131,3 +135,72 @@
     </div>
     <!-- END Header Loader -->
 </header>
+<!-- Modal -->
+@model OnlineArtGallery.Models.Entities.User
+<div class="modal fade" id="profile-admin" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @*@foreach (var admin in ViewBag.ProfileAdmin)
+            {*@
+                <form method="post" action="@Url.Action("NewEdit", "BEProfile")" enctype="multipart/form-data">
+                    <div class="block-content fs-sm pb-3">
+
+
+                        <div class="form-group mb-1 row">
+                            <div class="col-6">
+                                <label class="form-label">First Name</label>
+                                <div class="input-group">
+                                    <input type="text" value="admin.user_fname" name="user_fname" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Last Name </label>
+                                <div class="input-group">
+                                    <input type="text" value="admin.user_lname" name="user_lname" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1 row">
+                            <div class="col-6">
+                                <label class="form-label">Email</label>
+                                <div class="input-group">
+                                    <input type="email" value="admin.user_email" name="user_email" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Phone </label>
+                                <div class="input-group">
+                                    <input type="number" value="admin.user_phone" name="user_phone" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1 row">
+                            <div class="col-6">
+                                <label class="form-label">Address</label>
+                                <div class="input-group">
+                                    <textarea type="text" value="admin.user_address" name="user_address" rows="2" class="form-control"> </textarea>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Image</label>
+                                <div class="input-group">
+                                    <img width="50px" src="~/Content/assets/images/user/admin.user_image" alt="Alternate Text" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            }
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

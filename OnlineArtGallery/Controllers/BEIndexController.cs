@@ -53,6 +53,11 @@ namespace OnlineArtGallery.Controllers
         {
             return View();
         }
+        public ActionResult ProfileAdmin()
+        {
+            ViewBag.ProfileAdmin = db.Users.ToList();
+            return View();
+        }
         public ActionResult GalleryList()
         {
             ViewBag.GalleryList = db.Galleries.OrderByDescending(a => a.gallery_id).ToList();
