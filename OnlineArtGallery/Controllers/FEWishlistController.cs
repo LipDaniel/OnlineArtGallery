@@ -14,11 +14,6 @@ namespace OnlineArtGallery.Controllers
         {
             if (Session["UserId"] == null)
                 return RedirectToAction("Index", "FEHome");
-
-            string id = Session["UserId"].ToString();
-            var userId = int.Parse(id);
-            var wishlist = db.Favourites.Where(a => a.user_id == userId).OrderByDescending(a => a.favourite_id).ToList();
-            ViewBag.Wishlist = wishlist;
             return View();
         }
         public ActionResult Create(int id)

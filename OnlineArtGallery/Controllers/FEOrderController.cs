@@ -17,19 +17,15 @@ namespace OnlineArtGallery.Controllers
             if (Session["UserId"] == null)
                 return RedirectToAction("Index", "FEHome");
 
-            string id = Session["UserId"].ToString();
-            var userId = int.Parse(id);
-            var cart = db.Carts.Where(a => a.user_id == userId).OrderByDescending(a => a.cart_id).ToList();
-            ViewBag.Cart = cart;
             return View();
         }
 
-        public string Create(int id)
+        public ActionResult Create(int id)
         {
             if (Session["UserId"] == null)
-                return "Please login first ! ";
-
-            bool check = db.Favourites.Any(a => a.artwork_id == id);
+                return Json("Please login first ! ");
+            var userId = int.Parse(Session["UserId"].ToString());
+            bool check = db.Carts.Any(a => a.artwork_id == id);
             if (!check)
             {
                 var cart = new Cart()
@@ -40,9 +36,20 @@ namespace OnlineArtGallery.Controllers
 
                 db.Carts.Add(cart);
                 db.SaveChanges();
-                return "Added !";
+                var count = db.Carts.Where(b => b.user_id == userId).Count();
+                var resultt = new
+                {
+                    noti = "Added !",
+                    count
+                };
+                return Json(resultt);
+               
             }
-            return "Already added !";
+            var result = new
+            {
+                noti = "Already added !",
+            };
+            return Json(result);
         }
         public ActionResult Delete(int id)
         {

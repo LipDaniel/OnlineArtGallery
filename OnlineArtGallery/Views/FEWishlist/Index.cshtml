@@ -1,4 +1,4 @@
-﻿
+﻿@using OnlineArtGallery.Models.Entities;
 @{
     ViewBag.Title = "View";
 
@@ -27,6 +27,7 @@
                     <thead>
                         <tr>
                             <th>Artwork</th>
+                            <th>Name</th>
                             <th>Price</th>
                             <th>Stock Status</th>
                             <th></th>
@@ -35,46 +36,53 @@
                     </thead>
 
                     <tbody>
-                        @foreach(var item in ViewBag.Wishlist)
-                        {
-
-                            <tr>
-                            <td class="product-col">
-                                <div class="product">
-                                    <figure class="product-media">
-                                        <a href="#">
-                                            <img src="~/Content/assets/images/artwork/@item.Artwork.artwork_image" alt="Product image">
-                                        </a>
-                                    </figure>
-
-                                    <h3 class="product-title">
-                                        <a href="#">@item.Artwork.artwork_name</a>
-                                    </h3><!-- End .product-title -->
-                                </div><!-- End .product -->
-                            </td>
-                            <td class="price-col">$ @item.Artwork.artwork_price</td>
-                            <td class="stock-col"><span class="in-stock">In stock</span></td>
-                            <td class="action-col">
-                                <button class="btn btn-block btn-outline-primary-2"><i class="icon-cart-plus"></i>Add to Cart</button>
-                            </td>
-                            <td class="remove-col"><a href="/FEWishlist/Delete/@item.favourite_id" class="btn-remove"><i class="icon-close"></i></a></td>
-                        </tr>
+                        @{
+                            GalleryArtEntities db = new GalleryArtEntities();
+                            var id = int.Parse(Session["UserId"].ToString());
+                            var wishlist = (from favourite in db.Favourites
+                                            join artwork in db.Artworks on favourite.artwork_id equals artwork.artwork_id
+                                            where favourite.user_id == id
+                                            orderby favourite.favourite_id descending
+                                            select new
+                                            {
+                                                Favourite = favourite,
+                                                Artwork = artwork
+                                            }).ToList();
                         }
-                   
-              
-                    </tbody>
-                </table><!-- End .table table-wishlist -->
-                <div class="wishlist-share">
-                    <div class="social-icons social-icons-sm mb-2">
-                        <label class="social-label">Share on:</label>
-                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                        <a href="#" class="social-icon" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
-                        <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
-                    </div><!-- End .soial-icons -->
-                </div><!-- End .wishlist-share -->
-            </div><!-- End .container -->
+                        @foreach (var item in wishlist)
+                        {
+                            <tr>
+                                <td class="">
+                                    <a href="#"> <img style="height:150px" src="~/Content/assets/images/artwork/@item.Artwork.artwork_image" alt="Product image"></a>
+                                </td>
+                                <td class="col-3">
+                                    <h3 class="product-title">
+                                        <a href="/FEArtwork/ArtworkDetail/@item.Artwork.artwork_id">@item.Artwork.artwork_name</a>
+                                    </h3>
+                                </td>
+                                <td class="price-col">$ @item.Artwork.artwork_price</td>
+                                <td class="stock-col"><span class="in-stock">In stock</span></td>
+                                <td class="action-col">
+                                    <button class="btn btn-block btn-outline-primary-2"><i class="icon-cart-plus"></i>Add to Cart</button>
+                                </td>
+                                <td class="remove-col"><a href="/FEWishlist/Delete/@item.Favourite.favourite_id" class="btn-remove"><i class="icon-close"></i></a></td>
+                                </tr>
+            }
+
+
+                        </tbody>
+                        </table><!-- End .table table-wishlist -->
+                        <div class="wishlist-share">
+                            <div class="social-icons social-icons-sm mb-2">
+                                <label class="social-label">Share on:</label>
+                                <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                                <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                                <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                <a href="#" class="social-icon" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+                                <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                            </div><!-- End .soial-icons -->
+                        </div><!-- End .wishlist-share -->
+                    </div><!-- End .container -->
         </div><!-- End .page-content -->
     </main>
 }

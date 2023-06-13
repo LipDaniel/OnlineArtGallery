@@ -103,7 +103,6 @@
                             @if (Session["UserId"] != null)
                             {
                                 var id = int.Parse(Session["UserId"].ToString());
-                                var cartList = db.Carts.Where(a => a.user_id == id).ToList();
                                 var cartCount = db.Carts.Where(a => a.user_id == id).ToList().Count();
                                 if(cartCount > 0)
                                 {

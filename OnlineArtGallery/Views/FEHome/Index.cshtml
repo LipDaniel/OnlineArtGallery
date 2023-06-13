@@ -158,7 +158,6 @@
                         @foreach (var art in ViewBag.ArtworkTop)
                         {
                             <div class="product">
-                                <span class="product-label label-sale">Sale</span>
                                 <figure class="product-media">
                                     <a href="/FEArtwork/ArtworkDetail/@art.artwork_id">
                                         <img style="height:160px" src="~/Content/assets/images/artwork/@art.artwork_image" alt="Product image" class="product-image">
@@ -169,7 +168,7 @@
                                     <div class="product-cat">
                                         by <a href="#">@art.Artist.artist_name</a>
                                     </div><!-- End .product-cat -->
-                                    <h3 class="product-title"><a href="product.html">@art.artwork_name</a></h3><!-- End .product-title -->
+                                    <h3 class="product-title"><a href="/FEArtwork/ArtworkDetail/@art.artwork_id">@art.artwork_name</a></h3><!-- End .product-title -->
                                     <div class="product-price">
                                         <span class="new-price">$@art.artwork_price</span>
                                       
@@ -450,7 +449,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="banner banner-overlay">
                             <a href="#">
-                                <img src="~/Content/assets/images/galleryimg/@gal.gallery_image" alt="Banner">
+                                <img style="height:300px" src="~/Content/assets/images/galleryimg/@gal.gallery_image" alt="Banner">
                             </a>
 
                             <div class="banner-content">
@@ -858,8 +857,12 @@
                     id: id
                 }
             }).done(function (res) {
-                $('.toast-body').text(res);
+                $('.toast-body').text(res.noti);
                 $('#toast').toast('show');
+                if (res.count != null) {
+                    $('cart-count').html(res.count);
+                    console.log(res.count);
+                }
             });
         });
     </script>

@@ -30,6 +30,7 @@ namespace OnlineArtGallery.Controllers
             ViewBag.ArtworkList = artworkList;
             return View();
         }
+ 
 
         public ActionResult ArtworkList()
         {
@@ -42,6 +43,22 @@ namespace OnlineArtGallery.Controllers
             return View();
         }
 
+        public ActionResult Category(int id)
+        {
+            var artwork = db.Artworks.Where(a => a.category_id == id).ToList();
+            var category = db.Categories.ToList();
+            var tag = db.Tags.ToList();
+            ViewBag.Category = category;
+            ViewBag.Artwork = artwork;
+            ViewBag.Tag = tag;
+            return View();
+        }
 
+        public ActionResult GetCategory()
+        {
+            var category = db.Categories.ToList();
+            ViewBag.Category = category;
+            return View();
+        }
     }
 }
