@@ -38,17 +38,22 @@
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
             <div class="dropdown d-inline-block ms-2">
+                @{
+                    GalleryArtEntities db = new GalleryArtEntities();
+                    var id = int.Parse(Session["UserId"].ToString());
+                    var admin = db.Users.Find(id);
+                }
                 <button type="button" class="btn btn-sm btn-alt-secondary d-flex align-items-center" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle" src="~/Content/assets/images/artistimg/noimage.png" alt="Header Avatar" style="width: 50px; height:50px">
-                    <span class="d-none d-sm-inline-block ms-2">@Session["UserFName"] </span>
+                    <img class="rounded-circle" src="~/Content/assets/images/user/@admin.user_image" alt="Header Avatar" style="width: 50px; height:50px">
+                    <span class="d-none d-sm-inline-block ms-2">@admin.user_fname </span>
                     <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0" aria-labelledby="page-header-user-dropdown">
                     <div class="p-3 text-center bg-body-light border-bottom rounded-top">
-                        <img class="img-avatar img-avatar48 img-avatar-thumb" src="" alt="">
+                        <img class="img-avatar img-avatar48 img-avatar-thumb" src="~/Content/assets/images/user/@admin.user_image" alt="">
                         @if (Session["UserId"] != null)
                         {
-                            <p>Welcome back, @Session["UserFName"]   </p>
+                            <p>Welcome back, @admin.user_fname</p>
                         }
 
                     </div>
@@ -151,11 +156,7 @@
 
             <form method="post" action="@Url.Action("NewEdit", "BEProfile")" enctype="multipart/form-data">
                 <div class="block-content fs-sm pb-3">
-                    @{
-                        GalleryArtEntities db = new GalleryArtEntities();
-                        var id = int.Parse(Session["UserId"].ToString());
-                        var admin = db.Users.Find(id);
-                    }
+                    
 
                     <div class="form-group mb-1 row">
                         <div class="col-6">
@@ -186,17 +187,12 @@
                         </div>
                     </div>
                     <div class="form-group mb-1 row">
-                        <div class="col-6">
-                            <label class="form-label">Address</label>
-                            <div class="input-group">
-                                <textarea type="text" value="@admin.user_address" name="user_address" rows="2" class="form-control"> </textarea>
-                            </div>
-                        </div>
-                        <div class="col-6">
+                        
+                        <div class="col-12">
                             <label class="form-label">Image</label>
                             <div class="input-group">
                                 <input type="file" name="user_image" value="" />
-                                <img width="50px" src="~/Content/assets/images/user/@admin.user_image" alt="Alternate Text" />
+                                <img width="100px" src="~/Content/assets/images/user/@admin.user_image" alt="Alternate Text" />
                             </div>
                         </div>
 
@@ -207,6 +203,7 @@
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
+            @TempData["SuccessMessage"]
 
 
 

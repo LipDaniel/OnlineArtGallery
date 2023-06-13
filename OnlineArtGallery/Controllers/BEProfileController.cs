@@ -1,6 +1,7 @@
 ﻿using OnlineArtGallery.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -17,47 +18,48 @@ namespace OnlineArtGallery.Controllers
         [HttpPost]
         public ActionResult NewEdit(User Admin, HttpPostedFileBase user_image)
         {
-            var admin = db.Users.Find(Admin.user_id);
-
+            var admin = db.Users.Find(Session["UserId"]);
+            if (admin == null)
+            {
+                return RedirectToAction("Index", "FEHome");
+            }
 
             admin.user_fname = Admin.user_fname;
             admin.user_lname = Admin.user_lname;
             admin.user_email = Admin.user_email;
-            admin.user_password = Admin.user_password;
-            admin.user_address = Admin.user_address;
             admin.user_phone = Admin.user_phone;
-            admin.user_is_active = true;
-            if (user_image != null)
+
+
+
+
+
+            if (user_image != null && user_image.ContentLength > 0)
             {
                 if (admin.user_image != null)
                 {
-                    string artpath = Path.Combine(Server.MapPath("~/Content/Assets/Images/User/"), admin.user_image);
-                    if (System.IO.File.Exists(artpath))
+                    string path = Path.Combine(Server.MapPath("~/Content/Assets/Images/User/"), admin.user_image);
+                    if (System.IO.File.Exists(path))
                     {
                         // Delete the file
-                        System.IO.File.Delete(artpath);
+                        System.IO.File.Delete(path);
 
                         // Perform any other necessary actions
                     }
                 }
-                var fileName = Path.GetFileName(user_image.FileName);
                 string fileExtension = Path.GetExtension(user_image.FileName);
-                string file = fileName + DateTime.Now.ToString("yyyyMMddHHmmss") + fileExtension;
-                var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/user/"), file);
+                string uniqueFileName = admin.user_id.ToString() + DateTime.Now.ToString("yyyyMMddHHmmss") + fileExtension;
+                string filePath = Path.Combine(Server.MapPath("~/Content/Assets/Images/user/"), uniqueFileName);
+                user_image.SaveAs(filePath);
 
-
-
-                user_image.SaveAs(path);
-                admin.user_image = file;
+                admin.user_image = uniqueFileName;
             }
-            if (admin != null)
-            {
-                TempData["msg"] = "change success";
+            TempData["SuccessMessage"] = "Change profile successfully.";
+           
+                
+
+                db.SaveChanges();
                 return RedirectToAction("Index", "BEIndex");
-            }
-            db.SaveChanges();
-            return RedirectToAction("Index", "BEIndex");
-
+            
 
 
         }
