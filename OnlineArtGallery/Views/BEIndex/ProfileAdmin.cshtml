@@ -17,7 +17,7 @@
             <div class="page-header page-header-big text-center" style="background-image: url(/Content/assets/images/about/about-header.jpg); height:200px; opacity:0.8">
                 <img class="rounded-circle" src="~/Content/assets/images/user/@admin.user_image" alt="Header Avatar" style="width: 70px; height:70px; margin-top:10px ">
                 <h2 style="color:white;">
-                    Edit Account  <p style="color:tomato; font-size:18px">@admin.user_fname <br /><a class="btn btn-alt-success" href="#">Back</a></p>
+                    Edit Account  <p style="color:tomato; font-size:18px">@admin.user_fname </p>
 
                 </h2>
 
@@ -74,11 +74,16 @@
                         </div>
                     </div>
                 </form>
-                @TempData["SuccessMessage"]
                 @if (Session["Message"] != null)
                 {
-                    <div class="alert alert-success">@Session["Message"] </div>
+                    <div class="alert alert-success" id="successMessage">@Session["Message"]</div>
                     Session.Remove("Message");
+                    <script>
+        // Set timeout for success message
+                        setTimeout(function () {
+                            $('#successMessage').fadeOut('slow');
+                        }, 2000); // 5000 milliseconds = 5 seconds
+                    </script>
                 }
             </div>
         </div>
