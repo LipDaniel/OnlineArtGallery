@@ -6045,6 +6045,7 @@
     <Content Include="Views\Shared\AdminModals\_Artwork.cshtml" />
     <Content Include="Views\BEIndex\AuctionList.cshtml" />
     <Content Include="Views\Shared\AdminModals\_Auction.cshtml" />
+    <Content Include="Views\BEIndex\ProfileAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
