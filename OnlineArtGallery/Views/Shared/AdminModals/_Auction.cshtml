@@ -31,12 +31,16 @@
                                <div class="form-group mb-1">
                                    <label class="form-label">Date <span class="text-danger">*</span></label>
                                    <div class="input-daterange input-group" data-date-format="dd/mm/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
-                                       <input type="text" class="js-flatpickr form-control" data-enable-time="true" data-time_24hr="true" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                                       <input type="text" class="js-flatpickr form-control" id="date_from" data-enable-time="true" data-time_24hr="true" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
                                        <span class="input-group-text fw-semibold">
                                            <i class="fa fa-fw fa-arrow-right"></i>
                                        </span>
-                                       <input type="text" class="js-flatpickr form-control" data-enable-time="true" data-time_24hr="true" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                                       <input type="text" class="js-flatpickr form-control" id="date_to" data-enable-time="true" data-time_24hr="true" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
                                    </div>
+                               </div>
+                               <div class="form-group mb-1">
+                                   <label class="form-label">Time</label>
+                                   <input class="form-control form-control-alt" id="real_time" disabled/>
                                </div>
                            </div>
                            <div class="col-lg-4">
