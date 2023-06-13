@@ -21,7 +21,7 @@ namespace OnlineArtGallery.Controllers
             var admin = db.Users.Find(Session["UserId"]);
             if (admin == null)
             {
-                return RedirectToAction("Index", "FEHome");
+                return RedirectToAction("ProfileAdmin", "BEIndex");
             }
 
             admin.user_fname = Admin.user_fname;
@@ -53,12 +53,11 @@ namespace OnlineArtGallery.Controllers
 
                 admin.user_image = uniqueFileName;
             }
-            TempData["SuccessMessage"] = "Change profile successfully.";
-           
-                
+            //TempData["SuccessMessage"] = "Change profile successfully.";
 
-                db.SaveChanges();
-                return RedirectToAction("Index", "BEIndex");
+            Session["Message"] = "Change profile successful";
+            db.SaveChanges();
+                return RedirectToAction("ProfileAdmin","BEIndex");
             
 
 

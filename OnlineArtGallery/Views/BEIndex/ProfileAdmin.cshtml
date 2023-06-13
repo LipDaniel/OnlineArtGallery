@@ -74,8 +74,12 @@
                         </div>
                     </div>
                 </form>
-
-
+                @TempData["SuccessMessage"]
+                @if (Session["Message"] != null)
+                {
+                    <div class="alert alert-success">@Session["Message"] </div>
+                    Session.Remove("Message");
+                }
             </div>
         </div>
 
