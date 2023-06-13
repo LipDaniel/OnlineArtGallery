@@ -179,7 +179,7 @@
         <div style="background-color: #333; display: flex; width: 100%;">
             <div class="header-left">
                 <div class="dropdown category-dropdown">
-                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
+                    <a href="/FEArtwork/GetCategory/" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
                         Browse Categories
                     </a>
 
@@ -190,7 +190,7 @@
                                     var cateList = db.Categories.ToList();
                                 }
                                 @foreach (var cate in cateList) { 
-                                    <li class="item-lead"><a href="#">@cate.category_name</a></li>
+                                    <li class="item-lead"><a href="/FEArtwork/Category/@cate.category_id">@cate.category_name</a></li>
                                 }
                             </ul>
                         </nav>
