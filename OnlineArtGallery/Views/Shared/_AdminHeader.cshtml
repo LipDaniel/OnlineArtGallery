@@ -1,4 +1,5 @@
-﻿<header id="page-header">
+﻿@using OnlineArtGallery.Models.Entities;
+<header id="page-header">
     <!-- Header Content -->
     <div class="content-header">
         <!-- Left Section -->
@@ -37,21 +38,32 @@
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
             <div class="dropdown d-inline-block ms-2">
+                @{
+                    GalleryArtEntities db = new GalleryArtEntities();
+                    var id = int.Parse(Session["UserId"].ToString());
+                    var admin = db.Users.Find(id);
+                }
                 <button type="button" class="btn btn-sm btn-alt-secondary d-flex align-items-center" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle" src="" alt="Header Avatar" style="width: 21px;">
-                    <span class="d-none d-sm-inline-block ms-2">Admin</span>
+                    <img class="rounded-circle" src="~/Content/assets/images/user/@admin.user_image" alt="Header Avatar" style="width: 50px; height:50px">
+                    <span class="d-none d-sm-inline-block ms-2">@admin.user_fname </span>
                     <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0" aria-labelledby="page-header-user-dropdown">
                     <div class="p-3 text-center bg-body-light border-bottom rounded-top">
-                        <img class="img-avatar img-avatar48 img-avatar-thumb" src="" alt="">
-                        <p class="mt-2 mb-0 fw-medium">Admin</p>
-                        <p class="mb-0 text-muted fs-sm fw-medium">Admin</p>
+                        <img class="img-avatar img-avatar48 img-avatar-thumb" src="~/Content/assets/images/user/@admin.user_image" alt="">
+                        @if (Session["UserId"] != null)
+                        {
+                            <p>Welcome back, @admin.user_fname</p>
+                        }
+
                     </div>
                     <div class="p-2">
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="/admin/account">
-                            <span class="fs-sm fw-medium">Hồ sơ</span>
-                        </a>
+                        <!-- Button trigger modal -->
+                        <!-- Button trigger modal -->
+                        
+                        <a class="btn btn-alt-success" href="/BEIndex/ProfileAdmin">Profile </a>
+                        <!-- Modal -->
+
                         <button class="dropdown-item d-flex align-items-center justify-content-between" data-bs-toggle="modal" data-bs-target="#changepwd-modal">
                             <span class="fs-sm fw-medium">Đổi mật khẩu</span>
                         </button>
@@ -66,9 +78,9 @@
             <div class="dropdown d-inline-block ms-2">
                 <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-fw fa-bell"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-                            <span class="visually-hidden">New alerts</span>
-                        </span>
+                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0 border-0 fs-sm" aria-labelledby="page-header-notifications-dropdown">
                     <div class="p-2 bg-body-light border-bottom text-center rounded-top">
@@ -131,3 +143,6 @@
     </div>
     <!-- END Header Loader -->
 </header>
+<!-- Modal -->
+
+

@@ -115,12 +115,12 @@
                     <form method="post" action="@Url.Action("NewArt","BEArt")" enctype="multipart/form-data">
 
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Name:</label>
-                            <input type="text" name="artist_name" class="form-control">
+                            <label for="recipient-name" class="col-form-label">Name *:</label>
+                            <input type="text" class="form-control" name="artist_name" runat="server" placeholder="Name *" required="">
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Country:</label>
-                            <input type="text" name="artist_country" class="form-control">
+                            <input type="text" name="artist_country" class="form-control"  />
                         </div>
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Bio:</label>

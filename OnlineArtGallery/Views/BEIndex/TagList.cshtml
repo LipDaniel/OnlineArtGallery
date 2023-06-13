@@ -108,8 +108,8 @@
                 <div class="modal-body">
                     <form method="post" action="@Url.Action("NewTag","BETag")" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Name:</label>
-                            <input type="text" name="tag_name" class="form-control">
+                            <label for="recipient-name" class="col-form-label">Name *:</label>
+                            <input type="text" name="tag_name" class="form-control" required="">
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Image:</label>

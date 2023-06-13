@@ -1,0 +1,56 @@
+﻿@* ADD AUCTION *@
+<div class="modal fade" id="createauction_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popin" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-popin" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded block-transparent mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">CREATE AUCTION</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-fw fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <form id="artworkform" enctype="multipart/form-data">
+                    <div class="block-content fs-sm pb-3">
+                        <div class="form-group mb-1">
+                            <label class="form-label">Artwork <span class="text-danger">*</span></label>
+                            <select id="example" name="currency">
+                                @foreach (var item in ViewBag.Artwork)
+                                {
+                                    <option value="@item.artwork_id" data-icon="/Content/assets/images/artwork/@item.artwork_image">@item.artwork_name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="row mt-3">
+                           <div class="col-lg-8">
+                               <div class="form-group mb-1">
+                                   <label class="form-label">Reserve Price <span class="text-danger">*</span></label>
+                                   <input type="text" class="form-control" id="artwork_image">
+                               </div>
+                               <div class="form-group mb-1">
+                                   <label class="form-label">Date <span class="text-danger">*</span></label>
+                                   <div class="input-daterange input-group" data-date-format="dd/mm/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                                       <input type="text" class="js-flatpickr form-control" data-enable-time="true" data-time_24hr="true" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                                       <span class="input-group-text fw-semibold">
+                                           <i class="fa fa-fw fa-arrow-right"></i>
+                                       </span>
+                                       <input type="text" class="js-flatpickr form-control" data-enable-time="true" data-time_24hr="true" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-lg-4">
+                               <img class="img-fluid bg-secondary" id="artwork_preview" style="width: 100%; height: 200px" />
+                           </div>
+                        </div>
+                        
+                        <div class="mt-2">
+                            <button type="submit" class="btn btn-alt-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

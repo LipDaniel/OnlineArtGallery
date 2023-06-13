@@ -56,12 +56,8 @@ namespace OnlineArtGallery.Controllers
                 TempData["msg"] = "success";
                 return RedirectToAction("ArtistList", "BEIndex");
             }
-            else
-            {
-                TempData["msg"] = "Fail";
-                return RedirectToAction("ArtistList", "BEIndex");
-            }
-           
+            
+
             db.Artists.Add(artis);
             db.SaveChanges();
 
@@ -74,10 +70,10 @@ namespace OnlineArtGallery.Controllers
         public ActionResult Edit(int id)
         {
             var arr = db.Artists.Find(id);
-            
+
             return RedirectToAction("ArtistList", "BEIndex", arr);
 
-           
+
 
         }
 
@@ -85,13 +81,11 @@ namespace OnlineArtGallery.Controllers
 
         //post edit 
         [HttpPost]
-    public ActionResult NewEdit( Artist artist, HttpPostedFileBase artist_image)
-    {
-        var art = db.Artists.Find(artist.artist_id);
-        if (art == null)
+        public ActionResult NewEdit(Artist artist, HttpPostedFileBase artist_image)
         {
-            return RedirectToAction("ArtistList", "BEIndex");
-        }
+            var art = db.Artists.Find(artist.artist_id);
+            
+
             art.artist_name = artist.artist_name;
             art.artist_country = artist.artist_country;
             art.artist_bio = artist.artist_bio;
@@ -118,11 +112,16 @@ namespace OnlineArtGallery.Controllers
                 artist_image.SaveAs(path);
                 art.artist_image = file;
             }
+            if (art != null)
+            {
+                TempData["msg"] = "change success";
+                return RedirectToAction("ArtistList", "BEIndex");
+            }
             db.SaveChanges();
             return RedirectToAction("ArtistList", "BEIndex");
 
-        
 
+
+        }
     }
-}
 }
