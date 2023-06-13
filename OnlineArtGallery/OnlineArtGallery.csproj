@@ -135,6 +135,7 @@
     <Compile Include="Controllers\BEContactController.cs" />
     <Compile Include="Controllers\BEGalleryController.cs" />
     <Compile Include="Controllers\BEIndexController.cs" />
+    <Compile Include="Controllers\BEProfileController.cs" />
     <Compile Include="Controllers\BETagController.cs" />
     <Compile Include="Controllers\FEArtistController.cs" />
     <Compile Include="Controllers\FEArtworkController.cs" />
@@ -293,7 +294,7 @@
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
-    <Content Include="Content\adminassets\css\app.css" />
+    <None Include="Content\adminassets\css\app.scss" />
     <Content Include="Content\adminassets\css\oneui.css" />
     <Content Include="Content\adminassets\css\oneui.min.css" />
     <Content Include="Content\adminassets\css\themes\amethyst.css" />
@@ -5687,6 +5688,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\js\artwork.js" />
+    <Content Include="Content\js\auction.js" />
+    <Content Include="Content\js\custom-select.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\mainadmin.js" />
     <Content Include="favicon.ico" />
@@ -6043,6 +6046,8 @@
     <Content Include="Views\BEIndex\AuctionList.cshtml" />
     <Content Include="Views\FEArtwork\GetCategory.cshtml" />
     <Content Include="Views\FEArtwork\Category.cshtml" />
+    <Content Include="Views\Shared\AdminModals\_Auction.cshtml" />
+    <Content Include="Views\BEIndex\ProfileAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
