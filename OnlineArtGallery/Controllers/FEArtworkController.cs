@@ -48,9 +48,25 @@ namespace OnlineArtGallery.Controllers
             var artwork = db.Artworks.Where(a => a.category_id == id).ToList();
             var category = db.Categories.ToList();
             var tag = db.Tags.ToList();
+            var cate = db.Categories.Find(id);
+            var header = cate.category_name;
             ViewBag.Category = category;
             ViewBag.Artwork = artwork;
             ViewBag.Tag = tag;
+            ViewBag.Header = header;
+            return View();
+        }
+
+        public ActionResult Artist(int id)
+        {
+            var artwork = db.Artworks.Where(a => a.artist_id == id).ToList();
+            var category = db.Categories.Where(a => a.category_is_status == true).ToList();
+            var tag = db.Tags.ToList();
+            var artist = db.Artists.Find(id);
+            ViewBag.Category = category;
+            ViewBag.Artwork = artwork;
+            ViewBag.Tag = tag;
+            ViewBag.Artist = artist;
             return View();
         }
 

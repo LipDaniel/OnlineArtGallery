@@ -6048,6 +6048,7 @@
     <Content Include="Views\FEArtwork\Category.cshtml" />
     <Content Include="Views\Shared\AdminModals\_Auction.cshtml" />
     <Content Include="Views\BEIndex\ProfileAdmin.cshtml" />
+    <Content Include="Views\FEArtwork\Artist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
