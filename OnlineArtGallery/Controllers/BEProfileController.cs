@@ -81,10 +81,16 @@ namespace OnlineArtGallery.Controllers
                 return Json(response);
             }
 
+           
+
+            // Kiểm tra xem mật khẩu mới và xác nhận mật khẩu có khớp nhau không
             if (new_password != reset_password)
             {
-                Session["Message"] = "Passwords do not match ";
-                return RedirectToAction("ProfileAdmin","BEIndex");
+                Session["msg"] = "pass not true ";
+            }
+            else
+            {
+                Session["msg"] = "successful";
             }
 
             user.user_password = new_password;
