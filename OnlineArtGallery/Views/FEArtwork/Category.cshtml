@@ -1,4 +1,4 @@
-﻿
+﻿@using OnlineArtGallery.Models.Entities;
 @section main
 {
 
@@ -189,6 +189,8 @@
                                         <div class="filter-items filter-items-count">
                                             @foreach (var cate in ViewBag.Category)
                                             {
+                                                GalleryArtEntities db = new GalleryArtEntities();
+                                              
                                                 <div class="filter-item">
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input" id="cat-1">
@@ -270,7 +272,7 @@
                 url: "/FEWishlist/Create",
                 method: "Post",
                 data: {
-                    id : id
+                    id: id
                 }
             }).done(function (res) {
                 $('.toast-body').text(res);
@@ -279,7 +281,7 @@
         });
         $(".cart").click(function (e) {
             e.preventDefault();
-            var id = $(this).data("cart-id"); 
+            var id = $(this).data("cart-id");
 
             $.ajax({
                 url: "/FEOrder/Create",

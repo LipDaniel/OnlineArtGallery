@@ -17,12 +17,16 @@ namespace OnlineArtGallery.Controllers
             {
                 return RedirectToAction("Index", "FEHome");
             }
+            var art = db.Artists.ToList();
+            var cate = db.Categories.ToList();
             var auth = db.Users.Find(Session["UserId"]);
             if (auth == null)
             {
                 return RedirectToAction("Index", "FEHome");
             }
             ViewBag.User = auth;
+            ViewBag.Artists = art;
+            ViewBag.Category = cate;
             return View();
         }
 
@@ -64,7 +68,7 @@ namespace OnlineArtGallery.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
-        public string EditPassword(string new_password, string current_password, string reset_password)
+        public string EditPassword(string new_password, string current_password, string reset_password, HttpPostedFileBase user_image)
         {
             var auth = db.Users.Find(Session["UserId"]);
 
@@ -76,6 +80,38 @@ namespace OnlineArtGallery.Controllers
 
             auth.user_password = new_password;
             return "Change password successfully !";
-        } 
+        }
+
+        public string RequestArtwork(Artwork artwork, string height,string width, HttpPostedFileBase artwork_image)
+        {
+            var art = new Artwork()
+            {
+                artist_id = artwork.artist_id,
+                category_id = artwork.category_id,
+                artwork_name = artwork.artwork_name,
+                artwork_description = artwork.artwork_description,
+                artwork_dimensions = width + " x " + height,
+                artwork_price = artwork.artwork_price,
+                artwork_status = 0,
+                artwork_date = artwork.artwork_date
+            };
+            var auth = db.Users.Find(Session["UserId"]);
+
+            if (artwork_image != null && artwork_image.ContentLength > 0)
+            {
+                string fileExtension = Path.GetExtension(artwork_image.FileName);
+                string uniqueFileName = auth.user_id.ToString() + DateTime.Now.ToString("yyyyMMddHHmmss") + fileExtension;
+                string filePath = Path.Combine(Server.MapPath("~/Content/Assets/Images/Artwork/"), uniqueFileName);
+                artwork_image.SaveAs(filePath);
+
+                art.artwork_image = uniqueFileName;
+            }
+
+            db.Artworks.Add(art);
+            db.SaveChanges();
+
+
+            return "Submit artwork request successfully !";
+        }
     }
 }
