@@ -5,10 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Web;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -62,12 +59,13 @@ namespace OnlineArtGallery.Controllers
 
             Session["Message"] = "Change profile successful";
             db.SaveChanges();
-            return RedirectToAction("ProfileAdmin", "BEIndex");
- 
+                return RedirectToAction("ProfileAdmin","BEIndex");
+            
+
 
         }
-
-         
+        //Edit password 
+        [HttpPost]
         public ActionResult CheckCurrentPassword(string currentPassword, string new_password, string reset_password)
         {
             // Lấy thông tin người dùng từ cơ sở dữ liệu
@@ -76,11 +74,13 @@ namespace OnlineArtGallery.Controllers
 
             // Kiểm tra mật khẩu hiện tại
             var isValid = currentPassword == user.user_password;
+
             if (isValid)
             {
                 var response = new { isValid = isValid };
                 return Json(response);
             }
+
             if (new_password != reset_password)
             {
                 Session["Message"] = "Passwords do not match ";
