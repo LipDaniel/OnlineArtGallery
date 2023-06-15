@@ -36,7 +36,7 @@
                         <small id="currentpwd_alert" class="text-danger mb-2"></small>
                         <div class="password-group mb-1">
                             <label class="form-label" for="new_password">Mật khẩu mới <small>( Tối thiểu 8 ký tự )</small></label>
-                            <input type="password" class="form-control" name="new_password" id="new_password" required=""  >
+                            <input type="password" class="form-control" name="new_password" id="new_password" required="" onkeyup="validatePassword()" >
                             <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
                         </div>
                         <small id="newpwd_alert" class="text-danger mb-2"></small>
@@ -164,5 +164,17 @@
             confirmPwdAlert.textContent = "";
         }
     }
+     function validatePassword() {
+        var password = document.getElementById('new_password').value;
+        var passwordAlert = document.getElementById('newpwd_alert');
 
+        // Password complexity pattern
+        var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$!%*?&])[A-Za-z\d$!%*?&]{8,}$/;
+
+        if (!pattern.test(password)) {
+            passwordAlert.textContent = "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt.";
+        } else {
+            passwordAlert.textContent = "";
+        }
+    }
 </script>
