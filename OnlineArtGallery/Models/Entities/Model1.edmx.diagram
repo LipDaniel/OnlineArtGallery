@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4902b1db061b4a40be675a399d15ea4d" Name="Diagram1">
+      <Diagram DiagramId="68afaa11f0db49e3817f89116081e156" Name="Diagram1">
         <EntityTypeShape EntityType="GalleryArtModel.Artist" Width="1.5" PointX="1.5" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Artwork" Width="1.5" PointX="3.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Artwork" Width="1.5" PointX="3.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Artwork_Gallery" Width="1.5" PointX="11" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Artwork_Tag" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Auction" Width="1.5" PointX="3.75" PointY="26.375" IsExpanded="true" />
@@ -23,7 +23,7 @@
         <EntityTypeShape EntityType="GalleryArtModel.Order_Item" Width="1.5" PointX="5.25" PointY="21.5" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Order" Width="1.5" PointX="3" PointY="20.625" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.Rating" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryArtModel.Tag" Width="1.5" PointX="3.75" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GalleryArtModel.Tag" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GalleryArtModel.User" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
         <AssociationConnector Association="GalleryArtModel.FK__Artwork__artist___267ABA7A" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Artwork__categor__5812160E" ManuallyRouted="false" />

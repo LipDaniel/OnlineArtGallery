@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GalleryArtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="GalleryArtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Artist">
           <Key>
             <PropertyRef Name="artist_id" />
@@ -587,7 +587,8 @@
             <End Role="Rating" EntitySet="Rating" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GalleryArtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -600,8 +601,8 @@
           <Property Name="artist_country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="artist_bio" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="artist_is_status" Type="Boolean" />
-          <Property Name="artist_created_date" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="artist_image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="artist_created_date" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Artworks" Relationship="Self.FK__Artwork__artist___267ABA7A" FromRole="Artist" ToRole="Artwork" />
         </EntityType>
         <EntityType Name="Artwork">
@@ -617,6 +618,7 @@
           <Property Name="artwork_dimensions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="artwork_date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="category_id" Type="Int32" />
+          <Property Name="artwork_status" Type="Int32" />
           <NavigationProperty Name="Artist" Relationship="Self.FK__Artwork__artist___267ABA7A" FromRole="Artwork" ToRole="Artist" />
           <NavigationProperty Name="Category" Relationship="Self.FK__Artwork__categor__5812160E" FromRole="Artwork" ToRole="Category" />
           <NavigationProperty Name="Artwork_Gallery" Relationship="Self.FK__Artwork_G__artwo__5441852A" FromRole="Artwork" ToRole="Artwork_Gallery" />
@@ -624,7 +626,6 @@
           <NavigationProperty Name="Auctions" Relationship="Self.FK__Auction__artwork__656C112C" FromRole="Artwork" ToRole="Auction" />
           <NavigationProperty Name="Order_Item" Relationship="Self.FK__Order_Ite__artwo__398D8EEE" FromRole="Artwork" ToRole="Order_Item" />
           <NavigationProperty Name="Ratings" Relationship="Self.FK__Rating__artwork___4D94879B" FromRole="Artwork" ToRole="Rating" />
-          <Property Name="artwork_status" Type="Int32" />
         </EntityType>
         <EntityType Name="Artwork_Gallery">
           <Key>
@@ -1229,15 +1230,14 @@
                 <ScalarProperty Name="artist_country" ColumnName="artist_country" />
                 <ScalarProperty Name="artist_bio" ColumnName="artist_bio" />
                 <ScalarProperty Name="artist_is_status" ColumnName="artist_is_status" />
-                <ScalarProperty Name="artist_created_date" ColumnName="artist_created_date" />
                 <ScalarProperty Name="artist_image" ColumnName="artist_image" />
+                <ScalarProperty Name="artist_created_date" ColumnName="artist_created_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Artworks">
             <EntityTypeMapping TypeName="GalleryArtModel.Artwork">
               <MappingFragment StoreEntitySet="Artwork">
-                <ScalarProperty Name="artwork_status" ColumnName="artwork_status" />
                 <ScalarProperty Name="artwork_id" ColumnName="artwork_id" />
                 <ScalarProperty Name="artist_id" ColumnName="artist_id" />
                 <ScalarProperty Name="artwork_name" ColumnName="artwork_name" />
@@ -1247,7 +1247,8 @@
                 <ScalarProperty Name="artwork_dimensions" ColumnName="artwork_dimensions" />
                 <ScalarProperty Name="artwork_date" ColumnName="artwork_date" />
                 <ScalarProperty Name="category_id" ColumnName="category_id" />
-                </MappingFragment>
+                <ScalarProperty Name="artwork_status" ColumnName="artwork_status" />
+              </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Artwork_Gallery">

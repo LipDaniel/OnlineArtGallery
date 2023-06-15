@@ -68,7 +68,7 @@ namespace OnlineArtGallery.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
-        public string EditPassword(string new_password, string current_password, string reset_password, HttpPostedFileBase user_image)
+        public string EditPassword(string new_password, string current_password, string reset_password)
         {
             var auth = db.Users.Find(Session["UserId"]);
 
@@ -79,22 +79,26 @@ namespace OnlineArtGallery.Controllers
                 return "Your password doesen't match !";
 
             auth.user_password = new_password;
+            db.SaveChanges();
+
             return "Change password successfully !";
         }
 
-        public string RequestArtwork(Artwork artwork, string height,string width, HttpPostedFileBase artwork_image)
+        public ActionResult RequestArtwork(Artwork model, string height,string width, HttpPostedFileBase artwork_image)
         {
-            var art = new Artwork()
+            var artwork = new Artwork()
             {
-                artist_id = artwork.artist_id,
-                category_id = artwork.category_id,
-                artwork_name = artwork.artwork_name,
-                artwork_description = artwork.artwork_description,
+                artist_id = model.artist_id,
+                category_id = model.category_id,
+                artwork_name = model.artwork_name,
+                artwork_description = model.artwork_description,
                 artwork_dimensions = width + " x " + height,
-                artwork_price = artwork.artwork_price,
-                artwork_status = 0,
-                artwork_date = artwork.artwork_date
+                artwork_price = model.artwork_price,
+                artwork_status = 4,
+                artwork_date = model.artwork_date
             };
+            db.Artworks.Add(artwork);
+
             var auth = db.Users.Find(Session["UserId"]);
 
             if (artwork_image != null && artwork_image.ContentLength > 0)
@@ -103,15 +107,22 @@ namespace OnlineArtGallery.Controllers
                 string uniqueFileName = auth.user_id.ToString() + DateTime.Now.ToString("yyyyMMddHHmmss") + fileExtension;
                 string filePath = Path.Combine(Server.MapPath("~/Content/Assets/Images/Artwork/"), uniqueFileName);
                 artwork_image.SaveAs(filePath);
-
-                art.artwork_image = uniqueFileName;
+                artwork.artwork_image = uniqueFileName;
             }
-
-            db.Artworks.Add(art);
             db.SaveChanges();
+            var noti = new Notification
+            {
+                notification_recipient_id = int.Parse(auth.user_id.ToString()),
+                notification_title = "New request for artwork!",
+                notification_is_read = false,
+                notification_message = auth.user_fname + "" + auth.user_lname + " upload new artwork.",
+                notificaiton_click_url = "/BERequestArtwork/" + artwork.artwork_id
 
-
-            return "Submit artwork request successfully !";
+            };
+            db.Notifications.Add(noti);
+            db.SaveChanges();
+            TempData["SuccessMessage"] = "Request artwork successfully.";
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }

@@ -180,16 +180,16 @@
 
                                 <div class="tab-pane fade" id="tab-artwork" role="tabpanel" aria-labelledby="tab-artwork-link">
                                   
-                                    <form id="artworkform" enctype="multipart/form-data">
+                                    <form action="/FEUser/RequestArtwork" enctype="multipart/form-data" method="Post">
                                         <div class="block-content fs-sm pb-3">
                                             <div class="form-group mb-1">
                                                 <label class="form-label">Artwork <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="artwork_name">
+                                                <input type="text" class="form-control"  name="artwork_name">
                                             </div>
                                             <div class="form-group mb-1 row">
                                                 <div class="col-6">
                                                     <label class="form-label">Artist <span class="text-danger">*</span></label>
-                                                    <select class="form-select form-control bg-light" id="artist_id">
+                                                    <select class="form-select form-control bg-light" name="artist_id" >
                                                         @foreach (var item in ViewBag.Artists)
                                                         {
                                                             <option value="@item.artist_id">@item.artist_name</option>
@@ -198,7 +198,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <label class="form-label">Category <span class="text-danger">*</span></label>
-                                                    <select class="form-select form-control bg-light" id="category_id">
+                                                    <select class="form-select form-control bg-light"  name="category_id">
                                                         @foreach (var item in ViewBag.Category)
                                                         {
                                                             <option value="@item.category_id">@item.category_name</option>
@@ -209,37 +209,37 @@
                                             <div class="form-group mb-1 row">
                                                 <div class="col-6">
                                                     <label class="form-label">Price <span class="text-danger">*</span></label>
-                                                    <input type="number" onkeydown="" class="form-control" id="artwork_price">
+                                                    <input type="number" onkeydown="" class="form-control" name="artwork_price">
                                                 </div>
                                                 <div class="col-6">
                                                     <label class="form-label">Date <span class="text-danger">*</span></label>
-                                                    <input type="text" class="js-flatpickr form-control" placeholder="d-m-Y" readonly="readonly" id="artwork_date">
+                                                    <input type="date" class="form-control"  name="artwork_date">
                                                 </div>
                                             </div>
                                             <div class="form-group mb-1 row">
                                                 <div class="col-6">
                                                     <label class="form-label">Width <span class="text-danger">*</span></label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" id="width">
+                                                        <input type="text" class="form-control" name="width">
                                                         <span class="input-group-text " style="height: 40px;">CM</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <label class="form-label">Height <span class="text-danger">*</span></label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" id="height">
+                                                        <input type="text" class="form-control"  name="height">
                                                         <span class="input-group-text" style="height: 40px;">CM</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group mb-1">
                                                 <label class="form-label">Image <span class="text-danger">*</span></label>
-                                                <input type="file" class="form-control" id="artwork_image">
+                                                <input type="file" class="form-control"  name="artwork_image">
                                             </div>
                                             <div class="form-group mb-1 row">
                                                 <div class="col-9">
                                                     <label class="form-label">Description <span class="text-danger">*</span></label>
-                                                    <textarea rows="8" class="form-control" id="artwork_description"></textarea>
+                                                    <textarea rows="8" class="form-control" name="artwork_description"></textarea>
                                                 </div>
                                                 <div class="col-3">
                                                     <label class="form-label">Preview <span class="text-danger">*</span></label>
@@ -278,20 +278,7 @@
                 $('#current_password').text("");
             });
         });
-        $("#artworkform").on('submit', function (e) {
-            e.preventDefault();
-            var form_data = $(this).serialize();
-            console.log(form_data);
-
-            $ajax({
-                url: "/FEUser/RequestArtwork",
-                method: "Post",
-                data: form_data
-            }).done(function (res) {
-                $('.toast-body').text(res);
-                $('#toast').toast('show');
-            });
-        })
+     
     </script>
 }
 

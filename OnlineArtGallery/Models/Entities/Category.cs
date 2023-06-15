@@ -14,8 +14,6 @@ namespace OnlineArtGallery.Models.Entities
     
     public partial class Category
     {
-        internal bool category_is_active;
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
