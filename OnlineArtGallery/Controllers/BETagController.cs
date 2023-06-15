@@ -46,6 +46,7 @@ namespace OnlineArtGallery.Controllers
             }
             db.Tags.Add(tager);
             db.SaveChanges();
+            Session["Message"] = "Seccessful";
             return RedirectToAction("TagList", "BEIndex");
 
         }
@@ -98,6 +99,7 @@ namespace OnlineArtGallery.Controllers
                 tager.tag_image = file;
             }
             db.SaveChanges();
+            Session["Message"] = "Seccessful";
             return RedirectToAction("TagList", "BEIndex");
 
         }

@@ -51,16 +51,12 @@ namespace OnlineArtGallery.Controllers
                 artist_image.SaveAs(path);
                 artis.artist_image = file;
             }
-            if (artis != null)
-            {
-                TempData["msg"] = "success";
-                return RedirectToAction("ArtistList", "BEIndex");
-            }
+            
             
 
             db.Artists.Add(artis);
             db.SaveChanges();
-
+            Session["Message"] = "Seccessful";
             return RedirectToAction("ArtistList", "BEIndex");
 
         }
@@ -103,6 +99,7 @@ namespace OnlineArtGallery.Controllers
                 art.artist_image = file;
             }
             db.SaveChanges();
+            Session["Message"] = "Seccessful";
             return RedirectToAction("ArtistList", "BEIndex");
 
 

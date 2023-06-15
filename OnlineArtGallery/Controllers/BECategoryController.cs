@@ -39,7 +39,7 @@ namespace OnlineArtGallery.Controllers
             }
             db.Categories.Add(cate);
             db.SaveChanges();
-
+            Session["Message"] = "Seccessful";
             return RedirectToAction("CategoryList", "BEIndex");
 
         }
@@ -83,6 +83,7 @@ namespace OnlineArtGallery.Controllers
                 nobj.category_image = file;
             }
             db.SaveChanges();
+            Session["Message"] = "Seccessful";
             return RedirectToAction("CategoryList", "BEIndex");
         }
 
