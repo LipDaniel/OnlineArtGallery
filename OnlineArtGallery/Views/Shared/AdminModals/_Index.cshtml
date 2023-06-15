@@ -18,7 +18,7 @@
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-default">
-                    <h3 class="block-title">ĐỔI MẬT KHẨU</h3>
+                    <h3 class="block-title">Change Password</h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fa fa-fw fa-times"></i>
@@ -28,20 +28,20 @@
                 <form method="post" action="@Url.Action("CheckCurrentPassword","BEProfile")">
                     <div class="block-content fs-sm pb-3">
                         <div class="password-group mb-1">
-                            <label class="form-label">Mật khẩu hiện tại</label>
+                            <label class="form-label">Current Password</label>
                             <input type="password" class="form-control" name="current_password" id="current_password" required="" onblur="checkCurrentPassword()">
 
                             <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
                         </div>
                         <small id="currentpwd_alert" class="text-danger mb-2"></small>
                         <div class="password-group mb-1">
-                            <label class="form-label" for="new_password">Mật khẩu mới <small>( Tối thiểu 8 ký tự )</small></label>
-                            <input type="password" class="form-control" name="new_password" id="new_password" required="" onkeyup="validatePassword()" >
+                            <label class="form-label" for="new_password">A New Password<small>( Minimum of 8 characters)</small></label>
+                            <input type="password" class="form-control" name="new_password" id="new_password" placeholder="Ngochanh1$" required="" onkeyup="validatePassword()">
                             <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
                         </div>
                         <small id="newpwd_alert" class="text-danger mb-2"></small>
                         <div class="password-group mb-1">
-                            <label class="form-label" for="reset_password">Nhập lại mật khẩu mới</label>
+                            <label class="form-label" for="reset_password">Enter A New Password</label>
                             <input type="password" class="form-control" name="reset_password" id="reset_password" required="" onkeyup="comparePasswords()">
                             <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
                             @Session["msg"]
@@ -145,7 +145,7 @@
                         document.getElementById('currentpwd_alert').textContent = "Current password is incorrect!";
                     }
                 } else {
-                    document.getElementById('currentpwd_alert').textContent = "Error checking current password.";
+                    document.getElementById('currentpwd_alert').textContent = "Current password is incorrect!";
                 }
             }
         };
@@ -164,5 +164,17 @@
             confirmPwdAlert.textContent = "";
         }
     }
-    
+     function validatePassword() {
+        var password = document.getElementById('new_password').value;
+        var passwordAlert = document.getElementById('newpwd_alert');
+
+        // Password complexity pattern
+        var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$!%*?&])[A-Za-z\d$!%*?&]{8,}$/;
+
+        if (!pattern.test(password)) {
+            passwordAlert.textContent = "Password must have at least 8 characters, including uppercase, lowercase, numbers and special characters.";
+        } else {
+            passwordAlert.textContent = "";
+        }
+    }
 </script>
