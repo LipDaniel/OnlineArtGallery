@@ -44,7 +44,7 @@
                     var admin = db.Users.Find(id);
                 }
                 <button type="button" class="btn btn-sm btn-alt-secondary d-flex align-items-center" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle" src="~/Content/assets/images/user/@admin.user_image" alt="Header Avatar" style="width: 50px; height:50px">
+                    <img class="rounded-circle" src="~/Content/assets/images/user/@admin.user_image" alt="Header Avatar" style="width: 35px; height:35px">
                     <span class="d-none d-sm-inline-block ms-2">@admin.user_fname </span>
                     <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>
                 </button>
@@ -53,7 +53,7 @@
                         <img class="img-avatar img-avatar48 img-avatar-thumb" src="~/Content/assets/images/user/@admin.user_image" alt="">
                         @if (Session["UserId"] != null)
                         {
-                            <p>Welcome back, @admin.user_fname</p>
+                            <p style="margin:0">Welcome back, @admin.user_fname</p>
                         }
 
                     </div>
@@ -84,21 +84,47 @@
                     </span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0 border-0 fs-sm" aria-labelledby="page-header-notifications-dropdown">
-                    <div class="p-2 bg-body-light border-bottom text-center rounded-top">
-                        <h5 class="dropdown-header text-uppercase">Thông báo</h5>
+                    <div class="p-2  border-bottom text-center rounded-top">
+                        <h5 class="dropdown-header text-uppercase">Notification</h5>
                     </div>
                     <ul class="nav-items mb-0">
-                        <li>
-                            <a class="text-dark d-flex py-2" id="redirectPendingPosts" data-id="">
-                                <div class="flex-shrink-0 me-2 ms-3">
-                                    <i class="bi bi-pen text-success"></i>
-                                </div>
-                                <div class="flex-grow-1 pe-2">
-                                    <div class="fw-semibold">Có một bài viết mới đang chờ được phê duyệt</div>
-                                    <span class="fw-medium text-muted">23:59:21</span>
-                                </div>
-                            </a>
-                        </li>
+                        @{
+                            var notiList = db.Notifications.OrderByDescending(a => a.notification_id).ToList();
+
+                        }
+                        @foreach (var item in notiList)
+                        {
+                            if (item.notification_is_read == false)
+                            {
+                                <li class="bg-body-light">
+                                    <a class="text-dark d-flex py-2" id="redirectPendingPosts" data-id="">
+                                        <div class="flex-shrink-0 me-2 ms-3">
+                                            <i class="bi bi-pen text-success"></i>
+                                        </div>
+                                        <div class="flex-grow-1 pe-2">
+                                            <div class="fw-semibold">@item.notification_title</div>
+                                            <p style="margin:0">@item.notification_message</p>
+                                            <span class="fw-medium text-muted">23:59:21</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="">
+                                    <a class="text-dark d-flex py-2" id="redirectPendingPosts" data-id="">
+                                        <div class="flex-shrink-0 me-2 ms-3">
+                                            <i class="bi bi-pen text-success"></i>
+                                        </div>
+                                        <div class="flex-grow-1 pe-2">
+                                            <div class="fw-semibold">@item.notification_title</div>
+                                            <span class="fw-medium text-muted">23:59:21</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+
+                        }
                     </ul>
                     <!-- <div class="p-2 border-top text-center">
                       <a class="d-inline-block fw-medium" href="javascript:void(0)">

@@ -154,7 +154,6 @@
     <Compile Include="Controllers\BEIndexController.cs" />
     <Compile Include="Controllers\BEProfileController.cs" />
     <Compile Include="Controllers\BETagController.cs" />
-    <Compile Include="Controllers\FEArtistController.cs" />
     <Compile Include="Controllers\FEArtworkController.cs" />
     <Compile Include="Controllers\FEAuthController.cs" />
     <Compile Include="Controllers\FEHomeController.cs" />
