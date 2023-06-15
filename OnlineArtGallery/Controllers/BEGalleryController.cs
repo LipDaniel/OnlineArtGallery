@@ -47,7 +47,7 @@ namespace OnlineArtGallery.Controllers
             db.Galleries.Add(gal);
             db.SaveChanges();
 
-
+            Session["Message"] = "Seccessful";
             return RedirectToAction("GalleryList", "BEIndex");
         }
         public ActionResult Edit(int id)
@@ -98,6 +98,7 @@ namespace OnlineArtGallery.Controllers
                 galle.gallery_image = file;
             }
             db.SaveChanges();
+            Session["Message"] = "Seccessful";
             return RedirectToAction("GalleryList", "BEIndex");
 
 

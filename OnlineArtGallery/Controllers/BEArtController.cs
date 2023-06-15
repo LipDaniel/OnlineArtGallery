@@ -51,53 +51,39 @@ namespace OnlineArtGallery.Controllers
                 artist_image.SaveAs(path);
                 artis.artist_image = file;
             }
-            if (artis != null)
-            {
-                TempData["msg"] = "success";
-                return RedirectToAction("ArtistList", "BEIndex");
-            }
+            
             
 
             db.Artists.Add(artis);
             db.SaveChanges();
-
+            Session["Message"] = "Seccessful";
             return RedirectToAction("ArtistList", "BEIndex");
 
         }
 
 
         //get edit 
-        public ActionResult Edit(int id)
-        {
-            var arr = db.Artists.Find(id);
-
-            return RedirectToAction("ArtistList", "BEIndex", arr);
-
-
-
-        }
-
-
-
-        //post edit 
-        [HttpPost]
         public ActionResult NewEdit(Artist artist, HttpPostedFileBase artist_image)
         {
             var art = db.Artists.Find(artist.artist_id);
-            
-
+            if (art == null)
+            {
+                return RedirectToAction("ArtistList", "BEIndex");
+            }
             art.artist_name = artist.artist_name;
             art.artist_country = artist.artist_country;
             art.artist_bio = artist.artist_bio;
+            art.artist_created_date = DateTime.Now.ToString("yyyy/MM/dd");
+            art.artist_is_status = true;
             if (artist_image != null)
             {
-                if (artist.artist_image != null)
+                if (art.artist_image != null)
                 {
-                    string artpath = Path.Combine(Server.MapPath("~/Content/Assets/Images/User/"), artist.artist_image);
-                    if (System.IO.File.Exists(artpath))
+                    string gallpath = Path.Combine(Server.MapPath("~/Content/Assets/Images/User/"), art.artist_image);
+                    if (System.IO.File.Exists(gallpath))
                     {
                         // Delete the file
-                        System.IO.File.Delete(artpath);
+                        System.IO.File.Delete(gallpath);
 
                         // Perform any other necessary actions
                     }
@@ -108,20 +94,20 @@ namespace OnlineArtGallery.Controllers
                 var path = Path.Combine(Server.MapPath("~/Content/Assets/Images/artistimg/"), file);
 
 
-
+                
                 artist_image.SaveAs(path);
                 art.artist_image = file;
             }
-            if (art != null)
-            {
-                TempData["msg"] = "change success";
-                return RedirectToAction("ArtistList", "BEIndex");
-            }
             db.SaveChanges();
+            Session["Message"] = "Seccessful";
             return RedirectToAction("ArtistList", "BEIndex");
 
 
 
+
         }
+
+
+
     }
 }

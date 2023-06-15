@@ -14,10 +14,10 @@
     }
     <main class="main">
         <div class="container">
-            <div class="page-header page-header-big text-center" style="background-image: url(/Content/assets/images/about/about-header.jpg); height:200px; opacity:0.8">
-                <img class="rounded-circle" src="~/Content/assets/images/user/@admin.user_image" alt="Header Avatar" style="width: 70px; height:70px; margin-top:10px ">
-                <h2 style="color:white;">
-                    Edit Account  <p style="color:tomato; font-size:18px">@admin.user_fname </p>
+            <div class="page-header page-header-big text-center" >
+                <img class="rounded-circle" src="~/Content/assets/images/user/@admin.user_image" alt="Header Avatar" style="width: 70px; height:70px; margin-top:50px ">
+                <h2 style="color:black;">
+                 Welcome   @admin.user_fname 
 
                 </h2>
 
@@ -29,7 +29,7 @@
         <div class="container">
             <div>
                 <h5 class="p-2">Admin Profile</h5>
-                <p>Your account's  vital info. Your username will be publicly visible.</p>
+         
             </div>
             <div class="container shadow-lg p-5">
                 <form method="post" action="@Url.Action("NewEdit", "BEProfile")" enctype="multipart/form-data">
@@ -79,10 +79,10 @@
                     <div class="alert alert-success" id="successMessage">@Session["Message"]</div>
                     Session.Remove("Message");
                     <script>
-        // Set timeout for success message
+                        // Set timeout for success message
                         setTimeout(function () {
                             $('#successMessage').fadeOut('slow');
-                        }, 2000); // 5000 milliseconds = 5 seconds
+                        }, 3000); // 5000 milliseconds = 5 seconds
                     </script>
                 }
             </div>

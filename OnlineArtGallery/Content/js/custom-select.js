@@ -196,6 +196,7 @@
 
             $(defaultSelect).val(value);
             $(prefix_class + '-b').toggle();
+            auction_preview.src = icon;
 
             localStorage.setItem(extractText(prefix_class) + '-curr', item);
         });

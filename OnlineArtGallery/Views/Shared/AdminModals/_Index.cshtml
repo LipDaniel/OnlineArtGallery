@@ -18,38 +18,52 @@
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-default">
-                    <h3 class="block-title">ĐỔI MẬT KHẨU</h3>
+                    <h3 class="block-title">Change Password</h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fa fa-fw fa-times"></i>
                         </button>
                     </div>
                 </div>
-                <form id="changePasswordForm">
+                <form method="post" action="@Url.Action("CheckCurrentPassword","BEProfile")">
                     <div class="block-content fs-sm pb-3">
                         <div class="password-group mb-1">
-                            <label class="form-label" for="one-profile-edit-password">Mật khẩu hiện tại</label>
-                            <input type="password" class="form-control" id="currentpwd">
+                            <label class="form-label">Current Password</label>
+                            <input type="password" class="form-control" name="current_password" id="current_password" required="" onblur="checkCurrentPassword()">
+
                             <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
                         </div>
                         <small id="currentpwd_alert" class="text-danger mb-2"></small>
                         <div class="password-group mb-1">
-                            <label class="form-label" for="one-profile-edit-password-new">Mật khẩu mới <small>( Tối thiểu 8 ký tự )</small></label>
-                            <input type="password" class="form-control" id="newpwd">
+                            <label class="form-label" for="new_password">A New Password<small>( Minimum of 8 characters)</small></label>
+                            <input type="password" class="form-control" name="new_password" id="new_password" placeholder="Ngochanh1$" required="" onkeyup="validatePassword()">
                             <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
                         </div>
                         <small id="newpwd_alert" class="text-danger mb-2"></small>
                         <div class="password-group mb-1">
-                            <label class="form-label" for="one-profile-edit-password-new-confirm">Nhập lại mật khẩu mới</label>
-                            <input type="password" class="form-control" id="confirmpwd">
+                            <label class="form-label" for="reset_password">Enter A New Password</label>
+                            <input type="password" class="form-control" name="reset_password" id="reset_password" required="" onkeyup="comparePasswords()">
                             <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
+                            @Session["msg"]
                         </div>
                         <small id="confirmpwd_alert" class="text-danger mb-2"></small>
                         <div class="mt-2">
                             <button type="submit" class="btn btn-alt-primary">Lưu</button>
                         </div>
                     </div>
+                    @Session["Message"]
                 </form>
+                @if (Session["Message"] != null)
+                {
+                    <div class="alert alert-success" id="successMessage">@Session["Message"]</div>
+                    Session.Remove("Message");
+                    <script>
+                        // Set timeout for success message
+                        setTimeout(function () {
+                            $('#successMessage').fadeOut('slow');
+                        }, 3000); // 5000 milliseconds = 5 seconds
+                    </script>
+                }
             </div>
         </div>
     </div>
@@ -104,8 +118,63 @@
     <div class="toast align-items-center text-white bg-primary border-0" id="toast" role="alert" aria-live="assertive" aria-atomic="true" style="min-height:30px; width: 30vw">
         <div class="d-flex">
             <div class="toast-body pl-3" id="toastbody" style="font-size: 15px">
-
             </div>
         </div>
     </div>
 </div>
+<script>
+    function checkCurrentPassword() {
+        var currentPassword = document.getElementById('current_password').value;
+       
+        // Gửi yêu cầu kiểm tra mật khẩu hiện tại đến máy chủ
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/BEProfile/CheckCurrentPassword", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        var data = {
+            currentPassword: currentPassword, 
+        };
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.isValid) {
+                        document.getElementById('currentpwd_alert').textContent = ""; // Xóa thông báo lỗi nếu hợp lệ
+                       
+                    } else {
+                        document.getElementById('currentpwd_alert').textContent = "Current password is incorrect!";
+                    }
+                } else {
+                    document.getElementById('currentpwd_alert').textContent = "Current password is incorrect!";
+                }
+            }
+        };
+        xhr.send(JSON.stringify(data));
+    }
+</script>
+<script>
+    function comparePasswords() {
+        var newPassword = document.getElementById('new_password').value;
+        var confirmPassword = document.getElementById('reset_password').value;
+        var confirmPwdAlert = document.getElementById('confirmpwd_alert');
+
+        if (newPassword !== confirmPassword) {
+            confirmPwdAlert.textContent = "Your password doesn't match!";
+        } else {
+            confirmPwdAlert.textContent = "";
+        }
+    }
+     function validatePassword() {
+        var password = document.getElementById('new_password').value;
+        var passwordAlert = document.getElementById('newpwd_alert');
+
+        // Password complexity pattern
+        var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$!%*?&])[A-Za-z\d$!%*?&]{8,}$/;
+
+        if (!pattern.test(password)) {
+            passwordAlert.textContent = "Password must have at least 8 characters, including uppercase, lowercase, numbers and special characters.";
+        } else {
+            passwordAlert.textContent = "";
+        }
+    }
+</script>
