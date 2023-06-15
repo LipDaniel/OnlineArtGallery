@@ -163,6 +163,7 @@
           <Property Name="notification_message" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="notification_is_read" Type="bit" />
           <Property Name="notificaiton_click_url" Type="nvarchar" MaxLength="255" />
+          <Property Name="notification_created_date" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Order_Item">
           <Key>
@@ -775,6 +776,7 @@
           <Property Name="notification_message" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="notification_is_read" Type="Boolean" />
           <Property Name="notificaiton_click_url" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="notification_created_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="Self.FK__Notificat__notif__47DBAE45" FromRole="Notification" ToRole="Users" />
           <NavigationProperty Name="User1" Relationship="Self.FK__Notificat__notif__48CFD27E" FromRole="Notification" ToRole="Users" />
         </EntityType>
@@ -1393,6 +1395,7 @@
                 <ScalarProperty Name="notification_message" ColumnName="notification_message" />
                 <ScalarProperty Name="notification_is_read" ColumnName="notification_is_read" />
                 <ScalarProperty Name="notificaiton_click_url" ColumnName="notificaiton_click_url" />
+                <ScalarProperty Name="notification_created_date" ColumnName="notification_created_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
