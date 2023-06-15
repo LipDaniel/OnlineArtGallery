@@ -52,6 +52,7 @@ namespace OnlineArtGallery.Controllers
         public ActionResult AuctionList()
         {
             ViewBag.Artwork = db.Artworks.Where(a => a.artwork_status == 0).ToList();
+            ViewBag.Auction = db.Auctions.ToList();
 
             return View();
         }

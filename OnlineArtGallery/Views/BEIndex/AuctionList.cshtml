@@ -31,15 +31,53 @@
                         <th>Action</th>
                         </thead>
                         <tbody>
-                            <tr class="align-middle">
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>
+                            @{
+                                var i = 1;
+                            }
+                            @foreach (var item in ViewBag.Auction)
+                            {
+                                <tr class="align-middle">
+                                    <td>@i</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0 me-2">
+                                                <img src="~/Content/assets/images/artwork/@item.Artwork.artwork_image" style="width: 70px; height: 70px" class="img-fluid rounded-3" alt="Alternate Text" />
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <strong>@item.Artwork.artwork_name</strong>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning w-80 text-center">
+                                            $@item.auction_reserve_price
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
+                                            $2800
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary" type="button" disabled>
+                                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                            On Auction
+                                        </button>
+                                    </td>
+                                    <td class="text-center">
+                                        <span hidden class="start-date">@item.auction_start_date</span>
+                                        <span hidden class="end-date">@item.auction_end_date</span>
+                                        <span class="count-down fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger text-center mb-2" style="width: 200px">
+                                            @item.auction_start_date
+                                        </span>
+                                        <div class="progress push" style="height: 10px;">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger progressbar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </td>
+                                    <td>1</td>
+                                </tr>
+                                i++;
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -60,7 +98,6 @@
     <link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
     <link rel="stylesheet" href="/Content/adminassets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
     <link rel="stylesheet" href="/Content/adminassets/js/plugins/flatpickr/flatpickr.min.css">
-    <link rel="stylesheet" href="~/Content/adminassets/css/app.scss">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 }
 
