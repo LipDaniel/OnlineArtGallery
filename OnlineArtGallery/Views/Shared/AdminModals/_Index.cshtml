@@ -31,19 +31,19 @@
                             <label class="form-label">Current Password</label>
                             <input type="password" class="form-control" name="current_password" id="current_password" required="" onblur="checkCurrentPassword()">
 
-                            <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
+                            <i class="eye-icon far fa-eye show-password" style="cursor: pointer;" onclick="togglePasswordVisibility('current_password')"></i>
                         </div>
                         <small id="currentpwd_alert" class="text-danger mb-2"></small>
                         <div class="password-group mb-1">
                             <label class="form-label" for="new_password">A New Password<small>( Minimum of 8 characters)</small></label>
                             <input type="password" class="form-control" name="new_password" id="new_password" placeholder="Ngochanh1$" required="" onkeyup="validatePassword()">
-                            <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
+                            <i class="eye-icon far fa-eye show-password" style="cursor: pointer;" onclick="togglePasswordVisibility('new_password')"></i>
                         </div>
                         <small id="newpwd_alert" class="text-danger mb-2"></small>
                         <div class="password-group mb-1">
                             <label class="form-label" for="reset_password">Enter A New Password</label>
                             <input type="password" class="form-control" name="reset_password" id="reset_password" required="" onkeyup="comparePasswords()">
-                            <i class="eye-icon far fa-eye show-password" style="cursor: pointer;"></i>
+                            <i class="eye-icon far fa-eye show-password" style="cursor: pointer;" onclick="togglePasswordVisibility('reset_password')"></i>
                             @Session["msg"]
                         </div>
                         <small id="confirmpwd_alert" class="text-danger mb-2"></small>
@@ -164,17 +164,39 @@
             confirmPwdAlert.textContent = "";
         }
     }
+
+
      function validatePassword() {
-        var password = document.getElementById('new_password').value;
-        var passwordAlert = document.getElementById('newpwd_alert');
+         var newPassword = document.getElementById('new_password').value;
+         var confirmPassword = document.getElementById('reset_password').value;
+         var passwordAlert = document.getElementById('newpwd_alert');
 
-        // Password complexity pattern
-        var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$!%*?&])[A-Za-z\d$!%*?&]{8,}$/;
+         // Password complexity pattern
+         var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$!%*?&])[A-Za-z\d$!%*?&]{8,}$/;
 
-        if (!pattern.test(password)) {
-            passwordAlert.textContent = "Password must have at least 8 characters, including uppercase, lowercase, numbers and special characters.";
+         if (!pattern.test(newPassword)) {
+             passwordAlert.textContent = "Password must have at least 8 characters, including uppercase, lowercase, numbers, and special characters.";
+         } else if (newPassword.includes(" ")) {
+             passwordAlert.textContent = "Password cannot contain spaces.";
+         } else if (newPassword !== confirmPassword) {
+             passwordAlert.textContent = "Passwords do not match.";
+         } else {
+             passwordAlert.textContent = "";
+         }
+    }
+    //hien thi mat khau 
+    function togglePasswordVisibility(inputId) {
+        var passwordInput = document.getElementById(inputId);
+        var eyeIcon = passwordInput.nextElementSibling;
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
         } else {
-            passwordAlert.textContent = "";
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
         }
     }
 </script>
