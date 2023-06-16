@@ -171,21 +171,3 @@
     <!-- END Header Loader -->
 </header>
 <!-- Modal -->
-<script>
-    $(".notification").click(function (e) {
-        e.preventDefault();
-        var id = $(this).data("notification-id");
-
-        $.ajax({
-            url: "/FEWishlist/Create",
-            method: "Post",
-            data: {
-                id: id
-            }
-        }).done(function (res) {
-            $('.toast-body').text(res);
-            $('#toast').toast('show');
-        });
-    });
-</script>
-

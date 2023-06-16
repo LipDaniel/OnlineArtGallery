@@ -34,7 +34,7 @@ namespace OnlineArtGallery.Controllers
 
         public ActionResult ArtworkList()
         {
-            var artwork = db.Artworks.Include(a => a.Artist).Include(a => a.Category).ToList();
+            var artwork = db.Artworks.Where(a => a.artwork_status == 1 || a.artwork_status == 2 || a.artwork_status == 3).ToList();
             var category = db.Categories.ToList();
             var tag = db.Tags.ToList();
             ViewBag.Category = category;
@@ -45,7 +45,7 @@ namespace OnlineArtGallery.Controllers
 
         public ActionResult Category(int id)
         {
-            var artwork = db.Artworks.Where(a => a.category_id == id).ToList();
+            var artwork = db.Artworks.Where(a => a.category_id == id &&( a.artwork_status == 1 || a.artwork_status == 2 || a.artwork_status == 3)).ToList();
             var category = db.Categories.ToList();
             var tag = db.Tags.ToList();
             var cate = db.Categories.Find(id);
@@ -59,7 +59,7 @@ namespace OnlineArtGallery.Controllers
 
         public ActionResult Artist(int id)
         {
-            var artwork = db.Artworks.Where(a => a.artist_id == id).ToList();
+            var artwork = db.Artworks.Where(a => a.artist_id == id && (a.artwork_status == 1 || a.artwork_status == 2 || a.artwork_status == 3)).ToList();
             var category = db.Categories.Where(a => a.category_is_status == true).ToList();
             var tag = db.Tags.ToList();
             var artist = db.Artists.Find(id);
