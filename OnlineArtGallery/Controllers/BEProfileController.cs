@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -81,16 +82,16 @@ namespace OnlineArtGallery.Controllers
                 return Json(response);
             }
 
-           
+
 
             // Kiểm tra xem mật khẩu mới và xác nhận mật khẩu có khớp nhau không
-            if (new_password != reset_password)
+            var pattern = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$!%*?&])[A-Za-z\d$!%*?&]{8,}$");
+            var isPasswordValid = pattern.IsMatch(new_password) && !new_password.Contains(" ");
+
+            if (!isPasswordValid || new_password != reset_password)
             {
-                Session["msg"] = "pass not true ";
-            }
-            else
-            {
-                Session["msg"] = "successful";
+                Session["Message"] = "Change password Fail";
+                return RedirectToAction("ProfileAdmin", "BEIndex");
             }
 
             user.user_password = new_password;
