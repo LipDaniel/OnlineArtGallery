@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace OnlineArtGallery.Controllers
 {
@@ -14,6 +15,7 @@ namespace OnlineArtGallery.Controllers
     {
 
         private GalleryArtEntities db = new GalleryArtEntities();
+        private const int PageSize = 5;
         public ActionResult ArtworkDetail(int id)
         {
             Artwork artwork = db.Artworks.Find(id);
@@ -32,28 +34,41 @@ namespace OnlineArtGallery.Controllers
         }
  
 
-        public ActionResult ArtworkList()
+        public ActionResult ArtworkList(int page = 1)
         {
             var artwork = db.Artworks.Where(a => a.artwork_status == 1 || a.artwork_status == 2 || a.artwork_status == 3).ToList();
+            var paginatedData = artwork.Skip((page - 1) * PageSize).Take(PageSize).ToList();
+            var totalItem = artwork.Count();
+            var totalPages = (int)Math.Ceiling(totalItem / (double)PageSize);
             var category = db.Categories.ToList();
             var tag = db.Tags.ToList();
             ViewBag.Category = category;
-            ViewBag.Artwork = artwork;
+            ViewBag.Artwork = paginatedData;
             ViewBag.Tag = tag;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.TotalItem = totalItem;
+            ViewBag.PageSize = PageSize;
             return View();
         }
 
-        public ActionResult Category(int id)
+        public ActionResult Category(int id, int page = 1)
         {
             var artwork = db.Artworks.Where(a => a.category_id == id &&( a.artwork_status == 1 || a.artwork_status == 2 || a.artwork_status == 3)).ToList();
+            var paginatedData = artwork.Skip((page - 1)*PageSize).Take(PageSize).ToList();
+            var totalItem = artwork.Count();
+            var totalPages = (int)Math.Ceiling(totalItem / (double)PageSize);
             var category = db.Categories.ToList();
             var tag = db.Tags.ToList();
             var cate = db.Categories.Find(id);
             var header = cate.category_name;
             ViewBag.Category = category;
-            ViewBag.Artwork = artwork;
+            ViewBag.Artwork = paginatedData;
             ViewBag.Tag = tag;
             ViewBag.Header = header;
+            ViewBag.Id = id;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
             return View();
         }
 

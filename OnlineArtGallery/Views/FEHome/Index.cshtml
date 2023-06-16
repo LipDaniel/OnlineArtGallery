@@ -123,7 +123,94 @@
                 <div class="container">
                     <div class="heading heading-flex">
                         <div class="heading-left">
-                            <h2 class="title">New artwork</h2><!-- End .title -->
+                            <h2 class="title">New Auction</h2><!-- End .title -->
+                        </div><!-- End .heading-left -->
+
+                        <div class="heading-right">
+                            <a href="/FEArtwork/ArtworkList" class="title-link">View more Products <i class="icon-long-arrow-right"></i></a>
+                        </div><!-- End .heading-right -->
+                    </div><!-- End .header-flex -->
+
+                    <div class="owl-carousel carousel-equal-height owl-simple" data-toggle="owl"
+                         data-owl-options='{
+                                    "nav": false,
+                                    "dots": true,
+                                    "margin": 20,
+                                    "loop": false,
+                                    "responsive": {
+                                        "0": {
+                                            "items":2
+                                        },
+                                        "480": {
+                                            "items":2
+                                        },
+                                        "768": {
+                                            "items":3
+                                        },
+                                        "992": {
+                                            "items":4
+                                        },
+                                        "1440": {
+                                            "items":5
+                                        }
+                                    }
+                                }'>
+                        @foreach (var art in ViewBag.AuctionTop)
+                        {
+                            <div class="product">
+                                <figure class="product-media">
+                                    <a href="/FEArtwork/ArtworkDetail/@art.artwork_id">
+                                        <img style="height:160px" src="~/Content/assets/images/artwork/@art.artwork_image" alt="Product image" class="product-image">
+                                    </a>
+                                </figure><!-- End .product-media -->
+
+                                <div class="product-body">
+                                    <div class="product-cat">
+                                        by <a href="#">@art.Artist.artist_name</a>
+                                    </div><!-- End .product-cat -->
+                                    <h3 class="product-title"><a href="/FEArtwork/ArtworkDetail/@art.artwork_id">@art.artwork_name</a></h3><!-- End .product-title -->
+                                    <div class="product-price">
+                                        <span class="new-price">$@art.artwork_price</span>
+
+                                    </div><!-- End .product-price -->
+
+                                    <div class="product-footer">
+                                        <div class="ratings-container">
+                                            <div class="ratings">
+                                                <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                            </div><!-- End .ratings -->
+                                            <span class="ratings-text">( 10 Reviews )</span>
+                                        </div><!-- End .rating-container -->
+                                        <div class="product-action">
+                                            @if (Session["UserId"] != null)
+                                            {
+                                                <a href="" data-cart-id="@art.artwork_id" class="btn-product btn-cart cart"><span>add to cart</span></a>
+                                                <a href="" data-wishlist-id="@art.artwork_id" class="btn-product btn-wishlist wishlist"><span>Add to Wishlist</span></a>
+
+                                            }
+                                            else
+                                            {
+                                                <a href="#signin-modal" data-toggle="modal" class="btn-product btn-cart "><span>add to cart</span></a>
+                                                <a href="#signin-modal" data-toggle="modal" class="btn-product btn-wishlist "><span>Add to Wishlist</span></a>
+                                            }
+                                        </div><!-- End .product-action -->
+                                    </div><!-- End .product-footer -->
+                                </div><!-- End .product-body -->
+                            </div><!-- End .product -->
+
+                        }
+                    </div><!-- End .owl-carousel -->
+                </div><!-- End .container -->
+            </div><!-- End .block-wrapper -->
+        </div><!-- End .block -->
+    </div><!-- End .bg-light pt-4 pb-4 -->
+    <div class="bestseller-products bg-light pt-5 pb-5 mb-5">
+        <div class="block">
+            <div class="block-wrapper ">
+                <div class="container">
+                    <div class="heading heading-flex">
+                        <div class="heading-left">
+                            <h2 class="title">New Artworks</h2><!-- End .title -->
                         </div><!-- End .heading-left -->
 
                         <div class="heading-right">
@@ -171,7 +258,7 @@
                                     <h3 class="product-title"><a href="/FEArtwork/ArtworkDetail/@art.artwork_id">@art.artwork_name</a></h3><!-- End .product-title -->
                                     <div class="product-price">
                                         <span class="new-price">$@art.artwork_price</span>
-                                      
+
                                     </div><!-- End .product-price -->
 
                                     <div class="product-footer">
@@ -191,7 +278,7 @@
                                             else
                                             {
                                                 <a href="#signin-modal" data-toggle="modal" class="btn-product btn-cart "><span>add to cart</span></a>
-                                                <a href="#signin-modal" data-toggle="modal"  class="btn-product btn-wishlist "><span>Add to Wishlist</span></a>
+                                                <a href="#signin-modal" data-toggle="modal" class="btn-product btn-wishlist "><span>Add to Wishlist</span></a>
                                             }
                                         </div><!-- End .product-action -->
                                     </div><!-- End .product-footer -->
@@ -833,10 +920,10 @@
                 url: "/FEWishlist/Create",
                 method: "Post",
                 data: {
-                    id : id
+                    id: id
                 }
             }).done(function (res) {
-                
+
                 $('.toast-body').text(res.noti);
                 $('#toast').toast('show');
                 if (res.count != null) {
