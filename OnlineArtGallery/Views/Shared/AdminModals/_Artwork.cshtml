@@ -74,7 +74,7 @@
                             </div>
                             <div class="col-3">
                                 <label class="form-label">Preview <span class="text-danger">*</span></label>
-                                <img class="img-fluid bg-secondary" id="artwork_preview" style="width: 100%; height: 200px"/>
+                                <img class="img-fluid bg-secondary" id="artwork_preview" style="width: 100%; height: 200px" />
                             </div>
                             <span class="text-danger" id="artworkalert"></span>
                         </div>
@@ -163,6 +163,35 @@
                         <div class="mt-2">
                             <button type="submit" class="btn btn-alt-primary">Submit</button>
                         </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- POPUP XÁC NHẬN LOGOUT -->
+<div class="modal fade" id="confirm_modal" tabindex="-1" aria-labelledby="modal-block-popin" aria-modal="true" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-popin" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded block-transparent mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Confirm</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-fw fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <form id="approveForm">
+                    <div class="block-content fs-sm">
+                        <h6 id="contents"></h6>
+                        <input id="transferid" hidden type="text" />
+                        <input id="transferstatus" hidden type="text" />
+                    </div>
+                    <div class="block-content block-content-full text-end border-top">
+                        <a class="btn btn-sm btn-secondary" data-bs-dismiss="modal">No</a>
+                        <button type="submit" class="btn btn-sm btn-danger">Yes</button>
                     </div>
                 </form>
             </div>

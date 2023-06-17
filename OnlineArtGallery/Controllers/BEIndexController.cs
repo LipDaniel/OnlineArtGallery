@@ -23,10 +23,6 @@ namespace OnlineArtGallery.Controllers
             ViewBag.Artists = db.Artists.OrderByDescending(a => a.artist_id).ToList();
             return View();
         }
-        public ActionResult ArtworkRequest()
-        {
-            return View();
-        }
         public ActionResult ArtworkList()
         {
             ViewBag.Artists = db.Artists.OrderByDescending(a => a.artist_id).ToList();

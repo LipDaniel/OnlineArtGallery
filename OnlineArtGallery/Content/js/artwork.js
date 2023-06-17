@@ -75,6 +75,7 @@ function transferEditArtwork(id, name, price, dimensions, date, category, artist
 }
 
 $(document).ready(function ($) {
+
     $('#artworkform').submit(function (event) {
         event.preventDefault();
 
@@ -147,21 +148,36 @@ $(document).ready(function ($) {
         })
     })
 
-    $('.activateartwork').click(function (event) {
-
+    $('.btn_approve').click(function () {
         var id = $(this).data('id');
-        var status = $(this).is(':checked') ? 1 : 0
+        $('#contents').text("Are you sure to approve this artwork");
+        $('#transferid').val(id)
+        $('#transferstatus').val(1)
+    })
+
+    $('.btn_refuse').click(function () {
+        var id = $(this).data('id');
+        $('#contents').text("Are you sure to refuse this artwork");
+        $('#transferid').val(id)
+        $('#transferstatus').val(5)
+    })
+
+    $('#approveForm').submit(function (event) {
+        event.preventDefault();
+
+        var id = $('#transferid').val();
+        var status = $('#transferstatus').val();
 
         $.ajax({
             method: "POST",
-            url: "/BEArtwork/Update",
+            url: "/BEArtwork/Approve",
             data: {
                 artwork_id: id,
                 artwork_status: status
-            },
-        }).done(function (res) {
-            $('#toastbody').text(res)
-            $('#toast').toast('show');
+            }
+        }).done(function (data) {
+            localStorage.setItem('toast', data);
+            window.location.reload();
         })
     })
 })

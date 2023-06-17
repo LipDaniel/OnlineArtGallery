@@ -75,5 +75,15 @@ namespace OnlineArtGallery.Controllers
 
             return "Change status successfully";
         }
+
+        public string Approve(Artwork obj)
+        {
+            var item = db.Artworks.Find(obj.artwork_id);
+            item.artwork_status = obj.artwork_status;
+
+            db.SaveChanges();
+
+            return "Confirm successfully";
+        }
     }
 }

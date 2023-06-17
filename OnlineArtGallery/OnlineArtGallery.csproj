@@ -6045,7 +6045,6 @@
     <Content Include="Views\BEIndex\UserList.cshtml" />
     <Content Include="Views\BEIndex\Favourite.cshtml" />
     <Content Include="Views\BEIndex\Rating.cshtml" />
-    <Content Include="Views\BEIndex\ArtworkRequest.cshtml" />
     <Content Include="Views\BEIndex\OtherList.cshtml" />
     <Content Include="Views\FEArtwork\ArtworkDetail.cshtml" />
     <Content Include="Views\FEAuth\UserProfile.cshtml" />

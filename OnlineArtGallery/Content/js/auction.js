@@ -9,6 +9,15 @@ $('.end-date').each(function () {
     $this = $(this).next('span');
 
     var now = new Date().getTime();
+
+    if (now > countDownTo) {
+        console.log(1)
+        $(this).next().next().children().css("width", "100%")
+        $(this).next().next().children().removeClass("bg-danger").addClass('bg-success')
+        $(this).next('span').text("Finished");
+        $(this).next('span').removeClass("bg-danger-light text-danger").addClass('bg-success-light text-success');
+        return;
+    }
     if (now < countDownFrom) {
         $(this).next().next().children().css("width", "0%")
         return;
