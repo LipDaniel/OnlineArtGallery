@@ -54,9 +54,9 @@
                                 GalleryArtEntities db = new GalleryArtEntities();
                                 var star = db.Ratings.Where(a => a.artwork_id == id).ToList();
                                 double percent = 0;
-                                if (star != null)
+                                if (star.Count() != 0)
                                 {
-                                    percent = (star.Sum(a => a.rating_start)) / 5 * 100;
+                                    percent = (star.Average(a => a.rating_start)) / 5 * 100;
                                     return percent;
                                 }
 
@@ -106,12 +106,12 @@
                                         <div class="col-lg-5">
                                             <div class="product-body product-action-inner">
                                                 <div class="product-cat">
-                                                    <a href="#">@art.Category.category_name</a>
+                                                    <a href="/FEArtwork/Category/@art.Category.category_id">@art.Category.category_name</a>
                                                 </div><!-- End .product-cat -->
-                                                <h3 class="product-title"><a href="product.html">@art.artwork_name</a></h3><!-- End .product-title -->
+                                                <h3 class="product-title"><a href="/FEArtwork/ArtworkDetail/@art.artwork_id">@art.artwork_name</a></h3><!-- End .product-title -->
 
 
-                                                <p> <b style="font-weight:500">Artist:</b> <a href="/"> @art.Artist.artist_name</a> -  <b style="font-weight:500">Date:</b> @art.artwork_date</p>
+                                                <p> <b style="font-weight:500">Artist:</b> <a href="/FEArtwork/Artist/@art.Artist.artist_id"> @art.Artist.artist_name</a> -  <b style="font-weight:500">Date:</b> @art.artwork_date</p>
                                                 <div>
                                                     <p style="line-height:18px; font-size:13.5px">@art.artwork_description</p>
                                                 </div><!-- End .product-content -->

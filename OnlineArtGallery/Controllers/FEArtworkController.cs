@@ -27,12 +27,20 @@ namespace OnlineArtGallery.Controllers
             }
             var artworkList = db.Artworks.Take(4).ToList();
             var rev = db.Ratings.Where(a=>a.artwork_id == id).ToList();
+            var star = db.Ratings.Where(a => a.artwork_id == id).ToList();
+            double percent = 0;
+            if(star.Count() != 0)
+            {
+                percent = (star.Average(a => a.rating_start)) / 5 * 100;
+            }
             ViewBag.Review = rev;
             ViewBag.Artwork = artwork;
             ViewBag.Artist = artist;
             ViewBag.Category = category;  
             ViewBag.ArtworkList = artworkList;
             ViewBag.RevCount = revCount;
+            ViewBag.Percent = percent;
+            
             return View();
         }
  
