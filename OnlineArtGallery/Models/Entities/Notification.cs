@@ -22,6 +22,7 @@ namespace OnlineArtGallery.Models.Entities
         public Nullable<bool> notification_is_read { get; set; }
         public string notificaiton_click_url { get; set; }
         public string notification_created_date { get; set; }
+        public Nullable<int> artwork_id { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

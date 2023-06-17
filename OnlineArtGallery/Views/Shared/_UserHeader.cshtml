@@ -60,7 +60,68 @@
 
 
             <div class="header-dropdown-link">
+                @* NOTIFICATION *@
+                @if (Session["UserId"] != null)
+                {
 
+                <div class="dropdown cart-dropdown">
+                    <a href="/FEOrder/Cart" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                        <div class="icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                              <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                          </svg>
+                            @if (Session["UserId"] != null)
+                            {
+                                var id = int.Parse(Session["UserId"].ToString());
+                                var notiCount = db.Notifications.Where(a => a.notification_sender_id == id && a.notification_is_read == false).ToList().Count();
+                                if (notiCount > 0)
+                                {
+                                    <span class="cart-count">@notiCount</span>
+
+                                }
+                            }
+
+                        </div>
+                        <p>Notification</p>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0 border-0 fs-sm show" aria-labelledby="page-header-notifications-dropdown" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 32.8px, 0px);" data-popper-placement="bottom-end">
+                        <div class="p-2  border-bottom text-center rounded-top">
+                            <h5 class="dropdown-header text-uppercase" style=" font-size: 12px;">Notification</h5>
+                        </div>
+                        <ul class="nav-items mb-0">
+                            @if (Session["UserId"] != null)
+                            {
+                                var id = int.Parse(Session["UserId"].ToString());
+                                var notiList = db.Notifications.Where(a => a.notification_sender_id == id).ToList();
+                                foreach (var item in notiList)
+                                {
+                                    <li class="bg-body-light">
+                                        <a data-notification-id="3" class="text-dark d-flex py-2 notification" id="redirectPendingPosts">
+                                            <div class="flex-shrink-0 me-2 ms-3">
+                                                <i class="bi bi-pen text-success"></i>
+                                            </div>
+                                            <div class="flex-grow-1 pe-2">
+                                                <div class="fw-semibold">@item.notification_title</div>
+                                                <p>@item.notification_message</p>
+                                                <span class="fw-medium text-muted" style="font-size:12px">@item.notification_created_date</span>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                }
+
+                            }
+                          
+                        </ul>
+                        <!-- <div class="p-2 border-top text-center">
+      <a class="d-inline-block fw-medium" href="javascript:void(0)">
+        <i class="fa fa-fw fa-arrow-down me-1 opacity-50"></i> Load More..
+      </a>
+    </div> -->
+                    </div>
+                </div><!-- End .cart-dropdown -->
+                }
                 @* ACCOUNT *@
                 <div class="account">
                     @if (Session["UserId"] != null)
@@ -83,7 +144,7 @@
                             {
                                 var id = int.Parse(Session["UserId"].ToString());
                                 var wishlistCount = db.Favourites.Where(a => a.user_id == id).ToList().Count();
-                                if(wishlistCount > 0)
+                                if (wishlistCount > 0)
                                 {
                                     <span class="wishlist-count badge">@wishlistCount</span>
 
@@ -103,23 +164,21 @@
                             {
                                 var id = int.Parse(Session["UserId"].ToString());
                                 var cartCount = db.Carts.Where(a => a.user_id == id).ToList().Count();
-                                if(cartCount > 0)
+                                if (cartCount > 0)
                                 {
                                     <span class="cart-count">@cartCount</span>
 
                                 }
                             }
-                           
+
                         </div>
                         <p>Cart</p>
                     </a>
 
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <div class="dropdown-cart-products">
-                        @if (Session["UserId"] != null)
-                        {
-                            var id = int.Parse(Session["UserId"].ToString());
-                            var cartList = (from cart in db.Carts
+                    @if (Session["UserId"] != null)
+                    {
+                        var id = int.Parse(Session["UserId"].ToString());
+                        var cartList = (from cart in db.Carts
                                         join artwork in db.Artworks on cart.artwork_id equals artwork.artwork_id
                                         where cart.user_id == id
                                         select new
@@ -127,47 +186,50 @@
                                             Cart = cart,
                                             Artwork = artwork
                                         }).ToList();
-                          
 
-                            foreach (var cart in cartList)
-                            {
-                            <div class="product">
-                                <div class="product-cart-details">
-                                    <h4 class="product-title">
-                                        <a href="/FEArtwork/ArtworkDetail/@cart.Artwork.artwork_id">@cart.Artwork.artwork_name </a>
-                                    </h4>
+                        int amount = 0;
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown-cart-products">
+                                @foreach (var cart in cartList)
+                                {
+                                    <div class="product">
+                                        <div class="product-cart-details">
+                                            <h4 class="product-title">
+                                                <a href="/FEArtwork/ArtworkDetail/@cart.Artwork.artwork_id">@cart.Artwork.artwork_name </a>
+                                            </h4>
 
-                                    <span class="cart-product-info">
-                                        <span class="cart-product-qty">1</span>
-                                        x $ @cart.Artwork.artwork_price
-                                    </span>
-                                </div><!-- End .product-cart-details -->
+                                            <span class="cart-product-info">
+                                                <span class="cart-product-qty">1</span>
+                                                x $ @cart.Artwork.artwork_price
+                                            </span>
+                                        </div><!-- End .product-cart-details -->
 
-                                <figure class="product-image-container">
-                                    <a href="product.html" class="product-image">
-                                        <img src="~/Content/assets/images/artwork/@cart.Artwork.artwork_image" alt="product">
-                                    </a>
-                                </figure>
-                                <a href="/FEOrder/Delete/@cart.Cart.cart_id" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                            </div><!-- End .product -->
+                                        <figure class="product-image-container">
+                                            <a href="product.html" class="product-image">
+                                                <img src="~/Content/assets/images/artwork/@cart.Artwork.artwork_image" alt="product">
+                                            </a>
+                                        </figure>
+                                        <a href="/FEOrder/Delete/@cart.Cart.cart_id" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                    </div><!-- End .product -->
+                                    amount += int.Parse(cart.Artwork.artwork_price);
+                                }
 
-                            }
 
-                        }
+                            </div><!-- End .cart-product -->
 
-                        </div><!-- End .cart-product -->
+                            <div class="dropdown-cart-total">
+                                <span>Total</span>
 
-                        <div class="dropdown-cart-total">
-                            <span>Total</span>
+                                <span class="cart-total-price">$@amount</span>
+                            </div><!-- End .dropdown-cart-total -->
 
-                            <span class="cart-total-price">$160.00</span>
-                        </div><!-- End .dropdown-cart-total -->
 
-                        <div class="dropdown-cart-action">
-                            <a href="/FEOrder/Cart" class="btn btn-primary">View Cart</a>
-                            <a href="/FEOrder/Checkout" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
-                        </div><!-- End .dropdown-cart-total -->
-                    </div><!-- End .dropdown-menu -->
+                            <div class="dropdown-cart-action">
+                                <a href="/FEOrder/Cart" class="btn btn-primary">View Cart</a>
+                                <a href="/FEOrder/Checkout" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
+                            </div><!-- End .dropdown-cart-total -->
+                        </div><!-- End .dropdown-menu -->
+                    }
                 </div><!-- End .cart-dropdown -->
             </div>
         </div><!-- End .header-right -->

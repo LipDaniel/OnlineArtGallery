@@ -117,7 +117,8 @@ namespace OnlineArtGallery.Controllers
                 notification_is_read = false,
                 notification_message = auth.user_fname + "" + auth.user_lname + " upload new artwork.",
                 notificaiton_click_url = "/BERequestArtwork/" + artwork.artwork_id,
-                notification_created_date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+                notification_created_date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                artwork_id = artwork.artwork_id
             };
             db.Notifications.Add(noti);
             db.SaveChanges();

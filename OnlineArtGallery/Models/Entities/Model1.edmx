@@ -164,6 +164,7 @@
           <Property Name="notification_is_read" Type="bit" />
           <Property Name="notificaiton_click_url" Type="nvarchar" MaxLength="255" />
           <Property Name="notification_created_date" Type="varchar" MaxLength="50" />
+          <Property Name="artwork_id" Type="int" />
         </EntityType>
         <EntityType Name="Order_Item">
           <Key>
@@ -777,6 +778,7 @@
           <Property Name="notification_is_read" Type="Boolean" />
           <Property Name="notificaiton_click_url" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="notification_created_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="artwork_id" Type="Int32" />
           <NavigationProperty Name="User" Relationship="Self.FK__Notificat__notif__47DBAE45" FromRole="Notification" ToRole="Users" />
           <NavigationProperty Name="User1" Relationship="Self.FK__Notificat__notif__48CFD27E" FromRole="Notification" ToRole="Users" />
         </EntityType>
@@ -1396,6 +1398,7 @@
                 <ScalarProperty Name="notification_is_read" ColumnName="notification_is_read" />
                 <ScalarProperty Name="notificaiton_click_url" ColumnName="notificaiton_click_url" />
                 <ScalarProperty Name="notification_created_date" ColumnName="notification_created_date" />
+                <ScalarProperty Name="artwork_id" ColumnName="artwork_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
