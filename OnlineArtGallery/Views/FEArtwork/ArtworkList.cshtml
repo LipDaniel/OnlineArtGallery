@@ -1,4 +1,4 @@
-﻿
+﻿@using OnlineArtGallery.Models.Entities;
 @section main
 {
 
@@ -40,10 +40,30 @@
                                         </select>
                                     </div>
                                 </div><!-- End .toolbox-sort -->
-                             
+
                             </div><!-- End .toolbox-right -->
                         </div><!-- End .toolbox -->
+                        @functions {
+                            public int RatingCount(int id)
+                            {
+                                GalleryArtEntities db = new GalleryArtEntities();
+                                var count = db.Ratings.Where(a => a.artwork_id == id).ToList().Count();
+                                return count;
+                            }
+                            public double Star(int id)
+                            {
+                                GalleryArtEntities db = new GalleryArtEntities();
+                                var star = db.Ratings.Where(a => a.artwork_id == id).ToList();
+                                double percent = 0;
+                                if (star != null)
+                                {
+                                    percent = (star.Sum(a => a.rating_start)) / 5 * 100;
+                                    return percent;
+                                }
 
+                                return percent;
+                            }
+                        }
                         <div class="products mb-3">
                             @foreach (var art in ViewBag.Artwork)
                             {
@@ -74,12 +94,12 @@
                                                 </div><!-- End .product-price -->
                                                 <div class="ratings-container">
                                                     <div class="ratings">
-                                                        <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                                                        <div class="ratings-val" style="width: @Star(art.artwork_id)%;"></div><!-- End .ratings-val -->
                                                     </div><!-- End .ratings -->
-                                                    <span class="ratings-text">( 2 Reviews )</span>
+                                                    <span class="ratings-text">( @RatingCount(art.artwork_id) Reviews )</span>
                                                 </div><!-- End .rating-container -->
 
-                                                <a  data-wishlist-id="@art.artwork_id" href="" class="btn-product btn-cart mb-1 wishlist"><span>add to wishlist</span></a>
+                                                <a data-wishlist-id="@art.artwork_id" href="" class="btn-product btn-cart mb-1 wishlist"><span>add to wishlist</span></a>
                                                 <a data-cart-id="@art.artwork_id" href="" class="btn-product btn-cart cart"><span>add to cart</span></a>
                                             </div><!-- End .product-list-action -->
                                         </div><!-- End .col-sm-6 col-lg-3 -->
@@ -141,19 +161,19 @@
                                         Category
                                     </a>
                                 </h3><!-- End .widget-title -->
-                            @functions {
-                                public int CateCount (int id)
-                                {
-                                    int x = 0;
-                                    foreach(var item in ViewBag.Artwork)
+                                @functions {
+                                    public int CateCount(int id)
                                     {
-                                        if( item.category_id == id)
+                                        int x = 0;
+                                        foreach (var item in ViewBag.Artwork)
                                         {
-                                            x += 1;
+                                            if (item.category_id == id)
+                                            {
+                                                x += 1;
+                                            }
                                         }
+                                        return x;
                                     }
-                                    return x;
-                                }
                                 }
                                 <div class="collapse show" id="widget-1">
                                     <div class="widget-body">
@@ -176,6 +196,46 @@
                                 </div><!-- End .collapse -->
                             </div><!-- End .widget -->
 
+                            <div class="widget widget-collapsible">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
+                                        Artist
+                                    </a>
+                                </h3><!-- End .widget-title -->
+                                @functions {
+                                    public int ArtCount(int id)
+                                    {
+                                        int x = 0;
+                                        foreach (var item in ViewBag.Artwork)
+                                        {
+                                            if (item.artist_id == id)
+                                            {
+                                                x += 1;
+                                            }
+                                        }
+                                        return x;
+                                    }
+                                }
+                                <div class="collapse show" id="widget-1">
+                                    <div class="widget-body">
+                                        <div class="filter-items filter-items-count">
+                                            @foreach (var art in ViewBag.Artist)
+                                            {
+                                                <div class="filter-item">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="art-@art.artist_id">
+                                                        <label class="custom-control-label" for="art-@art.artist_id">@art.artist_name</label>
+                                                    </div><!-- End .custom-checkbox -->
+                                                    <span class="item-count">@ArtCount(@art.artist_id)</span>
+                                                </div><!-- End .filter-item -->
+
+                                            }
+
+
+                                        </div><!-- End .filter-items -->
+                                    </div><!-- End .widget-body -->
+                                </div><!-- End .collapse -->
+                            </div><!-- End .widget -->
                             <div class="widget widget-collapsible">
                                 <h3 class="widget-title">
                                     <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
@@ -204,7 +264,7 @@
                                 </div><!-- End .collapse -->
                             </div><!-- End .widget -->
 
-                            
+
 
                             <div class="widget widget-collapsible">
                                 <h3 class="widget-title">
@@ -228,6 +288,7 @@
                             </div><!-- End .widget -->
                         </div><!-- End .sidebar sidebar-shop -->
                     </aside><!-- End .col-lg-3 -->
+
                 </div><!-- End .row -->
             </div><!-- End .container -->
         </div><!-- End .page-content -->
@@ -242,7 +303,7 @@
                 url: "/FEWishlist/Create",
                 method: "Post",
                 data: {
-                    id : id
+                    id: id
                 }
             }).done(function (res) {
                 $('.toast-body').text(res);

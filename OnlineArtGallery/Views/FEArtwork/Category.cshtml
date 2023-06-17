@@ -49,6 +49,19 @@
                                 var count = db.Ratings.Where(a => a.artwork_id == id).ToList().Count();
                                 return count;
                             }
+                            public double Star(int id)
+                            {
+                                GalleryArtEntities db = new GalleryArtEntities();
+                                var star = db.Ratings.Where(a => a.artwork_id == id).ToList();
+                                double percent = 0;
+                                if (star != null)
+                                {
+                                    percent = (star.Sum(a => a.rating_start)) / 5 * 100;
+                                    return percent;
+                                }
+
+                                return percent;
+                            }
                         }
                         <div class="products mb-3">
                             @foreach (var art in ViewBag.Artwork)
@@ -80,7 +93,7 @@
                                                 </div><!-- End .product-price -->
                                                 <div class="ratings-container">
                                                     <div class="ratings">
-                                                        <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                                                        <div class="ratings-val" style="width: @Star(art.artwork_id)%;"></div><!-- End .ratings-val -->
                                                     </div><!-- End .ratings -->
                                                     <span class="ratings-text">( @RatingCount(art.artwork_id) Reviews )</span>
                                                 </div><!-- End .rating-container -->
@@ -144,7 +157,7 @@
                             <div class="widget widget-collapsible">
                                 <h3 class="widget-title">
                                     <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
-                                        Category
+                                        Artist
                                     </a>
                                 </h3><!-- End .widget-title -->
                                 @functions {

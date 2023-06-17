@@ -14,7 +14,7 @@ namespace OnlineArtGallery.Controllers
     public class FEArtworkController : Controller
     {
         private GalleryArtEntities db = new GalleryArtEntities();
-        private const int PageSize = 5;
+        private const int PageSize = 10;
         public ActionResult ArtworkDetail(int id)
         {
             Artwork artwork = db.Artworks.Find(id);
@@ -47,6 +47,7 @@ namespace OnlineArtGallery.Controllers
             var tag = db.Tags.ToList();
             var pageSize = paginatedData.Count() + (page - 1) * 5;
             var cateCount = db.Categories.Count();
+            var artist = db.Artists.Where(a => a.artist_is_status == true).ToList();
             ViewBag.Category = category;
             ViewBag.Artwork = paginatedData;
             ViewBag.Tag = tag;
@@ -54,6 +55,7 @@ namespace OnlineArtGallery.Controllers
             ViewBag.TotalPages = totalPages;
             ViewBag.TotalItem = totalItem;
             ViewBag.PageSize = pageSize;
+            ViewBag.Artist = artist;
             return View();
         }
 
