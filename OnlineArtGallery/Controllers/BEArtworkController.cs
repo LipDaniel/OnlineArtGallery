@@ -50,6 +50,7 @@ namespace OnlineArtGallery.Controllers
             item.artwork_dimensions = obj.artwork_dimensions;
             item.category_id = obj.category_id;
             item.artist_id = obj.artist_id;
+            item.artwork_status = obj.artwork_status;
 
             if (artwork_image != null)
             {

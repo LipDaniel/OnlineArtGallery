@@ -85,37 +85,12 @@
                                         <div class="d-flex" style="max-width: 160px">
                                             <div class="flex-grow-1">
                                                 <div class="btn-group me-2 mb-2 w-100" role="group">
-                                                    <button type="button" class="btn btn-sm btn-alt-info" onclick="transferEditArtwork('@item.id','@item.name','@item.price','@item.dimensions','@item.date','@item.category_id','@item.artist_id','@item.image','@item.description')" data-bs-toggle="modal" data-bs-target="#editartwork_edit" title="Sửa">
+                                                    <button type="button" class="btn btn-sm btn-alt-info" onclick="transferEditArtwork('@item.id','@item.name','@item.price','@item.dimensions','@item.date','@item.category_id','@item.artist_id','@item.image','@item.description','@item.status')" data-bs-toggle="modal" data-bs-target="#editartwork_edit" title="Sửa">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-sm btn-alt-danger" onclick="transferDeleteFeature('{{$item->id}}')" data-bs-toggle="modal" data-bs-target="#deletefeature-modal" title="Xóa">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <div class="form-check form-switch mb-3">
-
-                                                    @if (item.status == 1)
-                                                    {
-                                                        <input class="form-check-input activateartwork" type="checkbox" checked data-id="@item.id">
-                                                    }
-                                                    else if (item.status == 2)
-                                                    {
-                                                        <input class="form-check-input activateartwork" type="checkbox" checked disabled data-id="@item.id">
-                                                    }
-                                                    else if (item.status == 3)
-                                                    {
-                                                        <input class="form-check-input activateartwork" type="checkbox" disabled data-id="@item.id">
-                                                    }
-                                                    else if (item.status == 4)
-                                                    {
-                                                        <input class="form-check-input activateartwork" type="checkbox" disabled data-id="@item.id">
-                                                    }
-                                                    else
-                                                    {
-                                                        <input class="form-check-input activateartwork" type="checkbox" data-id="@item.id">
-                                                    }
                                                 </div>
                                             </div>
                                         </div>

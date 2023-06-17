@@ -36,7 +36,7 @@ edit_artwork_image.onchange = evt => {
     }
 }
 
-function transferEditArtwork(id, name, price, dimensions, date, category, artist, image, description) {
+function transferEditArtwork(id, name, price, dimensions, date, category, artist, image, description, status) {
     $('#edit_artwork_id').val(id)
     $('#edit_artwork_name').val(name)
     $('#edit_artist_id').val(artist)
@@ -45,6 +45,32 @@ function transferEditArtwork(id, name, price, dimensions, date, category, artist
     $('#edit_artwork_date').val(date)
     $('#edit_dimensions').val(dimensions)
     $('#edit_artwork_description').val(description)
+    if (status == 1) {
+
+        $('#artwork_status').attr('checked', true);
+
+    } else if (status == 2) {
+
+        $('#artwork_status').attr('checked', true)
+        $('#artwork_status').prop('disabled', true)
+
+    } else if (status == 3) {
+
+        $('#artwork_status').attr('checked', false)
+        $('#artwork_status').prop('disabled', true)
+
+    }
+    else if (status == 4) {
+
+        $('#artwork_status').attr('checked', false)
+        $('#artwork_status').prop('disabled', true)
+
+    } else {
+
+        $('#artwork_status').attr('checked', false)
+
+    }
+
     edit_artwork_preview.src = "/Content/assets/images/artwork/" + image;
 }
 
@@ -95,6 +121,7 @@ $(document).ready(function ($) {
         var artist_id = $('#edit_artist_id').val();
         var artwork_date = $('#edit_artwork_date').val();
         var artwork_image = $('#edit_artwork_image')[0].files[0];
+        var artwork_status = $('#artwork_status').is(':checked') ? 1 : 0 
 
         var formData = new FormData()
         formData.append("artwork_id", artwork_id)
@@ -106,6 +133,7 @@ $(document).ready(function ($) {
         formData.append("artist_id", artist_id)
         formData.append("artwork_date", artwork_date)
         formData.append("artwork_image", artwork_image)
+        formData.append("artwork_status", artwork_status)
 
         $.ajax({
             method: "POST",
