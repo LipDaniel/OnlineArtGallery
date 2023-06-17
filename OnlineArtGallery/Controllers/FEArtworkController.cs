@@ -25,7 +25,7 @@ namespace OnlineArtGallery.Controllers
             {
                 return RedirectToAction("Index","FEHome");
             }
-            var artworkList = db.Artworks.Take(4).ToList();
+            var artworkList = db.Artworks.Take(5).ToList();
             var rev = db.Ratings.Where(a=>a.artwork_id == id).ToList();
             var star = db.Ratings.Where(a => a.artwork_id == id).ToList();
             double percent = 0;
