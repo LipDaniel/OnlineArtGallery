@@ -33,7 +33,7 @@ namespace OnlineArtGallery.Controllers
 
             if (cont != null)
             {
-                TempData["msg"] = "Message successfully.";
+                Session["Message"] = "Message successfully.";
 
             }
             
