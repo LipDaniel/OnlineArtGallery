@@ -40,49 +40,7 @@
                                         </select>
                                     </div>
                                 </div><!-- End .toolbox-sort -->
-                                <div class="toolbox-layout">
-                                    <a href="category-list.html" class="btn-layout active">
-                                        <svg width="16" height="10">
-                                            <rect x="0" y="0" width="4" height="4"></rect>
-                                            <rect x="6" y="0" width="10" height="4"></rect>
-                                            <rect x="0" y="6" width="4" height="4"></rect>
-                                            <rect x="6" y="6" width="10" height="4"></rect>
-                                        </svg>
-                                    </a>
-
-                                    <a href="category-2cols.html" class="btn-layout">
-                                        <svg width="10" height="10">
-                                            <rect x="0" y="0" width="4" height="4"></rect>
-                                            <rect x="6" y="0" width="4" height="4"></rect>
-                                            <rect x="0" y="6" width="4" height="4"></rect>
-                                            <rect x="6" y="6" width="4" height="4"></rect>
-                                        </svg>
-                                    </a>
-
-                                    <a href="category.html" class="btn-layout">
-                                        <svg width="16" height="10">
-                                            <rect x="0" y="0" width="4" height="4"></rect>
-                                            <rect x="6" y="0" width="4" height="4"></rect>
-                                            <rect x="12" y="0" width="4" height="4"></rect>
-                                            <rect x="0" y="6" width="4" height="4"></rect>
-                                            <rect x="6" y="6" width="4" height="4"></rect>
-                                            <rect x="12" y="6" width="4" height="4"></rect>
-                                        </svg>
-                                    </a>
-
-                                    <a href="category-4cols.html" class="btn-layout">
-                                        <svg width="22" height="10">
-                                            <rect x="0" y="0" width="4" height="4"></rect>
-                                            <rect x="6" y="0" width="4" height="4"></rect>
-                                            <rect x="12" y="0" width="4" height="4"></rect>
-                                            <rect x="18" y="0" width="4" height="4"></rect>
-                                            <rect x="0" y="6" width="4" height="4"></rect>
-                                            <rect x="6" y="6" width="4" height="4"></rect>
-                                            <rect x="12" y="6" width="4" height="4"></rect>
-                                            <rect x="18" y="6" width="4" height="4"></rect>
-                                        </svg>
-                                    </a>
-                                </div><!-- End .toolbox-layout -->
+                             
                             </div><!-- End .toolbox-right -->
                         </div><!-- End .toolbox -->
 
@@ -183,7 +141,20 @@
                                         Category
                                     </a>
                                 </h3><!-- End .widget-title -->
-
+                            @functions {
+                                public int CateCount (int id)
+                                {
+                                    int x = 0;
+                                    foreach(var item in ViewBag.Artwork)
+                                    {
+                                        if( item.category_id == id)
+                                        {
+                                            x += 1;
+                                        }
+                                    }
+                                    return x;
+                                }
+                                }
                                 <div class="collapse show" id="widget-1">
                                     <div class="widget-body">
                                         <div class="filter-items filter-items-count">
@@ -194,7 +165,7 @@
                                                         <input type="checkbox" class="custom-control-input" id="cat-@cate.category_id">
                                                         <label class="custom-control-label" for="cat-@cate.category_id">@cate.category_name</label>
                                                     </div><!-- End .custom-checkbox -->
-                                                    <span class="item-count">3</span>
+                                                    <span class="item-count">@CateCount(@cate.category_id)</span>
                                                 </div><!-- End .filter-item -->
 
                                             }
