@@ -1,4 +1,107 @@
-﻿$(document).ready(function ($) {
+﻿$(".wishlist").click(function (e) {
+    e.preventDefault();
+    var id = $(this).data("wishlist-id");
+
+    $.ajax({
+        url: "/FEWishlist/Create",
+        method: "Post",
+        data: {
+            id: id
+        }
+    }).done(function (res) {
+
+        $('.toast-body').text(res.noti);
+        $('#toast').toast('show');
+        if (res.count != null) {
+            $('.wishlist-count').html(res.count);
+            console.log(res.count);
+        }
+        console.log(res.noti);
+    });
+});
+$(".cart").click(function (e) {
+    e.preventDefault();
+    var id = $(this).data("cart-id");
+
+    $.ajax({
+        url: "/FEOrder/Create",
+        method: "Post",
+        data: {
+            id: id
+        }
+    }).done(function (res) {
+        $('.toast-body').text(res.noti);
+        $('#toast').toast('show');
+        if (res.count != null) {
+            $('cart-count').html(res.count);
+            console.log(res.count);
+        }
+    });
+});
+
+$('.countdown').each(function () {
+    var time_from = $(this).data('start') + ":00";
+    var time_to = $(this).data('end') + ":00";
+
+    var now = new Date().getTime();
+    var countDownFrom = Date.parse(time_from);
+    var countDownTo = Date.parse(time_to);
+
+    var $this = $(this).children();
+
+    if (now > countDownTo) {
+        $(this).text("Finished");
+        return;
+    } else if (now < countDownFrom) {
+        interVal($this, countDownFrom);
+        return;
+    } else {
+        interVal($this, countDownTo);
+        return;
+    }
+})
+
+function validateNumber(e) {
+    var charCode = (e.which) ? e.which : e.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+
+function interVal(element, Time) {
+    setInterval(function () {
+
+        var now = new Date().getTime();
+        if (Time > now) {
+            var distance = Time - now;
+        } else {
+            var distance = now - Time;
+        }
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        if (days == 0) {
+            if (hours == 0) {
+                if (minutes == 0) {
+                    element.text(seconds + "s ");
+                } else {
+                    element.text(minutes + "m " + seconds + "s ");
+                }
+            } else {
+                element.text(hours + "h " + minutes + "m " + seconds + "s ");
+            }
+        } else {
+            if (days == 1) {
+                element.text(days + " day " + hours + " h " + minutes + "m " + seconds + "s ");
+            } else {
+                element.text(days + " days " + hours + " h " + minutes + "m " + seconds + "s ");
+            }
+        }
+    }, 1000);
+}
+
+$(document).ready(function ($) {
     if (localStorage.getItem("toast") !== null) {
         data = localStorage.getItem("toast");
         $('#toast-body').text(data)
@@ -10,8 +113,8 @@
 
         e.preventDefault();
 
-        var pwd = $("#register_password").val();
-        var confirmpwd = $("#confirm_password").val();
+        var pwd = $("#register-password").val();
+        var confirmpwd = $("#confirm-password").val();
 
         if (pwd != confirmpwd) {
             $('.toast-body').text("Confirm password not match");
@@ -29,7 +132,7 @@
                 user_lname: $('#singin-lname').val(),
                 user_fname: $('#singin-fname').val(),
                 user_email: $('#register-email').val(),
-                user_password: $('#register_password').val(),
+                user_password: $('#register-password').val(),
             },
         }).done(function (res) {
             if (res == "Successfully") {

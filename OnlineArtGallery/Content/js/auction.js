@@ -11,7 +11,6 @@ $('.end-date').each(function () {
     var now = new Date().getTime();
 
     if (now > countDownTo) {
-        console.log(1)
         $(this).next().next().children().css("width", "100%")
         $(this).next().next().children().removeClass("bg-danger").addClass('bg-success')
         $(this).next('span').text("Finished");
@@ -26,8 +25,8 @@ $('.end-date').each(function () {
         var percent = now - countDownFrom;
         var result = percent / (total / 100) + "%"
         $(this).next().next().children().css("width", result)
+        interVal($this, countDownTo);
     }
-    interVal($this, countDownTo);
 })
 
 function interVal(element, countDownTo) {
