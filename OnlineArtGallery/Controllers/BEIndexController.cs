@@ -14,8 +14,14 @@ namespace OnlineArtGallery.Controllers
         {
             return View();
         }
-        public ActionResult UserList()
+        public ActionResult UserList(User serlist)
         {
+            var activeUsers = db.Users.Where(p =>p.user_level==2).ToList();
+
+           
+
+            ViewBag.UserList = activeUsers;
+
             return View();
         }
         public ActionResult ArtistList()

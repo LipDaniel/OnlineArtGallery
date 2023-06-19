@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls.WebParts;
 
 namespace OnlineArtGallery.Controllers
 {
@@ -84,7 +85,7 @@ namespace OnlineArtGallery.Controllers
             return "Change password successfully !";
         }
 
-        public ActionResult RequestArtwork(Artwork model, string height,string width, HttpPostedFileBase artwork_image)
+        public ActionResult RequestArtwork(Artwork model, string height, string width, HttpPostedFileBase artwork_image)
         {
             var artwork = new Artwork()
             {
@@ -125,5 +126,37 @@ namespace OnlineArtGallery.Controllers
             TempData["SuccessMessage"] = "Request artwork successfully.";
             return Redirect(Request.UrlReferrer.ToString());
         }
+        [HttpPost]
+        public ActionResult EditStatus(int user_id, bool is_active)
+        {
+            if (Session["UserId"] == null)
+                return Json("Please login first");
+
+            var userId = int.Parse(Session["UserId"].ToString());
+            bool check = db.Users.Any(a => a.user_id == user_id);
+            if (check)
+            {
+                // Lấy thông tin người dùng từ database
+                var user = db.Users.FirstOrDefault(u => u.user_id == user_id);
+                if (user != null)
+                {
+                    // Cập nhật trạng thái người dùng
+                    user.user_is_active = is_active;
+                    db.SaveChanges();
+                    return Json("User status updated successfully.");
+                }
+                else
+                {
+                    return Json("User not found.");
+                }
+            }
+            else
+            {
+                return Json("User does not exist.");
+            }
+        }
+
     }
+
 }
+
