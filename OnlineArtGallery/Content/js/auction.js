@@ -1,8 +1,8 @@
 ﻿$('#artworkList').IconSelectBox(true);
 
 $('.end-date').each(function () {
-    var time_to = $(this).text() + ":00";
-    var time_from = $(this).prev('.start-date').text() + ":00";
+    var time_to = $(this).text();
+    var time_from = $(this).prev('.start-date').text();
 
     var countDownFrom = Date.parse(time_from);
     var countDownTo = Date.parse(time_to);
@@ -99,8 +99,8 @@ $(document).ready(function ($) {
         if (!$('#date_to').val()) {
             return;
         }
-        var date_from = formatDate($(this).val() + ":00");
-        var date_to = formatDate($('#date_to').val() + ":00");
+        var date_from = formatDate($(this).val());
+        var date_to = formatDate($('#date_to').val());
         var element = $('#real_time');
 
         new_date_from = Date.parse(date_from);
@@ -136,8 +136,8 @@ $(document).ready(function ($) {
         if (!$('#date_from').val()) {
             return;
         }
-        var date_to = formatDate($(this).val()+":00");
-        var date_from = formatDate($('#date_from').val()+":00");
+        var date_to = formatDate($(this).val());
+        var date_from = formatDate($('#date_from').val());
         var element = $('#real_time');
 
         new_date_from = Date.parse(date_from);

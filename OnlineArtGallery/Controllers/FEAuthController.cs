@@ -11,6 +11,8 @@ namespace OnlineArtGallery.Controllers
     public class FEAuthController : Controller
     {
         private GalleryArtEntities db = new GalleryArtEntities();
+
+        [HttpPost]
         public string SignIn(User user)
         {
             var auth = db.Users.FirstOrDefault(a => a.user_email.Equals(user.user_email) && a.user_password.Equals(user.user_password));
