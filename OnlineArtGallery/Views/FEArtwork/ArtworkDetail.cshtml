@@ -103,7 +103,7 @@
                                     <div>
                                         <div class="d-flex" style="margin-bottom: 8px;">
                                             <p style="font-weight: 500; margin-right: 10px "> Current bid: </p>
-                                            <p id="current-bid"> $@auction.auction_current_bid</p>
+                                            <p id="current-bid">$@auction.auction_current_bid</p>
                                         </div>
                                     </div>
                                 }
@@ -118,12 +118,20 @@
                                         int id = ViewBag.Artwork.artwork_id;
                                         var bid = db.Auctions.Where(a => a.artwork_id == id).FirstOrDefault();
 
-                                        <div class="d-flex">
-                                            <p style="font-weight: 500; margin-right: 10px; margin-top: 5px;"> Bid: </p>
-                                            <input style="text-align: center; " id="bid-amount" type="number" min="@bid.auction_current_bid" max="10000000" required onkeypress="return validateNumber(e)"  onpaste="return false;" oncopy="return false"/>
-                                            <input id="auction-id" value="@bid.auction_id" hidden />
-                                            <a style="margin-left: 10px; min-width: 50px; " href="" class="btn btn-primary" id="bid-submit">Go</a>
+                                       
+                                        <div >
+                                            <div class="d-flex">
+                                                <p style="font-weight: 500; margin-right: 10px; margin-top: 5px;"> Bid: </p>
+                                                <input style="text-align: center; " id="bid-amount" type="number" min="@bid.auction_current_bid" max="10000000" required onkeypress="return validateNumber(e)" onpaste="return false;" oncopy="return false" />
+                                                <input id="auction-id" value="@bid.auction_id" hidden />
+                                                <a style="margin-left: 10px; min-width: 50px; " href="" class="btn btn-primary" id="bid-submit">Go</a>
+                                            </div>
+                                            <div>
+                                                <p class="text-danger" style="margin-top: 10px;font-weight: 500;" id="text-error"></p>
+                                            </div>
                                         </div>
+                                          
+                                 
                                        
 
                                   
@@ -410,7 +418,6 @@
         $(document).ready(function () {
             setInterval(function () {
                 var currentDate = new Date();
-                console.log(currentDate);
                 var endDate = document.getElementById('end-date').textContent;
                 var startDate = document.getElementById('start-date').textContent;
                 var formattedDate = formatDate(endDate);
@@ -436,31 +443,37 @@
         $("#bid-submit").click(function (e) {
 
             e.preventDefault();
-            if (isClickable) {
-                isClickable = false;
+            var id = document.getElementById('auction-id').value;
+            var amount = document.getElementById('bid-amount').value;
+            var current = document.getElementById('current-bid').textContent;
+            var currentAmount = current.substring(1);
+            var currentBid = parseInt(currentAmount) + 50;
+            if (amount >= currentBid) {
+                if (isClickable) {
+                    isClickable = false;
+                    $.ajax({
+                        url: "/FEAuction/Create",
+                        method: "Post",
+                        data: {
+                            id: id,
+                            auction_amount: amount
+                        }
+                    }).done(function (res) {
+                        $('.toast-body').text(res.noti);
+                        $('#toast').toast('show');
+                        $('#current-bid').text('$' + res.bid);
+                        var min = parseInt(res.bid) + 50;
+                        $('#bid-amount').attr('min', min);
 
-                var id = document.getElementById('auction-id').value;
-                var amount = document.getElementById('bid-amount').value;
-
-                $.ajax({
-                    url: "/FEAuction/Create",
-                    method: "Post",
-                    data: {
-                        id: id,
-                        auction_amount: amount
-                    }
-                }).done(function (res) {
-                    $('.toast-body').text(res.noti);
-                    $('#toast').toast('show');
-                    $('#current-bid').text('$' + res.bid);
-                    var min = parseInt(res.bid) + 50;
-                    $('#bid-amount').attr('min', min);
-
-                    setTimeout(function () {
-                        isClickable = true;
-                    }, 30000);
-                });
-            }
+                        setTimeout(function () {
+                            isClickable = true;
+                        }, 10000);
+                    });
+                }
+            } else {
+                var textError = document.getElementById('text-error');
+                textError.textContent = "Your bid must be greater than or equal to " + currentBid + "!";
+            };
         });
 
     </script>
