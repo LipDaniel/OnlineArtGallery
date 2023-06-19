@@ -52,10 +52,14 @@
                                     var auction = db.Auctions.Where(a => a.artwork_id == id).FirstOrDefault();
                                     <div class="text-center mb-4">
                                         <span hidden class="start-date">@auction.auction_start_date</span>
-                                        <span hidden class="end-date">@auction.auction_end_date</span>
-                                        <span class="count-down fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger text-center mb-2" style="width: 200px"> @auction.auction_start_date </span>
+                                        <span hidden id="end-date" class="end-date">@auction.auction_end_date</span>
+                                        <div id="countdown" class="bg-dark text-center text-white countdown" style="opacity: .5;" data-start="@auction.auction_start_date" data-end="@auction.auction_end_date">
+                                            <strong>
+
+                                            </strong>
+                                        </div>
                                         <div class="progress push" style="height: 10px;">
-                                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger progressbar" role="progressbar" style="width: 45.625%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger progressbar" role="progressbar" style="width: 45.625%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
 
@@ -94,60 +98,63 @@
                                     GalleryArtEntities db = new GalleryArtEntities();
                                     int id = ViewBag.Artwork.artwork_id;
                                     var auction = db.Auctions.Where(a => a.artwork_id == id).FirstOrDefault();
+                                    
                                     <div>
                                         <div class="d-flex" style="margin-bottom: 8px;">
                                             <p style="font-weight: 500; margin-right: 10px "> Current bid: </p>
-                                            <p> $@auction.auction_current_bid</p>
+                                            <p id="current-bid"> $@auction.auction_current_bid</p>
                                         </div>
                                     </div>
                                 }
-                                
 
 
-                                
-                            <div class="product-details-action d-flex" style=" margin-top: 3rem;">
-                                @if (ViewBag.Artwork.artwork_status == 2)
-                                        {
-                                    <div class="col-6">
-                                       <div class="details-filter-row details-row-size">
-                                           <label for="qty">Qty:</label>
-                                          <div class="product-details-quantity">
-                                              <input type="number" id="qty" class="form-control" value="100" min="1" max="100000" step="1" data-decimals="0" required="" style="display: none;"><div class="input-group  input-spinner"><div class="input-group-prepend"><button style="min-width: 26px" class="btn btn-decrement btn-spinner" type="button"><i class="icon-minus"></i></button></div><input type="text" style="text-align: center" class="form-control " required="" placeholder=""><div class="input-group-append"><button style="min-width: 26px" class="btn btn-increment btn-spinner" type="button"><i class="icon-plus"></i></button></div></div>
-                                          </div>
-                                       </div>
-                                    </div>
 
-                                    <div class="col-6">
+
+                                <div class="product-details-action d-flex" style=" margin-top: 3rem;">
+                                    @if (ViewBag.Artwork.artwork_status == 2)
+                                    {
+                                        GalleryArtEntities db = new GalleryArtEntities();
+                                        int id = ViewBag.Artwork.artwork_id;
+                                        var bid = db.Auctions.Where(a => a.artwork_id == id).FirstOrDefault();
+
+                                        <div class="d-flex">
+                                            <p style="font-weight: 500; margin-right: 10px "> Bid: </p>
+                                            <input id="bid-amount" type="number" min="@bid.auction_current_bid" max="10000000" required />
+                                            <input id="auction-id" value="@bid.auction_id" hidden />
+                                            <a href="" class="btn btn-primary" id="bid-submit">Go</a>
+                                        </div>
+                                       
+
+                                  
                                         <a href="/" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
 
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+
+                                        <a href="/" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                    }
+
+
+                                </div><!-- End .product-details-action -->
+
+                                <div class="product-details-footer">
+                                    <div class="product-cat">
+                                        <span>Category:</span>
+                                        <a href="#">@ViewBag.Category.category_name</a>,
+                                    </div><!-- End .product-cat -->
+
+                                    <div class="social-icons social-icons-sm">
+                                        <span class="social-label">Share:</span>
+                                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                        <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
                                     </div>
-                                }
-                                else
-                                {
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-
-                                    <a href="/" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
-                                }
-
-
-                            </div><!-- End .product-details-action -->
-
-                                    <div class="product-details-footer">
-                                        <div class="product-cat">
-                                            <span>Category:</span>
-                                            <a href="#">@ViewBag.Category.category_name</a>,
-                                        </div><!-- End .product-cat -->
-
-                                        <div class="social-icons social-icons-sm">
-                                            <span class="social-label">Share:</span>
-                                            <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                            <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                            <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                            <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
-                                        </div>
-                                    </div><!-- End .product-details-footer -->
-                                </div><!-- End .product-details -->
-                            </div><!-- End .col-md-6 -->
+                                </div><!-- End .product-details-footer -->
+                            </div><!-- End .product-details -->
+                        </div><!-- End .col-md-6 -->
                     </div><!-- End .row -->
                 </div><!-- End .product-details-top -->
 
@@ -371,7 +378,71 @@
         </div><!-- End .page-content -->
     </main>
     <script src="/Content/js/auction.js"></script>
-    <script src="~/Content/js/custom-select.js"></script>
-    <script>One.helpersOnLoad(['js-flatpickr', 'jq-datepicker']);</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function formatDate(dateTimeString) {
+
+            var dateParts = dateTimeString.split(" ")[0].split("-");
+            var timeParts = dateTimeString.split(" ")[1].split(":");
+
+            var year = parseInt(dateParts[0]);
+            var month = parseInt(dateParts[1])
+            var day = parseInt(dateParts[2]);
+            var hours = parseInt(timeParts[0]);
+            var minutes = parseInt(timeParts[1]);
+
+            var date = new Date(year, month - 1, day, hours, minutes);
+            return date;
+        }
+
+        $(document).ready(function () {
+            setInterval(function () {
+                var currentDate = new Date();
+                console.log(currentDate);
+                var endDate = document.getElementById('end-date').textContent;
+                var formattedDate = formatDate(endDate);
+                if (formattedDate <= currentDate) {
+                    isClickable = false;
+                    document.getElementById('bid-amount').disabled = true;
+                    var widthPercentage = 100;
+                    document.getElementById('progress-bar').style.width = widthPercentage + "%";
+                };
+               
+            }, 1000);
+            
+        });
+
+        var isClickable = true;
+        $("#bid-submit").click(function (e) {
+
+            e.preventDefault();
+            if (isClickable) {
+                isClickable = false;
+
+                var id = document.getElementById('auction-id').value;
+                var amount = document.getElementById('bid-amount').value;
+
+                $.ajax({
+                    url: "/FEAuction/Create",
+                    method: "Post",
+                    data: {
+                        id: id,
+                        auction_amount: amount
+                    }
+                }).done(function (res) {
+                    $('.toast-body').text(res.noti);
+                    $('#toast').toast('show');
+                    $('#current-bid').text('$' + res.bid);
+                    var min = parseInt(res.bid) + 50;
+                    $('#bid-amount').attr('min', min);
+
+                    setTimeout(function () {
+                        isClickable = true;
+                    }, 30000);
+                });
+            }
+        });
+
+    </script>
 }
 
