@@ -40,8 +40,8 @@ $(".cart").click(function (e) {
 });
 
 $('.countdown').each(function () {
-    var time_from = $(this).data('start') + ":00";
-    var time_to = $(this).data('end') + ":00";
+    var time_from = $(this).data('start');
+    var time_to = $(this).data('end');
 
     var now = new Date().getTime();
     var countDownFrom = Date.parse(time_from);
@@ -69,7 +69,7 @@ function validateNumber(e) {
 }
 
 function interVal(element, Time) {
-    setInterval(function () {
+    var set = setInterval(function () {
 
         var now = new Date().getTime();
         if (Time > now) {
@@ -84,7 +84,12 @@ function interVal(element, Time) {
         if (days == 0) {
             if (hours == 0) {
                 if (minutes == 0) {
-                    element.text(seconds + "s ");
+                    if (seconds == 0) {
+                        element.text("Finished");
+                        clearInterval(set);
+                    } else {
+                        element.text(seconds + "s ");
+                    }
                 } else {
                     element.text(minutes + "m " + seconds + "s ");
                 }
@@ -100,6 +105,9 @@ function interVal(element, Time) {
         }
     }, 1000);
 }
+function checkAuction() {
+ 
+}
 
 $(document).ready(function ($) {
     if (localStorage.getItem("toast") !== null) {
@@ -108,6 +116,13 @@ $(document).ready(function ($) {
         $('#toast').toast('show');
         localStorage.removeItem("toast");
     }
+
+    $.ajax({
+        url: "/BEAuction/GetAuctionSuccess",
+        method: "GET",
+    }).done(function (res) {
+        console.log(res)
+    });
 
     $("#SignUpForm").submit(function (e) {
 
@@ -186,6 +201,46 @@ $(document).ready(function ($) {
                 $('#spinnerLogin').removeClass('spinner-border spinner-border-sm');
                 $('#btnLogin').prop('disabled', false)
             }
+        });
+    });
+
+    $(".bid").click(function (e) {
+        e.preventDefault();
+        $(this).children('span').addClass('spinner-border spinner-border-sm');
+        $(this).prop('disabled', true)
+
+        var id = $(this).data('auctionid');
+        var current_price = $(this).data('currentprice');
+        var amount = $('.bid_price_'+id).val();
+        var $this = $(this);
+        if (amount <= current_price) {
+            $('.toast-body').text("Invalid bid");
+            $('#toast').toast('show');
+            $(this).children('span').removeClass('spinner-border spinner-border-sm');
+            $(this).prop('disabled', false)
+            return;
+        }
+        $.ajax({
+            url: "/BEAuction/CreateBid",
+            method: "Post",
+            data: {
+                auction_amount: amount,
+                id: id
+            }
+        }).done(function (res) {
+            $('.toast-body').text(res.noti);
+
+            $('#toast').toast('show');
+
+            $this.children('span').removeClass('spinner-border spinner-border-sm');
+
+            $('.bid_price_' + id).val("");
+
+            $('.setup_current_' + id).text('$' + res.bid);
+
+            $this.data('currentprice', res.bid);
+
+            $this.prop('disabled', false)
         });
     });
 
