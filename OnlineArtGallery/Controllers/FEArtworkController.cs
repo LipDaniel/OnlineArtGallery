@@ -18,13 +18,18 @@ namespace OnlineArtGallery.Controllers
         public ActionResult ArtworkDetail(int id)
         {
             Artwork artwork = db.Artworks.Find(id);
-            Artist artist = db.Artists.Find(artwork.artist_id);
-            Category category = db.Categories.Find(artwork.category_id);
-            var revCount = db.Ratings.Where(a=> a.artwork_id == id).Count();
             if (artwork == null)
             {
-                return RedirectToAction("Index","FEHome");
+                return RedirectToAction("Index", "FEHome");
             }
+            Artist artist = db.Artists.Find(artwork.artist_id);
+            Category category = db.Categories.Find(artwork.category_id);
+            Auction auction = null;
+            if(artwork.artwork_status == 2)
+            {
+                auction = db.Auctions.Where(a => a.artwork_id == id).FirstOrDefault();
+            }
+            var revCount = db.Ratings.Where(a=> a.artwork_id == id).Count();
             var artworkList = db.Artworks.Take(5).ToList();
             var rev = db.Ratings.Where(a=>a.artwork_id == id).ToList();
             var star = db.Ratings.Where(a => a.artwork_id == id).ToList();
@@ -40,11 +45,30 @@ namespace OnlineArtGallery.Controllers
             ViewBag.ArtworkList = artworkList;
             ViewBag.RevCount = revCount;
             ViewBag.Percent = percent;
-            
+            ViewBag.Auction = auction;
+
             return View();
         }
- 
 
+        public int RatingCount(int id)
+        {
+            GalleryArtEntities db = new GalleryArtEntities();
+            var count = db.Ratings.Where(a => a.artwork_id == id).ToList().Count();
+            return count;
+        }
+        public double Star(int id)
+        {
+            GalleryArtEntities db = new GalleryArtEntities();
+            var star = db.Ratings.Where(a => a.artwork_id == id).ToList();
+            double percent = 0;
+            if (star.Count() != 0)
+            {
+                percent = (star.Average(a => a.rating_start)) / 5 * 100;
+                return percent;
+            }
+
+            return percent;
+        }
         public ActionResult ArtworkList(int page = 1)
         {
             var artwork = db.Artworks.Where(a => a.artwork_status == 1 || a.artwork_status == 2 || a.artwork_status == 3).ToList();

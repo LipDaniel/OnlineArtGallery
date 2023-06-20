@@ -1,4 +1,4 @@
-﻿@using OnlineArtGallery.Models.Entities;
+﻿
 @{
     ViewBag.Title = "ArtworkDetail";
 }
@@ -45,15 +45,13 @@
                                     <a class="ratings-text" href="#product-review-link" id="review-link">( @ViewBag.RevCount Reviews )</a>
                                 </div><!-- End .rating-container -->
 
+
                                 @if (ViewBag.Artwork.artwork_status == 2)
                                 {
-                                    GalleryArtEntities db = new GalleryArtEntities();
-                                    int id = ViewBag.Artwork.artwork_id;
-                                    var auction = db.Auctions.Where(a => a.artwork_id == id).FirstOrDefault();
                                     <div class="text-center mb-3">
-                                        <span hidden id="start-date" class="start-date">@auction.auction_start_date</span>
-                                        <span hidden id="end-date" class="end-date">@auction.auction_end_date</span>
-                                        <div id="countdown" class="bg-dark text-center text-white countdown" style="opacity: .5;" data-start="@auction.auction_start_date" data-end="@auction.auction_end_date">
+                                        <span hidden id="start-date" class="start-date">@ViewBag.Auction.auction_start_date</span>
+                                        <span hidden id="end-date" class="end-date">@ViewBag.Auction.auction_end_date</span>
+                                        <div id="countdown" class="bg-dark text-center text-white countdown" style="opacity: .5;" data-start="@ViewBag.Auction.auction_start_date" data-end="@ViewBag.Auction.auction_end_date">
                                             <strong>
 
                                             </strong>
@@ -65,7 +63,7 @@
 
                                     <div class="product-price mb-2">
                                         <p style="font-weight: 500; margin-right: 10px ">Reserve Price:</p>
-                                        $ @auction.auction_reserve_price
+                                        $ @ViewBag.Auction.auction_reserve_price
                                     </div>
                                 }
                                 else
@@ -96,14 +94,10 @@
                                 </div>
                                 @if (ViewBag.Artwork.artwork_status == 2)
                                 {
-                                    GalleryArtEntities db = new GalleryArtEntities();
-                                    int id = ViewBag.Artwork.artwork_id;
-                                    var auction = db.Auctions.Where(a => a.artwork_id == id).FirstOrDefault();
-                                    
                                     <div>
                                         <div class="d-flex" style="margin-bottom: 8px;">
                                             <p style="font-weight: 500; margin-right: 10px "> Current bid: </p>
-                                            <p id="current-bid">$@auction.auction_current_bid</p>
+                                            <p id="current-bid">$@ViewBag.Auction.auction_current_bid</p>
                                         </div>
                                     </div>
                                 }
@@ -114,34 +108,23 @@
                                 <div class="product-details-action d-flex" style=" margin-top: 3rem;">
                                     @if (ViewBag.Artwork.artwork_status == 2)
                                     {
-                                        GalleryArtEntities db = new GalleryArtEntities();
-                                        int id = ViewBag.Artwork.artwork_id;
-                                        var bid = db.Auctions.Where(a => a.artwork_id == id).FirstOrDefault();
-
-                                       
-                                        <div >
+                                        <div>
                                             <div class="d-flex">
                                                 <p style="font-weight: 500; margin-right: 10px; margin-top: 5px;"> Bid: </p>
-                                                <input style="text-align: center; " id="bid-amount" type="number" min="@bid.auction_current_bid" max="10000000" required onkeypress="return validateNumber(e)" onpaste="return false;" oncopy="return false" />
-                                                <input id="auction-id" value="@bid.auction_id" hidden />
+                                                <input style="text-align: center; " id="bid-amount" type="number" min="@ViewBag.Auction.auction_current_bid" max="10000000" required onkeypress="return validateNumber(e)" onpaste="return false;" oncopy="return false" />
+                                                <input id="auction-id" value="@ViewBag.Auction.auction_id" hidden />
                                                 <a style="margin-left: 10px; min-width: 50px; " href="" class="btn btn-primary" id="bid-submit">Go</a>
                                             </div>
                                             <div>
                                                 <p class="text-danger" style="margin-top: 10px;font-weight: 500;" id="text-error"></p>
                                             </div>
                                         </div>
-                                          
-                                 
-                                       
-
-                                  
                                         <a href="/" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
 
                                     }
                                     else
                                     {
-                                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-
+                                        <a href="/" class="btn-product btn-cart"><span>add to cart</span></a>
                                         <a href="/" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
                                     }
 
@@ -315,27 +298,7 @@
                     <!-- End .product -->
                     <!-- End .product -->
                     <!-- End .product -->
-                    @functions {
-                        public int RatingCount(int id)
-                        {
-                            GalleryArtEntities db = new GalleryArtEntities();
-                            var count = db.Ratings.Where(a => a.artwork_id == id).ToList().Count();
-                            return count;
-                        }
-                        public double Star(int id)
-                        {
-                            GalleryArtEntities db = new GalleryArtEntities();
-                            var star = db.Ratings.Where(a => a.artwork_id == id).ToList();
-                            double percent = 0;
-                            if (star.Count() != 0)
-                            {
-                                percent = (star.Average(a => a.rating_start)) / 5 * 100;
-                                return percent;
-                            }
 
-                            return percent;
-                        }
-                    }
                     <div class="owl-stage-outer">
                         <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1485px;">
                             @foreach (var item in ViewBag.ArtworkList)
@@ -367,11 +330,11 @@
                                             <div class="product-price">
                                                 $@item.artwork_price
                                             </div><!-- End .product-price -->
-                                            <div class="ratings-container">
+                                            <div class="ratings-container mt-2">
                                                 <div class="ratings">
-                                                    <div class="ratings-val" style="width: @Star(@item.artwork_id)%;"></div><!-- End .ratings-val -->
+                                                    <div class="ratings-val star-id" data-star-id="@item.artwork_id" style="width:0%"></div><!-- End .ratings-val -->
                                                 </div><!-- End .ratings -->
-                                                <span class="ratings-text">( @RatingCount(@item.artwork_id) Reviews )</span>
+                                                <span class="ratings-text star-count" data-star-count="@item.artwork_id"></span>
                                             </div><!-- End .rating-container -->
 
 
@@ -388,6 +351,45 @@
     </main>
     <script src="/Content/js/auction.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var stars = document.querySelectorAll('.star-id');
+            stars.forEach(function (star) {
+                var id = star.getAttribute('data-star-id');
+                $.ajax({
+                    url: '/FEArtwork/Star',
+                    method: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        var starWidth = response + "%";
+                        star.style.width = starWidth;
+                    }, error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var ratings = document.querySelectorAll('.star-count');
+            ratings.forEach(function (rating) {
+                var id = rating.getAttribute('data-star-count');
+                $.ajax({
+                    url: '/FEArtwork/RatingCount',
+                    method: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        rating.textContent = "(" + response + " Reviews)";
+            
+                    }, error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+
     <script>
         function formatDate(dateTimeString) {
 
@@ -413,9 +415,10 @@
             var secondsDiff = Math.floor((timeDiff / 1000) % 60);
             var totalSecondsDiff = (hoursDiff * 3600) + (minutesDiff * 60) + secondsDiff;
             return totalSecondsDiff;
-  
+
         }
         $(document).ready(function () {
+
             setInterval(function () {
                 var currentDate = new Date();
                 var endDate = document.getElementById('end-date').textContent;
@@ -426,17 +429,17 @@
                     document.getElementById('bid-amount').disabled = true;
                     var widthPercentage = 100;
                     document.getElementById('progress-bar').style.width = widthPercentage + "%";
+                    $('#bid-submit').disabled = true
                 } else {
                     var timeAuction = timeDiffSecond(startDate, endDate)
-                    console.log(timeAuction);
                     var timeCurrent = timeDiffSecond(currentDate, endDate);
-                    console.log(timeCurrent);
-                    var widthPercentage = timeCurrent / timeAuction * 100;
+                    var percentage = timeCurrent / timeAuction * 100;
+                    var widthPercentage = 100 - percentage;
                     document.getElementById('progress-bar').style.width = widthPercentage + "%";
                 };
-               
+
             }, 1000);
-            
+
         });
 
         var isClickable = true;
