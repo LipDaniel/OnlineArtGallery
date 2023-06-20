@@ -24,8 +24,8 @@
                         <div class="col-md-6">
                             <div class="">
                                 <div class="row">
-                                    <figure style="width:100%" class="product-main-image">
-                                        <img id="product-zoom" src="~/Content/assets/images/artwork/@ViewBag.Artwork.artwork_image" alt="product image">
+                                    <figure style="width:100%;" class="product-main-image">
+                                        <img id="product-zoom" style=" height:550px" src="~/Content/assets/images/artwork/@ViewBag.Artwork.artwork_image" alt="product image">
 
                                     </figure><!-- End .product-main-image -->
 
@@ -125,6 +125,7 @@
                                     else
                                     {
                                         <a href="/" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <a href="/" class="ml-5 btn-primary btn" style="border-radius: 0.3rem; padding: 10.5px; width: 198px; "><span>BUY NOW</span></a>
                                         <a href="/" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
                                     }
 
@@ -330,7 +331,7 @@
                                             <div class="product-price">
                                                 $@item.artwork_price
                                             </div><!-- End .product-price -->
-                                            <div class="ratings-container mt-2">
+                                            <div class="ratings-container mt-1">
                                                 <div class="ratings">
                                                     <div class="ratings-val star-id" data-star-id="@item.artwork_id" style="width:0%"></div><!-- End .ratings-val -->
                                                 </div><!-- End .ratings -->
@@ -429,7 +430,7 @@
                     document.getElementById('bid-amount').disabled = true;
                     var widthPercentage = 100;
                     document.getElementById('progress-bar').style.width = widthPercentage + "%";
-                    $('#bid-submit').disabled = true
+                    document.getElementById('bid-submit').disabled = true
                 } else {
                     var timeAuction = timeDiffSecond(startDate, endDate)
                     var timeCurrent = timeDiffSecond(currentDate, endDate);

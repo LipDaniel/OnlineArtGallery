@@ -1,4 +1,5 @@
 ﻿using OnlineArtGallery.Models.Entities;
+using OnlineArtGallery.Models.ModelView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace OnlineArtGallery.Controllers
         {
             if (Session["UserId"] == null)
                 return RedirectToAction("Index", "FEHome");
-
+            var cart = db.Carts.Where(a => a.user_id == int.Parse(Session["UserId"].ToString())).ToList();
             return View();
         }
 
@@ -65,13 +66,42 @@ namespace OnlineArtGallery.Controllers
         {
             if (Session["UserId"] == null)
                 return RedirectToAction("Index", "FEHome");
-
             string id = Session["UserId"].ToString();
             var userId = int.Parse(id);
-            var auth = db.Users.Find(userId);
-           
-            ViewBag.User = auth;
-            return View();
+            var cartList = db.Carts.Where(a => a.user_id == userId).ToList();
+            var order = (from cart in db.Carts
+                         join artwork in db.Artworks on cart.artwork_id equals artwork.artwork_id
+                         where cart.user_id == userId
+                         orderby cart.cart_id descending
+                         select new
+                         {
+                             Cart = cart,
+                             Artwork = artwork
+                         }).ToList();
+            CartView cartView;
+            List<CartView> lstCart = new List<CartView>();
+            foreach (var item in order)
+            {
+                cartView = new CartView
+                {
+                    ArtworkId = item.Artwork.artwork_id,
+                    ArtworkName = item.Artwork.artwork_name,
+                    ArtworkPrice = item.Artwork.artwork_price
+                };
+                
+                lstCart.Add(cartView);
+            }
+            if (cartList != null)
+            {
+                var auth = db.Users.Find(userId);
+                ViewBag.User = auth;
+                ViewData["lstCart"] = lstCart;
+                return View();
+
+            }
+            return Redirect(Request.UrlReferrer.ToString());
         }
+
+        
     }
 }
