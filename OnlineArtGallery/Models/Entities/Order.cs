@@ -23,10 +23,6 @@ namespace OnlineArtGallery.Models.Entities
         public int order_id { get; set; }
         public Nullable<int> user_id { get; set; }
         public string order_total { get; set; }
-        public string order_payment { get; set; }
-        public Nullable<byte> order_status { get; set; }
-        public Nullable<bool> order_delivery_option { get; set; }
-        public Nullable<bool> order_is_paid { get; set; }
         public string order_created_date { get; set; }
         public string order_phone { get; set; }
         public string order_address { get; set; }

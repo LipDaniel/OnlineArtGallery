@@ -46,6 +46,7 @@
         <AssociationConnector Association="GalleryArtModel.FK__Order_Ite__order__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Orders__user_id__34C8D9D1" ManuallyRouted="false" />
         <AssociationConnector Association="GalleryArtModel.FK__Rating__user_id__4CA06362" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GalleryArtModel.sysdiagram" Width="1.5" PointX="8.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -213,7 +213,8 @@ $(document).ready(function ($) {
         var current_price = $(this).data('currentprice');
         var amount = $('.bid_price_'+id).val();
         var $this = $(this);
-        if (amount <= current_price) {
+
+        if (amount <= current_price || (amount - current_price) % 50 != 0) {
             $('.toast-body').text("Invalid bid");
             $('#toast').toast('show');
             $(this).children('span').removeClass('spinner-border spinner-border-sm');
