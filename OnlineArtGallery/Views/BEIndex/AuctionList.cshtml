@@ -1,4 +1,5 @@
-﻿
+﻿@using OnlineArtGallery.Models.Entities;
+
 @{
     ViewBag.Title = "ArtSellRequest";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -22,12 +23,12 @@
                 <div class="block-content tab-content ps-0 pe-0">
                     <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                         <thead>
-                            <th>#</th>
-                            <th>Artwork</th>
-                            <th>Reserve Price</th>
-                            <th>Biggest Bid</th>
-                            <th>Winner</th>
-                            <th>Countdown</th>
+                        <th>#</th>
+                        <th>Artwork</th>
+                        <th>Reserve Price</th>
+                        <th>Biggest Bid</th>
+                        <th>Winner</th>
+                        <th>Countdown</th>
                         </thead>
                         <tbody>
                             @{
@@ -35,6 +36,14 @@
                             }
                             @foreach (var item in ViewBag.Auction)
                             {
+                                var user_id = 0;
+                                if(item.user_id != null)
+                                {
+                                    user_id = item.user_id;
+                                }
+                                GalleryArtEntities db = new GalleryArtEntities();
+                                var users = db.Users.Where(e => e.user_id == user_id).FirstOrDefault();
+
                                 <tr class="align-middle">
                                     <td>@i</td>
                                     <td>
@@ -58,10 +67,18 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary" type="button" disabled>
-                                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                                            On Auction
-                                        </button>
+                                        @if (item.Artwork.artwork_status == 6)
+                                        {
+                                            <i class="fa-solid fa-crown" style="color: #f0d105;"></i>
+                                            @users.user_fname @users.user_lname
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-primary" type="button" disabled>
+                                                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                On Auction
+                                            </button>
+                                        }
                                     </td>
                                     <td class="text-center">
                                         <span hidden class="start-date">@item.auction_start_date</span>

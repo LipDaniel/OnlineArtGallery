@@ -17,21 +17,50 @@
                 <div class="block-content tab-content ps-0 pe-0">
                     <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                         <thead>
-                        <th>Username<</th>
-                        <th>Artist</th>
-                        <th>Rating</th>
-                        <th>Sell price</th>
-                        <th>Tag</th>
+                            <th>#<</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Shipping Information</th>
+                            <th>Total</th>
+                            <th>Shipping method</th>
+                            <th>Status</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>12</td>
-                                <td>12</td>
-                                <td>12</td>
-                                <td>12</td>
-                                <td>12</td>
-                            </tr>
-                        </tbody>
+                            @{
+                                var i = 1;
+                            }
+                            @foreach (var item in ViewBag.OrderList)
+                            {
+                                <tr class="align-middle">
+                                    <td>@i</td>
+                                    <td>@item.User.user_fname @item.User.user_lname</td>
+                                    <td>
+                                        @item.order_created_date
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-primary">@item.order_email</span> <br />
+                                        <span class="badge bg-warning">@item.order_address</span> <br />
+                                        <span class="badge bg-secondary">@item.order_fname @item.order_lname</span> <br />
+                                    </td>
+                                    <td>
+                                        <span class="fw-semibold d-inline-block py-1 px-3 rounded-pill bg-primary-light text-white w-80 text-center">
+                                            $@item.order_total
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success w-80 text-center">
+                                            SHIPPING
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning w-80 text-center">
+                                            PAID
+                                        </span>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                         </tbody>
                     </table>
                 </div>
             </div>

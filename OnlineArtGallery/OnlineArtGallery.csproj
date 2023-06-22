@@ -155,6 +155,7 @@
     <Compile Include="Controllers\BEGalleryController.cs" />
     <Compile Include="Controllers\BEIndexController.cs" />
     <Compile Include="Controllers\BENotificationController.cs" />
+    <Compile Include="Controllers\BEOrderController.cs" />
     <Compile Include="Controllers\BEProfileController.cs" />
     <Compile Include="Controllers\BETagController.cs" />
     <Compile Include="Controllers\FEArtworkController.cs" />
@@ -6082,11 +6083,6 @@
     <Folder Include="Content\assets\images\exhibition\" />
     <Folder Include="Content\assets\images\tag\" />
     <Folder Include="Content\assets\images\user\" />
-    <Folder Include="Views\BEDashboard\" />
-    <Folder Include="Views\BEExhibition\" />
-    <Folder Include="Views\BENotification\" />
-    <Folder Include="Views\FEAuction\" />
-    <Folder Include="Views\FEAuth\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

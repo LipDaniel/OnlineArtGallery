@@ -48,14 +48,13 @@ namespace OnlineArtGallery.Controllers
                 date = a.artwork_date,
                 category_id = a.category_id,
                 category = a.Category.category_name
-            }).ToList();
+            }).OrderByDescending(e => e.id).ToList();
             return View();
         }
         public ActionResult AuctionList()
         {
-            ViewBag.Artwork = db.Artworks.Where(a => a.artwork_status == 0).ToList();
-            ViewBag.Auction = db.Auctions.ToList();
-
+            ViewBag.Artwork = db.Artworks.Where(a => a.artwork_status == 0).OrderByDescending(e => e.artwork_id).ToList();
+            ViewBag.Auction = db.Auctions.OrderByDescending(e => e.auction_id).ToList();
             return View();
         }
         public ActionResult ProfileAdmin()
@@ -83,6 +82,7 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult OtherList()
         {
+            ViewBag.OrderList = db.Orders.OrderByDescending(a => a.order_id).ToList();
             return View();
         }
         public ActionResult Infor()
