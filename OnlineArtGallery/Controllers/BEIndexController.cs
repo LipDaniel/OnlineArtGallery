@@ -106,7 +106,7 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult ExhibitionList()
         {
-            ViewBag.Exhibition = db.Exhibitions.ToList();
+            ViewBag.Exhibition = db.Exhibitions.OrderByDescending(a => a.exhibition_id).ToList();
 
             return View();
         }
