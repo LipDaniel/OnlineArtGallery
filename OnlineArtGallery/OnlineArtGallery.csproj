@@ -151,6 +151,7 @@
     <Compile Include="Controllers\BECategoryController.cs" />
     <Compile Include="Controllers\BEContactController.cs" />
     <Compile Include="Controllers\BEDashboardController.cs" />
+    <Compile Include="Controllers\BEExhibitionController.cs" />
     <Compile Include="Controllers\BEGalleryController.cs" />
     <Compile Include="Controllers\BEIndexController.cs" />
     <Compile Include="Controllers\BENotificationController.cs" />
@@ -6082,6 +6083,7 @@
     <Folder Include="Content\assets\images\tag\" />
     <Folder Include="Content\assets\images\user\" />
     <Folder Include="Views\BEDashboard\" />
+    <Folder Include="Views\BEExhibition\" />
     <Folder Include="Views\BENotification\" />
     <Folder Include="Views\FEAuction\" />
     <Folder Include="Views\FEAuth\" />
