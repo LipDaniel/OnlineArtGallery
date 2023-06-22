@@ -127,32 +127,33 @@ namespace OnlineArtGallery.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
         [HttpPost]
-        public ActionResult EditStatus(int user_id, bool is_active)
+        public ActionResult EditStatus(int user_id)
         {
-            if (Session["UserId"] == null)
-                return Json("Please login first");
+           
 
             var userId = int.Parse(Session["UserId"].ToString());
             bool check = db.Users.Any(a => a.user_id == user_id);
             if (check)
             {
                 // Lấy thông tin người dùng từ database
-                var user = db.Users.FirstOrDefault(u => u.user_id == user_id);
-                if (user != null)
+                var user = db.Users.Where(u => u.user_id == user_id ).FirstOrDefault();
+                if (user.user_is_active == true)
                 {
-                    // Cập nhật trạng thái người dùng
-                    user.user_is_active = is_active;
+                    user.user_is_active = false;
                     db.SaveChanges();
-                    return Json("User status updated successfully.");
+                    return RedirectToAction("UserList", "BEIndex");
                 }
                 else
                 {
-                    return Json("User not found.");
+                    user.user_is_active = true;
+                    db.SaveChanges();
+                    return RedirectToAction("UserList", "BEIndex");
                 }
+              
             }
             else
             {
-                return Json("User does not exist.");
+                return RedirectToAction("UserList", "BEIndex");
             }
         }
 

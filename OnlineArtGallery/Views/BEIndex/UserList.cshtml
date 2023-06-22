@@ -10,6 +10,8 @@
         <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <strong>USER LIST</strong>
+
+
             </div>
             <div class="block-content pb-3">
                 <div class="block-content tab-content ps-0 pe-0">
@@ -17,14 +19,12 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>First Name<</th>
+                                <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
-
                                 <th>Adddress</th>
                                 <th>Phone</th>
                                 <th>Log in with </th>
-
                                 <th>Status</th>
                                 <th>Edit</th>
                             </tr>
@@ -32,29 +32,38 @@
                         <tbody>
                             @{
                                 var s = 0;
+
                             }
                             @foreach (var user in ViewBag.UserList)
                             {
+
                                 s += 1;
                                 <tr>
                                     <th>@s</th>
                                     <td>@user.user_fname</td>
-                                    <td> @user.user_lname</td>
+                                    <td>@user.user_lname</td>
                                     <td>@user.user_email</td>
 
                                     <td>@user.user_address</td>
                                     <td>@user.user_phone</td>
-                                    <td>log in</td>
+                                    <!--Log in information-->
+
+                                    @if (@user.facebook_id != null)
+                                    {
+                                        <td>
+                                            Facebook
+                                        </td>
+                                    }
+                                    else if (@user.google_id != null)
+                                    {
+                                        <td>Google</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Email</td>
+                                    }
+                                    <!--End log in information-->
                                     <td>@(user.user_is_active ? "show" : "hide")</td>
-
-
-
-
-
-
-
-
-
                                     <td>
                                         @{
                                             var ar = "exampleModal" + user.user_id;
@@ -63,12 +72,28 @@
                                         <div class="modal fade" id="@ar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form method="post" action="@Url.Action("EditStatus","FEUser")" enctype="multipart/form-data">
+                                                    <form method="post" action="@Url.Action("EditStatus","FEUser")" enctype="multipart/form-data">
+
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+
+                                                            @if (@user.user_is_active == false)
+                                                            {
+                                                                <div class="form-check form-switch">
+                                                                    <input class="form-check-input" type="checkbox" id="statusForm" name="user_is_active">
+                                                                    <label class="form-check-label" for="userIsActive">Active</label>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="form-check form-switch">
+                                                                    <input class="form-check-input" type="checkbox" id="statusForm" name="user_is_active" checked>
+                                                                    <label class="form-check-label" for="userIsActive">Active</label>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                        <div class="modal-body">
+
                                                             <input type="text" value="@user.user_id" name="artist_id" class="form-control" hidden>
 
                                                             <div class="form-group mb-1 row">
@@ -95,25 +120,30 @@
                                                                 <label for="recipient-name" class="col-form-label">Address:</label>
                                                                 <input type="text" value="@user.user_address" class="form-control" disabled />
                                                             </div>
+                                                            <!--Log in with-->
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Log in with :</label>
-                                                                <input type="text" value="@user.user_address" class="form-control" disabled />
+                                                                <h5>Facebook ID</h5>
+                                                                <input type="text" value="@user.facebook_id" class="form-control" disabled />
+
+                                                                <h5>Google ID</h5>
+                                                                <input type="text" value="@user.google_id" class="form-control" disabled />
+
+                                                                <!--End Log in with-->
                                                             </div>
 
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox" name="user_is_active" >
-                                                                <label class="form-check-label" for="userIsActive_@user.user_id">Active</label>
-                                                            </div>
                                                             <input type="hidden" name="user_id" value="@user.user_id" />
-                                                            <button type="submit">Save</button>
-                                                        </form>
-                                                    </div>
 
+                                                            <button type="submit" class="btn btn-primary">Save</button>
+
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
+                               
                             }
                         </tbody>
                     </table>
@@ -121,29 +151,8 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            // Lắng nghe sự kiện onchange của checkbox
-            $(".form-check-input").change(function () {
-                var userId = $(this).closest("tr").data("user-id"); // Lấy user-id từ data attribute của hàng chứa checkbox
-                var isChecked = $(this).is(":checked"); // Kiểm tra xem checkbox có được chọn hay không
+    
 
-                // Gửi yêu cầu POST để cập nhật trạng thái người dùng
-                $.ajax({
-                    url: "/BEUser/EditStatus", // Đường dẫn tới action xử lý cập nhật trạng thái
-                    method: "POST",
-                    data: {
-                        user_id: userId,
-                        is_active: isChecked
-                    }
-                }).done(function (res) {
-                    // Xử lý kết quả trả về từ server
-                    $('.toast-body').text(res);
-                    $('#toast').toast('show');
-                });
-            });
-        });
-    </script>
 }
 
 @section css
