@@ -21,7 +21,7 @@ namespace OnlineArtGallery.Controllers
             item.auction_reserve_price = obj.auction_reserve_price;
             item.auction_start_date = obj.auction_start_date+":00";
             item.auction_end_date = obj.auction_end_date + ":00";
-            item.auction_current_bid = "0";
+            item.auction_current_bid = obj.auction_reserve_price;
             item.auction_created_date = DateTime.Now.ToString("yyyy-MM-dd");
             db.Auctions.Add(item);
             db.SaveChanges();
