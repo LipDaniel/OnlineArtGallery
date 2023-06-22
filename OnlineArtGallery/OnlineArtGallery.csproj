@@ -246,6 +246,7 @@
     </Compile>
     <Compile Include="Models\ModelView\ArtworkView.cs" />
     <Compile Include="Models\ModelView\CartView.cs" />
+    <Compile Include="Models\ModelView\AuctionListView.cs" />
     <Compile Include="Models\PayCompare.cs" />
     <Compile Include="Models\PayLib.cs" />
     <Compile Include="Models\Util.cs" />
@@ -6056,7 +6057,6 @@
     <Content Include="Views\BEIndex\Rating.cshtml" />
     <Content Include="Views\BEIndex\OtherList.cshtml" />
     <Content Include="Views\FEArtwork\ArtworkDetail.cshtml" />
-    <Content Include="Views\FEAuth\UserProfile.cshtml" />
     <Content Include="Views\FEHome\Contact.cshtml" />
     <Content Include="Views\FEHome\About.cshtml" />
     <Content Include="Views\FEArtwork\ArtworkList.cshtml" />
@@ -6084,6 +6084,7 @@
     <Folder Include="Views\BEDashboard\" />
     <Folder Include="Views\BENotification\" />
     <Folder Include="Views\FEAuction\" />
+    <Folder Include="Views\FEAuth\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls.WebParts;
-
+using OnlineArtGallery.Models.ModelView;
 namespace OnlineArtGallery.Controllers
 {
     public class FEUserController : Controller
@@ -25,9 +25,44 @@ namespace OnlineArtGallery.Controllers
             {
                 return RedirectToAction("Index", "FEHome");
             }
+            var auctionList = (from auction in db.Auctions
+                    join artwork in db.Artworks on auction.artwork_id equals artwork.artwork_id
+                    join auction_user in db.Auction_User on auction.auction_id equals auction_user.auction_id
+                    where auction_user.user_id == auth.user_id
+                    orderby auction_user.auction_user_id descending
+                    select new
+                    {
+                        AuctionUser = auction_user,
+                        Auction = auction,
+                        Artwork = artwork
+                    }).ToList();
+            var wonAuction = db.Auctions.Where(a => a.user_id == auth.user_id).ToList();
+            List<AuctionListView> aucList = new List<AuctionListView>();
+            foreach(var item in auctionList)
+            {
+                var auc = new AuctionListView()
+                {
+                    auction_id = item.Auction.auction_id,
+                    artist_name = item.Artwork.Artist.artist_name,
+                    artist_id = item.Artwork.Artist.artist_id,
+                    artwork_id = item.Artwork.artwork_id,
+                    artwork_image = item.Artwork.artwork_image,
+                    artwork_name = item.Artwork.artwork_name,
+                    reserve_price = item.Auction.auction_reserve_price,
+                    start_date = item.Auction.auction_start_date,
+                    end_date = item.Auction.auction_end_date,
+                    your_bid = item.AuctionUser.auction_amount,
+                    current_bid = item.Auction.auction_current_bid,
+                    
+                };
+                aucList.Add(auc);
+            }
+
+            ViewBag.Auction = aucList;
             ViewBag.User = auth;
             ViewBag.Artists = art;
             ViewBag.Category = cate;
+            ViewBag.WonAuction = wonAuction;
             return View();
         }
 

@@ -15,8 +15,7 @@
         <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
             <div class="container">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">My Account</li>
                 </ol>
             </div><!-- End .container -->
@@ -34,7 +33,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-auction-link" data-toggle="tab" href="#tab-auction" role="tab" aria-controls="tab-auction" aria-selected="false">Auction</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-wonauction-link" data-toggle="tab" href="#tab-wonauction" role="tab" aria-controls="tab-wonauction" aria-selected="false">Won Auction</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
                                 </li>
@@ -66,10 +70,6 @@
                                     {
                                         <span class="product-label label-sale p-3">@TempData["FailedMessage"]</span>
                                     }
-
-                                    <p>
-
-                                    </p>
                                 </div><!-- .End .tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
@@ -77,28 +77,82 @@
                                     <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
                                 </div><!-- .End .tab-pane -->
 
+                                <div class="tab-pane fade" id="tab-auction" role="tabpanel" aria-labelledby="tab-auction-link">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Artwork</th>
+                                                <th>Reserve Price</th>
+                                                <th>Your bid</th>
+                                                <th>Current bid</th>
+                                                <th>Time</th>
 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.Auction)
+                                            {
+                                                <tr>
+                                                    <td class="d-flex">
+                                                        <div>
+                                                            <img style="height:95px;width:95px" src="~/Content/assets/images/artwork/@item.artwork_image" />
+                                                        </div>
+                                                        <div class="ml-3" style=" padding-top: 15px;">
+                                                            <a style="font-weight:500" href="/FEArtwork/ArtworkDetail/@item.artwork_id">@item.artwork_name</a>
+                                                            <span class="d-block">by <a href="/FEArtwork/Artist/@item.artist_id">@item.artist_name</a> </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>$@item.reserve_price</td>
+                                                    <td>$@item.your_bid</td>
+                                                    <td>$@item.current_bid</td>
+                                                    <td>
+                                                        <span id="start-date" hidden class="start-date">@item.start_date</span>
+                                                        <span id="end-date" hidden class="end-date">@item.end_date</span>
+                                                        <div id="countdown" class="text-center text-white countdown" style="opacity: .5;width:179px" data-start="@item.start_date" data-end="@item.end_date">
+                                                            <strong>
+
+                                                            </strong>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div><!-- .End .tab-pane -->
+                                <div class="tab-pane fade" id="tab-wonauction" role="tabpanel" aria-labelledby="tab-wonauction-link">
+                                   <div class="row">
+                                       @foreach (var item in ViewBag.WonAuction)
+                                        {
+                                           <div class="col-12 mb-3" >
+                                               <div class=" d-flex" style=" border: 1px #9b9696 solid;">
+                                                    <div class="col-3">
+                                                        <img style="height:230px" src="~/Content/assets/images/artwork/@item.Artwork.artwork_image"/>
+                                                    </div>
+                                                   <div class="col-6" >
+                                                       <div>
+                                                           <p style="margin: 0; font-size: 20px; "> <a href="/FEArtwork/ArtworkDetail/@item.Artwork.artwork_id">@item.Artwork.artwork_name</a></p>
+                                                           <span>by <a href="/FEArtwork/Artist/@item.Artwork.Artist.artist_id"> @item.Artwork.Artist.artist_name</a></span>
+                                                       </div>
+                                                       <div>
+                                                           <p>Description</p>
+                                                           <p>@item.Artwork.artwork_description</p>
+                                                       </div>
+                                                   </div>
+                                                   <div style="text-align:center" class="col-3">
+                                                       <p style="font-weight:500">Amount to pay</p>
+                                                       <p>$@item.Artwork.artwork_price</p>
+                                                       <button class="btn btn-outline-primary-2 ">Pay now</button>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                        }
+                                   </div>
+                                </div><!-- .End .tab-pane -->
                                 <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
                                     <p>The following addresses will be used on the checkout page by default.</p>
 
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="card card-dashboard">
-                                                <div class="card-body">
-                                                    <h3 class="card-title">Billing Address</h3><!-- End .card-title -->
-
-                                                    <p>
-                                                        User Name<br>
-                                                        User Company<br>
-                                                        John str<br>
-                                                        New York, NY 10001<br>
-                                                        1-234-987-6543<br>
-                                                        yourmail@mail.com<br>
-                                                        <a href="#">Edit <i class="icon-edit"></i></a>
-                                                    </p>
-                                                </div><!-- End .card-body -->
-                                            </div><!-- End .card-dashboard -->
-                                        </div><!-- End .col-lg-6 -->
 
                                         <div class="col-lg-6">
                                             <div class="card card-dashboard">
@@ -154,7 +208,10 @@
                                             <label>Upload Image</label>
                                             <input type="file" class="form-control" name="user_image" />
                                         </div>
-
+                                        <button type="submit" class="btn btn-outline-primary-2 mt-2">
+                                            <span>SAVE CHANGES</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </button>
 
                                     </form>
                                 </div><!-- .End .tab-pane -->
@@ -179,17 +236,17 @@
                                 </div><!-- .End .tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-artwork" role="tabpanel" aria-labelledby="tab-artwork-link">
-                                  
+
                                     <form action="/FEUser/RequestArtwork" enctype="multipart/form-data" method="Post">
                                         <div class="block-content fs-sm pb-3">
                                             <div class="form-group mb-1">
                                                 <label class="form-label">Artwork <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control"  name="artwork_name">
+                                                <input type="text" class="form-control" name="artwork_name">
                                             </div>
                                             <div class="form-group mb-1 row">
                                                 <div class="col-6">
                                                     <label class="form-label">Artist <span class="text-danger">*</span></label>
-                                                    <select class="form-select form-control bg-light" name="artist_id" >
+                                                    <select class="form-select form-control bg-light" name="artist_id">
                                                         @foreach (var item in ViewBag.Artists)
                                                         {
                                                             <option value="@item.artist_id">@item.artist_name</option>
@@ -198,7 +255,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <label class="form-label">Category <span class="text-danger">*</span></label>
-                                                    <select class="form-select form-control bg-light"  name="category_id">
+                                                    <select class="form-select form-control bg-light" name="category_id">
                                                         @foreach (var item in ViewBag.Category)
                                                         {
                                                             <option value="@item.category_id">@item.category_name</option>
@@ -213,7 +270,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <label class="form-label">Date <span class="text-danger">*</span></label>
-                                                    <input type="date" class="form-control"  name="artwork_date">
+                                                    <input type="date" class="form-control" name="artwork_date">
                                                 </div>
                                             </div>
                                             <div class="form-group mb-1 row">
@@ -227,14 +284,14 @@
                                                 <div class="col-6">
                                                     <label class="form-label">Height <span class="text-danger">*</span></label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control"  name="height">
+                                                        <input type="text" class="form-control" name="height">
                                                         <span class="input-group-text" style="height: 40px;">CM</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group mb-1">
                                                 <label class="form-label">Image <span class="text-danger">*</span></label>
-                                                <input type="file" class="form-control"  name="artwork_image">
+                                                <input type="file" class="form-control" name="artwork_image">
                                             </div>
                                             <div class="form-group mb-1 row">
                                                 <div class="col-9">
@@ -252,7 +309,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                            
+
                                 </div><!-- .End .tab-pane -->
                             </div>
                         </div><!-- End .col-lg-9 -->
@@ -262,7 +319,9 @@
         </div><!-- End .page-content -->
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/Content/js/auction.js"></script>
     <script>
+
         $("#resetPassword").on('submit', function (e) {
             e.preventDefault();
             var form_data = $(this).serialize();
@@ -271,15 +330,27 @@
             $.ajax({
                 url: "/FEUser/EditPassword",
                 method: "Post",
-                data:  form_data
+                data: form_data
             }).done(function (res) {
                 $('.toast-body').text(res);
                 $('#toast').toast('show');
                 $('#current_password').text("");
             });
         });
-     
+        $(document).ready(function () {
+
+            var countdownList = document.querySelectorAll('.countdown');
+            countdownList.forEach(function (countdown) {
+                if (countdown.textContent != "Finished"){
+                    countdown.style.backgroundColor = 'green';
+
+                } else {
+                    countdown.style.backgroundColor = 'gray';
+                };
+            })
+        });
     </script>
+    <script></script>
 }
 
 

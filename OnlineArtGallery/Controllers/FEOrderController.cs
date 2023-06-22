@@ -102,6 +102,8 @@ namespace OnlineArtGallery.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
+
+
         [HttpPost]
         public ActionResult CreateBill(Order obj)
         {
