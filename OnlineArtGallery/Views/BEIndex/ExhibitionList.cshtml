@@ -26,6 +26,7 @@
                         <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th> Name</th>
                                     <th>Images</th>
                                     <th>Description</th>
@@ -34,12 +35,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @{ 
+                                    var s = 0;
+                                }
                                 @foreach (var exhibi in ViewBag.Exhibition)
                                 {
+                                    s += 1;
                                     <tr>
+                                        <td>@s</td>
                                         <td>@exhibi.exhibition_name</td>
                                         <td>
-                                            <img width="50px" src="~/Content/Assets/Images/exhibition/@exhibi.exhibition_image " alt="Alternate Text" />
+                                            <img width="50px" height="50px" src="~/Content/Assets/Images/exhibition/@exhibi.exhibition_image " alt="Alternate Text" />
                                         </td>
 
                                         <td>@exhibi.exhibition_description</td>
