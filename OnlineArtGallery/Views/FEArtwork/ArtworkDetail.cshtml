@@ -124,10 +124,135 @@
                                     }
                                     else
                                     {
-                                        <a href="/" class="btn-product btn-cart"><span>add to cart</span></a>
-                                        <a href="/" class="ml-5 btn-primary btn" style="border-radius: 0.3rem; padding: 10.5px; width: 198px; "><span>BUY NOW</span></a>
+
+
+                                        <a href="/" class="btn-product btn-cart"><span>add to cart</span></a><!-- Button trigger modal -->
+                                        if (Session["UserId"] != null)
+                                        {
+                                            <button type="button" class="btn btn-primary btn ml-5" data-toggle="modal" data-target="#exampleModal">
+                                                BUY NOW
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" style="max-width:1000px">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body p-3">
+                                                            <div class="">
+                                                                <div class="checkout">
+                                                                    <div class="container">
+                                                                        <form id="checkout">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-7">
+                                                                                    <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <label>First Name *</label>
+                                                                                            <input type="text" id="fname" class="form-control" value="@ViewBag.User.user_fname">
+                                                                                        </div><!-- End .col-sm-6 -->
+
+                                                                                        <div class="col-sm-6">
+                                                                                            <label>Last Name *</label>
+                                                                                            <input type="text" id="lname" class="form-control" value="@ViewBag.User.user_lname">
+                                                                                        </div><!-- End .col-sm-6 -->
+                                                                                    </div><!-- End .row -->
+
+                                                                                    <label>Address *</label>
+                                                                                    <input type="text" id="address" class="form-control">
+
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <label>Email address *</label>
+                                                                                            <input type="email" id="checkoutemail" class="form-control" value="@ViewBag.User.user_email">
+                                                                                        </div><!-- End .col-sm-6 -->
+
+                                                                                        <div class="col-sm-6">
+                                                                                            <label>Phone *</label>
+                                                                                            <input type="tel" id="checkoutphone" class="form-control" value="@ViewBag.User.user_phone">
+                                                                                        </div><!-- End .col-sm-6 -->
+                                                                                    </div><!-- End .row -->
+                                                                                </div><!-- End .col-lg-9 -->
+                                                                                <aside class="col-lg-5">
+                                                                                    <div class="summary">
+                                                                                        <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+                                                                                        <table class="table table-summary">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Product</th>
+                                                                                                    <th>Total</th>
+                                                                                                </tr>
+                                                                                            </thead>
+
+                                                                                            <tbody>
+                                                                                                <tr>
+                                                                                                    <td><a href="/FEArtwork/ArtworkDetail/@ViewBag.Artwork.artwork_id">@ViewBag.Artwork.artwork_name</a></td>
+                                                                                                    <td>$@ViewBag.Artwork.artwork_price</td>
+                                                                                                </tr>
+                                                                                                total += int.Parse(@ViewBag.Artwork.artwork_price);
+                                                                                                }
+
+                                                                                                <tr class="summary-subtotal">
+                                                                                                    <td>Subtotal:</td>
+                                                                                                    <td>$@ViewBag.Artwork.artwork_price.00</td>
+                                                                                                </tr><!-- End .summary-subtotal -->
+                                                                                                <tr>
+                                                                                                    <td>Shipping:</td>
+                                                                                                    <td>Free shipping</td>
+                                                                                                </tr>
+                                                                                                <tr class="summary-total">
+                                                                                                    <td>Total:</td>
+                                                                                                    <td>$@ViewBag.Artwork.artwork_price.00</td>
+                                                                                                </tr><!-- End .summary-total -->
+                                                                                            </tbody>
+                                                                                        </table><!-- End .table table-summary -->
+
+                                                                                        <div class="accordion-summary" id="accordion-payment">
+                                                                                            <div class="card">
+                                                                                                <div class="card-header" id="heading-1">
+                                                                                                    <h2 class="card-title">
+                                                                                                        <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+                                                                                                            VNPay
+                                                                                                        </a>
+                                                                                                    </h2>
+                                                                                                </div><!-- End .card-header -->
+                                                                                                <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
+                                                                                                    <div class="card-body">
+                                                                                                        VNPAY applies modern and breakthrough technology in the field of electronic payment in order to
+                                                                                                        building a diverse service ecosystem in terms of products, utilities, and experiences
+                                                                                                        superior service to serve customers and partners.
+                                                                                                    </div><!-- End .card-body -->
+                                                                                                </div><!-- End .collapse -->
+                                                                                            </div><!-- End .card -->
+                                                                                        </div><!-- End .accordion -->
+
+                                                                                        <button type="submit" id="submitCheckout" data-total="@ViewBag.Artwork.artwork_price" class="btn btn-outline-primary-2 btn-order btn-block">
+                                                                                            <span class="btn-text">Place Order</span>
+                                                                                            <span class="btn-hover-text">Proceed to Checkout</span>
+                                                                                            <span class="" id="checkoutspinner" role="status" aria-hidden="true"></span>
+                                                                                        </button>
+                                                                                    </div><!-- End .summary -->
+                                                                                </aside><!-- End .col-lg-3 -->
+                                                                            </div><!-- End .row -->
+                                                                        </form>
+                                                                    </div><!-- End .container -->
+                                                                </div><!-- End .checkout -->
+                                                            </div><!-- End .page-content -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            <a href="/" class="btn-product btn-cart"><span>Paynow</span></a><!-- Button trigger modal -->
+                                        }
                                         <a href="/" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+
                                     }
+
+
 
 
                                 </div><!-- End .product-details-action -->
@@ -382,7 +507,7 @@
                     data: { id: id },
                     success: function (response) {
                         rating.textContent = "(" + response + " Reviews)";
-            
+
                     }, error: function (error) {
                         console.log(error);
                     }
@@ -392,6 +517,7 @@
     </script>
 
     <script>
+
         function formatDate(dateTimeString) {
 
             var dateParts = dateTimeString.split(" ")[0].split("-");
@@ -481,5 +607,6 @@
         });
 
     </script>
+    <script src="/Content/js/checkout.js"></script>
 }
 

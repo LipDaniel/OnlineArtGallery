@@ -38,6 +38,13 @@ namespace OnlineArtGallery.Controllers
             {
                 percent = (star.Average(a => a.rating_start)) / 5 * 100;
             }
+            if(Session["UserId"] != null)
+            {
+                var userId = int.Parse(Session["UserId"].ToString());
+                var auth = db.Users.Find(userId);
+                ViewBag.User = auth;
+
+            }
             ViewBag.Review = rev;
             ViewBag.Artwork = artwork;
             ViewBag.Artist = artist;

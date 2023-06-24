@@ -17,7 +17,8 @@ namespace OnlineArtGallery.Controllers
         {
             if (Session["UserId"] == null)
                 return RedirectToAction("Index", "FEHome");
-            var cart = db.Carts.Where(a => a.user_id == int.Parse(Session["UserId"].ToString())).ToList();
+            var id = int.Parse(Session["UserId"].ToString());
+            var cart = db.Carts.Where(a => a.user_id == id).ToList();
             return View();
         }
 
@@ -102,13 +103,42 @@ namespace OnlineArtGallery.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
+        public ActionResult PayNow(Order obj, int artwork_id, string price)
+        {
+            string id = Session["UserId"].ToString();
+            var userId = int.Parse(id);
 
+            var orders = new Order();
+            orders.user_id = userId;
+            orders.order_total = obj.order_total;
+            orders.order_created_date = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            orders.order_phone = obj.order_phone;
+            orders.order_address = obj.order_address;
+            orders.order_email = obj.order_email;
+            orders.order_fname = obj.order_fname;
+            orders.order_lname = obj.order_lname;
+            db.Orders.Add(orders);
+            db.SaveChanges();
+
+            var items = new Order_Item();
+            items.order_id = orders.order_id;
+            items.artwork_id = artwork_id;
+            items.price = price;
+            db.Order_Item.Add(items);
+            db.SaveChanges();
+
+            var update = db.Artworks.Find(artwork_id);
+            update.artwork_status = 3;
+            db.SaveChanges();
+
+            string payment = (int.Parse(obj.order_total) * 100).ToString();
+            return JavaScript("window.location = '" + Url.Action("Payment", "FEOrder", new { payment = payment }) + "'");
+
+        }
 
         [HttpPost]
         public ActionResult CreateBill(Order obj)
         {
-           
-
             string id = Session["UserId"].ToString();
             var userId = int.Parse(id);
             var cartList = db.Carts.Where(a => a.user_id == userId).ToList();

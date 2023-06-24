@@ -121,33 +121,147 @@
                                     </table>
                                 </div><!-- .End .tab-pane -->
                                 <div class="tab-pane fade" id="tab-wonauction" role="tabpanel" aria-labelledby="tab-wonauction-link">
-                                   <div class="row">
-                                       @foreach (var item in ViewBag.WonAuction)
+                                    <div class="row">
+                                        @foreach (var item in ViewBag.WonAuction)
                                         {
-                                           <div class="col-12 mb-3" >
-                                               <div class=" d-flex" style=" border: 1px #9b9696 solid;">
+                                            <div class="col-12 mb-3">
+                                                <div class=" d-flex" style="box-shadow: rgba(0, 0, 0, 0.13) 0px 3.2px 7.2px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px;">
                                                     <div class="col-3">
-                                                        <img style="height:230px" src="~/Content/assets/images/artwork/@item.Artwork.artwork_image"/>
+                                                        <img style="height:230px" src="~/Content/assets/images/artwork/@item.Artwork.artwork_image" />
                                                     </div>
-                                                   <div class="col-6" >
-                                                       <div>
-                                                           <p style="margin: 0; font-size: 20px; "> <a href="/FEArtwork/ArtworkDetail/@item.Artwork.artwork_id">@item.Artwork.artwork_name</a></p>
-                                                           <span>by <a href="/FEArtwork/Artist/@item.Artwork.Artist.artist_id"> @item.Artwork.Artist.artist_name</a></span>
-                                                       </div>
-                                                       <div>
-                                                           <p>Description</p>
-                                                           <p>@item.Artwork.artwork_description</p>
-                                                       </div>
-                                                   </div>
-                                                   <div style="text-align:center" class="col-3">
-                                                       <p style="font-weight:500">Amount to pay</p>
-                                                       <p>$@item.Artwork.artwork_price</p>
-                                                       <button class="btn btn-outline-primary-2 ">Pay now</button>
-                                                   </div>
-                                               </div>
-                                           </div>
+                                                    <div class="col-6">
+                                                        <div>
+                                                            <p style="margin: 0; font-size: 20px; "> <a href="/FEArtwork/ArtworkDetail/@item.Artwork.artwork_id">@item.Artwork.artwork_name</a></p>
+                                                            <span>by <a href="/FEArtwork/Artist/@item.Artwork.Artist.artist_id"> @item.Artwork.Artist.artist_name</a></span>
+                                                        </div>
+                                                        <div>
+                                                            <p>Description</p>
+                                                            <p>@item.Artwork.artwork_description</p>
+                                                        </div>
+                                                    </div>
+                                                    <div style="text-align:center" class="col-3">
+                                                        <p style="font-weight:500">Amount to pay</p>
+                                                        <p>$@item.auction_current_bid</p>
+                                                        <!-- Button trigger modal -->
+                                                        @{
+                                                            var id = "id" + (item.Artwork.artwork_id).ToString();
+                                                        }
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@id">
+                                                            Pay now
+                                                        </button>
+
+                                                        <!-- Modal -->
+                                                        <div style="text-align:left" class="modal fade" id="@id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" style="max-width:1000px">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body p-5">
+                                                                        <div class="">
+                                                                            <div class="checkout">
+                                                                                <div class="container">
+                                                                                    <form id="checkout_(@item.Artwork.artwork_id)" class="checkout">
+                                                                                        <div class="row">
+                                                                                            <div class="col-lg-7">
+                                                                                                <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+                                                                                                <div class="row">
+                                                                                                    <div class="col-sm-6">
+                                                                                                        <label>First Name *</label>
+                                                                                                        <input type="text" id="fname_@(item.Artwork.artwork_id)" class="form-control" value="@ViewBag.User.user_fname">
+                                                                                                    </div><!-- End .col-sm-6 -->
+
+                                                                                                    <div class="col-sm-6">
+                                                                                                        <label>Last Name *</label>
+                                                                                                        <input type="text" id="lname_@(item.Artwork.artwork_id)" class="form-control" value="@ViewBag.User.user_lname">
+                                                                                                    </div><!-- End .col-sm-6 -->
+                                                                                                </div><!-- End .row -->
+
+                                                                                                <label>Address *</label>
+                                                                                                <input type="text" id="address_@(item.Artwork.artwork_id)" class="form-control">
+
+                                                                                                <div class="row">
+                                                                                                    <div class="col-sm-6">
+                                                                                                        <label>Email address *</label>
+                                                                                                        <input type="email" id="checkoutemail_@(item.Artwork.artwork_id)" class="form-control" value="@ViewBag.User.user_email">
+                                                                                                    </div><!-- End .col-sm-6 -->
+
+                                                                                                    <div class="col-sm-6">
+                                                                                                        <label>Phone *</label>
+                                                                                                        <input type="tel" id="checkoutphone_@(item.Artwork.artwork_id)" class="form-control" value="@ViewBag.User.user_phone">
+                                                                                                    </div><!-- End .col-sm-6 -->
+                                                                                                </div><!-- End .row -->
+                                                                                            </div><!-- End .col-lg-9 -->
+                                                                                            <aside class="col-lg-5">
+                                                                                                <div class="summary">
+                                                                                                    <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+                                                                                                    <table class="table table-summary">
+                                                                                                        <thead>
+                                                                                                            <tr>
+                                                                                                                <th>Artwork</th>
+                                                                                                                <th>Total</th>
+                                                                                                            </tr>
+                                                                                                        </thead>
+
+                                                                                                        <tbody>
+
+                                                                                                            <tr class="summary-subtotal">
+                                                                                                                <td>@item.Artwork.artwork_name</td>
+                                                                                                                <td>$@item.auction_current_bid.00</td>
+                                                                                                            </tr><!-- End .summary-subtotal -->
+                                                                                                            <tr>
+                                                                                                                <td>Shipping:</td>
+                                                                                                                <td>Free shipping</td>
+                                                                                                            </tr>
+                                                                                                            <tr class="summary-total">
+                                                                                                                <td>Total:</td>
+                                                                                                                <td>$@item.auction_current_bid.00</td>
+                                                                                                            </tr><!-- End .summary-total -->
+                                                                                                        </tbody>
+                                                                                                    </table><!-- End .table table-summary -->
+
+                                                                                                    <div class="accordion-summary" id="accordion-payment">
+                                                                                                        <div class="card">
+                                                                                                            <div class="card-header" id="heading-1">
+                                                                                                                <h2 class="card-title">
+                                                                                                                    <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+                                                                                                                        VNPay
+                                                                                                                    </a>
+                                                                                                                </h2>
+                                                                                                            </div><!-- End .card-header -->
+                                                                                                            <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
+                                                                                                                <div class="card-body">
+                                                                                                                    VNPAY applies modern and breakthrough technology in the field of electronic payment in order to
+                                                                                                                    building a diverse service ecosystem in terms of products, utilities, and experiences
+                                                                                                                    superior service to serve customers and partners.
+                                                                                                                </div><!-- End .card-body -->
+                                                                                                            </div><!-- End .collapse -->
+                                                                                                        </div><!-- End .card -->
+                                                                                                    </div><!-- End .accordion -->
+                                                                                                    <input id="artworkId_@(item.Artwork.artwork_id)" hidden value="@item.Artwork.artwork_id" />
+                                                                                                    <input id="auctionPrice_@(item.Artwork.artwork_id)" hidden value="@item.auction_current_bid" />
+                                                                                                    <button id="submitCheckout_(@item.Artwork.artwork_id)" type="button" data-id="@item.Artwork.artwork_id" data-total="@item.auction_current_bid" class="submitCheckout btn btn-outline-primary-2 btn-order btn-block">
+                                                                                                        <span class="btn-text">Place Order</span>
+                                                                                                        <span class="btn-hover-text">Proceed to Checkout</span>
+                                                                                                        <span class="" id="checkoutspinner" role="status" aria-hidden="true"></span>
+                                                                                                    </button>
+                                                                                                </div><!-- End .summary -->
+                                                                                            </aside><!-- End .col-lg-3 -->
+                                                                                        </div><!-- End .row -->
+                                                                                    </form>
+                                                                                </div><!-- End .container -->
+                                                                            </div><!-- End .checkout -->
+                                                                        </div><!-- End .page-content -->
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <a href="/" class="mt-2 btn-product btn-cart"><span>add to cart</span></a><!-- Button trigger modal -->
+                                                    </div>
+                                                </div>
+                                            </div>
                                         }
-                                   </div>
+                                    </div>
                                 </div><!-- .End .tab-pane -->
                                 <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
                                     <p>The following addresses will be used on the checkout page by default.</p>
@@ -341,7 +455,7 @@
 
             var countdownList = document.querySelectorAll('.countdown');
             countdownList.forEach(function (countdown) {
-                if (countdown.textContent != "Finished"){
+                if (countdown.textContent != "Finished") {
                     countdown.style.backgroundColor = 'green';
 
                 } else {
@@ -350,7 +464,49 @@
             })
         });
     </script>
-    <script></script>
+    <script>
+        $(document).ready(function ($) {
+
+            $('#checkout').submit(function (event) {
+                event.preventDefault();
+                $('#checkoutspinner').addClass('spinner-border spinner-border-sm');
+                $('#submitCheckout').prop('disabled', true);
+
+                var fname = $('#fname').val().trim();
+                var lname = $('#lname').val().trim();
+                var address = $('#address').val().trim();
+                var email = $('#checkoutemail').val().trim();
+                var phone = $('#checkoutphone').val().trim();
+                var total = $('#submitCheckout').data('total');
+
+
+                if (fname == '' || lname == '' || email == '' || phone == '' || address == '') {
+                    $('.toast-body').text("Shipping Information is Require !!!");
+                    $('#toast').toast('show');
+                    $('#toast').removeClass('bg-primary').addClass('bg-danger');
+                    $('#checkoutspinner').removeClass('spinner-border spinner-border-sm');
+                    $('#submitCheckout').prop('disabled', false);
+                    return;
+                }
+
+                $.ajax({
+                    method: "POST",
+                    url: "/FEOrder/PayNow",
+                    data: {
+                        order_phone: phone,
+                        order_address: address,
+                        order_email: email,
+                        order_fname: fname,
+                        order_lname: lname,
+                        order_total: total
+                    }
+                }).done(function (data) {
+                    console.log('Success');
+                })
+            })
+        })
+    </script>
+
 }
 
 
