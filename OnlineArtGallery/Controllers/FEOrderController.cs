@@ -27,24 +27,58 @@ namespace OnlineArtGallery.Controllers
             if (Session["UserId"] == null)
                 return Json("Please login first ! ");
             var userId = int.Parse(Session["UserId"].ToString());
+            
             bool check = db.Carts.Any(a => a.artwork_id == id);
             if (!check)
             {
-                var cart = new Cart()
+                var artwork = db.Artworks.Where(a => a.artwork_id == id).FirstOrDefault();
+                if (artwork.artwork_status == 6)
                 {
-                    user_id = int.Parse(Session["UserId"].ToString()),
-                    artwork_id = id
-                };
+                    var auction = db.Auctions.Where(a => a.artwork_id == id).FirstOrDefault();
+                    if (auction.user_id == userId)
+                    {
+                        var cart = new Cart()
+                        {
+                            user_id = int.Parse(Session["UserId"].ToString()),
+                            artwork_id = id
+                        };
 
-                db.Carts.Add(cart);
-                db.SaveChanges();
-                var count = db.Carts.Where(b => b.user_id == userId).Count();
-                var resultt = new
+                        db.Carts.Add(cart);
+                        db.SaveChanges();
+                        var count = db.Carts.Where(b => b.user_id == userId).Count();
+                        var resultt = new
+                        {
+                            noti = "Added !",
+                            count
+                        };
+                        return Json(resultt);
+                    } else
+                    {
+                        var resul = new
+                        {
+                            noti = "You can't add auction into cart"
+                        };
+                        return Json(resul);
+                    }
+                } else
                 {
-                    noti = "Added !",
-                    count
-                };
-                return Json(resultt);
+
+                    var cart = new Cart()
+                    {
+                        user_id = int.Parse(Session["UserId"].ToString()),
+                        artwork_id = id
+                    };
+
+                    db.Carts.Add(cart);
+                    db.SaveChanges();
+                    var count = db.Carts.Where(b => b.user_id == userId).Count();
+                    var resultt = new
+                    {
+                        noti = "Added !",
+                        count
+                    };
+                    return Json(resultt);
+                }
                
             }
             var result = new

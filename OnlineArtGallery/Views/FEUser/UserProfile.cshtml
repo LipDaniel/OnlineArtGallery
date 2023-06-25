@@ -80,6 +80,7 @@
                                                 <th>Order Detail</th>
                                                 <th>Total Price</th>
                                                 <th>Detail</th>
+                                                <th>Status</th>
                                                 <th>Created Date</th>
                                             </tr>
                                         </thead>
@@ -89,42 +90,95 @@
                                                 <tr>
                                                     <td>@item.OrderId</td>
                                                     <td style="padding:0">
-                                                    @foreach(var i in item.OrderItem)
-                                                    {
-                                                        <div class="d-flex mt-1 mb-1">
-                                                            <img src="~/Content/assets/images/artwork/@i.Image" style="height:50px; width:50px"/>
-                                                            @i.Name $@i.Price
-                                                        </div>
-                                                    }
+                                                        @foreach (var i in item.OrderItem)
+                                                        {
+                                                            <div class="d-flex mt-1 mb-1">
+                                                                <img src="~/Content/assets/images/artwork/@i.Image" style="height:60px; width:60px" />
+                                                                <p class="mt-2 ml-3">@i.Name</p>
+                                                                <p class="mt-2 ml-3">$@i.Price</p>
+                                                            </div>
+                                                        }
                                                     </td>
-                                                    <td>
+                                                    <td class="font-weight-bold text-primary">
                                                         $@item.OrderPrice
                                                     </td>
                                                     <td>
                                                         <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal@(item.OrderId)">
                                                             Detail
                                                         </button>
 
                                                         <!-- Modal -->
-                                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                <div class="modal-content">
+                                                        <div class="modal fade" id="exampleModal@(item.OrderId)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered " style="max-width: 1200px;">
+
+                                                                <div class="modal-content p-5">
                                                                     <div class="d-flex">
-                                                                        <div>
-                                                                            <span>First Name</span>
-                                                                            <p>@item.Fname </p>
+                                                                        <div class="summary summary-cart col-6" style="margin-bottom: 0;">
+                                                                            <h3 class="summary-title">Cart Total</h3><!-- End .summary-title -->
+
+                                                                            <table class="table table-summary">
+                                                                                <tbody>
+                                                                                    @foreach (var i in item.OrderItem)
+                                                                                    {
+                                                                                        <tr class="">
+                                                                                            <td>@i.Name</td>
+                                                                                            <td>$@i.Price</td>
+                                                                                        </tr>
+
+                                                                                    }
+                                                                                    <tr class="summary-subtotal">
+                                                                                        <td>Subtotal:</td>
+                                                                                        <td>$@item.OrderPrice</td>
+                                                                                    </tr><!-- End .summary-subtotal -->
+                                                                                    <tr class="summary-shipping">
+                                                                                        <td>Shipping:</td>
+                                                                                        <td>Freeship</td>
+                                                                                    </tr>
+                                                                                    <tr class="summary-total">
+                                                                                        <td>Total:</td>
+                                                                                        <td>$@item.OrderPrice</td>
+                                                                                    </tr><!-- End .summary-total -->
+                                                                                </tbody>
+                                                                            </table><!-- End .table table-summary -->
                                                                         </div>
-                                                                        <div>
-                                                                            <span>Last Name</span>
-                                                                            <p>@item.Lname</p>
+                                                                        <div class="col-6">
+                                                                            <h5 class="text-center text-primary mb-3">Address Information</h5>
+                                                                            <div class="d-flex ">
+                                                                                <div class="form-group col-6">
+                                                                                    <label>First Name</label>
+                                                                                    <input class="form-control" value="@item.Fname" disabled>
+                                                                                </div>
+                                                                                <div class="form-group col-6">
+                                                                                    <label>Last Name</label>
+                                                                                    <input class="form-control" value="@item.Lname" disabled>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="d-flex">
+                                                                                <div class="form-group col-6">
+                                                                                    <label>Email</label>
+                                                                                    <input class="form-control" value="@item.Email" disabled>
+                                                                                </div>
+                                                                                <div class="form-group col-6">
+                                                                                    <label>Phone</label>
+                                                                                    <input class="form-control" value="@item.Phone" disabled>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="d-flex">
+                                                                                <div class="form-group col-12">
+                                                                                    <label>Address</label>
+                                                                                    <input class="form-control" value="@item.Address" disabled>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
 
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </td>
+                                                    <td><span class="badge badge-success" style=" padding: 10px;">VN Pay </span> </td>
                                                     <td>
                                                         @item.CreatedDate
                                                     </td>
@@ -132,7 +186,7 @@
                                             }
                                         </tbody>
                                     </table>
-                                    <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+
                                 </div><!-- .End .tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-auction" role="tabpanel" aria-labelledby="tab-auction-link">
@@ -197,7 +251,7 @@
                                                             <p>@item.Artwork.artwork_description</p>
                                                         </div>
                                                     </div>
-                                                    <div style="text-align:center" class="col-3">
+                                                    <div style="text-align: center; padding: 20px;" class="col-3">
                                                         <p style="font-weight:500">Amount to pay</p>
                                                         <p>$@item.auction_current_bid</p>
                                                         <!-- Button trigger modal -->
@@ -314,7 +368,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <a href="/" class="mt-2 btn-product btn-cart"><span>add to cart</span></a><!-- Button trigger modal -->
+                                                        <a href="" data-cart-id="@item.Artwork.artwork_id" style="margin-left: 36px; width: 130px; " class="mt-2 btn-product btn-cart cart"><span>add to cart</span></a><!-- Button trigger modal -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -564,7 +618,7 @@
             })
         })
     </script>
-
+    
 }
 
 
