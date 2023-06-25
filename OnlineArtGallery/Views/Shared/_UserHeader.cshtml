@@ -31,7 +31,11 @@
 
     </div><!-- End .container -->
 </div><!-- End .header-top -->
-
+<style>
+    .li-navs:hover{
+        background-color: #808080
+    }
+</style>
 <div class="header-middle">
     <div class="container">
         <div class="header-left">
@@ -47,16 +51,15 @@
         </div><!-- End .header-left -->
 
         <div class="header-right">
-            <div class="header-search header-search-extended header-search-visible header-search-no-radius">
-                <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
-                <form action="#" method="get">
-                    <div class="header-search-wrapper search-wrapper-wide">
-                        <label for="q" class="sr-only">Search</label>
-                        <input type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
-                        <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-                    </div><!-- End .header-search-wrapper -->
-                </form>
-            </div><!-- End .header-search -->
+            <div class="header-search-wrapper search-wrapper-wide" style="width: 50vw">
+                <div class="dropdown me-2 w-100">
+                    <input type="text" class="form-control form-control-sm" id="searchBox" placeholder="Tìm kiếm ..." data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" autocomplete="off">
+                    <div class="dropdown-menu dropdown-menu-xxl dropdown-menu-middle p-1 border-0" style="width: 100%; font-size: 1.2rem !important">
+                        <ul class="nav-items mb-0" id="searchList" style="overflow-y: auto; max-height: 400px">
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- End .header-search-wrapper -->
 
 
             <div class="header-dropdown-link">
