@@ -120,15 +120,15 @@ namespace OnlineArtGallery.Controllers
             string output = "";
 
             foreach (var item in artwork) {
-                string href = "/FEArtwork/Artwork/"+ item.artwork_id;
+                string href = "/FEArtwork/ArtworkDetail/"+ item.artwork_id;
                 output += 
-                    "<li>"
-                        +"<a class='text-dark d-flex py-2 bg-white' style='cursor: pointer' href='" + href + "'>"
-                            +"<div class='flex-shrink-0 me-2 ms-2'>"
-                                +"<i class='bi bi-pen text-success'></i>"                                
+                    "<li class='dropdown-item p-0'>"
+                        +"<a class='text-dark d-flex align-items-center py-2' style='cursor: pointer' href='" + href + "'>"
+                            +"<div class='flex-shrink-0 mr-2 ml-2'>"
+                                + "<img class='rounded-3' style='width: 50px; height:50px' src='/Content/assets/images/artwork/"+item.artwork_image+"'>"
                             +"</div>"
-                            +"<div class='flex-grow-1 pe-2'>"
-                                +"<div class='fw-semibold'>"+ item.artwork_name +"</div>"
+                            +"<div class='flex-grow-1 pr-2'>"
+                                +"<div class='font-weight-bold text-uppercase'>" + item.artwork_name +"</div>"
                                 +"<span class='fw-medium text-muted'>"+ item.Artist.artist_name +"</span>"
                             +"</div>"
                         +"</a>"
