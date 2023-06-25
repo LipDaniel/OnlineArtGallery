@@ -245,6 +245,16 @@ $(document).ready(function ($) {
         });
     });
 
+    $('#searchBox').click(function () {
+        $.ajax({
+            url: '/BEIndex/Search',
+            type: 'GET',
+        }).done(function (data) {
+            $('#searchList').empty();
+            $('#searchList').html(data);
+        })
+    });
+
 })
 function fbLogin() {
     FB.login(function (response) {
