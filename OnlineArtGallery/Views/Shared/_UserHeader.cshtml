@@ -72,13 +72,7 @@
                           </svg>
                             @if (Session["UserId"] != null)
                             {
-                                var id = int.Parse(Session["UserId"].ToString());
-                                var notiCount = db.Notifications.Where(a => a.notification_sender_id == id && a.notification_is_read == false).ToList().Count();
-                                if (notiCount > 0)
-                                {
-                                    <span class="cart-count">@notiCount</span>
-
-                                }
+                              <span class="cart-count"></span>
                             }
 
                         </div>

@@ -25,6 +25,37 @@ namespace OnlineArtGallery.Controllers
             {
                 return RedirectToAction("Index", "FEHome");
             }
+            var orderList = db.Orders.Where(a=> a.user_id == auth.user_id).ToList();
+            List<OrderView> orders = new List<OrderView>(); 
+            foreach(var item in orderList)
+            {
+                var order = new OrderView()
+                {
+                    OrderId = item.order_id,
+                    OrderPrice = item.order_total,
+                    CreatedDate = item.order_created_date,
+                    Phone = item.order_phone,
+                    Address = item.order_address,
+                    Email = item.order_email,
+                    Lname = item.order_lname,
+                    Fname = item.order_fname,
+                };
+                List<OrderItemView> orderItem = new List<OrderItemView>();
+                var orderItemList = db.Order_Item.Where(a => a.order_id == order.OrderId).ToList();
+                foreach(var i in orderItemList)
+                {
+                    var itemOrder = new OrderItemView()
+                    {
+                        Name = i.Artwork.artwork_name,
+                        Price = i.Artwork.artwork_price,
+                        Image = i.Artwork.artwork_image
+                    };
+                    orderItem.Add(itemOrder);
+                }
+                order.OrderItem = orderItem;
+                orders.Add(order);
+            }
+
             var auctionList = (from auction in db.Auctions
                     join artwork in db.Artworks on auction.artwork_id equals artwork.artwork_id
                     join auction_user in db.Auction_User on auction.auction_id equals auction_user.auction_id
@@ -57,7 +88,7 @@ namespace OnlineArtGallery.Controllers
                 };
                 aucList.Add(auc);
             }
-
+            ViewBag.Order = orders;
             ViewBag.Auction = aucList;
             ViewBag.User = auth;
             ViewBag.Artists = art;

@@ -249,6 +249,8 @@
     <Compile Include="Models\ModelView\ArtworkView.cs" />
     <Compile Include="Models\ModelView\CartView.cs" />
     <Compile Include="Models\ModelView\AuctionListView.cs" />
+    <Compile Include="Models\ModelView\OrderView.cs" />
+    <Compile Include="Models\ModelView\OrderItemView.cs" />
     <Compile Include="Models\PayCompare.cs" />
     <Compile Include="Models\PayLib.cs" />
     <Compile Include="Models\Util.cs" />
