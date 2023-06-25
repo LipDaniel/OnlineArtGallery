@@ -1,5 +1,6 @@
 ﻿using OnlineArtGallery.Models.Entities;
 using OnlineArtGallery.Models.ModelView;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -109,6 +110,32 @@ namespace OnlineArtGallery.Controllers
             ViewBag.Exhibition = db.Exhibitions.OrderByDescending(a => a.exhibition_id).ToList();
 
             return View();
+        }
+
+        [HttpGet]
+        public string Search()
+        {
+            var artwork = db.Artworks.OrderByDescending(e => e.artwork_id).ToList();
+                
+            string output = "";
+
+            foreach (var item in artwork) {
+                string href = "/FEArtwork/Artwork/"+ item.artwork_id;
+                output += 
+                    "<li>"
+                        +"<a class='text-dark d-flex py-2 bg-white' style='cursor: pointer' href='" + href + "'>"
+                            +"<div class='flex-shrink-0 me-2 ms-2'>"
+                                +"<i class='bi bi-pen text-success'></i>"                                
+                            +"</div>"
+                            +"<div class='flex-grow-1 pe-2'>"
+                                +"<div class='fw-semibold'>"+ item.artwork_name +"</div>"
+                                +"<span class='fw-medium text-muted'>"+ item.Artist.artist_name +"</span>"
+                            +"</div>"
+                        +"</a>"
+                    +"</li>";
+            }
+
+            return output;
         }
     }
 }
