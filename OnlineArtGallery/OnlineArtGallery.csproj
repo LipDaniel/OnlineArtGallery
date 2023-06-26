@@ -349,7 +349,7 @@
     <Content Include="Content\adminassets\js\pages\be_comp_maps_vector.min.js" />
     <Content Include="Content\adminassets\js\pages\be_comp_rating.min.js" />
     <Content Include="Content\adminassets\js\pages\be_forms_validation.min.js" />
-    <Content Include="Content\adminassets\js\pages\be_pages_dashboard.min.js" />
+    <Content Include="Content\adminassets\js\pages\be_pages_dashboard.js" />
     <Content Include="Content\adminassets\js\pages\be_pages_dashboard_v1.min.js" />
     <Content Include="Content\adminassets\js\pages\be_pages_ecom_dashboard.min.js" />
     <Content Include="Content\adminassets\js\pages\be_tables_datatables.min.js" />
@@ -6059,7 +6059,6 @@
     <Content Include="Views\BEIndex\UserList.cshtml" />
     <Content Include="Views\BEIndex\Favourite.cshtml" />
     <Content Include="Views\BEIndex\Rating.cshtml" />
-    <Content Include="Views\BEIndex\OtherList.cshtml" />
     <Content Include="Views\FEArtwork\ArtworkDetail.cshtml" />
     <Content Include="Views\FEHome\Contact.cshtml" />
     <Content Include="Views\FEHome\About.cshtml" />

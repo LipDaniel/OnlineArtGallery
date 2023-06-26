@@ -13,6 +13,17 @@ namespace OnlineArtGallery.Controllers
         // GET: BEIndex
         public ActionResult Index()
         {
+            ViewBag.OrderList = db.Orders.OrderByDescending(a => a.order_id).ToList();
+            ViewBag.countBill = db.Orders.Count();
+            ViewBag.countCustomer = db.Users.Where(e => e.user_level == 2).Count();
+            ViewBag.countOnAuction = db.Auctions.Where(e => e.user_id == null).Count();
+            var totalEarnings = db.Orders.ToList();
+            var total = 0;
+            foreach (var item in totalEarnings)
+            {
+                total += int.Parse(item.order_total);
+            }
+            ViewBag.totalEarnings = total;
             return View();
         }
         public ActionResult UserList(User serlist)
@@ -79,11 +90,6 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult Rating()
         {
-            return View();
-        }
-        public ActionResult OtherList()
-        {
-            ViewBag.OrderList = db.Orders.OrderByDescending(a => a.order_id).ToList();
             return View();
         }
         public ActionResult Infor()

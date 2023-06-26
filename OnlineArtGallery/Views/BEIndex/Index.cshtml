@@ -5,148 +5,388 @@
 
 @section main
 {
-
+    <!-- Hero -->
     <div class="content">
-        <!-- Stats -->
-        <div class="row">
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop border-start border-primary border-4" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="fs-sm fw-semibold text-uppercase text-muted">Visitors</div>
-                        <div class="fs-2 fw-normal text-dark">120,580</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop border-start border-primary border-4" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="fs-sm fw-semibold text-uppercase text-muted">Sales</div>
-                        <div class="fs-2 fw-normal text-dark">150</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop border-start border-primary border-4" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="fs-sm fw-semibold text-uppercase text-muted">Earnings</div>
-                        <div class="fs-2 fw-normal text-dark">$3,200</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop border-start border-primary border-4" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="fs-sm fw-semibold text-uppercase text-muted">Avg Sale</div>
-                        <div class="fs-2 fw-normal text-dark">$21</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        @*///// div charts*@
-        <div class="content">
-            <!-- Chart.js Charts are initialized in js/pages/be_comp_charts.min.js which was auto compiled from _js/pages/be_comp_charts.js -->
-            <!-- For more info and examples you can check out http://www.chartjs.org/docs/ -->
-            <h2 class="content-heading">Chart.js</h2>
-            <div class="row">
-                <div class="col-xl-6">
-                    <!-- Lines Chart -->
-                    <div class="block block-rounded">
-                        <div class="block-header block-header-default">
-                            <h3 class="block-title">Polar Area</h3>
-                            <div class="block-options">
-                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
-                                    <i class="si si-refresh"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="block-content block-content-full text-center">
-                            <div class="py-3 px-xxl-7">
-                                <!-- Polar Area Chart Container -->
-                                <canvas id="js-chartjs-polar"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END Lines Chart -->
-                </div>
-                <div class="col-xl-6">
-                    <!-- Bars Chart -->
-                    <div class="block block-rounded">
-                        <div class="block-header block-header-default">
-                            <h3 class="block-title">Bars</h3>
-                            <div class="block-options">
-                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
-                                    <i class="si si-refresh"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="block-content block-content-full text-center">
-                            <div class="py-3">
-                                <!-- Bars Chart Container -->
-                                <canvas id="js-chartjs-bars"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END Bars Chart -->
-                </div>
-
-                <div class="col-xl-12">
-                    <div class="block block-rounded">
-                        <div class="block-header block-header-default">
-                            <h3 class="block-title">Lines</h3>
-                            <div class="block-options">
-                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
-                                    <i class="si si-refresh"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="block-content block-content-full text-center">
-                            <div class="py-3">
-                                <!-- Lines Chart Container -->
-                                <canvas id="js-chartjs-lines"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
+        <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center py-2 text-center text-md-start">
+            <div class="flex-grow-1 mb-1 mb-md-0">
+                <h1 class="h3 fw-bold mb-2">
+                    Dashboard
+                </h1>
             </div>
         </div>
     </div>
+    <!-- END Hero -->
+    <!-- Page Content -->
+    <div class="content">
+        <!-- Overview -->
+        <div class="row items-push">
+            <div class="col-sm-6 col-xxl-3">
+                <!-- Pending Orders -->
+                <div class="block block-rounded d-flex flex-column h-100 mb-0">
+                    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                        <dl class="mb-0">
+                            <dt class="fs-3 fw-bold">$@ViewBag.totalEarnings</dt>
+                            <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Earning total</dd>
+                        </dl>
+                        <div class="item item-rounded-lg bg-body-light">
+                            <i class="far fa-gem fs-3 text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="bg-body-light rounded-bottom">
+                        <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                            <span>View all orders</span>
+                            <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- END Pending Orders -->
+            </div>
+            <div class="col-sm-6 col-xxl-3">
+                <!-- New Customers -->
+                <div class="block block-rounded d-flex flex-column h-100 mb-0">
+                    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                        <dl class="mb-0">
+                            <dt class="fs-3 fw-bold">@ViewBag.countBill</dt>
+                            <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Orders</dd>
+                        </dl>
+                        <div class="item item-rounded-lg bg-body-light">
+                            <i class="far fa-user-circle fs-3 text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="bg-body-light rounded-bottom">
+                        <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                            <span>View all customers</span>
+                            <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- END New Customers -->
+            </div>
+            <div class="col-sm-6 col-xxl-3">
+                <!-- Messages -->
+                <div class="block block-rounded d-flex flex-column h-100 mb-0">
+                    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                        <dl class="mb-0">
+                            <dt class="fs-3 fw-bold">@ViewBag.countCustomer</dt>
+                            <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Customer</dd>
+                        </dl>
+                        <div class="item item-rounded-lg bg-body-light">
+                            <i class="far fa-paper-plane fs-3 text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="bg-body-light rounded-bottom">
+                        <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                            <span>View all messages</span>
+                            <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- END Messages -->
+            </div>
+            <div class="col-sm-6 col-xxl-3">
+                <!-- Conversion Rate -->
+                <div class="block block-rounded d-flex flex-column h-100 mb-0">
+                    <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                        <dl class="mb-0">
+                            <dt class="fs-3 fw-bold">@ViewBag.countOnAuction</dt>
+                            <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">On Auction</dd>
+                        </dl>
+                        <div class="item item-rounded-lg bg-body-light">
+                            <i class="fa fa-chart-bar fs-3 text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="bg-body-light rounded-bottom">
+                        <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                            <span>View statistics</span>
+                            <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- END Conversion Rate-->
+            </div>
+        </div>
+        <!-- END Overview -->
+        <!-- Statistics -->
+        <div class="row">
+            <div class="col-xl-8 col-xxl-9 d-flex flex-column">
+                <!-- Earnings Summary -->
+                <div class="block block-rounded flex-grow-1 d-flex flex-column">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Earnings Summary</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                                <i class="si si-refresh"></i>
+                            </button>
+                            <button type="button" class="btn-block-option">
+                                <i class="si si-settings"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full flex-grow-1 d-flex align-items-center">
+                        <canvas id="js-chartjs-earnings"></canvas>
+                    </div>
+                    <div class="block-content bg-body-light">
+                        <div class="row items-push text-center w-100">
+                            <div class="col-sm-4">
+                                <dl class="mb-0">
+                                    <dt class="fs-3 fw-bold d-inline-flex align-items-center space-x-2">
+                                        <i class="fa fa-caret-up fs-base text-success"></i>
+                                        <span>2.5%</span>
+                                    </dt>
+                                    <dd class="fs-sm fw-medium text-muted mb-0">Customer Growth</dd>
+                                </dl>
+                            </div>
+                            <div class="col-sm-4">
+                                <dl class="mb-0">
+                                    <dt class="fs-3 fw-bold d-inline-flex align-items-center space-x-2">
+                                        <i class="fa fa-caret-up fs-base text-success"></i>
+                                        <span>3.8%</span>
+                                    </dt>
+                                    <dd class="fs-sm fw-medium text-muted mb-0">Page Views</dd>
+                                </dl>
+                            </div>
+                            <div class="col-sm-4">
+                                <dl class="mb-0">
+                                    <dt class="fs-3 fw-bold d-inline-flex align-items-center space-x-2">
+                                        <i class="fa fa-caret-down fs-base text-danger"></i>
+                                        <span>1.7%</span>
+                                    </dt>
+                                    <dd class="fs-sm fw-medium text-muted mb-0">New Products</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Earnings Summary -->
+            </div>
+            <div class="col-xl-4 col-xxl-3 d-flex flex-column">
+                <div class="row items-push flex-grow-1">
+                    <div class="col-md-6 col-xl-12">
+                        <div class="block block-rounded d-flex flex-column h-100 mb-0">
+                            <div class="block-content flex-grow-1 d-flex justify-content-between">
+                                <dl class="mb-0">
+                                    <dt class="fs-3 fw-bold">570</dt>
+                                    <dd class="fs-sm fw-medium text-muted mb-0">Total Orders</dd>
+                                </dl>
+                                <div>
+                                    <div class="d-inline-block px-2 py-1 rounded-3 fs-xs fw-semibold text-danger bg-danger-light">
+                                        <i class="fa fa-caret-down me-1"></i>
+                                        2.2%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block-content p-1 text-center overflow-hidden">
+                                <!-- Total Orders Chart Container -->
+                                <canvas id="js-chartjs-total-orders" style="height: 90px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-12">
+                        <div class="block block-rounded d-flex flex-column h-100 mb-0">
+                            <div class="block-content flex-grow-1 d-flex justify-content-between">
+                                <dl class="mb-0">
+                                    <dt class="fs-3 fw-bold">$5,234.21</dt>
+                                    <dd class="fs-sm fw-medium text-muted mb-0">Total Earnings</dd>
+                                </dl>
+                                <div>
+                                    <div class="d-inline-block px-2 py-1 rounded-3 fs-xs fw-semibold text-success bg-success-light">
+                                        <i class="fa fa-caret-up me-1"></i>
+                                        4.2%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block-content p-1 text-center overflow-hidden">
+                                <!-- Total Earnings Chart Container -->
+                                <canvas id="js-chartjs-total-earnings" style="height: 90px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12">
+                        <div class="block block-rounded d-flex flex-column h-100 mb-0">
+                            <div class="block-content flex-grow-1 d-flex justify-content-between">
+                                <dl class="mb-0">
+                                    <dt class="fs-3 fw-bold">264</dt>
+                                    <dd class="fs-sm fw-medium text-muted mb-0">New Customers</dd>
+                                </dl>
+                                <div>
+                                    <div class="d-inline-block px-2 py-1 rounded-3 fs-xs fw-semibold text-success bg-success-light">
+                                        <i class="fa fa-caret-up me-1"></i>
+                                        9.3%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block-content p-1 text-center overflow-hidden">
+                                <!-- New Customers Chart Container -->
+                                <canvas id="js-chartjs-new-customers" style="height: 90px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Last 2 Weeks -->
+            </div>
+        </div>
+        <!-- END Statistics -->
+        <!-- Recent Orders -->
+        <div class="block block-rounded">
+            <div class="block-header block-header-default">
+                <h3 class="block-title">Recent Orders</h3>
+                <div class="block-options space-x-1">
+                    <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="class-toggle" data-target="#one-dashboard-search-orders" data-class="d-none">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn btn-sm btn-alt-secondary" id="dropdown-recent-orders-filters" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-fw fa-flask"></i>
+                            Filters
+                            <i class="fa fa-angle-down ms-1"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-end fs-sm" aria-labelledby="dropdown-recent-orders-filters">
+                            <a class="dropdown-item fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                Pending
+                                <span class="badge bg-primary rounded-pill">20</span>
+                            </a>
+                            <a class="dropdown-item fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                Active
+                                <span class="badge bg-primary rounded-pill">72</span>
+                            </a>
+                            <a class="dropdown-item fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                Completed
+                                <span class="badge bg-primary rounded-pill">890</span>
+                            </a>
+                            <a class="dropdown-item fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                All
+                                <span class="badge bg-primary rounded-pill">997</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="one-dashboard-search-orders" class="block-content border-bottom d-none">
+                <!-- Search Form -->
+                <form action="be_pages_dashboard.html" method="POST" onsubmit="return false;">
+                    <div class="push">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-alt" id="one-ecom-orders-search" name="one-ecom-orders-search" placeholder="Search all orders..">
+                            <span class="input-group-text bg-body border-0">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+                <!-- END Search Form -->
+            </div>
+            <div class="block-content block-content-full">
+                <!-- Recent Orders Table -->
+                <div class="table-responsive">
+                    <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
+                        <thead>
+                        <th>#<</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Shipping Information</th>
+                        <th>Total</th>
+                        <th>Shipping method</th>
+                        <th>Status</th>
+                        </thead>
+                        <tbody>
+                            @{
+                                var i = 1;
+                            }
+                            @foreach (var item in ViewBag.OrderList)
+                            {
+                                <tr class="align-middle">
+                                    <td>@i</td>
+                                    <td>@item.User.user_fname @item.User.user_lname</td>
+                                    <td>
+                                        @item.order_created_date
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-primary">@item.order_email</span> <br />
+                                        <span class="badge bg-warning">@item.order_address</span> <br />
+                                        <span class="badge bg-secondary">@item.order_fname @item.order_lname</span> <br />
+                                    </td>
+                                    <td>
+                                        <span class="fw-semibold d-inline-block py-1 px-3 rounded-pill bg-primary-light text-white w-80 text-center">
+                                            $@item.order_total
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success w-80 text-center">
+                                            SHIPPING
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning w-80 text-center">
+                                            PAID
+                                        </span>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END Recent Orders Table -->
+            </div>
+            <div class="block-content block-content-full bg-body-light">
+                <!-- Pagination -->
+                <nav aria-label="Photos Search Navigation">
+                    <ul class="pagination pagination-sm justify-content-end mb-0">
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-label="Previous">
+                                Prev
+                            </a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href="javascript:void(0)">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)">4</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                                Next
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- END Pagination -->
+            </div>
+        </div>
+        <!-- END Recent Orders -->
+    </div>
+    <!-- END Page Content -->
 }
-
 
 @section css
 {
     <link rel="stylesheet" href="~/Content/adminassets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="~/Content/adminassets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
-    <link rel="stylesheet" href="~/Content/adminassets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
-    <link rel="stylesheet" href="~/Content/adminassets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
-    <link rel="stylesheet" href="~/Content/adminassets/js/plugins/flatpickr/flatpickr.css">
-    <link rel="stylesheet" href="~/Content/adminassets/js/plugins/flatpickr/flatpickr.min.css">
-    <link rel="stylesheet" href="~/Content/adminassets/css/oneui.min.css">
-
-
+    <link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
+    <link rel="stylesheet" href="/Content/adminassets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
 }
 
 @section scripts
 {
-    <script src="~/Content/adminassets/js/pages/be_comp_charts.min.js"></script>
-    <script src="~/Content/adminassets/_js/pages/be_comp_charts.js"></script>
-    <script src="~/Content/adminassets/js/plugins/chart.js/chart.min.js"></script>
-
-
-
-    <script src="~/Content/adminassets/js/pages/be_pages_dashboard_v1.min.js"></script>
-    <script src="~/Content/adminassets/js/pages/be_pages_dashboard_v1.min.js"></script>
-    <script src="~/Content/adminassets/js/plugins/chart.js/chart.js"></script>
-
-
-
-
-
-
-
+    <!-- Page JS Plugins -->
+    <script src="/Content/adminassets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.print.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
+    <!-- Page JS Code -->
+    <script src="/Content/adminassets/js/pages/be_tables_datatables.min.js"></script>
+    <script src="/Content/adminassets/js/plugins/chart.js/chart.min.js"></script>
+    <script src="/Content/adminassets/js/pages/be_pages_dashboard.js"></script>
 }
-@*<script src="~/Content/adminassets/js/frontend.js"></script>
-    <script src="~/Content/adminassets/js/oneui.app.min.js"></script> lam toi giao dien cua form dashboard , nen khong duoc de vao *@
