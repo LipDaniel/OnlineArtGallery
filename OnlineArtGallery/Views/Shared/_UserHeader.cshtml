@@ -1,5 +1,5 @@
 ﻿@using OnlineArtGallery.Models.Entities;
-@{ 
+@{
     GalleryArtEntities db = new GalleryArtEntities();
 
 }
@@ -32,7 +32,7 @@
     </div><!-- End .container -->
 </div><!-- End .header-top -->
 <style>
-    .li-navs:hover{
+    .li-navs:hover {
         background-color: #808080
     }
 </style>
@@ -67,57 +67,57 @@
                 @if (Session["UserId"] != null)
                 {
 
-                <div class="dropdown cart-dropdown">
-                    <a href="/FEOrder/Cart" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                        <div class="icon">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-                              <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
-                          </svg>
-                            @if (Session["UserId"] != null)
-                            {
-                              <span class="cart-count"></span>
-                            }
-
-                        </div>
-                        <p>Notification</p>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0 border-0 fs-sm show" aria-labelledby="page-header-notifications-dropdown" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 32.8px, 0px);" data-popper-placement="bottom-end">
-                        <div class="p-2  border-bottom text-center rounded-top">
-                            <h5 class="dropdown-header text-uppercase" style=" font-size: 12px;">Notification</h5>
-                        </div>
-                        <ul class="nav-items mb-0">
-                            @if (Session["UserId"] != null)
-                            {
-                                var id = int.Parse(Session["UserId"].ToString());
-                                var notiList = db.Notifications.Where(a => a.notification_sender_id == id).ToList();
-                                foreach (var item in notiList)
+                    <div class="dropdown cart-dropdown">
+                        <a href="/FEOrder/Cart" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                                </svg>
+                                @if (Session["UserId"] != null)
                                 {
-                                    <li class="bg-body-light">
-                                        <a data-notification-id="3" class="text-dark d-flex py-2 notification" id="redirectPendingPosts">
-                                            <div class="flex-shrink-0 me-2 ms-3">
-                                                <i class="bi bi-pen text-success"></i>
-                                            </div>
-                                            <div class="flex-grow-1 pe-2">
-                                                <div class="fw-semibold">@item.notification_title</div>
-                                                <p>@item.notification_message</p>
-                                                <span class="fw-medium text-muted" style="font-size:12px">@item.notification_created_date</span>
-                                            </div>
-                                        </a>
-                                    </li>
+                                    <span class="cart-count"></span>
+                                }
+
+                            </div>
+                            <p>Notification</p>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0 border-0 fs-sm show" aria-labelledby="page-header-notifications-dropdown" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 32.8px, 0px);" data-popper-placement="bottom-end">
+                            <div class="p-2  border-bottom text-center rounded-top">
+                                <h5 class="dropdown-header text-uppercase" style=" font-size: 12px;">Notification</h5>
+                            </div>
+                            <ul class="nav-items mb-0">
+                                @if (Session["UserId"] != null)
+                                {
+                                    var id = int.Parse(Session["UserId"].ToString());
+                                    var notiList = db.Notifications.Where(a => a.notification_sender_id == id).ToList();
+                                    foreach (var item in notiList)
+                                    {
+                                        <li class="bg-body-light">
+                                            <a data-notification-id="3" class="text-dark d-flex py-2 notification" id="redirectPendingPosts">
+                                                <div class="flex-shrink-0 me-2 ms-3">
+                                                    <i class="bi bi-pen text-success"></i>
+                                                </div>
+                                                <div class="flex-grow-1 pe-2">
+                                                    <div class="fw-semibold">@item.notification_title</div>
+                                                    <p>@item.notification_message</p>
+                                                    <span class="fw-medium text-muted" style="font-size:12px">@item.notification_created_date</span>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                    }
 
                                 }
 
-                            }
-                          
-                        </ul>
-                        <!-- <div class="p-2 border-top text-center">
-      <a class="d-inline-block fw-medium" href="javascript:void(0)">
-        <i class="fa fa-fw fa-arrow-down me-1 opacity-50"></i> Load More..
-      </a>
-    </div> -->
-                    </div>
-                </div><!-- End .cart-dropdown -->
+                            </ul>
+                            <!-- <div class="p-2 border-top text-center">
+                              <a class="d-inline-block fw-medium" href="javascript:void(0)">
+                                <i class="fa fa-fw fa-arrow-down me-1 opacity-50"></i> Load More..
+                              </a>
+                            </div> -->
+                        </div>
+                    </div><!-- End .cart-dropdown -->
                 }
                 @* ACCOUNT *@
                 <div class="account">
@@ -245,10 +245,11 @@
                     <div class="dropdown-menu">
                         <nav class="side-nav">
                             <ul class="menu-vertical sf-arrows">
-                                @{ 
+                                @{
                                     var cateList = db.Categories.ToList();
                                 }
-                                @foreach (var cate in cateList) { 
+                                @foreach (var cate in cateList)
+                                {
                                     <li class="item-lead"><a href="/FEArtwork/Category/@cate.category_id">@cate.category_name</a></li>
                                 }
                             </ul>
@@ -262,104 +263,30 @@
                 <nav class="main-nav">
                     <ul class="menu sf-arrows">
                         <li class="megamenu-container active">
-                            <a href="/" class="sf-with-ul">Home</a>
+                            <a href="/">Home</a>
 
-                            <!--<div class="megamenu demo">
-                                <div class="menu-col">
-                                    <div class="menu-title">Choose your demo</div>--><!-- End .menu-title -->
-
-                                    <!--<div class="demo-list">
-                                        <div class="demo-item">
-                                            <a href="index-1.html">
-                                                <span class="demo-bg" style="background-image: url(~/Content/assets/images/menu/demos/1.jpg);"></span>
-                                                <span class="demo-title">01 - furniture store</span>
-                                            </a>
-                                        </div>--><!-- End .demo-item -->
-
-                                        <!--<div class="demo-item">
-                                            <a href="index-2.html">
-                                                <span class="demo-bg" style="background-image: url(~/Content/assets/images/menu/demos/2.jpg);"></span>
-                                                <span class="demo-title">02 - furniture store</span>
-                                            </a>
-                                        </div>--><!-- End .demo-item -->
-
-                                        <!--<div class="demo-item">
-                                            <a href="index-3.html">
-                                                <span class="demo-bg" style="background-image: url(~/Content/assets/images/menu/demos/3.jpg);"></span>
-                                                <span class="demo-title">03 - electronic store</span>
-                                            </a>
-                                        </div>--><!-- End .demo-item -->
-
-                                        <!--<div class="demo-item">
-                                            <a href="index-4.html">
-                                                <span class="demo-bg" style="background-image: url(~/Content/assets/images/menu/demos/4.jpg);"></span>
-                                                <span class="demo-title">04 - electronic store</span>
-                                            </a>
-                                        </div>--><!-- End .demo-item -->
-
-                                        <!--<div class="demo-item">
-                                            <a href="index-5.html">
-                                                <span class="demo-bg" style="background-image: url(~/Content/assets/images/menu/demos/5.jpg);"></span>
-                                                <span class="demo-title">05 - fashion store</span>
-                                            </a>
-                                        </div>--><!-- End .demo-item -->
-
-                                        <!--<div class="demo-item">
-                                            <a href="index-6.html">
-                                                <span class="demo-bg" style="background-image: url(~/Content/assets/images/menu/demos/6.jpg);"></span>
-                                                <span class="demo-title">06 - fashion store</span>
-                                            </a>
-                                        </div>--><!-- End .demo-item -->
-
-                                        <!--<div class="demo-item">
-                                            <a href="index-7.html">
-                                                <span class="demo-bg" style="background-image: url(~/Content/assets/images/menu/demos/7.jpg);"></span>
-                                                <span class="demo-title">07 - fashion store</span>
-                                            </a>
-                                        </div>--><!-- End .demo-item -->
-
-                                        <!--<div class="demo-item">
-                                            <a href="index-8.html">
-                                                <span class="demo-bg" style="background-image: url(~/Content/assets/images/menu/demos/8.jpg);"></span>
-                                                <span class="demo-title">08 - fashion store</span>
-                                            </a>
-                                        </div>--><!-- End .demo-item -->
-
-                                        <!--<div class="demo-item">
-                                            <a href="index-9.html">
-                                                <span class="demo-bg" style="background-image: url(~/Content/assets/images/menu/demos/9.jpg);"></span>
-                                                <span class="demo-title">09 - fashion store</span>
-                                            </a>
-                                        </div>--><!-- End .demo-item -->
-
-                                        <!--<div class="demo-item">
-                                            <a href="index-10.html">
-                                                <span class="demo-bg" style="background-image: url(~/Content/assets/images/menu/demos/10.jpg);"></span>
-                                                <span class="demo-title">10 - shoes store</span>
-                                            </a>
-                                        </div>--><!-- End .demo-item -->
-
-                                    <!--</div>--><!-- End .demo-list -->
-
-                                    <!--<div class="megamenu-action text-center">
-                                        <a href="#" class="btn btn-outline-primary-2 view-all-demos"><span>View All Demos</span><i class="icon-long-arrow-right"></i></a>
-                                    </div>--><!-- End .text-center -->
-                                <!--</div>--><!-- End .menu-col -->
-                            <!--</div>--><!-- End .megamenu -->
+                            
                         </li>
 
                         <li>
-                            <a href="#" >Artist</a>
+                            <a href="/FEArtwork/Artist/" class="sf-with-ul" title="Artist">Artist</a>
+                            <ul>
+                                @{
+                                    var artist = db.Artists.ToList();
+                                }
+                                @foreach (var art in artist)
+                                {
+                                    <li><a style="font-size:14px;font-weight:bold;" href="/FEArtwork/Artist/@art.artist_id">@art.artist_name</a></li>
+                                }
+                            </ul>
 
-                           
                         </li>
 
-                        
 
                         <li>
                             <a href="/FEArtwork/ArtworkList">Products</a>
 
-                            
+
                         </li>
                         <li>
                             <a href="/FEHome/About">About us</a>
