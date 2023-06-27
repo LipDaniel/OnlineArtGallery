@@ -85,7 +85,7 @@ namespace OnlineArtGallery.Controllers
 
 
             // Kiểm tra xem mật khẩu mới và xác nhận mật khẩu có khớp nhau không
-            var pattern = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$!%*?&])[A-Za-z\d$!%*?&]{8,}$");
+            var pattern = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$!%*?&#^])[A-Za-z\d$!%*?&#^]{8,}$");
             var isPasswordValid = pattern.IsMatch(new_password) && !new_password.Contains(" ");
 
             if (!isPasswordValid || new_password != reset_password)
