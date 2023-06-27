@@ -30,13 +30,13 @@ namespace OnlineArtGallery.Controllers
                 auction = db.Auctions.Where(a => a.artwork_id == id).FirstOrDefault();
             }
             var revCount = db.Ratings.Where(a=> a.artwork_id == id).Count();
-            var artworkList = db.Artworks.Take(5).ToList();
+            var artworkList = db.Artworks.Where(b => b.category_id == artwork.category_id).Take(5).ToList();
             var rev = db.Ratings.Where(a=>a.artwork_id == id).ToList();
             var star = db.Ratings.Where(a => a.artwork_id == id).ToList();
             double percent = 0;
             if(star.Count() != 0)
             {
-                percent = (star.Average(a => a.rating_start)) / 5 * 100;
+                percent = (star.Average(a => a.rating_star)) / 5 * 100;
             }
             if(Session["UserId"] != null)
             {
@@ -57,6 +57,25 @@ namespace OnlineArtGallery.Controllers
             return View();
         }
 
+        public ActionResult Rating(Rating rate, int artwork_id)
+        {
+            if (Session["UserId"] != null)
+            {
+                var userId = int.Parse(Session["UserId"].ToString());
+                var rating = new Rating()
+                {
+                    user_id = userId,
+                    artwork_id = artwork_id,
+                    rating_star = rate.rating_star,
+                    rating_comment = rate.rating_comment,
+                    rating_title = rate.rating_title,
+                };
+                db.Ratings.Add(rating);
+                db.SaveChanges();
+                return Redirect(Request.UrlReferrer.ToString());
+            };
+            return Redirect(Request.UrlReferrer.ToString());
+        }
         public int RatingCount(int id)
         {
             GalleryArtEntities db = new GalleryArtEntities();
@@ -70,7 +89,7 @@ namespace OnlineArtGallery.Controllers
             double percent = 0;
             if (star.Count() != 0)
             {
-                percent = (star.Average(a => a.rating_start)) / 5 * 100;
+                percent = (star.Average(a => a.rating_star)) / 5 * 100;
                 return percent;
             }
 
@@ -151,5 +170,7 @@ namespace OnlineArtGallery.Controllers
             ViewBag.Category = category;
             return View();
         }
+
+        
     }
 }

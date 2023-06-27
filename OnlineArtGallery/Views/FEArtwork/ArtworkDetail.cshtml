@@ -5,12 +5,14 @@
 
 @section main
 {
+   <input hidden id="artwork_status" value="@ViewBag.Artwork.artwork_status"/>
     <main class="main">
         <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
             <div class="container d-flex align-items-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item"><a href="/FEArtwork/Category/"></a></li>
                 </ol>
 
 
@@ -106,14 +108,11 @@
 
 
                             <div class="product-details-action d-flex" style=" margin-top: 3rem;">
-                                @if (Session["UserId"] == null)
-                                {
-                                    <a href="#signin-modal" data-toggle="modal" class=" btn-product btn-cart"><span>Sign in / Sign up</span></a>
-                                }
-                                else
-                                {
 
-                                    if (ViewBag.Artwork.artwork_status == 2)
+
+                                @if (ViewBag.Artwork.artwork_status == 2)
+                                {
+                                    if (Session["UserId"] != null)
                                     {
                                         <div>
                                             <div class="d-flex">
@@ -126,146 +125,153 @@
                                                 <p class="text-danger" style="margin-top: 10px;font-weight: 500;" id="text-error"></p>
                                             </div>
                                         </div>
-                                        <a href="/" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                        <a href="" data-wishlist-id="@ViewBag.Artwork.artwork_id" class="btn-product btn-wishlist wishlist"><span>Add to Wishlist</span></a>
+
 
                                     }
                                     else
                                     {
+                                        <a href="#signin-modal" data-toggle="modal" class=" btn-product btn-cart"><span>Sign in / Sign up</span></a>
+                                    }
+                                }
+                                else
+                                {
 
 
-                                        <a href="/" class="btn-product btn-cart"><span>add to cart</span></a><!-- Button trigger modal -->
-                                        if (Session["UserId"] != null)
-                                        {
-                                            <button type="button" class="btn btn-primary btn ml-5" data-toggle="modal" data-target="#exampleModal">
-                                                BUY NOW
-                                            </button>
+                                    if (Session["UserId"] != null)
+                                    {
+                                        <a href="" data-cart-id="@ViewBag.Artwork.artwork_id" class="btn-product btn-cart cart"><span>add to cart</span></a><!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary btn ml-5" data-toggle="modal" data-target="#exampleModal">
+                                            BUY NOW
+                                        </button>
 
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" style="max-width:1000px">
-                                                    <div class="modal-content">
-                                                        <div class="modal-body p-3">
-                                                            <div class="">
-                                                                <div class="checkout">
-                                                                    <div class="container">
-                                                                        <form id="checkout">
-                                                                            <div class="row">
-                                                                                <div class="col-lg-7">
-                                                                                    <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
-                                                                                    <div class="row">
-                                                                                        <div class="col-sm-6">
-                                                                                            <label>First Name *</label>
-                                                                                            <input type="text" id="fname" class="form-control" value="@ViewBag.User.user_fname">
-                                                                                        </div><!-- End .col-sm-6 -->
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" style="max-width:1000px">
+                                                <div class="modal-content">
+                                                    <div class="modal-body p-3">
+                                                        <div class="">
+                                                            <div class="checkout">
+                                                                <div class="container">
+                                                                    <form id="checkout">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-7">
+                                                                                <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-6">
+                                                                                        <label>First Name *</label>
+                                                                                        <input type="text" id="fname" class="form-control" value="@ViewBag.User.user_fname">
+                                                                                    </div><!-- End .col-sm-6 -->
 
-                                                                                        <div class="col-sm-6">
-                                                                                            <label>Last Name *</label>
-                                                                                            <input type="text" id="lname" class="form-control" value="@ViewBag.User.user_lname">
-                                                                                        </div><!-- End .col-sm-6 -->
-                                                                                    </div><!-- End .row -->
+                                                                                    <div class="col-sm-6">
+                                                                                        <label>Last Name *</label>
+                                                                                        <input type="text" id="lname" class="form-control" value="@ViewBag.User.user_lname">
+                                                                                    </div><!-- End .col-sm-6 -->
+                                                                                </div><!-- End .row -->
 
-                                                                                    <label>Address *</label>
-                                                                                    <input type="text" id="address" class="form-control">
+                                                                                <label>Address *</label>
+                                                                                <input type="text" id="address" class="form-control">
 
-                                                                                    <div class="row">
-                                                                                        <div class="col-sm-6">
-                                                                                            <label>Email address *</label>
-                                                                                            <input type="email" id="checkoutemail" class="form-control" value="@ViewBag.User.user_email">
-                                                                                        </div><!-- End .col-sm-6 -->
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-6">
+                                                                                        <label>Email address *</label>
+                                                                                        <input type="email" id="checkoutemail" class="form-control" value="@ViewBag.User.user_email">
+                                                                                    </div><!-- End .col-sm-6 -->
 
-                                                                                        <div class="col-sm-6">
-                                                                                            <label>Phone *</label>
-                                                                                            <input type="tel" id="checkoutphone" class="form-control" value="@ViewBag.User.user_phone">
-                                                                                        </div><!-- End .col-sm-6 -->
-                                                                                    </div><!-- End .row -->
-                                                                                </div><!-- End .col-lg-9 -->
-                                                                                <aside class="col-lg-5">
-                                                                                    <div class="summary">
-                                                                                        <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+                                                                                    <div class="col-sm-6">
+                                                                                        <label>Phone *</label>
+                                                                                        <input type="tel" id="checkoutphone" class="form-control" value="@ViewBag.User.user_phone">
+                                                                                    </div><!-- End .col-sm-6 -->
+                                                                                </div><!-- End .row -->
+                                                                            </div><!-- End .col-lg-9 -->
+                                                                            <aside class="col-lg-5">
+                                                                                <div class="summary">
+                                                                                    <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
 
-                                                                                        <table class="table table-summary">
-                                                                                            <thead>
-                                                                                                <tr>
-                                                                                                    <th>Product</th>
-                                                                                                    <th>Total</th>
-                                                                                                </tr>
-                                                                                            </thead>
+                                                                                    <table class="table table-summary">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Product</th>
+                                                                                                <th>Total</th>
+                                                                                            </tr>
+                                                                                        </thead>
 
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td><a href="/FEArtwork/ArtworkDetail/@ViewBag.Artwork.artwork_id">@ViewBag.Artwork.artwork_name</a></td>
-                                                                                                    <td>$@ViewBag.Artwork.artwork_price</td>
-                                                                                                </tr>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td><a href="/FEArtwork/ArtworkDetail/@ViewBag.Artwork.artwork_id">@ViewBag.Artwork.artwork_name</a></td>
+                                                                                                <td>$@ViewBag.Artwork.artwork_price</td>
+                                                                                            </tr>
 
 
-                                                                                                <tr class="summary-subtotal">
-                                                                                                    <td>Subtotal:</td>
-                                                                                                    <td>$@ViewBag.Artwork.artwork_price.00</td>
-                                                                                                </tr><!-- End .summary-subtotal -->
-                                                                                                <tr>
-                                                                                                    <td>Shipping:</td>
-                                                                                                    <td>Free shipping</td>
-                                                                                                </tr>
-                                                                                                <tr class="summary-total">
-                                                                                                    <td>Total:</td>
-                                                                                                    <td>$@ViewBag.Artwork.artwork_price.00</td>
-                                                                                                </tr><!-- End .summary-total -->
-                                                                                            </tbody>
-                                                                                        </table><!-- End .table table-summary -->
+                                                                                            <tr class="summary-subtotal">
+                                                                                                <td>Subtotal:</td>
+                                                                                                <td>$@ViewBag.Artwork.artwork_price.00</td>
+                                                                                            </tr><!-- End .summary-subtotal -->
+                                                                                            <tr>
+                                                                                                <td>Shipping:</td>
+                                                                                                <td>Free shipping</td>
+                                                                                            </tr>
+                                                                                            <tr class="summary-total">
+                                                                                                <td>Total:</td>
+                                                                                                <td>$@ViewBag.Artwork.artwork_price.00</td>
+                                                                                            </tr><!-- End .summary-total -->
+                                                                                        </tbody>
+                                                                                    </table><!-- End .table table-summary -->
 
-                                                                                        <div class="accordion-summary" id="accordion-payment">
-                                                                                            <div class="card">
-                                                                                                <div class="card-header" id="heading-1">
-                                                                                                    <h2 class="card-title">
-                                                                                                        <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-                                                                                                            VNPay
-                                                                                                        </a>
-                                                                                                    </h2>
-                                                                                                </div><!-- End .card-header -->
-                                                                                                <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
-                                                                                                    <div class="card-body">
-                                                                                                        VNPAY applies modern and breakthrough technology in the field of electronic payment in order to
-                                                                                                        building a diverse service ecosystem in terms of products, utilities, and experiences
-                                                                                                        superior service to serve customers and partners.
-                                                                                                    </div><!-- End .card-body -->
-                                                                                                </div><!-- End .collapse -->
-                                                                                            </div><!-- End .card -->
-                                                                                        </div><!-- End .accordion -->
-                                                                                        <input id="artworkId" hidden value="@ViewBag.Artwork.artwork_id" />
-                                                                                        <input id="price" hidden value="@ViewBag.Artwork.artwork_price" />
-                                                                                        <button type="submit" id="submitCheckout" data-total="@ViewBag.Artwork.artwork_price" class="btn btn-outline-primary-2 btn-order btn-block">
-                                                                                            <span class="btn-text">Place Order</span>
-                                                                                            <span class="btn-hover-text">Proceed to Checkout</span>
-                                                                                            <span class="" id="checkoutspinner" role="status" aria-hidden="true"></span>
-                                                                                        </button>
-                                                                                    </div><!-- End .summary -->
-                                                                                </aside><!-- End .col-lg-3 -->
-                                                                            </div><!-- End .row -->
-                                                                        </form>
-                                                                    </div><!-- End .container -->
-                                                                </div><!-- End .checkout -->
-                                                            </div><!-- End .page-content -->
-                                                        </div>
+                                                                                    <div class="accordion-summary" id="accordion-payment">
+                                                                                        <div class="card">
+                                                                                            <div class="card-header" id="heading-1">
+                                                                                                <h2 class="card-title">
+                                                                                                    <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+                                                                                                        VNPay
+                                                                                                    </a>
+                                                                                                </h2>
+                                                                                            </div><!-- End .card-header -->
+                                                                                            <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
+                                                                                                <div class="card-body">
+                                                                                                    VNPAY applies modern and breakthrough technology in the field of electronic payment in order to
+                                                                                                    building a diverse service ecosystem in terms of products, utilities, and experiences
+                                                                                                    superior service to serve customers and partners.
+                                                                                                </div><!-- End .card-body -->
+                                                                                            </div><!-- End .collapse -->
+                                                                                        </div><!-- End .card -->
+                                                                                    </div><!-- End .accordion -->
+                                                                                    <input id="artworkId" hidden value="@ViewBag.Artwork.artwork_id" />
+                                                                                    <input id="price" hidden value="@ViewBag.Artwork.artwork_price" />
+                                                                                    <button type="submit" id="submitCheckout" data-total="@ViewBag.Artwork.artwork_price" class="btn btn-outline-primary-2 btn-order btn-block">
+                                                                                        <span class="btn-text">Place Order</span>
+                                                                                        <span class="btn-hover-text">Proceed to Checkout</span>
+                                                                                        <span class="" id="checkoutspinner" role="status" aria-hidden="true"></span>
+                                                                                    </button>
+                                                                                </div><!-- End .summary -->
+                                                                            </aside><!-- End .col-lg-3 -->
+                                                                        </div><!-- End .row -->
+                                                                    </form>
+                                                                </div><!-- End .container -->
+                                                            </div><!-- End .checkout -->
+                                                        </div><!-- End .page-content -->
                                                     </div>
                                                 </div>
                                             </div>
-
-                                        }
-                                        else
-                                        {
-                                            <a href="#signin-modal" data-toggle="modal" class="ml-5 btn-product btn-cart"><span>Paynow</span></a><!-- Button trigger modal -->
-                                        }
-                                        <a href="/" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                        </div>
 
                                     }
+                                    else
+                                    {
+                                        <a href="#signin-modal" data-toggle="modal"  class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <a href="#signin-modal" data-toggle="modal" class="ml-5 btn-product btn-cart"><span>Paynow</span></a><!-- Button trigger modal -->
+                                    }
+                                    <a href="" data-wishlist-id="@ViewBag.Artwork.artwork_id" class="btn-product btn-wishlist wishlist"><span>Add to Wishlist</span></a>
+
                                 }
+
 
 
 
 
                             </div><!-- End .product-details-action -->
 
-                             
+
                             </div><!-- End .product-details -->
                         </div><!-- End .col-md-6 -->
                     </div><!-- End .row -->
@@ -331,57 +337,60 @@
                         <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
                             <div class="reviews">
                                 <h3>Reviews (@ViewBag.RevCount)</h3>
+                            @foreach(var item in ViewBag.Review)
+                            {
+                                string lname = item.User.user_lname;
+                                char firstCharacter = lname[0];
+                                double star = (double)item.rating_star;
+                                string percent = ((star / 5) * 100).ToString() + "%";
                                 <div class="review">
                                     <div class="row no-gutters">
                                         <div class="col-auto">
-                                            <h4><a href="#">Samanta J.</a></h4>
+                                            <h4><a>@item.User.user_fname @firstCharacter.</a></h4>
                                             <div class="ratings-container">
                                                 <div class="ratings">
-                                                    <div class="ratings-val" style="width: @ViewBag.Percent%;"></div><!-- End .ratings-val -->
+                                                    <div class="ratings-val" style="width: @percent"></div><!-- End .ratings-val -->
                                                 </div><!-- End .ratings -->
                                             </div><!-- End .rating-container -->
-                                            <span class="review-date">6 days ago</span>
                                         </div><!-- End .col -->
                                         <div class="col">
-                                            <h4>Good, perfect size</h4>
+                                            <h4>@item.rating_title</h4>
 
                                             <div class="review-content">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum dolores assumenda asperiores facilis porro reprehenderit animi culpa atque blanditiis commodi perspiciatis doloremque, possimus, explicabo, autem fugit beatae quae voluptas!</p>
+                                                <p>@item.rating_comment</p>
                                             </div><!-- End .review-content -->
 
-                                            <div class="review-action">
-                                                <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
-                                                <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                            </div><!-- End .review-action -->
                                         </div><!-- End .col-auto -->
                                     </div><!-- End .row -->
                                 </div><!-- End .review -->
 
-                                <div class="review">
-                                    <div class="row no-gutters">
-                                        <div class="col-auto">
-                                            <h4><a href="#">John Doe</a></h4>
-                                            <div class="ratings-container">
-                                                <div class="ratings">
-                                                    <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
-                                                </div><!-- End .ratings -->
-                                            </div><!-- End .rating-container -->
-                                            <span class="review-date">5 days ago</span>
-                                        </div><!-- End .col -->
-                                        <div class="col">
-                                            <h4>Very good</h4>
+                            }
 
-                                            <div class="review-content">
-                                                <p>Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum blanditiis laudantium iste amet. Cum non voluptate eos enim, ab cumque nam, modi, quas iure illum repellendus, blanditiis perspiciatis beatae!</p>
-                                            </div><!-- End .review-content -->
-
-                                            <div class="review-action">
-                                                <a href="#"><i class="icon-thumbs-up"></i>Helpful (0)</a>
-                                                <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                            </div><!-- End .review-action -->
-                                        </div><!-- End .col-auto -->
-                                    </div><!-- End .row -->
-                                </div><!-- End .review -->
+                           
+                                <div>
+                                    <form method="Post" action="/FEArtwork/Rating">
+                                        <div>
+                                            <h3 class="title title-simple text-left text-normal">Add a Review </h3>
+                                            <input hidden name="artwork_id" value="@ViewBag.Artwork.artwork_id"/>
+                                            <div class="row mb-2">
+                                                <div class="col-6">
+                                                    <input type="text" name="rating_title"  placeholder="Title *" required="" class="form-control">
+                                                </div>
+                                                <div class="col-6">
+                                                    <select class="form-control" name="rating_star">
+                                                        <option value="5" selected>5 stars </option>
+                                                        <option value="4">4 stars </option>
+                                                        <option value="3">3 stars </option>
+                                                        <option value="2">2 stars </option>
+                                                        <option value="1">1 star </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <textarea name="rating_comment" cols="30" rows="6" placeholder="Comment *" required="" class="form-control mb-2"></textarea>
+                                            <button type="submit" class="btn btn-primary"><span>Submit</span><i class="icon-long-arrow-right"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div><!-- End .reviews -->
                         </div><!-- .End .tab-pane -->
                     </div><!-- End .tab-content -->
@@ -434,8 +443,8 @@
                                             </a>
 
                                             <div class="product-action-vertical">
-                                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                                                <a href="" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                                
                                             </div><!-- End .product-action-vertical -->
 
                                             <div class="product-action">
@@ -541,26 +550,30 @@
         }
         $(document).ready(function () {
 
-            setInterval(function () {
-                var currentDate = new Date();
-                var endDate = document.getElementById('end-date').textContent;
-                var startDate = document.getElementById('start-date').textContent;
-                var formattedDate = formatDate(endDate);
-                if (formattedDate <= currentDate) {
-                    isClickable = false;
-                    document.getElementById('bid-amount').disabled = true;
-                    var widthPercentage = 100;
-                    document.getElementById('progress-bar').style.width = widthPercentage + "%";
-                    document.getElementById('bid-submit').disabled = true
-                } else {
-                    var timeAuction = timeDiffSecond(startDate, endDate)
-                    var timeCurrent = timeDiffSecond(currentDate, endDate);
-                    var percentage = timeCurrent / timeAuction * 100;
-                    var widthPercentage = 100 - percentage;
-                    document.getElementById('progress-bar').style.width = widthPercentage + "%";
-                };
+            var status = $('#artwork_status').val();
+            if (status == 2) {
+                setInterval(function () {
+                    var currentDate = new Date();
+                    var endDate = document.getElementById('end-date').textContent;
+                    var startDate = document.getElementById('start-date').textContent;
+                    var formattedDate = formatDate(endDate);
+                    if (formattedDate <= currentDate) {
+                        isClickable = false;
+                        document.getElementById('bid-amount').disabled = true;
+                        var widthPercentage = 100;
+                        document.getElementById('progress-bar').style.width = widthPercentage + "%";
+                        document.getElementById('bid-submit').disabled = true
+                    } else {
+                        var timeAuction = timeDiffSecond(startDate, endDate)
+                        var timeCurrent = timeDiffSecond(currentDate, endDate);
+                        var percentage = timeCurrent / timeAuction * 100;
+                        var widthPercentage = 100 - percentage;
+                        document.getElementById('progress-bar').style.width = widthPercentage + "%";
+                    };
 
-            }, 1000);
+                }, 1000);
+
+            }
 
         });
 
@@ -605,7 +618,6 @@
     </script>
     <script>
         $(document).ready(function ($) {
-
             $('#checkout').submit(function (event) {
                 event.preventDefault();
                 $('#checkoutspinner').addClass('spinner-border spinner-border-sm');
@@ -648,5 +660,7 @@
             })
         })
     </script>
+   
+
 }
 

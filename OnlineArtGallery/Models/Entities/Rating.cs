@@ -17,9 +17,9 @@ namespace OnlineArtGallery.Models.Entities
         public int rating_id { get; set; }
         public Nullable<int> user_id { get; set; }
         public Nullable<int> artwork_id { get; set; }
-        public byte rating_start { get; set; }
+        public byte rating_star { get; set; }
         public string rating_comment { get; set; }
-        public Nullable<int> rating_level { get; set; }
+        public string rating_title { get; set; }
     
         public virtual Artwork Artwork { get; set; }
         public virtual User User { get; set; }

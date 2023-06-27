@@ -45,6 +45,5 @@ namespace OnlineArtGallery.Models.Entities
         public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

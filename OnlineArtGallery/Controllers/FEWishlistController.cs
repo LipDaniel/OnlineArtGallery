@@ -19,7 +19,13 @@ namespace OnlineArtGallery.Controllers
         public ActionResult Create(int id)
         {
             if (Session["UserId"] == null)
-                return Json("Please login first");
+            {
+                var resul = new
+                {
+                    noti = "Please login first!",
+                };
+                return Json(resul);
+            }
 
             var userId = int.Parse(Session["UserId"].ToString());
             bool check = db.Favourites.Any(a => a.artwork_id == id);
