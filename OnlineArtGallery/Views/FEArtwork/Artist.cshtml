@@ -110,7 +110,7 @@
                                                     <div class="product-cat">
                                                         <a href="/FEArtwork/Category/@art.Category.category_id">@art.Category.category_name</a>
                                                     </div><!-- End .product-cat -->
-                                                    <h3 class="product-title"><a href="/FEArtwork/ArtworkDetail/@art.Artist.artwork_id ">@art.artwork_name</a></h3><!-- End .product-title -->
+                                                    <h3 class="product-title"><a href="/FEArtwork/ArtworkDetail/@art.artwork_id ">@art.artwork_name</a></h3><!-- End .product-title -->
 
 
                                                     <p> <b style="font-weight:500">Artist:</b> <a href="/FEArtwork/Artist/@art.Artist.artist_id"> @art.Artist.artist_name</a> -  <b style="font-weight:500">Date:</b> @art.artwork_date</p>
@@ -254,36 +254,5 @@
             </div><!-- End .page-content -->
         </main>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(".wishlist").click(function (e) {
-                e.preventDefault();
-                var id = $(this).data("wishlist-id");
-
-                $.ajax({
-                    url: "/FEWishlist/Create",
-                    method: "Post",
-                    data: {
-                        id: id
-                    }
-                }).done(function (res) {
-                    $('.toast-body').text(res);
-                    $('#toast').toast('show');
-                });
-            });
-            $(".cart").click(function (e) {
-                e.preventDefault();
-                var id = $(this).data("cart-id");
-
-                $.ajax({
-                    url: "/FEOrder/Create",
-                    method: "Post",
-                    data: {
-                        id: id
-                    }
-                }).done(function (res) {
-                    $('.toast-body').text(res);
-                    $('#toast').toast('show');
-                });
-            });
-        </script>
+      
     }

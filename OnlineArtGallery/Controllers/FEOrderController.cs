@@ -18,7 +18,40 @@ namespace OnlineArtGallery.Controllers
             if (Session["UserId"] == null)
                 return RedirectToAction("Index", "FEHome");
             var id = int.Parse(Session["UserId"].ToString());
-            var cart = db.Carts.Where(a => a.user_id == id).ToList();
+            var cartlist = (from cart in db.Carts
+                            join artwork in db.Artworks on cart.artwork_id equals artwork.artwork_id
+                            where cart.user_id == id
+                            orderby cart.cart_id descending
+                            select new
+                            {
+                                Cart = cart,
+                                Artwork = artwork
+                            }).ToList();
+            List<CartView> cartList= new List<CartView>();
+            int amount = 0;
+            foreach(var item in cartlist)
+            {
+                
+                var cart = new CartView()
+                {
+                    ArtworkId = item.Artwork.artwork_id,
+                    ArtworkName = item.Artwork.artwork_name,
+                    ArtworkPrice = item.Artwork.artwork_price,
+                    ArtworkStatus = (int)item.Artwork.artwork_status,
+                    ArtworkImage = item.Artwork.artwork_image,
+                    CartId = item.Cart.cart_id
+                };
+                if (item.Artwork.artwork_status == 2)
+                {
+                    var auction = db.Auctions.Where(a => a.artwork_id == item.Artwork.artwork_id).FirstOrDefault();
+                    var bid = auction.auction_current_bid;
+                    cart.ArtworkPrice = bid;
+                }
+                amount += int.Parse(cart.ArtworkPrice);
+                cartList.Add(cart);
+            }
+            ViewBag.CartList = cartList;
+            ViewBag.Amount = amount;
             return View();
         }
 
