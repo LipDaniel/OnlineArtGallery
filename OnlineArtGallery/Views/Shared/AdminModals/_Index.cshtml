@@ -172,7 +172,11 @@
          var passwordAlert = document.getElementById('newpwd_alert');
 
          // Password complexity pattern
-         var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$!%*?&])[A-Za-z\d$!%*?&]{8,}$/;
+         var pattern = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$!%*?&#^()])[A-Za-z\\d$!%*?&#^()]{8,}$");
+
+
+
+
 
          if (!pattern.test(newPassword)) {
              passwordAlert.textContent = "Password must have at least 8 characters, including uppercase, lowercase, numbers, and special characters.";
@@ -184,7 +188,7 @@
              passwordAlert.textContent = "";
          }
     }
-    //hien thi mat khau 
+    //hien thi mat khau
     function togglePasswordVisibility(inputId) {
         var passwordInput = document.getElementById(inputId);
         var eyeIcon = passwordInput.nextElementSibling;

@@ -7,6 +7,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls.WebParts;
 using OnlineArtGallery.Models.ModelView;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
+
 namespace OnlineArtGallery.Controllers
 {
     public class FEUserController : Controller
@@ -139,17 +143,39 @@ namespace OnlineArtGallery.Controllers
         {
             var auth = db.Users.Find(Session["UserId"]);
 
-            if (current_password == null)
-                return "Enter your password first !";
+            
 
             if (new_password != reset_password)
-                return "Your password doesen't match !";
+                return "Your passwords don't match!";
 
-            auth.user_password = new_password;
-            db.SaveChanges();
-
-            return "Change password successfully !";
+            // Kiểm tra khớp với mật khẩu hiện tại
+            if (current_password == auth.user_password && new_password == reset_password)
+            {
+                // Kiểm tra yêu cầu về độ dài và ký tự
+                if (IsPasswordValid(new_password))
+                {
+                    // Lưu mật khẩu mới vào cơ sở dữ liệu
+                    auth.user_password = new_password;
+                    db.SaveChanges();
+                    return "Password changed successfully!";
+                }
+                else
+                {
+                    return "Your new password must be at least 8 characters!";
+                }
+            }
+            else
+            {
+                return "Password changed Fail!";
+            }
         }
+        private bool IsPasswordValid(string password)
+        {
+            // Kiểm tra yêu cầu về độ dài và ký tự
+            var regex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$!%*?&#^()])[A-Za-z\d$!%*?&#^()]{8,}$");
+            return regex.IsMatch(password);
+        }
+        // Hàm băm mật khẩu
 
         public ActionResult RequestArtwork(Artwork model, string height, string width, HttpPostedFileBase artwork_image)
         {
