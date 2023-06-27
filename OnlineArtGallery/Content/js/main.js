@@ -13,7 +13,7 @@
         $('.toast-body').text(res.noti);
         $('#toast').toast('show');
         if (res.count != null) {
-            $('.wishlist-count').html(res.count);
+            $('.wishlist-count').html(res.count).show();
             console.log(res.count);
         }
         console.log(res.noti);
@@ -33,7 +33,7 @@ $(".cart").click(function (e) {
         $('.toast-body').text(res.noti);
         $('#toast').toast('show');
         if (res.count != null) {
-            $('cart-count').html(res.count);
+            $('#cart-count').html(res.count).show();
             console.log(res.count);
         }
     });
@@ -106,7 +106,7 @@ function interVal(element, Time) {
     }, 1000);
 }
 function checkAuction() {
- 
+
 }
 
 $(document).ready(function ($) {
@@ -123,6 +123,29 @@ $(document).ready(function ($) {
     }).done(function (res) {
         console.log(res)
     });
+
+    $.ajax({
+        url: '/FEHome/Count',
+        method: 'GET',
+        success: function (response) {
+            if (response.cart > 0) {
+                $('#cart-count').removeAttr('hidden').show();
+                $('#cart-count').text(response.cart).show();
+            } 
+            if (response.wishlist > 0) {
+                $('#wishlist-count').removeAttr('hidden').show();
+                $('#wishlist-count').text(response.wishlist).show();
+            }
+            if (response.noti > 0) {
+                $('#noti-count').removeAttr('hidden').show();
+                $('#noti-count').text(response.noti).show();
+            } 
+        },
+        error: function (error) {
+
+        }
+    });
+
 
     $("#SignUpForm").submit(function (e) {
 
@@ -211,7 +234,7 @@ $(document).ready(function ($) {
 
         var id = $(this).data('auctionid');
         var current_price = $(this).data('currentprice');
-        var amount = $('.bid_price_'+id).val();
+        var amount = $('.bid_price_' + id).val();
         var $this = $(this);
 
         if (amount <= current_price || (amount - current_price) % 50 != 0) {

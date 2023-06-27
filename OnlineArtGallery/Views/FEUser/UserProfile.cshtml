@@ -590,7 +590,8 @@
                 var email = $('#checkoutemail').val().trim();
                 var phone = $('#checkoutphone').val().trim();
                 var total = $('#submitCheckout').data('total');
-
+                var artwork_id = $('#artworkId').val().trim();
+                var price = $('#price').val().trim();
 
                 if (fname == '' || lname == '' || email == '' || phone == '' || address == '') {
                     $('.toast-body').text("Shipping Information is Require !!!");
@@ -610,7 +611,9 @@
                         order_email: email,
                         order_fname: fname,
                         order_lname: lname,
-                        order_total: total
+                        order_total: total,
+                        artwork_id: artwork_id,
+                        price: price
                     }
                 }).done(function (data) {
                     console.log('Success');
@@ -618,7 +621,7 @@
             })
         })
     </script>
-    
+
 }
 
 

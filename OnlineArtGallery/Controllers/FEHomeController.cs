@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Razor.Parser.SyntaxTree;
 
 namespace OnlineArtGallery.Controllers
 {
@@ -29,6 +30,29 @@ namespace OnlineArtGallery.Controllers
             return View();
         }
 
+        public ActionResult Count()
+        {
+            if(Session["UserId"] != null)
+            {
+                var id = int.Parse(Session["UserId"].ToString());
+                var cartCount = db.Carts.Where(a => a.user_id == id).ToList().Count();
+                var wishlistCount = db.Favourites.Where(a => a.user_id == id).ToList().Count();
+                var notiCount = db.Notifications.Where(a => a.notification_sender_id == id && a.notification_is_read == false).ToList().Count();
+                var result = new
+                {
+                    cart = cartCount,
+                    wishlist = wishlistCount,
+                    noti = notiCount
+                };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            var resultt = new
+            {
+                cart = 0,
+                wishlist = 0,
+            };
+            return Json(resultt, JsonRequestBehavior.AllowGet);
+        }
       
    
     }

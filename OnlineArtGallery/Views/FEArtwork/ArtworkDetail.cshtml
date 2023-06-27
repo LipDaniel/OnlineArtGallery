@@ -189,8 +189,7 @@
                                                                                                     <td><a href="/FEArtwork/ArtworkDetail/@ViewBag.Artwork.artwork_id">@ViewBag.Artwork.artwork_name</a></td>
                                                                                                     <td>$@ViewBag.Artwork.artwork_price</td>
                                                                                                 </tr>
-                                                                                                total += int.Parse(@ViewBag.Artwork.artwork_price);
-                                                                                                }
+                                                                                                
 
                                                                                                 <tr class="summary-subtotal">
                                                                                                     <td>Subtotal:</td>
@@ -225,7 +224,8 @@
                                                                                                 </div><!-- End .collapse -->
                                                                                             </div><!-- End .card -->
                                                                                         </div><!-- End .accordion -->
-
+                                                                                        <input id="artworkId" hidden value="@ViewBag.Artwork.artwork_id" />
+                                                                                        <input id="price" hidden value="@ViewBag.Artwork.artwork_price" />
                                                                                         <button type="submit" id="submitCheckout" data-total="@ViewBag.Artwork.artwork_price" class="btn btn-outline-primary-2 btn-order btn-block">
                                                                                             <span class="btn-text">Place Order</span>
                                                                                             <span class="btn-hover-text">Proceed to Checkout</span>
@@ -257,20 +257,7 @@
 
                                 </div><!-- End .product-details-action -->
 
-                                <div class="product-details-footer">
-                                    <div class="product-cat">
-                                        <span>Category:</span>
-                                        <a href="#">@ViewBag.Category.category_name</a>,
-                                    </div><!-- End .product-cat -->
-
-                                    <div class="social-icons social-icons-sm">
-                                        <span class="social-label">Share:</span>
-                                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                        <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
-                                    </div>
-                                </div><!-- End .product-details-footer -->
+                             
                             </div><!-- End .product-details -->
                         </div><!-- End .col-md-6 -->
                     </div><!-- End .row -->
@@ -607,6 +594,50 @@
         });
 
     </script>
-    <script src="/Content/js/checkout.js"></script>
+    <script>
+        $(document).ready(function ($) {
+
+            $('#checkout').submit(function (event) {
+                event.preventDefault();
+                $('#checkoutspinner').addClass('spinner-border spinner-border-sm');
+                $('#submitCheckout').prop('disabled', true);
+
+                var fname = $('#fname').val().trim();
+                var lname = $('#lname').val().trim();
+                var address = $('#address').val().trim();
+                var email = $('#checkoutemail').val().trim();
+                var phone = $('#checkoutphone').val().trim();
+                var total = $('#submitCheckout').data('total');
+                var artwork_id = $('#artworkId').val().trim();
+                var price = $('#price').val().trim();
+
+                if (fname == '' || lname == '' || email == '' || phone == '' || address == '') {
+                    $('.toast-body').text("Shipping Information is Require !!!");
+                    $('#toast').toast('show');
+                    $('#toast').removeClass('bg-primary').addClass('bg-danger');
+                    $('#checkoutspinner').removeClass('spinner-border spinner-border-sm');
+                    $('#submitCheckout').prop('disabled', false);
+                    return;
+                }
+
+                $.ajax({
+                    method: "POST",
+                    url: "/FEOrder/PayNow",
+                    data: {
+                        order_phone: phone,
+                        order_address: address,
+                        order_email: email,
+                        order_fname: fname,
+                        order_lname: lname,
+                        order_total: total,
+                        artwork_id: artwork_id,
+                        price: price
+                    }
+                }).done(function (data) {
+                    console.log('Success');
+                })
+            })
+        })
+    </script>
 }
 
