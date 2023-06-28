@@ -1,14 +1,9 @@
-$.ajax({
-    method: "GET",
-    url: "/BEDashboard/GetRevenueEachYear",
-}).done(function (data) {
-    data.each(function (item) {
-        console.log(item());
-    });
-})
+
+
 
 One.onLoad(
     class {
+        
         static initCharts() {
             (Chart.defaults.color = "#818d96"),
                 (Chart.defaults.scale.grid.lineWidth = 0),
@@ -43,7 +38,7 @@ One.onLoad(
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: "rgba(100, 116, 139, 1)",
-                                data: [716, 628, 1056, 560, 956, 890, 790],
+                                data: JSON.parse(localStorage.getItem('revenue2022')),
                             },
                             {
                                 label: "This Year",
@@ -54,7 +49,7 @@ One.onLoad(
                                 pointBorderColor: "#fff",
                                 pointHoverBackgroundColor: "#fff",
                                 pointHoverBorderColor: "rgba(100, 116, 139, 1)",
-                                data: [1160, 923, 1052, 1300, 880, 926, 963],
+                                data: JSON.parse(localStorage.getItem('revenue2023')),
                             },
                         ],
                     },

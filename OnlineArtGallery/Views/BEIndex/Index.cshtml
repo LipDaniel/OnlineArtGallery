@@ -5,7 +5,6 @@
 
 @section main
 {
-    <!-- Hero -->
     <div class="content">
         <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center py-2 text-center text-md-start">
             <div class="flex-grow-1 mb-1 mb-md-0">
@@ -15,13 +14,9 @@
             </div>
         </div>
     </div>
-    <!-- END Hero -->
-    <!-- Page Content -->
     <div class="content">
-        <!-- Overview -->
         <div class="row items-push">
             <div class="col-sm-6 col-xxl-3">
-                <!-- Pending Orders -->
                 <div class="block block-rounded d-flex flex-column h-100 mb-0">
                     <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
@@ -39,10 +34,8 @@
                         </a>
                     </div>
                 </div>
-                <!-- END Pending Orders -->
             </div>
             <div class="col-sm-6 col-xxl-3">
-                <!-- New Customers -->
                 <div class="block block-rounded d-flex flex-column h-100 mb-0">
                     <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
@@ -60,10 +53,8 @@
                         </a>
                     </div>
                 </div>
-                <!-- END New Customers -->
             </div>
             <div class="col-sm-6 col-xxl-3">
-                <!-- Messages -->
                 <div class="block block-rounded d-flex flex-column h-100 mb-0">
                     <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
@@ -81,10 +72,8 @@
                         </a>
                     </div>
                 </div>
-                <!-- END Messages -->
             </div>
             <div class="col-sm-6 col-xxl-3">
-                <!-- Conversion Rate -->
                 <div class="block block-rounded d-flex flex-column h-100 mb-0">
                     <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
@@ -102,14 +91,10 @@
                         </a>
                     </div>
                 </div>
-                <!-- END Conversion Rate-->
             </div>
         </div>
-        <!-- END Overview -->
-        <!-- Statistics -->
         <div class="row">
-            <div class="col-xl-8 col-xxl-9 d-flex flex-column">
-                <!-- Earnings Summary -->
+            <div class="col-xl-12 col-xxl-12 d-flex flex-column">
                 <div class="block block-rounded flex-grow-1 d-flex flex-column">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">Earnings Summary</h3>
@@ -157,112 +142,14 @@
                         </div>
                     </div>
                 </div>
-                <!-- END Earnings Summary -->
             </div>
-            <div class="col-xl-4 col-xxl-3 d-flex flex-column">
-                <div class="row items-push flex-grow-1">
-                    <div class="col-md-6 col-xl-12">
-                        <div class="block block-rounded d-flex flex-column h-100 mb-0">
-                            <div class="block-content flex-grow-1 d-flex justify-content-between">
-                                <dl class="mb-0">
-                                    <dt class="fs-3 fw-bold">570</dt>
-                                    <dd class="fs-sm fw-medium text-muted mb-0">Total Orders</dd>
-                                </dl>
-                                <div>
-                                    <div class="d-inline-block px-2 py-1 rounded-3 fs-xs fw-semibold text-danger bg-danger-light">
-                                        <i class="fa fa-caret-down me-1"></i>
-                                        2.2%
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block-content p-1 text-center overflow-hidden">
-                                <!-- Total Orders Chart Container -->
-                                <canvas id="js-chartjs-total-orders" style="height: 90px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-12">
-                        <div class="block block-rounded d-flex flex-column h-100 mb-0">
-                            <div class="block-content flex-grow-1 d-flex justify-content-between">
-                                <dl class="mb-0">
-                                    <dt class="fs-3 fw-bold">$5,234.21</dt>
-                                    <dd class="fs-sm fw-medium text-muted mb-0">Total Earnings</dd>
-                                </dl>
-                                <div>
-                                    <div class="d-inline-block px-2 py-1 rounded-3 fs-xs fw-semibold text-success bg-success-light">
-                                        <i class="fa fa-caret-up me-1"></i>
-                                        4.2%
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block-content p-1 text-center overflow-hidden">
-                                <!-- Total Earnings Chart Container -->
-                                <canvas id="js-chartjs-total-earnings" style="height: 90px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-12">
-                        <div class="block block-rounded d-flex flex-column h-100 mb-0">
-                            <div class="block-content flex-grow-1 d-flex justify-content-between">
-                                <dl class="mb-0">
-                                    <dt class="fs-3 fw-bold">264</dt>
-                                    <dd class="fs-sm fw-medium text-muted mb-0">New Customers</dd>
-                                </dl>
-                                <div>
-                                    <div class="d-inline-block px-2 py-1 rounded-3 fs-xs fw-semibold text-success bg-success-light">
-                                        <i class="fa fa-caret-up me-1"></i>
-                                        9.3%
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block-content p-1 text-center overflow-hidden">
-                                <!-- New Customers Chart Container -->
-                                <canvas id="js-chartjs-new-customers" style="height: 90px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END Last 2 Weeks -->
-            </div>
+            
         </div>
-        <!-- END Statistics -->
-        <!-- Recent Orders -->
         <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <h3 class="block-title">Recent Orders</h3>
-                <div class="block-options space-x-1">
-                    <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="class-toggle" data-target="#one-dashboard-search-orders" data-class="d-none">
-                        <i class="fa fa-search"></i>
-                    </button>
-                    <div class="dropdown d-inline-block">
-                        <button type="button" class="btn btn-sm btn-alt-secondary" id="dropdown-recent-orders-filters" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-fw fa-flask"></i>
-                            Filters
-                            <i class="fa fa-angle-down ms-1"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-end fs-sm" aria-labelledby="dropdown-recent-orders-filters">
-                            <a class="dropdown-item fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                Pending
-                                <span class="badge bg-primary rounded-pill">20</span>
-                            </a>
-                            <a class="dropdown-item fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                Active
-                                <span class="badge bg-primary rounded-pill">72</span>
-                            </a>
-                            <a class="dropdown-item fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                Completed
-                                <span class="badge bg-primary rounded-pill">890</span>
-                            </a>
-                            <a class="dropdown-item fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                All
-                                <span class="badge bg-primary rounded-pill">997</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div id="one-dashboard-search-orders" class="block-content border-bottom d-none">
-                <!-- Search Form -->
                 <form action="be_pages_dashboard.html" method="POST" onsubmit="return false;">
                     <div class="push">
                         <div class="input-group">
@@ -273,10 +160,8 @@
                         </div>
                     </div>
                 </form>
-                <!-- END Search Form -->
             </div>
             <div class="block-content block-content-full">
-                <!-- Recent Orders Table -->
                 <div class="table-responsive">
                     <table class="table table-sm table-responsive table-hover js-dataTable-responsive dataTable no-footer dtr-inline">
                         <thead>
@@ -326,42 +211,9 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- END Recent Orders Table -->
-            </div>
-            <div class="block-content block-content-full bg-body-light">
-                <!-- Pagination -->
-                <nav aria-label="Photos Search Navigation">
-                    <ul class="pagination pagination-sm justify-content-end mb-0">
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-label="Previous">
-                                Prev
-                            </a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="javascript:void(0)">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">4</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)" aria-label="Next">
-                                Next
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- END Pagination -->
             </div>
         </div>
-        <!-- END Recent Orders -->
     </div>
-    <!-- END Page Content -->
 }
 
 @section css

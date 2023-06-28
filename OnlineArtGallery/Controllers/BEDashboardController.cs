@@ -1,9 +1,14 @@
-﻿using OnlineArtGallery.Models.Entities;
+﻿using Newtonsoft.Json;
+using OnlineArtGallery.Models.Entities;
+using OnlineArtGallery.Models.ModelView;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 
 namespace OnlineArtGallery.Controllers
 {
@@ -11,18 +16,44 @@ namespace OnlineArtGallery.Controllers
     {
         private GalleryArtEntities db = new GalleryArtEntities();
         // GET: BEDashboard
-        public List<Order> GetRevenueEachYear()
+        public Object GetRevenueEachYear()
         {
-            var orders = db.Orders.SqlQuery("Select month(convert(datetime, order_created_date, 120)) as month, SUM(CAST(order_total as int)) as revenues from orders where year(convert(datetime, order_created_date, 120)) = 2022 group by month(convert(datetime, order_created_date, 120))").ToList();
+            using (SqlConnection con = new SqlConnection("workstation id=GalleryArt.mssql.somee.com;packet size=4096;user id=nhannguyen_SQLLogin_1;pwd=4d52kand8k;data source=GalleryArt.mssql.somee.com;persist security info=False;initial catalog=GalleryArt"))
+            {
+                using (SqlCommand cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = "revenue_2023";
+                    cmd.Connection.Open();
+                    object o = cmd.ExecuteScalar();
 
-            return orders;
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataSet dataset = new DataSet();
+                    da.Fill(dataset);
+                    cmd.Connection.Close();
+                    var res = JsonConvert.SerializeObject(dataset.Tables[0]);
+                    return res;
+                }
+            }
         }
 
-        public DateTime ConverDate(string date)
+        public Object GetRevenueEachYear2023()
         {
-            var myDate = DateTime.ParseExact(date, "yyyy-MM-dd HH:mm:ss",
-                                       System.Globalization.CultureInfo.InvariantCulture);
-            return myDate;
+            using (SqlConnection con = new SqlConnection("workstation id=GalleryArt.mssql.somee.com;packet size=4096;user id=nhannguyen_SQLLogin_1;pwd=4d52kand8k;data source=GalleryArt.mssql.somee.com;persist security info=False;initial catalog=GalleryArt"))
+            {
+                using (SqlCommand cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = "revenue_2022";
+                    cmd.Connection.Open();
+                    object o = cmd.ExecuteScalar();
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataSet dataset = new DataSet();
+                    da.Fill(dataset);
+                    cmd.Connection.Close();
+                    var res = JsonConvert.SerializeObject(dataset.Tables[0]);
+                    return res;
+                }
+            }
         }
     }
 }

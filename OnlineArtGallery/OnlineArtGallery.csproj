@@ -249,6 +249,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelView\RequestView.cs" />
+    <Compile Include="Models\ModelView\Revenue.cs" />
     <Compile Include="Models\PayCompare.cs" />
     <Compile Include="Models\PayLib.cs" />
     <Compile Include="Models\Util.cs" />
