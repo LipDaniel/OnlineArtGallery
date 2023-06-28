@@ -67,7 +67,7 @@ namespace OnlineArtGallery.Controllers
             }
             var userId = int.Parse(Session["UserId"].ToString());
             
-            bool check = db.Carts.Any(a => a.artwork_id == id);
+            bool check = db.Carts.Any(a => a.artwork_id == id && a.user_id == userId);
             if (!check)
             {
                 var artwork = db.Artworks.Where(a => a.artwork_id == id).FirstOrDefault();
@@ -204,6 +204,24 @@ namespace OnlineArtGallery.Controllers
             update.artwork_status = 3;
             db.SaveChanges();
 
+            bool check = db.Notifications.Any(a => a.artwork_id == artwork_id);
+            if (check)
+            {
+                var request = db.Notifications.Where(a=> a.artwork_id == artwork_id && a.notification_recipient_id != null).FirstOrDefault();
+                var art = db.Artworks.Find(artwork_id);
+                var noti = new Notification()
+                {
+                    artwork_id = artwork_id,
+                    notification_sender_id = request.notification_recipient_id,
+                    notification_title = "Your artwork was sold",
+                    notification_message = art.artwork_name + "was sold!",
+                    notification_created_date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                    notification_is_read = false,
+                };
+                db.Notifications.Add(noti);
+                db.SaveChanges();
+                
+            }
             string payment = (int.Parse(obj.order_total) * 100).ToString();
             return JavaScript("window.location = '" + Url.Action("Payment", "FEOrder", new { payment = payment }) + "'");
 
@@ -248,6 +266,24 @@ namespace OnlineArtGallery.Controllers
                 Cart book = db.Carts.Find(item.cart_id);
                 db.Carts.Remove(book);
                 db.SaveChanges();
+
+                bool check = db.Notifications.Any(a => a.artwork_id == artwork.artwork_id);
+                if (check)
+                {
+                    var request = db.Notifications.Where(a => a.artwork_id == artwork.artwork_id && a.notification_recipient_id != null).FirstOrDefault();
+                    var noti = new Notification()
+                    {
+                        artwork_id = artwork.artwork_id,
+                        notification_sender_id = request.notification_recipient_id,
+                        notification_title = "Your artwork was sold",
+                        notification_message = artwork.artwork_name + "was sold!",
+                        notification_created_date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+                        notification_is_read = false,
+                    };
+                    db.Notifications.Add(noti);
+                    db.SaveChanges();
+
+                }
             }
 
             string payment = (int.Parse(obj.order_total) * 100).ToString();

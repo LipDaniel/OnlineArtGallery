@@ -43,27 +43,7 @@
 
                             </div><!-- End .toolbox-right -->
                         </div><!-- End .toolbox -->
-                        @functions {
-                            public int RatingCount(int id)
-                            {
-                                GalleryArtEntities db = new GalleryArtEntities();
-                                var count = db.Ratings.Where(a => a.artwork_id == id).ToList().Count();
-                                return count;
-                            }
-                            public double Star(int id)
-                            {
-                                GalleryArtEntities db = new GalleryArtEntities();
-                                var star = db.Ratings.Where(a => a.artwork_id == id).ToList();
-                                double percent = 0;
-                                if (star.Count() != 0)
-                                {
-                                    percent = (star.Average(a => a.rating_start)) / 5 * 100;
-                                    return percent;
-                                }
-
-                                return percent;
-                            }
-                        }
+                       
                         <div class="products mb-3">
                             @foreach (var art in ViewBag.Artwork)
                             {
@@ -94,9 +74,9 @@
                                                 </div><!-- End .product-price -->
                                                 <div class="ratings-container">
                                                     <div class="ratings">
-                                                        <div class="ratings-val" style="width: @Star(art.artwork_id)%;"></div><!-- End .ratings-val -->
+                                                        <div class="ratings-val star-id" data-star-id="@art.artwork_id" style="width: 0%;"></div><!-- End .ratings-val -->
                                                     </div><!-- End .ratings -->
-                                                    <span class="ratings-text">( @RatingCount(art.artwork_id) Reviews )</span>
+                                                    <span class="ratings-text star-count" data-star-count="@art.artwork_id"> </span>
                                                 </div><!-- End .rating-container -->
 
                                                 <a data-wishlist-id="@art.artwork_id" href="" class="btn-product btn-cart mb-1 wishlists"><span>add to wishlist</span></a>

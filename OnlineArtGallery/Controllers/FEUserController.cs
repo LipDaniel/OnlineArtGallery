@@ -30,7 +30,7 @@ namespace OnlineArtGallery.Controllers
             {
                 return RedirectToAction("Index", "FEHome");
             }
-            var orderList = db.Orders.Where(a=> a.user_id == auth.user_id).ToList();
+            var orderList = db.Orders.Where(a=> a.user_id == auth.user_id).OrderByDescending(a => a.order_id).ToList();
             List<OrderView> orders = new List<OrderView>(); 
             foreach(var item in orderList)
             {
