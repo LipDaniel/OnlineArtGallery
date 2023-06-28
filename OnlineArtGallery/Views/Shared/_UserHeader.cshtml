@@ -89,7 +89,7 @@
                                     var notiList = db.Notifications.Where(a => a.notification_sender_id == id).ToList();
                                     foreach (var item in notiList)
                                     {
-                                        <li class="bg-body-light">
+                                        <li class="bg-body-light pl-2">
                                             <a data-notification-id="3" class="text-dark d-flex py-2 notification" id="redirectPendingPosts">
                                                 <div class="flex-shrink-0 me-2 ms-3">
                                                     <i class="bi bi-pen text-success"></i>
@@ -179,7 +179,7 @@
 
                                         <figure class="product-image-container">
                                             <a href="product.html" class="product-image">
-                                                <img src="~/Content/assets/images/artwork/@cart.Artwork.artwork_image" alt="product">
+                                                <img style="width:100%; height:50px" src="~/Content/assets/images/artwork/@cart.Artwork.artwork_image" alt="product">
                                             </a>
                                         </figure>
                                         <a href="/FEOrder/Delete/@cart.Cart.cart_id" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>

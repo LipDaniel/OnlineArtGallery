@@ -73,6 +73,19 @@ namespace OnlineArtGallery.Controllers
                         Artwork = artwork
                     }).ToList();
             var wonAuction = db.Auctions.Where(a => a.user_id == auth.user_id).ToList();
+            List<Tuple<string, int>> payment = new List<Tuple<string, int>>();
+            foreach (var item in wonAuction)
+            {
+                var check = db.Order_Item.Any(a => a.artwork_id == item.artwork_id);
+                if (check)
+                {
+                    payment.Add(new Tuple<string, int>("Payment", int.Parse(item.artwork_id.ToString())));
+
+                } else
+                {
+                    payment.Add(new Tuple<string, int>("Not payment yet", int.Parse(item.artwork_id.ToString())));
+                }
+            }
 
             List<AuctionListView> aucList = new List<AuctionListView>();
             foreach(var item in auctionList)
@@ -141,6 +154,7 @@ namespace OnlineArtGallery.Controllers
             ViewBag.Artists = art;
             ViewBag.Category = cate;
             ViewBag.WonAuction = wonAuction;
+            ViewBag.Status = payment;
             return View();
         }
 

@@ -26,6 +26,7 @@
                 <table class="table table-wishlist table-mobile">
                     <thead>
                         <tr>
+                            <th style="width:50px">#</th>
                             <th>Artwork</th>
                             <th>Name</th>
                             <th>Price</th>
@@ -36,36 +37,41 @@
                     </thead>
 
                     <tbody>
-                        @{
-                            GalleryArtEntities db = new GalleryArtEntities();
-                            var id = int.Parse(Session["UserId"].ToString());
-                            var wishlist = (from favourite in db.Favourites
-                                            join artwork in db.Artworks on favourite.artwork_id equals artwork.artwork_id
-                                            where favourite.user_id == id
-                                            orderby favourite.favourite_id descending
-                                            select new
-                                            {
-                                                Favourite = favourite,
-                                                Artwork = artwork
-                                            }).ToList();
+                        @{ 
+                            int x = 0;
                         }
-                        @foreach (var item in wishlist)
+                        @foreach (var item in ViewBag.Wishlist)
                         {
+                            x += 1;
                             <tr>
+                                <td>@x</td>
                                 <td class="">
-                                    <a href="#"> <img style="height:150px" src="~/Content/assets/images/artwork/@item.Artwork.artwork_image" alt="Product image"></a>
+                                    <a href="#"> <img style="height:150px" src="~/Content/assets/images/artwork/@item.ArtworkImage" alt="Product image"></a>
                                 </td>
                                 <td class="col-3">
                                     <h3 class="product-title">
-                                        <a href="/FEArtwork/ArtworkDetail/@item.Artwork.artwork_id">@item.Artwork.artwork_name</a>
+                                        <a href="/FEArtwork/ArtworkDetail/@item.ArtworkId">@item.ArtworkName</a>
                                     </h3>
                                 </td>
-                                <td class="price-col">$ @item.Artwork.artwork_price</td>
-                                <td class="stock-col"><span class="in-stock">In stock</span></td>
-                                <td class="action-col">
-                                    <button class="btn btn-block btn-outline-primary-2"><i class="icon-cart-plus"></i>Add to Cart</button>
+                                <td class="price-col">$ @item.ArtworkPrice</td>
+                                <td class="stock-col">
+                                    @if (item.ArtworkStatus == 1)
+                                    {
+                                        <span class="badge badge-success p-3">On Sale</span>
+                                    }
+                                    else if (item.ArtworkStatus == 2)
+                                    {
+                                        <span class="badge badge-warning p-3">Won Auction</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-secondary p-3">Sold out</span>
+                                    }
                                 </td>
-                                <td class="remove-col"><a href="/FEWishlist/Delete/@item.Favourite.favourite_id" class="btn-remove"><i class="icon-close"></i></a></td>
+                                <td class="action-col">
+                                    <button data-cart-id="@item.ArtworkId" class="btn btn-block btn-outline-primary-2 cart"><i class="icon-cart-plus"></i>Add to Cart</button>
+                                </td>
+                                <td class="remove-col"><a href="/FEWishlist/Delete/@item.FavoriteId" class="btn-remove"><i class="icon-close"></i></a></td>
                                 </tr>
             }
 
