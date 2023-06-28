@@ -10,6 +10,7 @@ using OnlineArtGallery.Models.ModelView;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Security.Policy;
 
 namespace OnlineArtGallery.Controllers
 {
@@ -72,6 +73,7 @@ namespace OnlineArtGallery.Controllers
                         Artwork = artwork
                     }).ToList();
             var wonAuction = db.Auctions.Where(a => a.user_id == auth.user_id).ToList();
+
             List<AuctionListView> aucList = new List<AuctionListView>();
             foreach(var item in auctionList)
             {
@@ -92,6 +94,47 @@ namespace OnlineArtGallery.Controllers
                 };
                 aucList.Add(auc);
             }
+
+            var requestList = (from noti in db.Notifications 
+                               join artwork in db.Artworks on noti.artwork_id equals artwork.artwork_id
+                               where noti.notification_recipient_id == auth.user_id && noti.artwork_id != null
+                               orderby noti.notification_id descending
+                               select new
+                               {
+                                   UserId = auth.user_id,
+                                   ArtworkId = artwork.artwork_id,
+                                   ArtworkImage = artwork.artwork_image,
+                                   CategoryName = artwork.Category.category_name,
+                                   ArtistName = artwork.Artist.artist_name,
+                                   ArtworkStatus = artwork.artwork_status,
+                                   ArtworkPrice = artwork.artwork_price,
+                                   ArtworkName = artwork.artwork_name,
+                                   Date = artwork.artwork_date,
+                                   Dimensions = artwork.artwork_dimensions,
+                                   Description = artwork.artwork_description,
+                                   CreatedDate = noti.notification_created_date
+                               }).ToList();
+            var reqList = new List<RequestView>();
+            foreach (var item in requestList)
+            {
+                var request = new RequestView()
+                {
+                    UserId = auth.user_id,
+                    ArtworkId = item.ArtworkId,
+                    ArtworkImage = item.ArtworkImage,
+                    CategoryName = item.CategoryName,
+                    ArtistName = item.ArtistName,
+                    ArtworkStatus = int.Parse((item.ArtworkStatus).ToString()),
+                    ArtworkPrice = item.ArtworkPrice,
+                    ArtworkName = item.ArtworkName,
+                    Date = item.Date,
+                    Dimensions = item.Dimensions,
+                    Description = item.Description,
+                    CreatedDate = item.CreatedDate
+                };
+                reqList.Add(request);
+            }
+            ViewBag.Request = reqList;
             ViewBag.Order = orders;
             ViewBag.Auction = aucList;
             ViewBag.User = auth;
@@ -208,7 +251,7 @@ namespace OnlineArtGallery.Controllers
                 notification_recipient_id = int.Parse(auth.user_id.ToString()),
                 notification_title = "New request for artwork!",
                 notification_is_read = false,
-                notification_message = auth.user_fname + "" + auth.user_lname + " upload new artwork.",
+                notification_message = auth.user_fname + "" + auth.user_lname + " request new artwork.",
                 notificaiton_click_url = "/BERequestArtwork/" + artwork.artwork_id,
                 notification_created_date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
                 artwork_id = artwork.artwork_id

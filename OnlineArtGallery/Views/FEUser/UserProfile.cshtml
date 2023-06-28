@@ -39,14 +39,15 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-wonauction-link" data-toggle="tab" href="#tab-wonauction" role="tab" aria-controls="tab-wonauction" aria-selected="false">Won Auction</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
-                                </li>
+                              
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-password-link" data-toggle="tab" href="#tab-password" role="tab" aria-controls="tab-password" aria-selected="false">Reset password</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-art-link" data-toggle="tab" href="#tab-art" role="tab" aria-controls="tab-art" aria-selected="false">Artwork</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab-artwork-link" data-toggle="tab" href="#tab-artwork" role="tab" aria-controls="tab-artwork" aria-selected="false">Request artwork</a>
@@ -375,25 +376,7 @@
                                         }
                                     </div>
                                 </div><!-- .End .tab-pane -->
-                                <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
-                                    <p>The following addresses will be used on the checkout page by default.</p>
-
-                                    <div class="row">
-
-                                        <div class="col-lg-6">
-                                            <div class="card card-dashboard">
-                                                <div class="card-body">
-                                                    <h3 class="card-title">Shipping Address</h3><!-- End .card-title -->
-
-                                                    <p>
-                                                        You have not set up this type of address yet.<br>
-                                                        <a href="#">Edit <i class="icon-edit"></i></a>
-                                                    </p>
-                                                </div><!-- End .card-body -->
-                                            </div><!-- End .card-dashboard -->
-                                        </div><!-- End .col-lg-6 -->
-                                    </div><!-- End .row -->
-                                </div><!-- .End .tab-pane -->
+                               
 
                                 <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
                                     <form action="/FEUser/UserEdit" method="Post" enctype="multipart/form-data">
@@ -460,7 +443,119 @@
                                         </button>
                                     </form>
                                 </div><!-- .End .tab-pane -->
+                                <div class="tab-pane fade" id="tab-art" role="tabpanel" aria-labelledby="tab-art-link">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Image</th>
+                                                <th>Name</th>
+                                                <th>Detail</th>
+                                                <th>Status</th>
+                                                <th>Created Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{ 
+                                                var y = 0;
+                                            }
+                                            @foreach (var item in ViewBag.Request)
+                                            {
+                                                y += 1;
+                                                <tr>
+                                                    <td>@y</td>
+                                                    <td> 
+                                                        <img style="height:95px;width:95px" src="~/Content/assets/images/artwork/@item.ArtworkImage" />
+                                                    </td>
+                                                    <td>
+                                                        @if (item.ArtworkStatus == 1)
+                                                        {
+                                                            <a style="font-weight:500" href="/FEArtwork/ArtworkDetail/@item.ArtworkId">@item.ArtworkName</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a style="font-weight:500">@item.ArtworkName</a>
 
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <!-- Button trigger modal -->
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#request@(item.ArtworkId)">
+                                                            Detail
+                                                        </button>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="request@(item.ArtworkId)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered " style="max-width:1100px">
+                                                                <div class="modal-content">
+                                                                    <h5 class="text-center text-primary mb-1 mt-2">Artwork Information</h5>
+                                                                    <div class="d-flex">
+                                                                        <div class="col-6 p-4 ">
+                                                                            <img style="height:350px;width:100%" src="~/Content/assets/images/artwork/@item.ArtworkImage" />
+                                                                        </div>
+                                                                        <div class="col-6 p-4">
+                                                                            <div class="row">
+                                                                                <div class="col-6">
+                                                                                    <span style="font-weight:400">Artwork Name</span>
+                                                                                    <p>@item.ArtworkName </p>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <span style="font-weight:400">Artist</span>
+                                                                                    <p>@item.ArtistName </p>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <span style="font-weight:400">Category</span>
+                                                                                    <p>@item.CategoryName </p>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <span style="font-weight:400">Price</span>
+                                                                                    <p>$ @item.ArtworkPrice </p>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <span style="font-weight:400">Dimensions</span>
+                                                                                    <p>@item.Dimensions (cm)</p>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <span style="font-weight:400">Date</span>
+                                                                                    <p>@item.Date </p>
+                                                                                </div>
+                                                                                <div class="col-12">
+                                                                                    <span style="font-weight:400">Description</span>
+                                                                                    <p>@item.Description </p>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        @if (item.ArtworkStatus == 1)
+                                                        {
+                                                            <span class="badge badge-success p-3">On sale</span>
+                                                        }
+                                                        else if (item.ArtworkStatus == 4)
+                                                        {
+                                                            <span class="badge badge-secondary p-3">Pending approval</span>
+                                                        }
+                                                        else if (item.ArtworkStatus == 3)
+                                                        {
+                                                            <span class="badge badge-info p-3">Sold out</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="badge badge-danger p-3">Refuse</span>
+                                                        }
+                                                    </td>
+                                                   
+                                                    <td>@item.CreatedDate</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div><!-- .End .tab-pane -->
                                 <div class="tab-pane fade" id="tab-artwork" role="tabpanel" aria-labelledby="tab-artwork-link">
 
                                     <form action="/FEUser/RequestArtwork" enctype="multipart/form-data" method="Post">

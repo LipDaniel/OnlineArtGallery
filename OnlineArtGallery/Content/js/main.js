@@ -1,4 +1,4 @@
-﻿$(".wishlist").click(function (e) {
+﻿$(".wishlists").click(function (e) {
     e.preventDefault();
     var id = $(this).data("wishlist-id");
 

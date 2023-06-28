@@ -99,7 +99,7 @@
                                                     <span class="ratings-text">( @RatingCount(art.artwork_id) Reviews )</span>
                                                 </div><!-- End .rating-container -->
 
-                                                <a data-wishlist-id="@art.artwork_id" href="" class="btn-product btn-cart mb-1 wishlist"><span>add to wishlist</span></a>
+                                                <a data-wishlist-id="@art.artwork_id" href="" class="btn-product btn-cart mb-1 wishlists"><span>add to wishlist</span></a>
                                                 <a data-cart-id="@art.artwork_id" href="" class="btn-product btn-cart cart"><span>add to cart</span></a>
                                             </div><!-- End .product-list-action -->
                                         </div><!-- End .col-sm-6 col-lg-3 -->
@@ -293,34 +293,40 @@
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(".wishlist").click(function (e) {
-            e.preventDefault();
-            var id = $(this).data("wishlist-id");
-
-            $.ajax({
-                url: "/FEWishlist/Create",
-                method: "Post",
-                data: {
-                    id: id
-                }
-            }).done(function (res) {
-                $('.toast-body').text(res);
-                $('#toast').toast('show');
+        $(document).ready(function () {
+            var stars = document.querySelectorAll('.star-id');
+            stars.forEach(function (star) {
+                var id = star.getAttribute('data-star-id');
+                $.ajax({
+                    url: '/FEArtwork/Star',
+                    method: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        var starWidth = response + "%";
+                        star.style.width = starWidth;
+                    }, error: function (error) {
+                        console.log(error);
+                    }
+                });
             });
         });
-        $(".cart").click(function (e) {
-            e.preventDefault();
-            var id = $(this).data("cart-id");
+    </script>
+    <script>
+        $(document).ready(function () {
+            var ratings = document.querySelectorAll('.star-count');
+            ratings.forEach(function (rating) {
+                var id = rating.getAttribute('data-star-count');
+                $.ajax({
+                    url: '/FEArtwork/RatingCount',
+                    method: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        rating.textContent = "(" + response + " Reviews)";
 
-            $.ajax({
-                url: "/FEOrder/Create",
-                method: "Post",
-                data: {
-                    id: id
-                }
-            }).done(function (res) {
-                $('.toast-body').text(res);
-                $('#toast').toast('show');
+                    }, error: function (error) {
+                        console.log(error);
+                    }
+                });
             });
         });
     </script>

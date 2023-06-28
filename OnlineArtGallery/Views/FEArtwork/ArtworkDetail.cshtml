@@ -125,7 +125,7 @@
                                                 <p class="text-danger" style="margin-top: 10px;font-weight: 500;" id="text-error"></p>
                                             </div>
                                         </div>
-                                        <a href="" data-wishlist-id="@ViewBag.Artwork.artwork_id" class="btn-product btn-wishlist wishlist"><span>Add to Wishlist</span></a>
+                                        <a href="" data-wishlist-id="@ViewBag.Artwork.artwork_id" class="btn-product btn-wishlist wishlists"><span>Add to Wishlist</span></a>
 
 
                                     }
@@ -261,7 +261,7 @@
                                         <a href="#signin-modal" data-toggle="modal"  class="btn-product btn-cart"><span>add to cart</span></a>
                                         <a href="#signin-modal" data-toggle="modal" class="ml-5 btn-product btn-cart"><span>Paynow</span></a><!-- Button trigger modal -->
                                     }
-                                    <a href="" data-wishlist-id="@ViewBag.Artwork.artwork_id" class="btn-product btn-wishlist wishlist"><span>Add to Wishlist</span></a>
+                                    <a href="" data-wishlist-id="@ViewBag.Artwork.artwork_id" class="btn-product btn-wishlist wishlists"><span>Add to Wishlist</span></a>
 
                                 }
 
@@ -443,7 +443,7 @@
                                             </a>
 
                                             <div class="product-action-vertical">
-                                                <a href="" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                                <a href="" data-wishlist-id="@item.artwork_id" class="btn-product-icon btn-wishlist btn-expandable wishlists"><span>add to wishlist</span></a>
                                                 
                                             </div><!-- End .product-action-vertical -->
 
