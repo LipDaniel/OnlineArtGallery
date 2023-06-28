@@ -17,14 +17,15 @@
         </nav><!-- End .breadcrumb-nav -->
 
         <div class="page-content">
-            <div class="cart">
+            <div class="carts">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-9">
                             <table class="table table-cart table-mobile">
                                 <thead>
                                     <tr>
-                                        <th>Artwork</th>
+                                        <th style="width:50px">Id</th>
+                                        <th style="width:300px">Artwork</th>
                                         <th>Name</th>
                                         <th>Status</th>
                                         <th>Price</th>
@@ -33,11 +34,14 @@
                                 </thead>
 
                                 <tbody>
-                                
+                                @{ 
+                                    int x = 0;
+                                }
                                     @foreach (var item in ViewBag.Cartlist)
                                     {
-                                       
+                                        x += 1;
                                         <tr>
+                                            <td>@x</td>
                                            <td>
                                              <img style="height:150px" src="~/Content/assets/images/artwork/@item.ArtworkImage" alt="Product image">
                                                      
@@ -72,20 +76,7 @@
                                 </tbody>
                             </table><!-- End .table table-wishlist -->
 
-                            <div class="cart-bottom">
-                                <div class="cart-discount">
-                                    <form action="#">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" required="" placeholder="coupon code">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-primary-2" type="submit"><i class="icon-long-arrow-right"></i></button>
-                                            </div><!-- .End .input-group-append -->
-                                        </div><!-- End .input-group -->
-                                    </form>
-                                </div><!-- End .cart-discount -->
-
-                                <a href="#" class="btn btn-outline-dark-2"><span>UPDATE CART</span><i class="icon-refresh"></i></a>
-                            </div><!-- End .cart-bottom -->
+                       
                         </div><!-- End .col-lg-9 -->
                         <aside class="col-lg-3">
                             <div class="summary summary-cart">
