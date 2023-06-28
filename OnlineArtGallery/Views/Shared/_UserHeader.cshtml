@@ -86,7 +86,7 @@
                                 @if (Session["UserId"] != null)
                                 {
                                     var id = int.Parse(Session["UserId"].ToString());
-                                    var notiList = db.Notifications.Where(a => a.notification_sender_id == id).ToList();
+                                    var notiList = db.Notifications.Where(a => a.notification_sender_id == id).ToList().OrderByDescending(a => a.notification_id);
                                     foreach (var item in notiList)
                                     {
                                         <li class="bg-body-light pl-2">
@@ -95,8 +95,8 @@
                                                     <i class="bi bi-pen text-success"></i>
                                                 </div>
                                                 <div class="flex-grow-1 pe-2">
-                                                    <div class="fw-semibold">@item.notification_title</div>
-                                                    <p>@item.notification_message</p>
+                                                    <div style="font-size:14px; font-weight:500" >@item.notification_title</div>
+                                                    <p style="font-size:13px;">@item.notification_message</p>
                                                     <span class="fw-medium text-muted" style="font-size:12px">@item.notification_created_date</span>
                                                 </div>
                                             </a>

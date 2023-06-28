@@ -62,6 +62,93 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
 
+                                    <div>
+                                        <h4 class="text-primary mb-3">Dashboard</h4>
+                                        <div class="row">
+                                            <div class="col-4 mb-3 ">
+                                                <div style="box-shadow: rgba(0, 0, 0, 0.13) 0px 3.2px 7.2px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px;">
+                                                    <div class="d-flex justify-content-between align-items-center p-4">
+                                                        <div class="ml-3">
+                                                            <p style="font-size:20px; margin:0; font-weight:500">@ViewBag.OrderCount</p>
+                                                            <span>Orders</span>
+                                                        </div>
+                                                        <div style="width: 75px; height: 75px; background-color: #1cc0a0; border-radius: 2px; padding: 25px; ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-basket2 text-white" viewBox="0 0 16 16">
+                                                                <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 1 1 2 0v2a1 1 0 0 1-2 0v-2z" />
+                                                                <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.623l-1.844 6.456a.75.75 0 0 1-.722.544H3.69a.75.75 0 0 1-.722-.544L1.123 8H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.163 8l1.714 6h8.246l1.714-6H2.163z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3 ">
+                                                <div style="box-shadow: rgba(0, 0, 0, 0.13) 0px 3.2px 7.2px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px;">
+                                                    <div class="d-flex justify-content-between align-items-center p-4">
+                                                        <div class="ml-3">
+                                                            <p style="font-size:20px; margin:0; font-weight:500">@ViewBag.WonAuctionCount</p>
+                                                            <span>Won Auctions</span>
+                                                        </div>
+                                                        <div style="width: 75px; height: 75px; background-color: #1cc0a0; border-radius: 2px; padding: 25px; ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trophy text-white" viewBox="0 0 16 16">
+                                                                <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935zM3.504 1c.007.517.026 1.006.056 1.469.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.501.501 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667.03-.463.049-.952.056-1.469H3.504z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3 ">
+                                                <div style="box-shadow: rgba(0, 0, 0, 0.13) 0px 3.2px 7.2px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px;">
+                                                    <div class="d-flex justify-content-between align-items-center p-4">
+                                                        <div class="ml-3">
+                                                            <p style="font-size:20px; margin:0; font-weight:500">@ViewBag.AuctionCount</p>
+                                                            <span>On Auctions</span>
+                                                        </div>
+                                                        <div style="width: 75px; height: 75px; background-color: #1cc0a0; border-radius: 2px; padding: 25px; ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-easel text-white" viewBox="0 0 16 16">
+                                                                <path d="M8 0a.5.5 0 0 1 .473.337L9.046 2H14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1.85l1.323 3.837a.5.5 0 1 1-.946.326L11.092 11H8.5v3a.5.5 0 0 1-1 0v-3H4.908l-1.435 4.163a.5.5 0 1 1-.946-.326L3.85 11H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.954L7.527.337A.5.5 0 0 1 8 0zM2 3v7h12V3H2z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3 ">
+                                                <div style="box-shadow: rgba(0, 0, 0, 0.13) 0px 3.2px 7.2px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px;">
+                                                    <div class="d-flex justify-content-between align-items-center p-4">
+                                                        <div class="ml-3">
+                                                            <p style="font-size:20px; margin:0; font-weight:500">@ViewBag.RequestCount</p>
+                                                            <span>Request Artworks</span>
+                                                        </div>
+                                                        <div style="width: 75px; height: 75px; background-color: #1cc0a0; border-radius: 2px; padding: 25px; ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-easel text-white" viewBox="0 0 16 16">
+                                                                <path d="M8 0a.5.5 0 0 1 .473.337L9.046 2H14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1.85l1.323 3.837a.5.5 0 1 1-.946.326L11.092 11H8.5v3a.5.5 0 0 1-1 0v-3H4.908l-1.435 4.163a.5.5 0 1 1-.946-.326L3.85 11H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.954L7.527.337A.5.5 0 0 1 8 0zM2 3v7h12V3H2z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3 ">
+                                                <div style="box-shadow: rgba(0, 0, 0, 0.13) 0px 3.2px 7.2px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px;">
+                                                    <div class="d-flex justify-content-between align-items-center p-4">
+                                                        <div class="ml-3">
+                                                            <p style="font-size:20px; margin:0; font-weight:500">$@ViewBag.Revenue</p>
+                                                            <span>Revenue</span>
+                                                        </div>
+                                                        <div style="width: 75px;height:75px; background-color: #1cc0a0; border-radius: 2px; padding: 25px; ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cash text-white" viewBox="0 0 16 16">
+                                                                <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                                                                <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @if (TempData["SuccessMessage"] != null)
                                     {
 

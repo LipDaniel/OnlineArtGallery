@@ -1,6 +1,23 @@
 ﻿
 @section main
 {
+    <style>
+        .banner {
+            position: relative;
+            display: block;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            opacity: 0.35
+        }
+
+    </style>
     <div class="intro-section pt-lg-2">
         <div class="container">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -94,7 +111,7 @@
                         </div><!-- End .heading-left -->
 
                         <div class="heading-right">
-                            <a href="/FEArtwork/ArtworkList" class="title-link">View more Products <i class="icon-long-arrow-right"></i></a>
+                            <a href="/FEArtwork/ArtworkList" class="title-link">View more Artworks <i class="icon-long-arrow-right"></i></a>
                         </div><!-- End .heading-right -->
                     </div><!-- End .header-flex -->
 
@@ -124,14 +141,14 @@
                                 }'>
                         @foreach (var art in ViewBag.ArtworkTop)
                         {
-                            <div class="product">
+                            <div class="product" style="box-shadow: rgba(0, 0, 0, 0.13) 0px 3.2px 7.2px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px;">
                                 <figure>
                                     <a href="/FEArtwork/ArtworkDetail/@art.artwork_id">
-                                        <img style="height:220px" src="~/Content/assets/images/artwork/@art.artwork_image" alt="Product image" class="product-image">
+                                        <img style="height:240px" src="~/Content/assets/images/artwork/@art.artwork_image" alt="Product image" class="product-image">
                                     </a>
                                 </figure><!-- End .product-media -->
 
-                                <div class="product-body">
+                                <div class="product-body" style="padding-left: 20px;padding-top:8px">
                                     <div class="product-cat">
                                         by <a href="#">@art.Artist.artist_name</a>
                                     </div><!-- End .product-cat -->
@@ -184,7 +201,7 @@
                 @foreach (var gal in ViewBag.GalleryTop)
                 {
                     <div class="col-md-6 col-lg-4">
-                        <div class="banner banner-overlay">
+                        <div class="banner banner-overlay " style="box-shadow: rgba(0, 0, 0, 0.13) 0px 3.2px 7.2px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px;">
                             <a href="#">
                                 <img style="height:300px" src="~/Content/assets/images/galleryimg/@gal.gallery_image" alt="Banner">
                             </a>
@@ -194,6 +211,7 @@
                                 <h3 class="banner-title text-white"><a href="#">@gal.gallery_name</a></h3><!-- End .banner-title -->
                                 <a href="#" class="btn btn-outline-white-3 banner-link">Discover Now<i class="icon-long-arrow-right"></i></a>
                             </div><!-- End .banner-content -->
+                            <div class="overlay"></div>
                         </div><!-- End .banner -->
                     </div><!-- End .col-lg-4 -->
                 }
@@ -278,9 +296,7 @@
                             }
                         </div><!-- End .row -->
 
-                        <div class="load-more-container text-center">
-                            <a href="#" class="btn btn-outline-darker btn-load-more">More Auctions <i class="icon-refresh"></i></a>
-                        </div><!-- End .load-more-container -->
+                       
                     </div>
                 </div><!-- End .container -->
             </div><!-- End .block-wrapper -->

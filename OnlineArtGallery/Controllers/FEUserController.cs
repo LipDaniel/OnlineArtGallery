@@ -128,6 +128,7 @@ namespace OnlineArtGallery.Controllers
                                    CreatedDate = noti.notification_created_date
                                }).ToList();
             var reqList = new List<RequestView>();
+            int revenue = 0;
             foreach (var item in requestList)
             {
                 var request = new RequestView()
@@ -146,6 +147,7 @@ namespace OnlineArtGallery.Controllers
                     CreatedDate = item.CreatedDate
                 };
                 reqList.Add(request);
+                revenue += int.Parse(item.ArtworkPrice);
             }
             ViewBag.Request = reqList;
             ViewBag.Order = orders;
@@ -155,6 +157,11 @@ namespace OnlineArtGallery.Controllers
             ViewBag.Category = cate;
             ViewBag.WonAuction = wonAuction;
             ViewBag.Status = payment;
+            ViewBag.OrderCount = orderList.Count();
+            ViewBag.WonAuctionCount = wonAuction.Count();
+            ViewBag.AuctionCount = auctionList.Count();
+            ViewBag.RequestCount = requestList.Count();
+            ViewBag.Revenue = revenue;
             return View();
         }
 
