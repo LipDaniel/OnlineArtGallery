@@ -147,7 +147,10 @@ namespace OnlineArtGallery.Controllers
                     CreatedDate = item.CreatedDate
                 };
                 reqList.Add(request);
-                revenue += int.Parse(item.ArtworkPrice);
+                if (item.ArtworkStatus == 3)
+                {
+                    revenue += int.Parse(item.ArtworkPrice);
+                }
             }
             ViewBag.Request = reqList;
             ViewBag.Order = orders;
