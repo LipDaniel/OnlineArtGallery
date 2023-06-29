@@ -77,16 +77,23 @@ namespace OnlineArtGallery.Controllers
                     var data = db.Auction_User.Where(e => e.auction_id == item.auction_id).OrderByDescending(d => d.auction_amount).FirstOrDefault();
                     if(data != null)
                     {
-                        var artwork = db.Artworks.Find(item.Artwork.artwork_id);
-                        artwork.artwork_status = 6;
-                        db.SaveChanges();
+                        if(data.Auction.Artwork.artwork_status != 3)
+                        {
+                            var artwork = db.Artworks.Find(item.Artwork.artwork_id);
+                            artwork.artwork_status = 6;
+                            db.SaveChanges();
 
-                        var auctions = db.Auctions.Find(item.auction_id);
-                        auctions.user_id = data.user_id;
-                        db.SaveChanges();
+                            var auctions = db.Auctions.Find(item.auction_id);
+                            auctions.user_id = data.user_id;
+                            db.SaveChanges();
+                        }
                     }
                     else
                     {
+                        var auctions = db.Auctions.Find(item.auction_id);
+                        db.Auctions.Remove(auctions);
+                        db.SaveChanges();
+
                         var artwork = db.Artworks.Find(item.Artwork.artwork_id);
                         artwork.artwork_status = 0;
                         db.SaveChanges();
