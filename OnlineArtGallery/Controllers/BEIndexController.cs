@@ -1,5 +1,6 @@
 ﻿using OnlineArtGallery.Models.Entities;
 using OnlineArtGallery.Models.ModelView;
+using System.Collections.Generic;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Web.Mvc;
@@ -76,7 +77,20 @@ namespace OnlineArtGallery.Controllers
         }
         public ActionResult GalleryList()
         {
+            var list = db.Artworks.Where(a => a.artwork_status == 1 || a.artwork_status == 0).ToList();
+           
+            List<Artwork> artworkList = new List<Artwork>();
+            foreach( var item in list)
+            {
+                var check = db.Artwork_Gallery.Any(a => a.artwork_id == item.artwork_id);
+                if (!check)
+                {
+                    artworkList.Add(item);
+                }
+            }
+            ViewBag.ArtworkList = artworkList;
             ViewBag.GalleryList = db.Galleries.OrderByDescending(a => a.gallery_id).ToList();
+            
             return View();
         }
         public ActionResult CategoryList()
@@ -114,7 +128,8 @@ namespace OnlineArtGallery.Controllers
         public ActionResult ExhibitionList()
         {
             ViewBag.Exhibition = db.Exhibitions.OrderByDescending(a => a.exhibition_id).ToList();
-
+            ViewBag.Gallery = db.Galleries.Where(a => a.gellery_is_active == true).OrderByDescending(b => b.gallery_id).ToList();
+            
             return View();
         }
 

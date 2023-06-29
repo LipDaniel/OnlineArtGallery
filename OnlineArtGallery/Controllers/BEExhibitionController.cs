@@ -1,20 +1,39 @@
-﻿using OnlineArtGallery.Models.Entities;
+﻿using Antlr.Runtime.Tree;
+using OnlineArtGallery.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
-
+using OnlineArtGallery.Models.ModelView;
 namespace OnlineArtGallery.Controllers
 {
     public class BEExhibitionController : Controller
     {
         // GET: BEExhibition
         private GalleryArtEntities db = new GalleryArtEntities();
+        
+        public ActionResult AddGallery(Exhibition_Gallery model)
+        {
+            
+            var add = new Exhibition_Gallery()
+            {
+                exhibition_id = model.exhibition_id,
+                gallery_id = model.gallery_id,
+                exhibition_gallery_created_date = model.exhibition_gallery_created_date,
+                exhibition_gallery_end_date = model.exhibition_gallery_end_date,
+                exhibition_gallery_is_active = true
+            };
+            var gal = db.Galleries.Find(model.gallery_id);
+            gal.gellery_is_active = false;
+            db.Exhibition_Gallery.Add(add);
+            db.SaveChanges();
+            return Redirect(Request.UrlReferrer.ToString());
 
-     
+        }
 
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 

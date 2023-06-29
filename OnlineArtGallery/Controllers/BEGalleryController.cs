@@ -1,12 +1,14 @@
 ﻿
 using OnlineArtGallery.Models.Entities;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
-
+using OnlineArtGallery.Models.ModelView;
 namespace OnlineArtGallery.Controllers
 {
+   
     public class BEGalleryController : Controller
     {
         // GET: BEGallery
@@ -102,6 +104,24 @@ namespace OnlineArtGallery.Controllers
             return RedirectToAction("GalleryList", "BEIndex");
 
 
+        }
+        
+        public string AddArtwork(int id, List<int> arr)
+        {
+
+            foreach(var item in arr)
+            {
+                var galArt = new Artwork_Gallery()
+                {
+                    gallery_id = id,
+                    artwork_id = int.Parse(item.ToString())
+                };
+                db.Artwork_Gallery.Add(galArt);
+                db.SaveChanges();
+
+            }
+            return "Success";
+            
         }
     }
 }

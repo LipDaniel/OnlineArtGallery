@@ -1,4 +1,4 @@
-﻿
+﻿@using OnlineArtGallery.Models.Entities;
 @{
     ViewBag.Title = "GalleryList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -35,12 +35,23 @@
                                 <th>Number</th>
                                 <th>Name</th>
                                 <th>Img</th>
-                                <th>Description</th>
-                                <th>Create</th>
+                                <th style="width:350px">Description</th>
+                                <th>Artwork</th>
+                                <th>Created Date</th>
+                                <th>Add Artwork</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @functions
+                                {
+                                public List<OnlineArtGallery.Models.Entities.Artwork_Gallery> GetGallery(int id)
+                                {
+                                    GalleryArtEntities db = new GalleryArtEntities();
+                                    var galleryList = db.Artwork_Gallery.Where(a => a.gallery_id == id).ToList();
+                                    return galleryList;
+                                }
+                            }
                             @{
                                 var s = 0;
                             }
@@ -54,7 +65,76 @@
                                         <img width="50px" src="~/Content/Assets/Images/galleryimg/@gallery.gallery_image" alt="Alternate Text" />
                                     </td>
                                     <td>@gallery.gallery_description</td>
+                                    <td>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detail@(gallery.gallery_id)">
+                                            Detail
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="detail@(gallery.gallery_id)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" style="max-width: 800px">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        Artwork List
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div>
+                                                            <div class="row">
+                                                                @foreach (var gal in GetGallery(@gallery.gallery_id))
+                                                                {
+                                                                    <div class="col-4 pb-3">
+                                                                        <span class="badge bg-success p-2">@gal.Gallery.gallery_name</span>
+                                                                        <br />
+
+                                                                    </div>
+                                                                }
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>@gallery.gallery_created_date</td>
+                                    <td>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#id@(gallery.gallery_id)">
+                                            Add
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="id@(gallery.gallery_id)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" style="max-width: 1200px">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add artwork</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div>
+                                                            <form class="artworkForm">
+                                                                <div class="row">
+                                                                    @foreach (var art in ViewBag.ArtworkList)
+                                                                    {
+                                                                        <div class="col-3 pb-1">
+                                                                            <input id="id@(gallery.gallery_id)-@(art.artwork_id)" type="checkbox" class="artwork_check" data-id="@art.artwork_id" value="@art.artwork_id">
+                                                                            <label for="id@(gallery.gallery_id)-@(art.artwork_id)"><span class="badge bg-secondary p-2">@art.artwork_name</span></label>
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                                <button data-galid="@gallery.gallery_id" type="submit" class="submitForm btn btn-primary mt-3">Submit</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>
                                         @{
                                             var galle = "exampleModal" + @gallery.gallery_id;
@@ -140,7 +220,7 @@
         </div>
     </div>
     @*//////*@
-  
+
 }
 
 @section css
@@ -166,5 +246,39 @@
     <script src="/Content/adminassets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
     <!-- Page JS Code -->
     <script src="/Content/adminassets/js/pages/be_tables_datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.artworkForm').submit(function (event) {
+                event.preventDefault();
+                var id = $('.submitForm').data('galid')
+                var arr = new Array();
+
+                $('.artwork_check').each(function (i) {
+                    if ($(this).is(':checked')) {
+                        var id = $(this).data('id')
+                        arr.push(id)
+                    }
+                })
+
+                console.log(arr)
+
+
+
+                $.ajax({
+                    url: '/BEGallery/AddArtwork',
+                    method: 'POST',
+                    data: {
+                        id: id,
+                        arr: arr,
+                    }
+                }).done(function (data) {
+                    if (data == "Success") {
+                        window.location.reload();
+                    }
+                });
+            });
+        });
+
+    </script>
 }
 

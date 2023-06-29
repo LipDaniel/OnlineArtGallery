@@ -1,8 +1,8 @@
-﻿@{
+﻿@using OnlineArtGallery.Models.Entities;
+@{
     ViewBag.Title = "ExhibitionList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
 
 @section main
 {
@@ -31,16 +31,29 @@
                                     <th>Images</th>
                                     <th>Description</th>
                                     <th>Location</th>
+                                    <th>Gallery</th>
+                                    <th style="width:150px">Add Gallery</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @{ 
+                                @functions
+                                {
+                                    public List<Exhibition_Gallery> GetGallery(int id)
+                                    {
+                                        GalleryArtEntities db = new GalleryArtEntities();
+                                        var galleryList = db.Exhibition_Gallery.Where(a => a.exhibition_id == id).ToList();
+                                        return galleryList;
+                                    }
+                                }
+                                @{
                                     var s = 0;
+
                                 }
                                 @foreach (var exhibi in ViewBag.Exhibition)
                                 {
                                     s += 1;
+
                                     <tr>
                                         <td>@s</td>
                                         <td>@exhibi.exhibition_name</td>
@@ -48,15 +61,68 @@
                                             <img width="50px" height="50px" src="~/Content/Assets/Images/exhibition/@exhibi.exhibition_image " alt="Alternate Text" />
                                         </td>
 
-                                        <td>@exhibi.exhibition_description</td>
+                                        <td style="font-size: 14px;">@exhibi.exhibition_description</td>
                                         <td>@exhibi.exhibition_location</td>
+                                        <td>
+                                            @foreach (var gal in GetGallery(exhibi.exhibition_id))
+                                            {
+                                                <span class="badge bg-primary">@gal.Gallery.gallery_name</span>
+                                                <br/>
+                                            }
+                                        </td>
+                                        <td class="flex">
+                                            <div class="">
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#id@(exhibi.exhibition_id)">
+                                                    Add gallery
+                                                </button>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="id@(exhibi.exhibition_id)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Add gallery</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div style=" display:flex">
+                                                                    <form method="Post" action="/BEExhibition/AddGallery">
+                                                                        <div class="form-group mb-2">
+                                                                            <span>Gallery</span>
+                                                                            <select class="form-control" name="gallery_id">
+                                                                                @foreach (var item in ViewBag.Gallery)
+                                                                                {
+                                                                                    <option value="@item.gallery_id">@item.gallery_name</option>
+                                                                                }
+                                                                            </select>
+                                                                        </div>
+                                                                        <input name="exhibition_id" hidden value="@exhibi.exhibition_id" />
+                                                                        <div class="form-group mb-2">
+                                                                            <span>Start Date</span>
+                                                                            <input class="form-control" name="exhibition_gallery_start_date" type="date" />
+                                                                        </div>
+                                                                        <div class="form-group mb-2">
+                                                                            <span>End Date</span>
+                                                                            <input class="form-control" name="exhibition_gallery_end_date" type="date" />
+                                                                        </div>
+
+                                                                        <button class="btn btn-primary mt-2">Submit</button>
+                                                                    </form>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </td>
                                         <td>
                                             @{
                                                 var ar = "exampleModal" + @exhibi.exhibition_id;
                                             }
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@ar" data-bs-whatever="@exhibi.exhibition_id">Edit</button>
                                             <div class="modal fade" id="@ar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
+                                                <div class="modal-dialog " style="max-width:800px">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLabel">Edit Exhibition</h5>
@@ -94,10 +160,10 @@
                                         </td>
                                     </tr>
                                 }
-                                </tbody>
+                            </tbody>
                         </table>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -127,7 +193,7 @@
                             <label for="recipient-name" class="col-form-label">Description:</label>
                             <input type="text" name="exhibition_description" class="form-control">
                         </div>
-                       
+
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
@@ -137,10 +203,12 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
     @*//////*@
 
-  
+
 }
 
 
