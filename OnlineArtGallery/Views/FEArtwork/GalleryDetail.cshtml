@@ -1,0 +1,99 @@
+﻿
+@section main
+{
+    <main class="main">
+        <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+            <div class="container">
+                <h1 class="page-title">@ViewBag.Gallery.gallery_name<span style="font-size:18px">@ViewBag.Gallery.gallery_description</span></h1>
+                <h4>Exhibition: @ViewBag.Exhibition.Exhibition.exhibition_name</h4>
+                <span>Location: @ViewBag.Exhibition.Exhibition.exhibition_location</span>
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/FEArtwork/Gallery">Galleries</a></li>
+
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in ViewBag.Artwork)
+                    {
+                        <div class="col-md-3 mb-3">
+                            <div class="product " style="box-shadow: rgba(0, 0, 0, 0.13) 0px 3.2px 7.2px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px;">
+                                <figure>
+                                    <a href="/FEArtwork/ArtworkDetail/139">
+                                        <img style="height:240px" src="/Content/assets/images/artwork/@item.Artwork.artwork_image" alt="Product image" class="product-image">
+                                    </a>
+                                </figure><!-- End .product-media -->
+
+                                <div class="product-body" style="padding-left: 20px;padding-top:8px">
+                                    <div class="product-cat">
+                                        by <a href="#">@item.Artwork.Artist.artist_name</a>
+                                    </div><!-- End .product-cat -->
+                                    <h3 class="product-title"><a href="/FEArtwork/ArtworkDetail/@item.Artwork.artwork_id">@item.Artwork.artwork_name</a></h3><!-- End .product-title -->
+                                    
+
+                                </div><!-- End .product-body -->
+                            </div>
+                        </div><!-- End .col-md-6 -->
+
+
+
+                    }
+                </div><!-- End .row -->
+
+
+
+
+            </div><!-- End .container -->
+
+
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var stars = document.querySelectorAll('.star-id');
+            stars.forEach(function (star) {
+                var id = star.getAttribute('data-star-id');
+                $.ajax({
+                    url: '/FEArtwork/Star',
+                    method: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        var starWidth = response + "%";
+                        star.style.width = starWidth;
+                    }, error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var ratings = document.querySelectorAll('.star-count');
+            ratings.forEach(function (rating) {
+                var id = rating.getAttribute('data-star-count');
+                $.ajax({
+                    url: '/FEArtwork/RatingCount',
+                    method: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        rating.textContent = "(" + response + " Reviews)";
+
+                    }, error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+}
+

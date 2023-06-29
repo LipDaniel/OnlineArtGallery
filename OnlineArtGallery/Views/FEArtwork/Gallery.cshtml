@@ -1,0 +1,109 @@
+﻿
+@section main
+{
+    <style>
+        .banner {
+            position: relative;
+            display: block;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            opacity: 0.3
+        }
+    </style>
+    <main class="main">
+        <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+            <div class="container">
+                <h1 class="page-title">Galleries<span>List</span></h1>
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="elements-list.html">Elements</a></li>
+
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="container">
+                <div class="row">
+                    @foreach (var gal in ViewBag.Gallery)
+                    {
+                        <div class="col-md-4" >
+                            <div  class="banner banner-cat" style="box-shadow: rgba(0, 0, 0, 0.13) 0px 3.2px 7.2px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px; ">
+                                <a href="#">
+                                    <img style="height: 300px" src="~/Content/assets/images/galleryimg/@gal.GalleryImage" alt="Banner">
+                                </a>
+
+                                <div class="banner-content">
+                                    <h3 class="banner-title text-white">@gal.GalleryName</h3><!-- End .banner-title -->
+                                    <h4 class="banner-subtitle text-white">@gal.Products Artworks</h4><!-- End .banner-subtitle -->
+                                    <a href="/FEArtwork/GalleryDetail/@gal.GalleryId" class="btn btn-outline-white-3 banner-link">Discover Now<i class="icon-long-arrow-right"></i></a>
+                                </div><!-- End .banner-content -->
+                                <div class="overlay"></div>
+                            </div><!-- End .banner -->
+                        </div><!-- End .col-md-6 -->
+
+
+
+                    }
+                </div><!-- End .row -->
+
+
+
+
+            </div><!-- End .container -->
+
+
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var stars = document.querySelectorAll('.star-id');
+            stars.forEach(function (star) {
+                var id = star.getAttribute('data-star-id');
+                $.ajax({
+                    url: '/FEArtwork/Star',
+                    method: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        var starWidth = response + "%";
+                        star.style.width = starWidth;
+                    }, error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var ratings = document.querySelectorAll('.star-count');
+            ratings.forEach(function (rating) {
+                var id = rating.getAttribute('data-star-count');
+                $.ajax({
+                    url: '/FEArtwork/RatingCount',
+                    method: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        rating.textContent = "(" + response + " Reviews)";
+
+                    }, error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+}
+

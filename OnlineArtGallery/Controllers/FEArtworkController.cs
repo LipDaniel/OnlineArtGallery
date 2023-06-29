@@ -8,13 +8,46 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-
+using OnlineArtGallery.Models.ModelView;
 namespace OnlineArtGallery.Controllers
 {
     public class FEArtworkController : Controller
     {
         private GalleryArtEntities db = new GalleryArtEntities();
         private const int PageSize = 10;
+
+        public ActionResult GalleryDetail(int id)
+        {
+            var gallery = db.Galleries.Find(id);
+            var artwork = db.Artwork_Gallery.Where(a => a.gallery_id == id).ToList();
+            
+            var exhi = db.Exhibition_Gallery.Where(b => b.gallery_id == id).FirstOrDefault();
+            ViewBag.Gallery = gallery;
+            ViewBag.Artwork = artwork;
+            ViewBag.Exhibition = exhi;
+            return View();
+        }
+        public ActionResult Gallery()
+        {
+            List<GalleryView> list = new List<GalleryView>();
+            var gallery = db.Galleries.OrderByDescending(a => a.gallery_id).ToList();
+            foreach (var item in gallery)
+            {
+                var product = db.Artwork_Gallery.Where(b => b.gallery_id == item.gallery_id).Count();
+                var gal = new GalleryView()
+                {
+                    GalleryDescription = item.gallery_description,
+                    GalleryId = item.gallery_id,
+                    GalleryImage = item.gallery_image,
+                    GalleryName = item.gallery_name,
+                    Products = product,
+                };
+                list.Add(gal);
+            }
+            
+            ViewBag.Gallery = list;
+            return View();
+        }
         public ActionResult ArtworkDetail(int id)
         {
             Artwork artwork = db.Artworks.Find(id);

@@ -194,9 +194,13 @@
         <div class="container">
             <div class="heading heading-flex">
                 <div class="heading-left">
-                    <h2 class="title">Galleries</h2><!-- End .title -->
+                    <h2 class="title">New Artworks</h2><!-- End .title -->
                 </div><!-- End .heading-left -->
-            </div><!-- End .header-flex -->
+
+                <div class="heading-right">
+                    <a href="/FEArtwork/Gallery" class="title-link">View more Galleries <i class="icon-long-arrow-right"></i></a>
+                </div><!-- End .heading-right -->
+            </div>
             <div class="row justify-content-center">
                 @foreach (var gal in ViewBag.GalleryTop)
                 {
@@ -209,7 +213,7 @@
                             <div class="banner-content">
                                 <h4 class="banner-subtitle text-white"><a href="#">A Perfect Choice For Your Children</a></h4><!-- End .banner-subtitle -->
                                 <h3 class="banner-title text-white"><a href="#">@gal.gallery_name</a></h3><!-- End .banner-title -->
-                                <a href="#" class="btn btn-outline-white-3 banner-link">Discover Now<i class="icon-long-arrow-right"></i></a>
+                                <a href="/FEArtwork/GalleryDetail/@gal.gallery_id" class="btn btn-outline-white-3 banner-link">Discover Now<i class="icon-long-arrow-right"></i></a>
                             </div><!-- End .banner-content -->
                             <div class="overlay"></div>
                         </div><!-- End .banner -->
